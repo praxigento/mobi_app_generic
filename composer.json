@@ -1,0 +1,26 @@
+{
+  "name": "praxigento/mobi_app_generic_mage2",
+  "description": "Generic MOBI application for Magento v2.",
+  "type": "magento2-module",
+  "homepage": "https://github.com/praxigento/mobi_app_generic_mage2",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alex Gusev",
+      "email": "flancer64@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.3",
+    "praxigento/mobi_mod_mage2_mlm_dashboard": "dev-master"
+  },
+  "extra": {
+    "map": [
+      [
+        "src",
+        "Praxigento/AppGeneric2"
+      ]
+    ]
+  }
+}
