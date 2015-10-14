@@ -70,9 +70,9 @@
     },
     "praxigento/mobi_mod_common_dashboard": {
       "type": "vcs",
-      "url": "https://github.com/praxigento/mobi_mod_mage2_dashboard"
+      "url": "https://github.com/praxigento/mobi_mod_common_dashboard"
     },
-    "praxigento/mobi_mod_common_dashboard": {
+    "praxigento/mobi_mod_mage2_dashboard": {
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_mod_mage2_dashboard"
     }
