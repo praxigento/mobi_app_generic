@@ -68,7 +68,11 @@
       "type": "vcs",
       "url": "https://github.com/flancer64/magento-composer-installer"
     },
-    "praxigento/mobi_mod_mage2_dashboard": {
+    "praxigento/mobi_mod_common_dashboard": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_dashboard"
+    },
+    "praxigento/mobi_mod_common_dashboard": {
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_mod_mage2_dashboard"
     }
@@ -80,14 +84,17 @@
     "pre-install-cmd": [
       "# Create root directory for the development Magento instance.",
       "mkdir -p htdocs"
+    ],
+    "post-install-cmd": [
+      "# To complete installation launch 'sh ./bin/deploy/post_install.sh'"
     ]
   },
   "extra": {
     "magento-root-dir": "htdocs",
     "magento-deploystrategy": "copy",
     "magento-deploystrategy-overwrite": {
-      "praxigento/mobi_mod_common_mlm_dashboard": "symlink",
-      "praxigento/mobi_mod_mage2_mlm_dashboard": "symlink"
+      "praxigento/mobi_mod_common_dashboard": "symlink",
+      "praxigento/mobi_mod_mage2_dashboard": "symlink"
     },
     "magento-force": true,
     "auto-append-gitignore": false,
