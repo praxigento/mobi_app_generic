@@ -10,6 +10,9 @@
          syntaxCheck="true"
          bootstrap="./phpunit_bootstrap.php">
     <testsuite name="Functional Tests for Generic MOBI application (M2)">
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_core/test/functional</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_dashboard/test/functional</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_core/test/functional</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_dashboard/test/functional</directory>
     </testsuite>
     <logging>
