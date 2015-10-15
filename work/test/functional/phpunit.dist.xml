@@ -10,10 +10,24 @@
          syntaxCheck="true"
          bootstrap="./phpunit_bootstrap.php">
     <testsuite name="Functional Tests for Generic MOBI application (M2)">
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_accounting/test/functional</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_bonus_base/test/functional</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_bonus_retail/test/functional</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_core/test/functional</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_dashboard/test/functional</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_downline/test/functional</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_mlm_id/test/functional</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_pv/test/functional</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_wallet/test/functional</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_accounting/test/functional</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_bonus_base/test/functional</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_bonus_retail/test/functional</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_core/test/functional</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_dashboard/test/functional</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_downline/test/functional</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_mlm_id/test/functional</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_pv/test/functional</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_wallet/test/functional</directory>
     </testsuite>
     <logging>
         <!--<log type="coverage-html" target="./tmp/report" lowUpperBound="35" highLowerBound="70"/>-->

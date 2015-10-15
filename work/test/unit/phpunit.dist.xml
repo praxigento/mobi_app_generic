@@ -10,10 +10,24 @@
          syntaxCheck="true"
          bootstrap="./phpunit_bootstrap.php">
     <testsuite name="Unit Tests for Generic MOBI application (M2)">
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_accounting/test/unit</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_bonus_base/test/unit</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_bonus_retail/test/unit</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_core/test/unit</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_dashboard/test/unit</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_downline/test/unit</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_mlm_id/test/unit</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_pv/test/unit</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_wallet/test/unit</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_accounting/test/unit</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_bonus_base/test/unit</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_bonus_retail/test/unit</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_core/test/unit</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_dashboard/test/unit</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_downline/test/unit</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_mlm_id/test/unit</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_pv/test/unit</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_wallet/test/unit</directory>
     </testsuite>
     <logging>
         <!--<log type="coverage-html" target="./tmp/report" lowUpperBound="35" highLowerBound="70"/>-->
