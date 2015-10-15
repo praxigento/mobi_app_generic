@@ -14,7 +14,15 @@
     "magento/magento-composer-installer": "dev-patch-1",
     "praxigento/composer_plugin_templates": "^1.0",
     "magento/product-community-edition": "1.0.0-beta",
-    "praxigento/mobi_mod_mage2_dashboard": "dev-master"
+    "praxigento/mobi_mod_mage2_accounting": "dev-master",
+    "praxigento/mobi_mod_mage2_bonus_base": "dev-master",
+    "praxigento/mobi_mod_mage2_bonus_retail": "dev-master",
+    "praxigento/mobi_mod_mage2_core": "dev-master",
+    "praxigento/mobi_mod_mage2_dashboard": "dev-master",
+    "praxigento/mobi_mod_mage2_downline": "dev-master",
+    "praxigento/mobi_mod_mage2_mlm_id": "dev-master",
+    "praxigento/mobi_mod_mage2_pv": "dev-master",
+    "praxigento/mobi_mod_mage2_wallet": "dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "4.1.0",
@@ -69,6 +77,18 @@
       "type": "vcs",
       "url": "https://github.com/flancer64/magento-composer-installer"
     },
+    "praxigento/mobi_mod_common_accounting": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_accounting"
+    },
+    "praxigento/mobi_mod_common_bonus_base": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_bonus_base"
+    },
+    "praxigento/mobi_mod_common_bonus_retail": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_bonus_retail"
+    },
     "praxigento/mobi_mod_common_core": {
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_mod_common_core"
@@ -77,6 +97,34 @@
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_mod_common_dashboard"
     },
+    "praxigento/mobi_mod_common_downline": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_downline"
+    },
+    "praxigento/mobi_mod_common_mlm_id": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_mlm_id"
+    },
+    "praxigento/mobi_mod_common_pv": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_pv"
+    },
+    "praxigento/mobi_mod_common_wallet": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_wallet"
+    },
+    "praxigento/mobi_mod_mage2_accounting": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_accounting"
+    },
+    "praxigento/mobi_mod_mage2_bonus_base": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_bonus_base"
+    },
+    "praxigento/mobi_mod_mage2_bonus_retail": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_bonus_retail"
+    },
     "praxigento/mobi_mod_mage2_core": {
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_mod_mage2_core"
@@ -84,6 +132,26 @@
     "praxigento/mobi_mod_mage2_dashboard": {
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_mod_mage2_dashboard"
+    },
+    "praxigento/mobi_mod_mage2_downline": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_downline"
+    },
+    "praxigento/mobi_mod_mage2_mlm_id": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_mlm_id"
+    },
+    "praxigento/mobi_mod_mage2_pv": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_pv"
+    },
+    "praxigento/mobi_mod_mage2_wallet": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_wallet"
+    },
+    "praxigento/mobi_app_generic_mage2": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_app_generic_mage2"
     }
   },
   "config": {
