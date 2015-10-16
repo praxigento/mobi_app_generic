@@ -1,0 +1,140 @@
+{
+  "name": "praxigento/mobi_app_generic_mage2_live",
+  "description": "Production environment for Magento v2 Generic MOBI application.",
+  "type": "project",
+  "homepage": "https://github.com/praxigento/mobi_app_generic_mage2",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alex Gusev",
+      "email": "flancer64@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.3",
+    "magento/magento-composer-installer": "dev-patch-1",
+    "praxigento/composer_plugin_templates": "^1.0",
+    "magento/product-community-edition": "1.0.0-beta",
+    "praxigento/mobi_app_generic_mage2": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "Magento\\Framework\\": "htdocs/lib/internal/Magento/Framework/",
+      "Magento\\Setup\\": "htdocs/setup/src/Magento/Setup/"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "repositories": {
+    "firegento": {
+      "type": "composer",
+      "url": "http://packages.firegento.com"
+    },
+    "magento": {
+      "type": "composer",
+      "url": "http://packages.magento.com/"
+    },
+    "flancer64/magento-composer-installer": {
+      "type": "vcs",
+      "url": "https://github.com/flancer64/magento-composer-installer"
+    },
+    "praxigento/mobi_mod_common_accounting": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_accounting"
+    },
+    "praxigento/mobi_mod_common_bonus_base": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_bonus_base"
+    },
+    "praxigento/mobi_mod_common_bonus_retail": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_bonus_retail"
+    },
+    "praxigento/mobi_mod_common_core": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_core"
+    },
+    "praxigento/mobi_mod_common_dashboard": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_dashboard"
+    },
+    "praxigento/mobi_mod_common_downline": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_downline"
+    },
+    "praxigento/mobi_mod_common_mlm_id": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_mlm_id"
+    },
+    "praxigento/mobi_mod_common_pv": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_pv"
+    },
+    "praxigento/mobi_mod_common_wallet": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_wallet"
+    },
+    "praxigento/mobi_mod_mage2_accounting": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_accounting"
+    },
+    "praxigento/mobi_mod_mage2_bonus_base": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_bonus_base"
+    },
+    "praxigento/mobi_mod_mage2_bonus_retail": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_bonus_retail"
+    },
+    "praxigento/mobi_mod_mage2_core": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_core"
+    },
+    "praxigento/mobi_mod_mage2_dashboard": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_dashboard"
+    },
+    "praxigento/mobi_mod_mage2_downline": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_downline"
+    },
+    "praxigento/mobi_mod_mage2_mlm_id": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_mlm_id"
+    },
+    "praxigento/mobi_mod_mage2_pv": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_pv"
+    },
+    "praxigento/mobi_mod_mage2_wallet": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_wallet"
+    },
+    "praxigento/mobi_app_generic_mage2": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_app_generic_mage2"
+    }
+  },
+  "config": {
+    "use-include-path": true
+  },
+  "scripts": {
+    "pre-install-cmd": [
+      "# Create root directory for the development Magento instance.",
+      "mkdir -p htdocs"
+    ],
+    "post-install-cmd": [
+      "# To complete installation launch 'sh ./bin/deploy/post_install.sh'"
+    ]
+  },
+  "extra": {
+    "magento-root-dir": "htdocs",
+    "magento-deploystrategy": "copy",
+    "magento-force": true,
+    "auto-append-gitignore": false,
+    "praxigento_templates_config": [
+      "./templates.json",
+      "./cfg/templates.json"
+    ]
+  }
+}

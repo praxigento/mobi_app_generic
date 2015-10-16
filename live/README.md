@@ -1,18 +1,15 @@
-# Install Development Environment for Generic MOBI application for Magento v2
+# Production environment for Magento v2 Generic MOBI application
 
 
-## Clone repository
+## Installation
 
-Clone sample module repo from github and go to development environment root folder (`./work/`):
+Clone repo from github and go to development instance folder:
 
     $ git clone git@github.com:praxigento/mobi_app_generic_mage2.git
-    $ cd mobi_app_generic_mage2/work/
+    $ cd mobi_app_generic_mage2/live/
 
-
-## Create instance configuration file
- 
-Create JSON configuration for your development instance 
-(DB parameters, access parameters, [etc](http://devdocs.magento.com/guides/v2.0/install-gde/install/cli/install-cli-install.html#instgde-install-cli-magento)):
+... configure development instance (DB parameters, access parameters,
+[etc](http://fbrnc.net/blog/2012/03/run-magento-installer-from-command-line)):
 
     $ cp templates.json.init templates.json
     $ nano templates.json    
@@ -43,21 +40,10 @@ Create JSON configuration for your development instance
       }
     }
     
-## Composer installation
+... then run composer, install Magento core to `./live/htdocs/`, link modules into and 
+perform post install routines (setup, permissions, create Magento DB, etc.):  
     
     $ composer install
-    
-
-## Additional configuration
-
-Shell script `./work/bin/deploy/post_install.sh` is created from `./work/cfg/bin/deploy/post_install.sh` template on
-_post-install-cmd_ and _post-status-cmd_ events (see [praxigento/composer_plugin_templates](https://github.com/praxigento/composer_plugin_templates)).
-Configuration parameters for placeholders are taken from `templates.json`:
-
     $ sh  ./bin/deploy/post_install.sh
 
-
-
-## Setup web server
-
-Point your web-server to folder `$LOCAL_ROOT/work/htdocs`.
+Setup your web server (sample for Ubuntu apache2) and point it to `./live/htdocs/`.

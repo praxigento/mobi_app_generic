@@ -9,6 +9,8 @@ LOCAL_ROOT=${LOCAL_ROOT}
 # The owner of the Magento file system:
 #   * Must have full control (read/write/execute) of all files and directories.
 #   * Must not be the web server user; it should be a different user.
+# Web server:
+#   * must be a member of the '${LOCAL_GROUP}' group.
 LOCAL_OWNER=${LOCAL_OWNER}
 LOCAL_GROUP=${LOCAL_GROUP}
 # DB connection params
