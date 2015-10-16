@@ -7,5 +7,5 @@
 namespace Praxigento\App\Generic2;
 
 class Config {
-
+    const MODULE = 'Praxigento_AppGeneric2';
 }

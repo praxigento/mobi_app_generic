@@ -22,7 +22,7 @@
     "praxigento/mobi_mod_mage2_downline": "dev-master",
     "praxigento/mobi_mod_mage2_mlm_id": "dev-master",
     "praxigento/mobi_mod_mage2_pv": "dev-master",
-    "praxigento/mobi_mod_mage2_wallet": "dev-master"
+    "praxigento/mobi_app_generic_mage2": "dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "4.1.0",
