@@ -15,5 +15,5 @@
 
 ## Installation
 
-* [./live/](./live/) - install live (production) version of the application.
 * [./work/](./work/) - install development version of the application.
+* [./live/](./live/) - install live (production) version of the application.
