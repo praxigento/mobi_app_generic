@@ -4,10 +4,7 @@
  *
  * User: Alex Gusev <alex@flancer64.com>
  */
+use Magento\Framework\Component\ComponentRegistrar as Registrar;
 use Praxigento\App\Generic2\Config as Config;
 
-\Magento\Framework\Component\ComponentRegistrar::register(
-    \Magento\Framework\Component\ComponentRegistrar::MODULE,
-    Config::MODULE,
-    __DIR__
-);
+Registrar::register(Registrar::MODULE, Config::MODULE, __DIR__);
