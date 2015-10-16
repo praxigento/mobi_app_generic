@@ -33,7 +33,7 @@ else
     # Full list of the available options:
     # http://devdocs.magento.com/guides/v2.0/install-gde/install/cli/install-cli-install.html#instgde-install-cli-magento
 
-    php $LOCAL_ROOT/work/htdocs/bin/magento setup:install  \
+    php $LOCAL_ROOT/live/htdocs/bin/magento setup:install  \
     --admin-firstname="${CFG_ADMIN_FIRSTNAME}" \
     --admin-lastname="${CFG_ADMIN_LASTNAME}" \
     --admin-email="${CFG_ADMIN_EMAIL}" \
@@ -58,13 +58,13 @@ else
     ##
     echo "Setup additional filesystem permissions."
     ##
-    chown -R $LOCAL_OWNER:$LOCAL_GROUP $LOCAL_ROOT/work/htdocs
-    find $LOCAL_ROOT/work/htdocs -type d -exec chmod 770 {} \;
-    find $LOCAL_ROOT/work/htdocs -type f -exec chmod 660 {} \;
-    chmod -R g+w $LOCAL_ROOT/work/htdocs/var
-    chmod -R g+w $LOCAL_ROOT/work/htdocs/pub
-    chmod u+x $LOCAL_ROOT/work/htdocs/bin/magento
-    chmod -R go-w $LOCAL_ROOT/work/htdocs/app/etc
+    chown -R $LOCAL_OWNER:$LOCAL_GROUP $LOCAL_ROOT/live/htdocs
+    find $LOCAL_ROOT/live/htdocs -type d -exec chmod 770 {} \;
+    find $LOCAL_ROOT/live/htdocs -type f -exec chmod 660 {} \;
+    chmod -R g+w $LOCAL_ROOT/live/htdocs/var
+    chmod -R g+w $LOCAL_ROOT/live/htdocs/pub
+    chmod u+x $LOCAL_ROOT/live/htdocs/bin/magento
+    chmod -R go-w $LOCAL_ROOT/live/htdocs/app/etc
 
 fi
 
