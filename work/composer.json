@@ -52,6 +52,7 @@
       "Magento\\Tools\\Sanity\\": "htdocs/dev/build/publication/sanity/Magento/Tools/Sanity/",
       "Magento\\TestFramework\\Inspection\\": "htdocs/dev/tests/static/framework/Magento/TestFramework/Inspection/",
       "Magento\\TestFramework\\Utility\\": "htdocs/dev/tests/static/framework/Magento/TestFramework/Utility/",
+      "Praxigento\\Accounting\\Test\\Integration\\": "vendor/praxigento/mobi_mod_common_accounting/test/integration",
       "Praxigento\\Test\\": "test/fw/"
     }
   },
