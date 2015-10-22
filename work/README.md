@@ -18,7 +18,7 @@ Create JSON configuration for your development instance
     $ nano templates.json    
     {
       "vars": {
-        "LOCAL_ROOT": "/home/magento/instance/mobi_app_generic_mage2",
+        "LOCAL_ROOT": "/home/magento/instance/mobi_app_generic_mage2/work",
         "LOCAL_OWNER": "magento",
         "LOCAL_GROUP": "apache",
         "CFG_ADMIN_FIRSTNAME": "Store",
