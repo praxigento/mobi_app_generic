@@ -6,7 +6,7 @@ php:
 
 before_install:
   - mysql --version
-  - sudo /etc/init.d/mysql.server stop
+  - sudo apt-get remove mysql-common mysql-server-5.5
   - sudo apt-get install mysql-server-5.6
   - sudo /etc/init.d/mysql.server start
   - mysql --version
