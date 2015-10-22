@@ -11,7 +11,7 @@ php:
 #dist: trusty
 
 before_install:
-# Setup MySQL 5.6 on Ubuntu 12.04:
+# Setup MySQL 5.6 on Ubuntu 12.04 (thanks to drogus - https://gist.github.com/drogus/6718448):
   - mysql --version
   - "sudo apt-get remove mysql-common mysql-server-5.5 mysql-server-core-5.5 mysql-client-5.5 mysql-client-core-5.5"
   - "sudo apt-get autoremove"
@@ -26,7 +26,7 @@ before_install:
   - "sudo sed -i'' 's/basedir[^=]\\+=.*$/basedir = \\/opt\\/mysql\\/server-5.6/' /etc/mysql/my.cnf"
   - "sudo /etc/init.d/mysql.server start"
   - mysql --version
-# Create DB for Magento
+# Create empty DB for Magento
   - mysql -e "create database if not exists mobi2;" -utravis
 # Go to working folder, copy templates.json for travis and start composer install process
   - cd work
@@ -35,6 +35,7 @@ before_install:
   - cp templates.json.travis templates.json
   - composer self-update
   - composer install
+# Run post installation script (deploy Magento2 itself)
   - sh ./bin/deploy/post_install.sh
 
 
@@ -46,6 +47,7 @@ script:
 notifications:
   email:
     recipients:
-      - alex@flancer64.com
+      - alex@nmmlm.com
+      - support@praxigento.com
     on_success: always # [always|never|change], default: change
     on_failure: always # [always|never|change], default: change
