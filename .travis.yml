@@ -1,21 +1,26 @@
 language: php
 php:
   - 5.6
-  - hhvm
+# - hhvm
 
 
 before_install:
+# Setup MySQL 5.6:
   - mysql --version
-  - sudo apt-get remove mysql-common mysql-server-5.5
-  - sudo apt-get install mysql-server-5.6
-  - sudo /etc/init.d/mysql.server start
+  - sudo apt-get remove mysql-common mysql-server-5.5 mysql-server-core-5.5 mysql-client-5.5 mysql-client-core-5.5
+  - sudo apt-get autoremove
+  - sudo apt-get install libaio1
+  - wget -O mysql-5.6.deb http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.14-debian6.0-x86_64.deb
+  - sudo dpkg -i  mysql-5.6.deb
+  - sudo service mysql.server start
   - mysql --version
-  - mysql -e "create database IF NOT EXISTS mobi2;"
-  - cd work
-  - pwd
-  - whoami
-  - cp templates.json.travis templates.json
-  - composer self-update
+  - mysql -e "create database if not exists mobi2;"
+  - mysql --version
+#  - cd work
+#  - pwd
+#  - whoami
+#  - cp templates.json.travis templates.json
+#  - composer self-update
 #  - composer install
 #  - sh ./bin/deploy/post_install.sh
 
