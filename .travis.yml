@@ -1,11 +1,14 @@
+sudo: false
+
+
 language: php
 php:
   - 5.5
 # - hhvm
 
 # Use Ubuntu Trusty (beta)
-sudo: required
-dist: trusty
+#sudo: required
+#dist: trusty
 
 before_install:
 # Setup MySQL 5.6 on Ubuntu 12.04:
