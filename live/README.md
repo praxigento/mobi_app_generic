@@ -15,7 +15,7 @@ Clone repo from github and go to development instance folder:
     $ nano templates.json    
     {
       "vars": {
-        "LOCAL_ROOT": "/home/magento/instance/mobi_app_generic_mage2",
+        "LOCAL_ROOT": "/home/magento/instance/mobi_app_generic_mage2/live",
         "LOCAL_OWNER": "magento",
         "LOCAL_GROUP": "apache",
         "CFG_ADMIN_FIRSTNAME": "Store",
