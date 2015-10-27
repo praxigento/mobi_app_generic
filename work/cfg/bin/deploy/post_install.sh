@@ -45,7 +45,7 @@ fi
 ##
 echo "Drop/create database $DB_NAME."
 ##
-mysqladmin -f -u"$DB_USER" $MYSQL_PASS -h"$DB_HOST" drop if exists "$DB_NAME"
+mysqladmin -f -u"$DB_USER" $MYSQL_PASS -h"$DB_HOST" drop "$DB_NAME"
 mysqladmin -f -u"$DB_USER" $MYSQL_PASS -h"$DB_HOST" create "$DB_NAME"
 
 
