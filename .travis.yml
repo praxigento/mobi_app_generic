@@ -1,6 +1,6 @@
 sudo: required # use Travis standard env (http://docs.travis-ci.com/user/ci-environment/)
 dist: trusty
-language: python
+language: generic
 #language: php
 #php:
 #  - 5.6
@@ -8,37 +8,38 @@ language: python
 # ... run command 'bin/magento info:language:list'."
 
 before_install:
+  - dpkg --get-selections | grep mysql
 # Setup MySQL 5.6 on Ubuntu 12.04 (thanks to drogus - https://gist.github.com/drogus/6718448):
-  - mysql --version # control version before upgrade
-  - sudo apt-get remove mysql-common mysql-server-5.5 mysql-server-core-5.5 mysql-client-5.5 mysql-client-core-5.5
-  - sudo apt-get autoremove
-  - sudo apt-get install libaio1
-  - wget -O mysql-5.6.14.deb http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.14-debian6.0-x86_64.deb/from/http://cdn.mysql.com/
-  - sudo dpkg -i mysql-5.6.14.deb
-  - sudo cp /opt/mysql/server-5.6/support-files/mysql.server /etc/init.d/mysql.server
-  - sudo ln -s /opt/mysql/server-5.6/bin/* /usr/bin/
-# some config values were changed since 5.5
-  - sudo sed -i'' 's/table_cache/table_open_cache/' /etc/mysql/my.cnf
-  - sudo sed -i'' 's/log_slow_queries/slow_query_log/' /etc/mysql/my.cnf
-  - "sudo sed -i'' 's/basedir[^=]\\+=.*$/basedir = \\/opt\\/mysql\\/server-5.6/' /etc/mysql/my.cnf" # there is an error
-# ... w/o double quotes: The command "sudo sed -i'' 's/basedir[^=]\+=.*$/basedir = \/opt\/mysql\/server-5.6/' /etc/mysql/my.cnf" failed and exited with 1 during .
-  - sudo /etc/init.d/mysql.server start
-  - mysql --version # control version after upgrade
-# Deploy Magento 2 application
-# Go to working folder, copy templates.json for travis and start composer install process
-  - cd work #  go to root folder for development environment
-  - pwd # control current path ('LOCAL_ROOT' in templates.json)
-  - cp templates.json.travis templates.json # create configuration for Travis from template
-  - composer self-update # update composer
-  - composer install
-# Run post installation script (deploy Magento2 itself)
-  - cat ./bin/deploy/post_install.sh # control parameters in the installation script
-  - sh ./bin/deploy/post_install.sh # create initial DB, setup permissions, ...
-
-script:
-  - phpunit --configuration ./test/unit/phpunit.dist.xml
-  - phpunit --configuration ./test/functional/phpunit.dist.xml
-#  - phpunit --configuration ./htdocs/dev/tests/unit/phpunit.xml.dist # run Magento 2 unit tests
+#  - mysql --version # control version before upgrade
+#  - sudo apt-get remove mysql-common mysql-server-5.5 mysql-server-core-5.5 mysql-client-5.5 mysql-client-core-5.5
+#  - sudo apt-get autoremove
+#  - sudo apt-get install libaio1
+#  - wget -O mysql-5.6.14.deb http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.14-debian6.0-x86_64.deb/from/http://cdn.mysql.com/
+#  - sudo dpkg -i mysql-5.6.14.deb
+#  - sudo cp /opt/mysql/server-5.6/support-files/mysql.server /etc/init.d/mysql.server
+#  - sudo ln -s /opt/mysql/server-5.6/bin/* /usr/bin/
+## some config values were changed since 5.5
+#  - sudo sed -i'' 's/table_cache/table_open_cache/' /etc/mysql/my.cnf
+#  - sudo sed -i'' 's/log_slow_queries/slow_query_log/' /etc/mysql/my.cnf
+#  - "sudo sed -i'' 's/basedir[^=]\\+=.*$/basedir = \\/opt\\/mysql\\/server-5.6/' /etc/mysql/my.cnf" # there is an error
+## ... w/o double quotes: The command "sudo sed -i'' 's/basedir[^=]\+=.*$/basedir = \/opt\/mysql\/server-5.6/' /etc/mysql/my.cnf" failed and exited with 1 during .
+#  - sudo /etc/init.d/mysql.server start
+#  - mysql --version # control version after upgrade
+## Deploy Magento 2 application
+## Go to working folder, copy templates.json for travis and start composer install process
+#  - cd work #  go to root folder for development environment
+#  - pwd # control current path ('LOCAL_ROOT' in templates.json)
+#  - cp templates.json.travis templates.json # create configuration for Travis from template
+#  - composer self-update # update composer
+#  - composer install
+## Run post installation script (deploy Magento2 itself)
+#  - cat ./bin/deploy/post_install.sh # control parameters in the installation script
+#  - sh ./bin/deploy/post_install.sh # create initial DB, setup permissions, ...
+#
+#script:
+#  - phpunit --configuration ./test/unit/phpunit.dist.xml
+#  - phpunit --configuration ./test/functional/phpunit.dist.xml
+##  - phpunit --configuration ./htdocs/dev/tests/unit/phpunit.xml.dist # run Magento 2 unit tests
 
 notifications:
   email:
