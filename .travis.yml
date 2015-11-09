@@ -9,6 +9,8 @@ language: generic
 
 before_install:
   - dpkg --get-selections | grep mysql
+  - sudo apt-get update
+  - sudo apt-get install php5
 # Setup MySQL 5.6 on Ubuntu 12.04 (thanks to drogus - https://gist.github.com/drogus/6718448):
 #  - mysql --version # control version before upgrade
 #  - sudo apt-get remove mysql-common mysql-server-5.5 mysql-server-core-5.5 mysql-client-5.5 mysql-client-core-5.5
