@@ -1,4 +1,5 @@
 /bin/
+/build/
 /htdocs/
 /composer.lock
 /persistent/
