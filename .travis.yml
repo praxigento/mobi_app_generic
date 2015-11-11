@@ -1,11 +1,6 @@
-sudo: required # use Travis standard env (http://docs.travis-ci.com/user/ci-environment/)
+sudo: required # use Travis Trusty env (http://docs.travis-ci.com/user/ci-environment/)
 dist: trusty
-language: generic
-#language: php
-#php:
-#  - 5.6
-#  - hhvm # there is an error on DB installation: "Command option 'language': Invalid value. To see possible values,
-# ... run command 'bin/magento info:language:list'."
+language: generic # PHP is not available in "mega" image, so we use "minimal" image and setup runtimes separately
 
 before_install:
 # Install execution environment (php, phpunit, mysql, composer)

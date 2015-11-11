@@ -1,6 +1,6 @@
 {
   "vars": {
-    "LOCAL_ROOT": "/home/magento/instance/mobi_app_generic_mage2",
+    "LOCAL_ROOT": "/home/magento/instance/mobi_app_generic_mage2/work",
     "DEPLOYMENT_TYPE": "travis|manual",
     "LOCAL_OWNER": "magento",
     "LOCAL_GROUP": "apache",
