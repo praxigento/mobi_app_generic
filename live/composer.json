@@ -95,10 +95,6 @@
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_mod_mage2_dashboard"
     },
-    "praxigento/mobi_mod_mage2_downline": {
-      "type": "vcs",
-      "url": "https://github.com/praxigento/mobi_mod_mage2_downline"
-    },
     "praxigento/mobi_mod_mage2_mlm_id": {
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_mod_mage2_mlm_id"

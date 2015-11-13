@@ -91,10 +91,6 @@
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_mod_common_dashboard"
     },
-    "praxigento/mobi_mod_common_downline": {
-      "type": "vcs",
-      "url": "https://github.com/praxigento/mobi_mod_common_downline"
-    },
     "praxigento/mobi_mod_common_mlm_id": {
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_mod_common_mlm_id"
@@ -126,10 +122,6 @@
     "praxigento/mobi_mod_mage2_dashboard": {
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_mod_mage2_dashboard"
-    },
-    "praxigento/mobi_mod_mage2_downline": {
-      "type": "vcs",
-      "url": "https://github.com/praxigento/mobi_mod_mage2_downline"
     },
     "praxigento/mobi_mod_mage2_mlm_id": {
       "type": "vcs",
@@ -170,7 +162,6 @@
       "praxigento/mobi_mod_common_bonus_retail": "symlink",
       "praxigento/mobi_mod_common_core": "symlink",
       "praxigento/mobi_mod_common_dashboard": "symlink",
-      "praxigento/mobi_mod_common_downline": "symlink",
       "praxigento/mobi_mod_common_mlm_id": "symlink",
       "praxigento/mobi_mod_common_pv": "symlink",
       "praxigento/mobi_mod_common_wallet": "symlink",
@@ -179,7 +170,6 @@
       "praxigento/mobi_mod_mage2_bonus_retail": "symlink",
       "praxigento/mobi_mod_mage2_core": "symlink",
       "praxigento/mobi_mod_mage2_dashboard": "symlink",
-      "praxigento/mobi_mod_mage2_downline": "symlink",
       "praxigento/mobi_mod_mage2_mlm_id": "symlink",
       "praxigento/mobi_mod_mage2_pv": "symlink",
       "praxigento/mobi_mod_mage2_wallet": "symlink"
