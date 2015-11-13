@@ -16,6 +16,7 @@ before_install:
   - pwd # control current path ('LOCAL_ROOT' in templates.json)
   - cp templates.json.travis templates.json # create configuration for Travis from template
 #  - composer self-update # update composer
+  - composer clear-cache
   - composer install
 # Run post installation script (deploy Magento2 itself)
   - cat ./bin/deploy/post_install.sh # control parameters in the installation script
