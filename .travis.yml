@@ -31,5 +31,5 @@ notifications:
     recipients:
       - alex@nmmlm.com
       - support@praxigento.com
-    on_success: change # [always|never|change], default: change
+    on_success: always # [always|never|change], default: change
     on_failure: change # [always|never|change], default: change
