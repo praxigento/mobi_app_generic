@@ -10,9 +10,13 @@ before_install:
   - sudo apt-get install phpunit
   - sudo apt-get install mysql-client-core-5.6 mysql-client-5.6 mysql-server-5.6
   - sudo php -r "readfile('https://getcomposer.org/installer');" | sudo php -- --install-dir=/usr/local/bin --filename=composer
+  - sudo apt-get install git
+  - git --version
 # Deploy Magento 2 application
 # Go to working folder, copy templates.json for travis and start composer install process
   - cd work #  go to root folder for development environment
+  - git clone https://github.com/praxigento/mobi_mod_common_core
+  - git clone https://github.com/praxigento/mobi_mod_common_downline
   - pwd # control current path ('LOCAL_ROOT' in templates.json)
   - cp templates.json.travis templates.json # create configuration for Travis from template
 #  - composer self-update # update composer
