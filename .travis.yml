@@ -10,7 +10,7 @@ before_install:
   - sudo apt-get install phpunit
   - sudo apt-get install mysql-client-core-5.6 mysql-client-5.6 mysql-server-5.6
   - sudo php -r "readfile('https://getcomposer.org/installer');" | sudo php -- --install-dir=/usr/local/bin --filename=composer
-  - sudo composer config -g github-oauth.github.com 0fddb111be2a43bec163aeac9257f572afa82450
+  - sudo composer config -g github-oauth.github.com 08cdaf09e2cd4f6191a100b6e58b8fe68bd3c29b
   - php --version
   - composer --version
   - git --version
