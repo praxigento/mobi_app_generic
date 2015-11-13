@@ -13,6 +13,7 @@ before_install:
 # Deploy Magento 2 application
 # Go to working folder, copy templates.json for travis and start composer install process
   - cd work #  go to root folder for development environment
+  - git clone git@github.com:praxigento/mobi_mod_common_downline.git
   - pwd # control current path ('LOCAL_ROOT' in templates.json)
   - cp templates.json.travis templates.json # create configuration for Travis from template
 #  - composer self-update # update composer
