@@ -45,8 +45,11 @@ Create JSON configuration for your live/pilot instance
         "CFG_SESSION_SAVE": "db"
       }
     }
-    
-... then run composer, install Magento core to `./live/`, link modules into and 
+
+
+## Deployment
+
+Run composer, install Magento core to `./live/`, link modules into and 
 perform post install routines (setup, permissions, create Magento DB, etc.):  
     
     $ composer install
