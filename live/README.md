@@ -11,11 +11,12 @@ Clone repo from github and go to development instance folder:
 ... configure development instance (DB parameters, access parameters,
 [etc](http://fbrnc.net/blog/2012/03/run-magento-installer-from-command-line)):
 
-    $ cp templates.json.init templates.json
-    $ nano templates.json    
+    $ cp ../templates.vars.json.init ../templates.vars.live.json
+    $ nano ../templates.vars.live.json   
     {
       "vars": {
         "LOCAL_ROOT": "/home/magento/instance/mobi_app_generic_mage2/live",
+        "DEPLOYMENT_TYPE": "live",
         "LOCAL_OWNER": "magento",
         "LOCAL_GROUP": "apache",
         "CFG_ADMIN_FIRSTNAME": "Store",
@@ -40,10 +41,10 @@ Clone repo from github and go to development instance folder:
       }
     }
     
-... then run composer, install Magento core to `./live/htdocs/`, link modules into and 
+... then run composer, install Magento core to `./live/`, link modules into and 
 perform post install routines (setup, permissions, create Magento DB, etc.):  
     
     $ composer install
-    $ sh  ./bin/deploy/post_install.sh
+    $ sh  ./bin/post_install.sh
 
-Setup your web server (sample for Ubuntu apache2) and point it to `./live/htdocs/`.
+Setup your web server and point it to `./live/`.

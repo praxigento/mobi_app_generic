@@ -14,12 +14,12 @@ Clone sample module repo from github and go to development environment root fold
 Create JSON configuration for your development instance 
 (DB parameters, access parameters, [etc](http://devdocs.magento.com/guides/v2.0/install-gde/install/cli/install-cli-install.html#instgde-install-cli-magento)):
 
-    $ cp templates.json.init ../templates.vars.work.json
+    $ cp ../templates.vars.json.init ../templates.vars.work.json
     $ nano ../templates.vars.work.json
     {
       "vars": {
         "LOCAL_ROOT": "/home/magento/instance/mobi_app_generic_mage2/work",
-        "DEPLOYMENT_TYPE": "travis|manual",
+        "DEPLOYMENT_TYPE": "development",
         "LOCAL_OWNER": "magento",
         "LOCAL_GROUP": "apache",
         "CFG_ADMIN_FIRSTNAME": "Store",
@@ -43,30 +43,23 @@ Create JSON configuration for your development instance
         "CFG_SESSION_SAVE": "db"
       }
     }
+
+    
     
 ## Deployment
 
-### Compose application
+Run composer, install Magento core to `./work/`, link modules into and 
+perform post install routines (setup, permissions, create Magento DB, etc.):  
     
     $ composer install
-    
-
-### Create database and setup Magento 2 app
-
-Shell script `./work/bin/post_install.sh` is created from `./work/cfg/bin/post_install.sh` template on
-_post-install-cmd_ and _post-status-cmd_ events (see [praxigento/composer_plugin_templates](https://github.com/praxigento/composer_plugin_templates)).
-Configuration parameters for placeholders are taken from `templates.json`:
-
     $ sh  ./bin/post_install.sh
 
+Setup your web server and point it to `./work/`.
 
-### Clean Magento files
 
-You can clean Magento 2 app files to deploy application once more:
+
+## Clean up Magento files
+
+You can clean Magento 2 app files to deploy application once again:
 
     $ sh ./bin/mage_clean.sh
-
-
-### Setup web server
-
-Point your web-server to folder `$LOCAL_ROOT/work`.

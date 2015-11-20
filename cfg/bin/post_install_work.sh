@@ -5,7 +5,7 @@
 ##
 
 
-# type of the deployment (skip some steps when app is deployed in TRAVIS CI, $DEPLOYMENT_TYPE='travis')
+# type of the deployment (skip some steps when app is deployed in TRAVIS CI, $DEPLOYMENT_TYPE='test')
 DEPLOYMENT_TYPE=${DEPLOYMENT_TYPE}
 # local specific environment
 LOCAL_ROOT=${LOCAL_ROOT}    # root folder for the deployed instance
@@ -80,7 +80,7 @@ php $MAGE_ROOT/bin/magento setup:install  \
 $MAGE_DBPASS \
 
 
-if [ "$DEPLOYMENT_TYPE" = "travis" ]; then
+if [ "$DEPLOYMENT_TYPE" = "test" ]; then
     echo "Skip file system ownership and permissions setup."
 else
     ##
