@@ -19,15 +19,16 @@ before_install:
   - cd work #  go to root folder for development environment
   - pwd # control current path ('LOCAL_ROOT' in templates.json)
   - cp templates.json.travis ../templates.vars.work.json # create configuration for Travis from template
-  - sudo composer -vvv clear-cache
-  - sudo composer -vvv install
+  - sudo composer clear-cache
+  - sudo composer install
 # Run post installation script (deploy Magento2 itself)
-  - cat ./bin/deploy/post_install.sh # control parameters in the installation script
-  - sh ./bin/deploy/post_install.sh # create initial DB, setup permissions, ...
+  - cat ./bin/post_install.sh # control parameters in the installation script
+  - sh ./bin/post_install.sh # create initial DB, setup permissions, ...
 #
 script:
   - phpunit --configuration ./test/unit/phpunit.dist.xml
   - phpunit --configuration ./test/functional/phpunit.dist.xml
+  - phpunit --configuration ./test/integration/phpunit.dist.xml
 #  - phpunit --configuration ./htdocs/dev/tests/unit/phpunit.xml.dist # run Magento 2 unit tests
 
 notifications:
@@ -35,5 +36,5 @@ notifications:
     recipients:
       - alex@nmmlm.com
       - support@praxigento.com
-    on_success: always # [always|never|change], default: change
+    on_success: change # [always|never|change], default: change
     on_failure: change # [always|never|change], default: change
