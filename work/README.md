@@ -44,12 +44,14 @@ Create JSON configuration for your development instance
       }
     }
     
-## Composer installation
+## Deployment
+
+### Compose application
     
     $ composer install
     
 
-## Additional configuration
+### Create database and setup Magento 2 app
 
 Shell script `./work/bin/post_install.sh` is created from `./work/cfg/bin/post_install.sh` template on
 _post-install-cmd_ and _post-status-cmd_ events (see [praxigento/composer_plugin_templates](https://github.com/praxigento/composer_plugin_templates)).
@@ -58,11 +60,13 @@ Configuration parameters for placeholders are taken from `templates.json`:
     $ sh  ./bin/post_install.sh
 
 
-## Clear Magento files
+### Clean Magento files
+
+You can clean Magento 2 app files to deploy application once more:
 
     $ sh ./bin/mage_clean.sh
 
 
-## Setup web server
+### Setup web server
 
-Point your web-server to folder `$LOCAL_ROOT/work/htdocs`.
+Point your web-server to folder `$LOCAL_ROOT/work`.
