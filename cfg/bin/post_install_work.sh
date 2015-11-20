@@ -79,8 +79,6 @@ php $MAGE_ROOT/bin/magento setup:install  \
 --cleanup-database \
 $MAGE_DBPASS \
 
-php $MAGE_ROOT/bin/magento --help
-
 
 if [ "$DEPLOYMENT_TYPE" = "travis" ]; then
     echo "Skip file system ownership and permissions setup."
