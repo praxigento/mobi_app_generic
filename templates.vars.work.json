@@ -1,0 +1,27 @@
+{
+  "vars": {
+    "LOCAL_ROOT": "/home/alex/work/github/mobi_app_generic_mage2/work",
+    "DEPLOYMENT_TYPE": "manual",
+    "LOCAL_OWNER": "alex",
+    "LOCAL_GROUP": "www-data",
+    "CFG_ADMIN_FIRSTNAME": "Store",
+    "CFG_ADMIN_LASTNAME": "Admin",
+    "CFG_ADMIN_EMAIL": "admin@store.com",
+    "CFG_ADMIN_USER": "admin",
+    "CFG_ADMIN_PASSWORD": "oT4MKi69Z37CB6E35Wzu",
+    "CFG_BASE_URL": "http://mobi2.local.prxgt.com:50080/",
+    "CFG_BACKEND_FRONTNAME": "admin",
+    "CFG_DB_HOST": "localhost",
+    "CFG_DB_NAME": "mobi2",
+    "CFG_DB_USER": "apache",
+    "CFG_DB_PASSWORD": "plOM6LeHPNa6fHQl5MP9",
+    "CFG_LANGUAGE": "en_US",
+    "CFG_CURRENCY": "USD",
+    "CFG_TIMEZONE": "UTC",
+    "CFG_USE_REWRITES": "0",
+    "CFG_USE_SECURE": "0",
+    "CFG_USE_SECURE_ADMIN": "0",
+    "CFG_ADMI_USE_SECURITY_KEY": "0",
+    "CFG_SESSION_SAVE": "db"
+  }
+}

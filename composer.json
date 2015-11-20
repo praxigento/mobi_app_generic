@@ -23,12 +23,12 @@
     "praxigento/mobi_mod_mage2_pv": "dev-master",
     "praxigento/mobi_mod_mage2_wallet": "dev-master"
   },
-  "extra": {
-    "map": [
-      [
-        "src",
-        "Praxigento/AppGeneric2"
-      ]
-    ]
+  "autoload": {
+    "files": [
+      "src/registration.php"
+    ],
+    "psr-4": {
+      "Praxigento\\AppGeneric2\\": "src/"
+    }
   }
 }
