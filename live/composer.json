@@ -11,17 +11,15 @@
     }
   ],
   "require": {
-    "php": ">=5.3",
-    "symfony/event-dispatcher": "~2.1",
-    "magento/magento-composer-installer": "dev-patch-1",
+    "php": "~5.5.0|~5.6.0|~7.0.0",
     "praxigento/composer_plugin_templates": "^1.0",
-    "magento/product-community-edition": "1.0.0-beta",
+    "magento/magento-composer-installer": "^0.1",
+    "magento/product-community-edition": "2.0.0",
     "praxigento/mobi_app_generic_mage2": "dev-master"
   },
   "autoload": {
     "psr-4": {
-      "Magento\\Framework\\": "htdocs/lib/internal/Magento/Framework/",
-      "Magento\\Setup\\": "htdocs/setup/src/Magento/Setup/"
+      "Magento\\Setup\\": "setup/src/Magento/Setup/"
     }
   },
   "minimum-stability": "dev",
@@ -34,10 +32,6 @@
     "magento": {
       "type": "composer",
       "url": "http://packages.magento.com/"
-    },
-    "flancer64/magento-composer-installer": {
-      "type": "vcs",
-      "url": "https://github.com/flancer64/magento-composer-installer"
     },
     "praxigento/mobi_mod_common_accounting": {
       "type": "vcs",
@@ -116,22 +110,19 @@
     "use-include-path": true
   },
   "scripts": {
-    "pre-install-cmd": [
-      "# Create root directory for the development Magento instance.",
-      "mkdir -p htdocs"
-    ],
     "post-install-cmd": [
-      "# To complete installation launch 'sh ./bin/deploy/post_install.sh'"
+      "# To complete installation launch 'sh ./bin/post_install.sh'",
+      "# To clean up Magento files launch 'sh ./bin/mage_clean.sh' (pilot only)"
     ]
   },
   "extra": {
-    "magento-root-dir": "htdocs",
+    "magento-root-dir": ".",
     "magento-deploystrategy": "copy",
     "magento-force": true,
     "auto-append-gitignore": false,
     "praxigento_templates_config": [
-      "./templates.json",
-      "./cfg/templates.json"
+      "./templates.cfg.json",
+      "../templates.vars.live.json"
     ]
   }
 }
