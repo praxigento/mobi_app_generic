@@ -1,9 +1,9 @@
-# Install Development Environment for Generic MOBI application for Magento v2
+# Install Development/Test Environment for Generic MOBI application for Magento v2
 
 
 ## Clone repository
 
-Clone sample module repo from github and go to development environment root folder (`./work/`):
+Clone repo from github and go to development/pilot environment root folder (`./work/`):
 
     $ git clone git@github.com:praxigento/mobi_app_generic_mage2.git
     $ cd mobi_app_generic_mage2/work/
@@ -11,8 +11,9 @@ Clone sample module repo from github and go to development environment root fold
 
 ## Create instance configuration file
  
-Create JSON configuration for your development instance 
-(DB parameters, access parameters, [etc](http://devdocs.magento.com/guides/v2.0/install-gde/install/cli/install-cli-install.html#instgde-install-cli-magento)):
+Create JSON configuration for your development/test instance 
+(DB parameters, access parameters, 
+[etc](http://devdocs.magento.com/guides/v2.0/install-gde/install/cli/install-cli-install.html#instgde-install-cli-magento)):
 
     $ cp ../templates.vars.json.init ../templates.vars.work.json
     $ nano ../templates.vars.work.json

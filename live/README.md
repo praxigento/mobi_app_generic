@@ -1,15 +1,20 @@
-# Production environment for Magento v2 Generic MOBI application
+# Install Live/Pilot Environment for Generic MOBI application for Magento v2
 
 
-## Installation
+## Clone repository
 
-Clone repo from github and go to development instance folder:
+Clone repo from github and go to live/pilot instances folder (`./live/`):
 
     $ git clone git@github.com:praxigento/mobi_app_generic_mage2.git
     $ cd mobi_app_generic_mage2/live/
 
-... configure development instance (DB parameters, access parameters,
-[etc](http://fbrnc.net/blog/2012/03/run-magento-installer-from-command-line)):
+
+
+## Create instance configuration file
+
+Create JSON configuration for your live/pilot instance 
+(DB parameters, access parameters, 
+[etc](http://devdocs.magento.com/guides/v2.0/install-gde/install/cli/install-cli-install.html#instgde-install-cli-magento)):
 
     $ cp ../templates.vars.json.init ../templates.vars.live.json
     $ nano ../templates.vars.live.json   

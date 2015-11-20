@@ -1,6 +1,6 @@
 {
   "name": "praxigento/mobi_app_generic_mage2_live",
-  "description": "Production environment for Magento v2 Generic MOBI application.",
+  "description": "Production/pilot environment for Magento v2 Generic MOBI application.",
   "type": "project",
   "homepage": "https://github.com/praxigento/mobi_app_generic_mage2",
   "license": "MIT",
@@ -88,6 +88,10 @@
     "praxigento/mobi_mod_mage2_dashboard": {
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_mod_mage2_dashboard"
+    },
+    "praxigento/mobi_mod_mage2_downline": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_downline"
     },
     "praxigento/mobi_mod_mage2_mlm_id": {
       "type": "vcs",

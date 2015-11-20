@@ -1,6 +1,6 @@
 {
   "name": "praxigento/mobi_app_generic_mage2_work",
-  "description": "Development environment for Magento v2 Generic MOBI application.",
+  "description": "Development/test environment for Magento v2 Generic MOBI application.",
   "type": "project",
   "homepage": "https://github.com/praxigento/mobi_app_generic_mage2",
   "license": "MIT",
@@ -12,8 +12,8 @@
   ],
   "require": {
     "php": "~5.5.0|~5.6.0|~7.0.0",
-    "magento/magento-composer-installer": "dev-master",
     "praxigento/composer_plugin_templates": "^1.0",
+    "magento/magento-composer-installer": "^0.1",
     "magento/product-community-edition": "2.0.0",
     "praxigento/mobi_app_generic_mage2": "dev-master"
   },
@@ -27,11 +27,6 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Magento\\Sniffs\\": "dev/tests/static/framework/Magento/Sniffs/",
-      "Magento\\Tools\\": "dev/tools/Magento/Tools/",
-      "Magento\\Tools\\Sanity\\": "dev/build/publication/sanity/Magento/Tools/Sanity/",
-      "Magento\\TestFramework\\Inspection\\": "dev/tests/static/framework/Magento/TestFramework/Inspection/",
-      "Magento\\TestFramework\\Utility\\": "dev/tests/static/framework/Magento/TestFramework/Utility/",
       "Praxigento\\Accounting\\Test\\Integration\\": "vendor/praxigento/mobi_mod_common_accounting/test/integration",
       "Praxigento\\Test\\": "test/fw/"
     }
@@ -46,10 +41,6 @@
     "magento": {
       "type": "composer",
       "url": "http://packages.magento.com/"
-    },
-    "flancer64/magento-composer-installer": {
-      "type": "vcs",
-      "url": "https://github.com/flancer64/magento-composer-installer"
     },
     "praxigento/mobi_mod_common_accounting": {
       "type": "vcs",
@@ -131,10 +122,6 @@
     "use-include-path": true
   },
   "scripts": {
-    "pre-install-cmd": [
-      "# Create root directory for the development Magento instance.",
-      "# mkdir -p htdocs"
-    ],
     "post-install-cmd": [
       "# To complete installation launch 'sh ./bin/post_install.sh'",
       "# To clean up Magento files launch 'sh ./bin/mage_clean.sh'"
