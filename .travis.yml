@@ -10,17 +10,19 @@ before_install:
   - sudo apt-get install phpunit
   - sudo apt-get install mysql-client-core-5.6 mysql-client-5.6 mysql-server-5.6
   - sudo php -r "readfile('https://getcomposer.org/installer');" | sudo php -- --install-dir=/usr/local/bin --filename=composer
+# Display versions for tools
   - php --version
   - composer --version
-  - sudo composer config -g github-oauth.github.com $GITHUB_OAUTH_TOKEN
   - git --version
+# Setup composer to use Github OAuth Token from Travis Environment Variable
+# (http://docs.travis-ci.com/user/environment-variables/#Defining-Variables-in-Repository-Settings)
+  - composer config -g github-oauth.github.com $GITHUB_OAUTH_TOKEN
 # Deploy Magento 2 application
 # Go to working folder, copy templates.json for travis and start composer install process
   - cd work #  go to root folder for development environment
   - pwd # control current path ('LOCAL_ROOT' in templates.json)
   - cp templates.json.travis ../templates.vars.work.json # create configuration for Travis from template
-  - sudo composer clear-cache
-  - sudo composer install
+  - composer install
 # Run post installation script (deploy Magento2 itself)
   - cat ./bin/post_install.sh # control parameters in the installation script
   - sh ./bin/post_install.sh # create initial DB, setup permissions, ...
