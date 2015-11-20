@@ -39,7 +39,7 @@ Create JSON configuration for your development instance
         "CFG_USE_REWRITES": "0",
         "CFG_USE_SECURE": "0",
         "CFG_USE_SECURE_ADMIN": "0",
-        "CFG_ADMI_USE_SECURITY_KEY": "0",
+        "CFG_ADMIN_USE_SECURITY_KEY": "0",
         "CFG_SESSION_SAVE": "db"
       }
     }

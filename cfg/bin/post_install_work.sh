@@ -74,7 +74,7 @@ php $MAGE_ROOT/bin/magento setup:install  \
 --use-rewrites="${CFG_USE_REWRITES}" \
 --use-secure="${CFG_USE_SECURE}" \
 --use-secure-admin="${CFG_USE_SECURE_ADMIN}" \
---admin-use-security-key="${CFG_ADMI_USE_SECURITY_KEY}" \
+--admin-use-security-key="${CFG_ADMIN_USE_SECURITY_KEY}" \
 --session-save="${CFG_SESSION_SAVE}" \
 --cleanup-database \
 $MAGE_DBPASS \
