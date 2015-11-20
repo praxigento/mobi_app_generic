@@ -12,6 +12,7 @@ before_install:
   - sudo php -r "readfile('https://getcomposer.org/installer');" | sudo php -- --install-dir=/usr/local/bin --filename=composer
   - php --version
   - composer --version
+  - sudo composer config -g github-oauth.github.com $GITHUB_OAUTH_TOKEN
   - git --version
 # Deploy Magento 2 application
 # Go to working folder, copy templates.json for travis and start composer install process
