@@ -68,7 +68,6 @@ php $MAGE_ROOT/bin/magento setup:install  \
 --db-host="${CFG_DB_HOST}" \
 --db-name="${CFG_DB_NAME}" \
 --db-user="${CFG_DB_USER}" \
-$MAGE_DBPASS \
 --language="${CFG_LANGUAGE}" \
 --currency="${CFG_CURRENCY}" \
 --timezone="${CFG_TIMEZONE}" \
@@ -78,7 +77,9 @@ $MAGE_DBPASS \
 --admin-use-security-key="${CFG_ADMI_USE_SECURITY_KEY}" \
 --session-save="${CFG_SESSION_SAVE}" \
 --cleanup-database \
+$MAGE_DBPASS \
 
+php $MAGE_ROOT/bin/magento --help
 
 
 if [ "$DEPLOYMENT_TYPE" = "travis" ]; then
