@@ -11,7 +11,7 @@
     },
     "bin/post_install.sh": {
       "src": "../cfg/bin/post_install_work.sh",
-      "dst": "bin/deploy/post_install.sh",
+      "dst": "bin/post_install.sh",
       "events": [
         "post-install-cmd",
         "post-status-cmd"
