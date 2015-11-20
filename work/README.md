@@ -14,8 +14,8 @@ Clone sample module repo from github and go to development environment root fold
 Create JSON configuration for your development instance 
 (DB parameters, access parameters, [etc](http://devdocs.magento.com/guides/v2.0/install-gde/install/cli/install-cli-install.html#instgde-install-cli-magento)):
 
-    $ cp templates.json.init templates.json
-    $ nano templates.json    
+    $ cp templates.json.init ../templates.vars.work.json
+    $ nano ../templates.vars.work.json
     {
       "vars": {
         "LOCAL_ROOT": "/home/magento/instance/mobi_app_generic_mage2/work",
@@ -51,12 +51,16 @@ Create JSON configuration for your development instance
 
 ## Additional configuration
 
-Shell script `./work/bin/deploy/post_install.sh` is created from `./work/cfg/bin/deploy/post_install.sh` template on
+Shell script `./work/bin/post_install.sh` is created from `./work/cfg/bin/post_install.sh` template on
 _post-install-cmd_ and _post-status-cmd_ events (see [praxigento/composer_plugin_templates](https://github.com/praxigento/composer_plugin_templates)).
 Configuration parameters for placeholders are taken from `templates.json`:
 
-    $ sh  ./bin/deploy/post_install.sh
+    $ sh  ./bin/post_install.sh
 
+
+## Clear Magento files
+
+    $ sh ./bin/mage_clean.sh
 
 
 ## Setup web server

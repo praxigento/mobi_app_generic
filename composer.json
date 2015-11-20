@@ -28,7 +28,7 @@
       "src/registration.php"
     ],
     "psr-4": {
-      "Praxigento\\AppGeneric2\\": "src/"
+      "Praxigento\\App\\Generic2\\": "src/"
     }
   }
 }
