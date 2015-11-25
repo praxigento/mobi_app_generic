@@ -125,7 +125,8 @@
   "scripts": {
     "post-install-cmd": [
       "# To complete installation launch 'sh ./bin/post_install.sh'",
-      "# To clean up Magento files launch 'sh ./bin/mage_clean.sh'"
+      "# To clean up Magento files launch 'sh ./bin/mage_clean.sh'",
+      "# To start integration tests launch './vendor/bin/phpunit -c ./test/integration/phpunit.dist.xml'"
     ]
   },
   "extra": {
