@@ -22,6 +22,15 @@
         "post-status-cmd"
       ],
       "rewrite": true
+    },
+    "bin/setup.sql": {
+      "src": "../cfg/bin/setup.live.sql",
+      "dst": "bin/setup.sql",
+      "events": [
+        "post-install-cmd",
+        "post-status-cmd"
+      ],
+      "rewrite": true
     }
   }
 }

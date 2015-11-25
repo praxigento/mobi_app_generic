@@ -54,6 +54,11 @@ else
     --cleanup-database \
 
     ##
+    echo "Post installation setup for database '$DB_NAME'."
+    ##
+    mysql --database=$DB_NAME --host=$DB_HOST --user=$DB_USER --password=$DB_PASS -e "source $LOCAL_ROOT/bin/setup.sql"
+
+    ##
     echo "Setup additional filesystem permissions."
     ##
     chown -R $LOCAL_OWNER:$LOCAL_GROUP $MAGE_ROOT
