@@ -34,6 +34,7 @@ Create JSON configuration for your development/test instance
         "CFG_DB_NAME": "magento2",
         "CFG_DB_USER": "magento2",
         "CFG_DB_PASSWORD": "JvPESKVSjXvZDrGk2gBe or use 'skip_password'",
+        "CFG_DB_PREFIX": "m2_",
         "CFG_LANGUAGE": "en_US",
         "CFG_CURRENCY": "USD",
         "CFG_TIMEZONE": "UTC",

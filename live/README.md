@@ -35,6 +35,7 @@ Create JSON configuration for your live/pilot instance
         "CFG_DB_NAME": "magento2",
         "CFG_DB_USER": "magento2",
         "CFG_DB_PASSWORD": "JvPESKVSjXvZDrGk2gBe",
+        "CFG_DB_PREFIX": "",
         "CFG_LANGUAGE": "en_US",
         "CFG_CURRENCY": "USD",
         "CFG_TIMEZONE": "UTC",

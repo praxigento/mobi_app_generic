@@ -15,6 +15,7 @@
     "CFG_DB_NAME": "mobi2",
     "CFG_DB_USER": "root",
     "CFG_DB_PASSWORD": "skip_password",
+    "CFG_DB_PREFIX": "m2_",
     "CFG_LANGUAGE": "en_US",
     "CFG_CURRENCY": "USD",
     "CFG_TIMEZONE": "UTC",

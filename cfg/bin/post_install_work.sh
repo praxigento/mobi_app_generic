@@ -30,7 +30,13 @@ else
     MYSQL_PASS="--password=$DB_PASS"
     MAGE_DBPASS="--db-password=""${CFG_DB_PASSWORD}"""
 fi
-
+# DB prefix can be empty
+DB_PREFIX="${CFG_DB_PREFIX}"
+if [ "$DB_PREFIX" = "" ]; then
+    MAGE_DBPREFIX=""
+else
+    MAGE_DBPREFIX="--db-prefix=$DB_PREFIX"
+fi
 
 ##
 echo "Restore write access on folder '$MAGE_ROOT/app/etc' for owner when launches are repeated."
@@ -77,6 +83,7 @@ php $MAGE_ROOT/bin/magento setup:install  \
 --admin-use-security-key="${CFG_ADMIN_USE_SECURITY_KEY}" \
 --session-save="${CFG_SESSION_SAVE}" \
 --cleanup-database \
+$MAGE_DBPREFIX \
 $MAGE_DBPASS \
 
 ##
