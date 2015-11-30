@@ -42,6 +42,9 @@
     "magento": {
       "type": "composer",
       "url": "http://packages.magento.com/"
+    }, "praxigento/mage2_ext_logging": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mage2_ext_logging"
     },
     "praxigento/mobi_mod_common_accounting": {
       "type": "vcs",
