@@ -10,4 +10,4 @@ cd ${LOCAL_ROOT}
 
 git pull
 composer update
-${LOCAL_ROOT}/vendor/bin/phpunit --configuration ${LOCAL_ROOT}/test/coverage/phpunit.dist.xml
+php ${LOCAL_ROOT}/vendor/bin/phpunit --configuration ${LOCAL_ROOT}/test/coverage/phpunit.dist.xml
