@@ -3,7 +3,7 @@
  * Create DB schema.
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigneto\App\Generic2\Setup;
+namespace Praxigento\App\Generic2\Setup;
 
 use Magento\Framework\DB\Ddl\Table as Ddl;
 use Magento\Framework\Setup\InstallSchemaInterface;
