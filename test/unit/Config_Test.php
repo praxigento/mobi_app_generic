@@ -10,7 +10,7 @@ class Config_UnitTest extends \Praxigento\Core\Lib\Test\BaseTestCase {
 
     public function test_constructor() {
         $cfg = new Config();
-        $this->assertTrue($cfg instanceof \Praxigento\Core\Config);
+        $this->assertInstanceOf('Praxigento\App\Generic2\Config', $cfg);
     }
 
 }
