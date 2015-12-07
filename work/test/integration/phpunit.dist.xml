@@ -10,6 +10,7 @@
          syntaxCheck="true"
          bootstrap="./phpunit_bootstrap.php">
     <testsuite name="Integration Tests for Generic MOBI application (M2)">
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_app_generic_mage2/test/integration</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_accounting/test/integration</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_bonus_base/test/integration</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_bonus_retail/test/integration</directory>
