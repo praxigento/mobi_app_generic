@@ -10,6 +10,8 @@
          syntaxCheck="true"
          bootstrap="./phpunit_bootstrap.php">
     <testsuite name="Code Coverage Tests (based on unit tests) for Generic MOBI application (M2)">
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_app_generic_mage1/test/unit</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_app_generic_mage2/test/unit</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_accounting/test/unit</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_bonus_base/test/unit</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_bonus_retail/test/unit</directory>
@@ -34,6 +36,7 @@
                 processUncoveredFilesFromWhitelist="false"
                 addUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">../../vendor/praxigento/mobi_app_generic_mage1/src</directory>
+            <directory suffix=".php">../../vendor/praxigento/mobi_app_generic_mage2/src</directory>
             <directory suffix=".php">../../vendor/praxigento/mobi_mod_common_accounting/src</directory>
             <directory suffix=".php">../../vendor/praxigento/mobi_mod_common_bonus_base/src</directory>
             <directory suffix=".php">../../vendor/praxigento/mobi_mod_common_bonus_retail/src</directory>
@@ -51,7 +54,7 @@
             <directory suffix=".php">../../vendor/praxigento/mobi_mod_mage2_pv/src</directory>
             <directory suffix=".php">../../vendor/praxigento/mobi_mod_mage2_wallet/src</directory>
             <exclude>
-                <file>../../vendor/praxigento/mobi_app_generic_mage1/src/registration.php</file>
+                <file>../../vendor/praxigento/mobi_app_generic_mage2/src/registration.php</file>
                 <file>../../vendor/praxigento/mobi_mod_common_accounting/src/registration.php</file>
                 <file>../../vendor/praxigento/mobi_mod_common_bonus_base/src/registration.php</file>
                 <file>../../vendor/praxigento/mobi_mod_common_bonus_retail/src/registration.php</file>
@@ -73,13 +76,5 @@
     </filter>
     <logging>
         <log type="coverage-html" target="../../build/coverage" lowUpperBound="35" highLowerBound="70"/>
-        <!--<log type="coverage-clover" target="./tmp/coverage.xml"/>-->
-        <!--<log type="coverage-php" target="./tmp/coverage.serialized"/>-->
-        <!--<log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>-->
-        <!--<log type="json" target="./tmp/logfile.json"/>-->
-        <!--<log type="tap" target="./tmp/logfile.tap"/>-->
-        <!--<log type="junit" target="./tmp/logfile.xml" logIncompleteSkipped="false"/>-->
-        <!--<log type="testdox-html" target="./tmp/testdox.html"/>-->
-        <!--<log type="testdox-text" target="./tmp/testdox.txt"/>-->
     </logging>
 </phpunit>
