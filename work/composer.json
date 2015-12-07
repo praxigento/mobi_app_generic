@@ -69,10 +69,6 @@
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_mod_common_downline"
     },
-    "praxigento/mobi_mod_common_mlm_id": {
-      "type": "vcs",
-      "url": "https://github.com/praxigento/mobi_mod_common_mlm_id"
-    },
     "praxigento/mobi_mod_common_pv": {
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_mod_common_pv"
@@ -104,10 +100,6 @@
     "praxigento/mobi_mod_mage2_downline": {
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_mod_mage2_downline"
-    },
-    "praxigento/mobi_mod_mage2_mlm_id": {
-      "type": "vcs",
-      "url": "https://github.com/praxigento/mobi_mod_mage2_mlm_id"
     },
     "praxigento/mobi_mod_mage2_pv": {
       "type": "vcs",
