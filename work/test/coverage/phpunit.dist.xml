@@ -10,7 +10,6 @@
          syntaxCheck="true"
          bootstrap="./phpunit_bootstrap.php">
     <testsuite name="Code Coverage Tests (based on unit tests) for Generic MOBI application (M2)">
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_app_generic_mage1/test/unit</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_app_generic_mage2/test/unit</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_accounting/test/unit</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_bonus_base/test/unit</directory>
@@ -35,7 +34,6 @@
         <whitelist
                 processUncoveredFilesFromWhitelist="false"
                 addUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">../../vendor/praxigento/mobi_app_generic_mage1/src</directory>
             <directory suffix=".php">../../vendor/praxigento/mobi_app_generic_mage2/src</directory>
             <directory suffix=".php">../../vendor/praxigento/mobi_mod_common_accounting/src</directory>
             <directory suffix=".php">../../vendor/praxigento/mobi_mod_common_bonus_base/src</directory>
