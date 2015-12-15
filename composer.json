@@ -13,8 +13,7 @@
   ],
   "require": {
     "php": ">=5.3",
-    "praxigento/mobi_mod_mage2_dashboard": "dev-master",
-    "praxigento/mobi_mod_mage2_wallet": "dev-master"
+    "praxigento/mobi_mod_mage2_dashboard": "dev-master"
   },
   "autoload": {
     "files": [
