@@ -14,7 +14,7 @@
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_accounting/test/integration</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_bonus_base/test/integration</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_bonus_hybrid/test/integration</directory>
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_bonus_personal/test/integration</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_bonus_hybrid/test/integration</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_bonus_retail/test/integration</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_core/test/integration</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_dashboard/test/integration</directory>
@@ -25,7 +25,7 @@
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_accounting/test/integration</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_bonus_base/test/integration</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_bonus_hybrid/test/integration</directory>
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_bonus_personal/test/integration</directory>
+        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_bonus_hybrid/test/integration</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_bonus_retail/test/integration</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_core/test/integration</directory>
         <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_dashboard/test/integration</directory>
