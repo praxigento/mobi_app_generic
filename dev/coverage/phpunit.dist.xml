@@ -10,74 +10,74 @@
          syntaxCheck="true"
          bootstrap="./phpunit_bootstrap.php">
     <testsuite name="Code Coverage Tests (based on unit tests) for Generic MOBI application (M2)">
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_app_generic_mage2/test/unit</directory>
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_accounting/test/unit</directory>
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_bonus_base/test/unit</directory>
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_bonus_hybrid/test/unit</directory>
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_bonus_retail/test/unit</directory>
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_core/test/unit</directory>
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_dashboard/test/unit</directory>
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_downline/test/unit</directory>
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_mlm_id/test/unit</directory>
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_pv/test/unit</directory>
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_common_wallet/test/unit</directory>
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_accounting/test/unit</directory>
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_bonus_base/test/unit</directory>
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_bonus_hybrid/test/unit</directory>
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_bonus_retail/test/unit</directory>
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_core/test/unit</directory>
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_dashboard/test/unit</directory>
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_downline/test/unit</directory>
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_mlm_id/test/unit</directory>
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_pv/test/unit</directory>
-        <directory suffix="_Test.php">../../vendor/praxigento/mobi_mod_mage2_wallet/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_app_generic_mage2/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_accounting/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_bonus_base/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_bonus_hybrid/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_bonus_retail/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_core/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_dashboard/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_downline/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_mlm_id/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_pv/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_wallet/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_accounting/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_base/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_hybrid/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_retail/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_core/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_dashboard/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_downline/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_mlm_id/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_pv/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_wallet/test/unit</directory>
     </testsuite>
     <filter>
         <whitelist
                 processUncoveredFilesFromWhitelist="false"
                 addUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">../../vendor/praxigento/mobi_app_generic_mage2/src</directory>
-            <directory suffix=".php">../../vendor/praxigento/mobi_mod_common_accounting/src</directory>
-            <directory suffix=".php">../../vendor/praxigento/mobi_mod_common_bonus_base/src</directory>
-            <directory suffix=".php">../../vendor/praxigento/mobi_mod_common_bonus_hybrid/src</directory>
-            <directory suffix=".php">../../vendor/praxigento/mobi_mod_common_bonus_hybrid/src</directory>
-            <directory suffix=".php">../../vendor/praxigento/mobi_mod_common_bonus_retail/src</directory>
-            <directory suffix=".php">../../vendor/praxigento/mobi_mod_common_core/src</directory>
-            <directory suffix=".php">../../vendor/praxigento/mobi_mod_common_dashboard/src</directory>
-            <directory suffix=".php">../../vendor/praxigento/mobi_mod_common_downline/src</directory>
-            <directory suffix=".php">../../vendor/praxigento/mobi_mod_common_pv/src</directory>
-            <directory suffix=".php">../../vendor/praxigento/mobi_mod_common_wallet/src</directory>
-            <directory suffix=".php">../../vendor/praxigento/mobi_mod_mage2_accounting/src</directory>
-            <directory suffix=".php">../../vendor/praxigento/mobi_mod_mage2_bonus_base/src</directory>
-            <directory suffix=".php">../../vendor/praxigento/mobi_mod_mage2_bonus_hybrid/src</directory>
-            <directory suffix=".php">../../vendor/praxigento/mobi_mod_mage2_bonus_retail/src</directory>
-            <directory suffix=".php">../../vendor/praxigento/mobi_mod_mage2_core/src</directory>
-            <directory suffix=".php">../../vendor/praxigento/mobi_mod_mage2_dashboard/src</directory>
-            <directory suffix=".php">../../vendor/praxigento/mobi_mod_mage2_downline/src</directory>
-            <directory suffix=".php">../../vendor/praxigento/mobi_mod_mage2_pv/src</directory>
-            <directory suffix=".php">../../vendor/praxigento/mobi_mod_mage2_wallet/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_app_generic_mage2/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_accounting/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_bonus_base/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_bonus_hybrid/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_bonus_hybrid/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_bonus_retail/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_core/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_dashboard/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_downline/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_pv/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_wallet/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_accounting/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_base/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_hybrid/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_retail/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_core/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_dashboard/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_downline/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_pv/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_wallet/src</directory>
             <exclude>
-                <file>../../vendor/praxigento/mobi_app_generic_mage2/src/registration.php</file>
-                <file>../../vendor/praxigento/mobi_mod_common_accounting/src/registration.php</file>
-                <file>../../vendor/praxigento/mobi_mod_common_bonus_base/src/registration.php</file>
-                <file>../../vendor/praxigento/mobi_mod_common_bonus_hybrid/src/registration.php</file>
-                <file>../../vendor/praxigento/mobi_mod_common_bonus_hybrid/src/registration.php</file>
-                <file>../../vendor/praxigento/mobi_mod_common_bonus_retail/src/registration.php</file>
-                <file>../../vendor/praxigento/mobi_mod_common_core/src/registration.php</file>
-                <file>../../vendor/praxigento/mobi_mod_common_dashboard/src/registration.php</file>
-                <file>../../vendor/praxigento/mobi_mod_common_downline/src/registration.php</file>
-                <file>../../vendor/praxigento/mobi_mod_common_pv/src/registration.php</file>
-                <file>../../vendor/praxigento/mobi_mod_common_wallet/src/registration.php</file>
-                <file>../../vendor/praxigento/mobi_mod_mage2_accounting/src/registration.php</file>
-                <file>../../vendor/praxigento/mobi_mod_mage2_bonus_base/src/registration.php</file>
-                <file>../../vendor/praxigento/mobi_mod_mage2_bonus_hybrid/src/registration.php</file>
-                <file>../../vendor/praxigento/mobi_mod_mage2_bonus_hybrid/src/registration.php</file>
-                <file>../../vendor/praxigento/mobi_mod_mage2_bonus_retail/src/registration.php</file>
-                <file>../../vendor/praxigento/mobi_mod_mage2_core/src/registration.php</file>
-                <file>../../vendor/praxigento/mobi_mod_mage2_dashboard/src/registration.php</file>
-                <file>../../vendor/praxigento/mobi_mod_mage2_downline/src/registration.php</file>
-                <file>../../vendor/praxigento/mobi_mod_mage2_pv/src/registration.php</file>
-                <file>../../vendor/praxigento/mobi_mod_mage2_wallet/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_app_generic_mage2/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_common_accounting/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_common_bonus_base/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_common_bonus_hybrid/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_common_bonus_hybrid/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_common_bonus_retail/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_common_core/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_common_dashboard/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_common_downline/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_common_pv/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_common_wallet/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_mage2_accounting/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_mage2_bonus_base/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_mage2_bonus_hybrid/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_mage2_bonus_hybrid/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_mage2_bonus_retail/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_mage2_core/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_mage2_dashboard/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_mage2_downline/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_mage2_pv/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_mage2_wallet/src/registration.php</file>
             </exclude>
         </whitelist>
     </filter>
