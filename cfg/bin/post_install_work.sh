@@ -90,7 +90,7 @@ $MAGE_DBPASS \
 echo "Post installation setup for database '$DB_NAME'."
 ##
 #
-mysql --database=$DB_NAME --host=$DB_HOST --user=$DB_USER $MYSQL_PASS -e "source $LOCAL_ROOT/bin/setup.sql"
+mysql --database=$DB_NAME --host=$DB_HOST --user=$DB_USER $MYSQL_PASS -e "source $LOCAL_ROOT/../bin/setup.sql"
 
 
 if [ "$DEPLOYMENT_TYPE" = "test" ]; then

@@ -1,0 +1,145 @@
+{
+  "name": "praxigento/mobi_app_generic_mage2_work",
+  "description": "Development/test environment for Magento v2 Generic MOBI application.",
+  "type": "project",
+  "homepage": "https://github.com/praxigento/mobi_app_generic_mage2",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alex Gusev",
+      "email": "flancer64@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "~5.5.0|~5.6.0|~7.0.0",
+    "praxigento/composer_plugin_templates": "^1.0",
+    "magento/product-community-edition": "~2.0",
+    "praxigento/mobi_app_generic_mage2": "dev-master"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.1.0",
+    "phpunit/php-code-coverage": "^2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Magento\\Setup\\": "setup/src/Magento/Setup/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Praxigento\\Accounting\\Test\\Integration\\": "vendor/praxigento/mobi_mod_common_accounting/test/integration",
+      "Praxigento\\Test\\": "test/fw/"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "repositories": {
+    "firegento": {
+      "type": "composer",
+      "url": "http://packages.firegento.com"
+    },
+    "magento": {
+      "type": "composer",
+      "url": "http://packages.magento.com/"
+    },
+    "praxigento/mage2_ext_logging": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mage2_ext_logging"
+    },
+    "praxigento/mobi_mod_common_accounting": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_accounting"
+    },
+    "praxigento/mobi_mod_common_bonus_base": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_bonus_base"
+    },
+    "praxigento/mobi_mod_common_bonus_hybrid": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_bonus_hybrid"
+    },
+    "praxigento/mobi_mod_common_bonus_retail": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_bonus_retail"
+    },
+    "praxigento/mobi_mod_common_core": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_core"
+    },
+    "praxigento/mobi_mod_common_dashboard": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_dashboard"
+    }, "praxigento/mobi_mod_common_downline": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_downline"
+    },
+    "praxigento/mobi_mod_common_pv": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_pv"
+    },
+    "praxigento/mobi_mod_common_wallet": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_wallet"
+    },
+    "praxigento/mobi_mod_mage2_accounting": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_accounting"
+    },
+    "praxigento/mobi_mod_mage2_bonus_base": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_bonus_base"
+    },
+    "praxigento/mobi_mod_mage2_bonus_hybrid": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_bonus_hybrid"
+    },
+    "praxigento/mobi_mod_mage2_bonus_retail": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_bonus_retail"
+    },
+    "praxigento/mobi_mod_mage2_core": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_core"
+    },
+    "praxigento/mobi_mod_mage2_dashboard": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_dashboard"
+    },
+    "praxigento/mobi_mod_mage2_downline": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_downline"
+    },
+    "praxigento/mobi_mod_mage2_pv": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_pv"
+    },
+    "praxigento/mobi_mod_mage2_wallet": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_wallet"
+    },
+    "praxigento/mobi_app_generic_mage2": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_app_generic_mage2"
+    }
+  },
+  "config": {
+    "use-include-path": true
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "# To complete installation launch 'sh ./bin/post_install.sh'",
+      "# To clean up Magento files launch 'sh ./bin/mage_clean.sh'",
+      "# To start integration tests launch './vendor/bin/phpunit -c ./test/integration/phpunit.dist.xml'"
+    ]
+  },
+  "extra": {
+    "magento-root-dir": ".",
+    "magento-deploystrategy": "copy",
+    "magento-force": true,
+    "auto-append-gitignore": false,
+    "praxigento_templates_config": [
+      "./templates.cfg.json",
+      "../templates.vars.work.json"
+    ]
+  }
+}
