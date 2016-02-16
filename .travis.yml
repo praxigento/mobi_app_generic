@@ -27,10 +27,12 @@ before_install:
 # Run post installation script (deploy Magento2 itself)
   - cat ./bin/post_install.sh # control parameters in the installation script
   - sh ./bin/post_install.sh # create initial DB, setup permissions, ...
+# Go to root folder
+  - cd ..
 #
 script:
-  - phpunit --configuration ./test/unit/phpunit.dist.xml
-  - phpunit --configuration ./test/integration/phpunit.dist.xml
+  - phpunit -c ./dev/unit/phpunit.dist.xml
+  - phpunit -c ./dev/integration/phpunit.dist.xml
 #  - phpunit --configuration ./dev/tests/unit/phpunit.xml.dist # run Magento 2 unit tests
 
 notifications:

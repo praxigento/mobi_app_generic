@@ -1,7 +1,7 @@
 {
   "templates": {
     "bin/post_install.sh": {
-      "src": "../cfg/bin/post_install_work.sh",
+      "src": "../deploy/bin/post_install_work.sh",
       "dst": "../bin/post_install.sh",
       "events": [
         "post-update-cmd",
@@ -10,7 +10,7 @@
       "rewrite": true
     },
     "bin/setup.sql": {
-      "src": "../cfg/bin/setup.work.sql",
+      "src": "../deploy/bin/setup.work.sql",
       "dst": "../bin/setup.sql",
       "events": [
         "post-update-cmd",
@@ -19,7 +19,7 @@
       "rewrite": true
     },
     "bin/cron_coverage.work.sh": {
-      "src": "../cfg/bin/cron_coverage.work.sh",
+      "src": "../deploy/bin/cron_coverage.work.sh",
       "dst": "../bin/cron_coverage.sh",
       "events": [
         "post-update-cmd",
@@ -28,7 +28,7 @@
       "rewrite": true
     },
     "var/log/logging.yaml": {
-      "src": "../cfg/logging.yaml",
+      "src": "../deploy/logging.yaml",
       "dst": "./var/log/logging.yaml",
       "events": [
         "post-update-cmd",
