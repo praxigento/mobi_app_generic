@@ -18,17 +18,13 @@ before_install:
 # Setup composer to use Github OAuth Token from Travis Environment Variable
 # (http://docs.travis-ci.com/user/environment-variables/#Defining-Variables-in-Repository-Settings)
   - composer config -g github-oauth.github.com $GITHUB_OAUTH_TOKEN
+  - composer config -g http-basic.repo.magento.com $M2_KEY_PUB $M2_KEY_PRIV
 # Deploy Magento 2 application
   - cp templates.vars.json.travis templates.vars.work.json # create configuration for Travis from template
-# Go to working folder, copy templates.json for travis and start composer install process
-  - cd work #  go to root folder for development environment
   - pwd # control current path ('LOCAL_ROOT' in templates.json)
-  - composer install
-# Run post installation script (deploy Magento2 itself)
-  - cat ./bin/post_install.sh # control parameters in the installation script
-  - sh ./bin/post_install.sh # create initial DB, setup permissions, ...
-# Go to root folder
-  - cd ..
+  - sh deploy.sh
+  - sh ./bin/post_install.sh
+
 #
 script:
   - phpunit -c ./dev/unit/phpunit.dist.xml
