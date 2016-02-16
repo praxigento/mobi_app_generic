@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         syntaxCheck="true"
+         bootstrap="./phpunit_bootstrap.php">
+    <testsuite name="Integration Tests for Generic MOBI application (M2)">
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_app_generic_mage2/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_accounting/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_bonus_base/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_bonus_hybrid/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_bonus_hybrid/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_bonus_retail/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_core/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_dashboard/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_downline/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_mlm_id/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_pv/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_wallet/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_accounting/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_base/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_hybrid/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_hybrid/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_retail/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_core/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_dashboard/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_downline/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_mlm_id/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_pv/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_wallet/test/integration</directory>
+    </testsuite>
+</phpunit>

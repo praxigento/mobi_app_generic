@@ -17,7 +17,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Praxigento\\Test\\": "test/fw/"
+      "Praxigento\\Test\\": "../dev/fw/"
     }
   },
   "repositories": {
