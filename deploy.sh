@@ -23,7 +23,7 @@ COMPOSER_OPTS=$DHOME/composer_opts.json
 ##
 #   Deployment.
 ##
-echo "\nClean up application root folder ($M2_ROOT)..."
+echo "\nClean up application's root folder ($M2_ROOT)..."
 if [ -d "$M2_ROOT" ]
 then
     rm -fr $M2_ROOT
