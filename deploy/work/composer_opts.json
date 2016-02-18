@@ -41,6 +41,10 @@
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_mod_common_bonus_retail"
     },
+    "praxigento/mobi_mod_common_bonus_loyalty": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_common_bonus_loyalty"
+    },
     "praxigento/mobi_mod_common_bonus_unilevel": {
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_mod_common_bonus_unilevel"
@@ -79,6 +83,10 @@
     "praxigento/mobi_mod_mage2_bonus_retail": {
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_mod_mage2_bonus_retail"
+    },
+    "praxigento/mobi_mod_mage2_bonus_loyalty": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_mod_mage2_bonus_loyalty"
     },
     "praxigento/mobi_mod_mage2_bonus_unilevel": {
       "type": "vcs",
