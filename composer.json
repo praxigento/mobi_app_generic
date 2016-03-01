@@ -13,8 +13,7 @@
   ],
   "require": {
     "praxigento/mobi_mod_mage2_bonus_hybrid": "dev-master",
-    "praxigento/mobi_mod_mage2_bonus_loyalty": "dev-master",
-    "praxigento/mobi_mod_mage2_bonus_unilevel": "dev-master",
+    "praxigento/mobi_mod_mage2_bonus_global_sales": "dev-master",
     "praxigento/mobi_mod_mage2_dashboard": "dev-master"
   },
   "autoload": {
