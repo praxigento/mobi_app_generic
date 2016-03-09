@@ -13,7 +13,8 @@
     "praxigento/mobi_app_generic_mage2": "dev-master"
   },
   "require-dev": {
-    "phpunit/php-code-coverage": "^2"
+    "phpunit/php-code-coverage": "^2",
+    "mockery/mockery": "^0.9.4"
   },
   "autoload-dev": {
     "psr-4": {
