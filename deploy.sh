@@ -39,7 +39,7 @@ composer create-project --repository-url=https://repo.magento.com/ magento/proje
 
 
 echo "\nAdd pre-deploy dependencies to main 'composer.json'..."
-composer require flancer32/php_data_object:dev-master
+composer require flancer32/php_data_object:~0.1
 
 
 echo "\nFilter original '$COMPOSER_MAIN' on '$COMPOSER_UNSET' set and populate with additional options from '$COMPOSER_OPTS'..."
