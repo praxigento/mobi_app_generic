@@ -19,9 +19,11 @@
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_core/test/integration</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_dashboard/test/integration</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_downline/test/integration</directory>
-        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_mlm_id/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_exp_date/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_odoo/test/integration</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_pv/test/integration</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_wallet/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_warehouse/test/integration</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_accounting/test/integration</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_base/test/integration</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_hybrid/test/integration</directory>
@@ -30,8 +32,10 @@
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_core/test/integration</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_dashboard/test/integration</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_downline/test/integration</directory>
-        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_mlm_id/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_exp_date/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_odoo/test/integration</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_pv/test/integration</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_wallet/test/integration</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_warehouse/test/integration</directory>
     </testsuite>
 </phpunit>

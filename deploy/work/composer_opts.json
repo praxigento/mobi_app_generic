@@ -22,10 +22,6 @@
     }
   },
   "repositories": {
-    "praxigento/mage2_ext_logging": {
-      "type": "vcs",
-      "url": "https://github.com/praxigento/mage2_ext_logging"
-    },
     "praxigento/mobi_mod_common_accounting": {
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_mod_common_accounting"
@@ -49,10 +45,6 @@
     "praxigento/mobi_mod_common_bonus_loyalty": {
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_mod_common_bonus_loyalty"
-    },
-    "praxigento/mobi_mod_common_bonus_unilevel": {
-      "type": "vcs",
-      "url": "https://github.com/praxigento/mobi_mod_common_bonus_unilevel"
     },
     "praxigento/mobi_mod_common_core": {
       "type": "vcs",
@@ -96,10 +88,6 @@
     "praxigento/mobi_mod_mage2_bonus_loyalty": {
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_mod_mage2_bonus_loyalty"
-    },
-    "praxigento/mobi_mod_mage2_bonus_unilevel": {
-      "type": "vcs",
-      "url": "https://github.com/praxigento/mobi_mod_mage2_bonus_unilevel"
     },
     "praxigento/mobi_mod_mage2_core": {
       "type": "vcs",

@@ -19,7 +19,6 @@
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_core/test/unit</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_dashboard/test/unit</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_downline/test/unit</directory>
-        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_mlm_id/test/unit</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_pv/test/unit</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_wallet/test/unit</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_accounting/test/unit</directory>
@@ -29,7 +28,6 @@
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_core/test/unit</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_dashboard/test/unit</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_downline/test/unit</directory>
-        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_mlm_id/test/unit</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_pv/test/unit</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_wallet/test/unit</directory>
     </testsuite>
@@ -46,8 +44,11 @@
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_core/src</directory>
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_dashboard/src</directory>
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_downline/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_exp_date/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_odoo/src</directory>
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_pv/src</directory>
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_wallet/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_warehouse/src</directory>
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_accounting/src</directory>
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_base/src</directory>
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_hybrid/src</directory>
@@ -55,8 +56,11 @@
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_core/src</directory>
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_dashboard/src</directory>
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_downline/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_exp_date/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_odoo/src</directory>
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_pv/src</directory>
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_wallet/src</directory>
+            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_warehouse/src</directory>
             <exclude>
                 <file>../../work/vendor/praxigento/mobi_app_generic_mage2/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_common_accounting/src/registration.php</file>
@@ -67,8 +71,11 @@
                 <file>../../work/vendor/praxigento/mobi_mod_common_core/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_common_dashboard/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_common_downline/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_common_exp_date/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_common_odoo/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_common_pv/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_common_wallet/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_common_warehouse/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_mage2_accounting/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_mage2_bonus_base/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_mage2_bonus_global_sales/src/registration.php</file>
@@ -78,8 +85,11 @@
                 <file>../../work/vendor/praxigento/mobi_mod_mage2_core/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_mage2_dashboard/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_mage2_downline/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_mage2_exp_date/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_mage2_odoo/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_mage2_pv/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_mage2_wallet/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_mage2_warehouse/src/registration.php</file>
             </exclude>
         </whitelist>
     </filter>
