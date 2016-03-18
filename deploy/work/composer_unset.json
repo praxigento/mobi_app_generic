@@ -1,6 +1,6 @@
 [
-  "/name",
-  "/description",
-  "/version",
-  "/minimum-stability"
+  "name",
+  "description",
+  "version",
+  "minimum-stability"
 ]

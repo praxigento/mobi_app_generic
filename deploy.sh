@@ -38,12 +38,12 @@ echo "\nCreate M2 CE project in '$M2_ROOT' using 'composer install'..."
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition $M2_ROOT
 
 
-echo "\nAdd pre-deploy dependencies to main 'composer.json'..."
-composer require flancer32/php_data_object:~0.1
-
-
 echo "\nFilter original '$COMPOSER_MAIN' on '$COMPOSER_UNSET' set and populate with additional options from '$COMPOSER_OPTS'..."
 php $DIR/deploy/merge_json.php $COMPOSER_MAIN $COMPOSER_UNSET $COMPOSER_OPTS
+
+
+echo "\nSwitch Magento into 'developer' mode."
+php $M2_ROOT/bin/magento deploy:mode:set developer
 
 
 echo "\nUpdate M2 CE project with additional options..."
