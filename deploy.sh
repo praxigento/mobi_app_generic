@@ -42,10 +42,6 @@ echo "\nFilter original '$COMPOSER_MAIN' on '$COMPOSER_UNSET' set and populate w
 php $DIR/deploy/merge_json.php $COMPOSER_MAIN $COMPOSER_UNSET $COMPOSER_OPTS
 
 
-echo "\nSwitch Magento into 'developer' mode."
-php $M2_ROOT/bin/magento deploy:mode:set developer
-
-
 echo "\nUpdate M2 CE project with additional options..."
 composer update
 
