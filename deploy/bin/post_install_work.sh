@@ -99,15 +99,16 @@ else
     ##
     echo "\nSet file system ownership and permissions."
     ##
+    mkdir -p $MAGE_ROOT/var/cache
+    mkdir -p $MAGE_ROOT/var/generation
     chown -R $LOCAL_OWNER:$LOCAL_GROUP $MAGE_ROOT
     find $MAGE_ROOT -type d -exec chmod 770 {} \;
     find $MAGE_ROOT -type f -exec chmod 660 {} \;
-    mkdir -p $MAGE_ROOT/var/cache
-    mkdir -p $MAGE_ROOT/var/generation
     chmod -R g+w $MAGE_ROOT/var
     chmod -R g+w $MAGE_ROOT/pub
     chmod u+x $MAGE_ROOT/bin/magento
     chmod -R go-w $MAGE_ROOT/app/etc
+
     ##
     echo "\nSwitch Magento into 'developer' mode."
     php $MAGE_ROOT/bin/magento deploy:mode:set developer
