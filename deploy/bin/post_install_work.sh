@@ -9,7 +9,7 @@
 DEPLOYMENT_TYPE=${DEPLOYMENT_TYPE}
 # local specific environment
 LOCAL_ROOT=${LOCAL_ROOT}    # root folder for the deployed instance
-MAGE_ROOT=$LOCAL_ROOT       # root folder for Magento app (in common case can be other than LOCAL_ROOT)
+M2_ROOT=$LOCAL_ROOT       # root folder for Magento app (in common case can be other than LOCAL_ROOT)
 # The owner of the Magento file system:
 #   * Must have full control (read/write/execute) of all files and directories.
 #   * Must not be the web server user; it should be a different user.
@@ -39,11 +39,11 @@ else
 fi
 
 ##
-echo "Restore write access on folder '$MAGE_ROOT/app/etc' for owner when launches are repeated."
+echo "Restore write access on folder '$M2_ROOT/app/etc' for owner when launches are repeated."
 ##
-if [ -d "$MAGE_ROOT/app/etc" ]
+if [ -d "$M2_ROOT/app/etc" ]
 then
-    chmod -R go+w $MAGE_ROOT/app/etc
+    chmod -R go+w $M2_ROOT/app/etc
 fi
 
 
@@ -63,7 +63,7 @@ echo "(Re)install Magento using database '$DB_NAME' (connecting as '$DB_USER')."
 # Full list of the available options:
 # http://devdocs.magento.com/guides/v2.0/install-gde/install/cli/install-cli-install.html#instgde-install-cli-magento
 
-php $MAGE_ROOT/bin/magento setup:install  \
+php $M2_ROOT/bin/magento setup:install  \
 --admin-firstname="${CFG_ADMIN_FIRSTNAME}" \
 --admin-lastname="${CFG_ADMIN_LASTNAME}" \
 --admin-email="${CFG_ADMIN_EMAIL}" \
@@ -97,24 +97,23 @@ if [ "$DEPLOYMENT_TYPE" = "test" ]; then
     echo "\nSkip file system ownership and permissions setup."
 else
     ##
+    echo "\nSwitch Magento 2 into 'developer' mode."
+    php $M2_ROOT/bin/magento deploy:mode:set developer
+    echo "Disable Magento 2 cache."
+    php $M2_ROOT/bin/magento cache:disable
+    ##
     echo "\nSet file system ownership and permissions."
     ##
-    mkdir -p $MAGE_ROOT/var/cache
-    mkdir -p $MAGE_ROOT/var/generation
-    chown -R $LOCAL_OWNER:$LOCAL_GROUP $MAGE_ROOT
-    find $MAGE_ROOT -type d -exec chmod 770 {} \;
-    find $MAGE_ROOT -type f -exec chmod 660 {} \;
-    chmod -R g+w $MAGE_ROOT/var
-    chmod -R g+w $MAGE_ROOT/pub
-    chmod u+x $MAGE_ROOT/bin/magento
-    chmod -R go-w $MAGE_ROOT/app/etc
-
-    ##
-    echo "\nSwitch Magento into 'developer' mode."
-    php $MAGE_ROOT/bin/magento deploy:mode:set developer
-
+#    mkdir -p $M2_ROOT/var/cache
+#    mkdir -p $M2_ROOT/var/generation
+    chown -R $LOCAL_OWNER:$LOCAL_GROUP $M2_ROOT
+    find $M2_ROOT -type d -exec chmod 770 {} \;
+    find $M2_ROOT -type f -exec chmod 660 {} \;
+    chmod -R g+w $M2_ROOT/var
+    chmod -R g+w $M2_ROOT/pub
+    chmod u+x $M2_ROOT/bin/magento
+    chmod -R go-w $M2_ROOT/app/etc
 fi
-
 
 
 ##
