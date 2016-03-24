@@ -38,7 +38,7 @@ echo "\nCreate M2 CE project in '$M2_ROOT' using 'composer install'..."
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition $M2_ROOT
 
 
-echo "\nFilter original '$COMPOSER_MAIN' on '$COMPOSER_UNSET' set and populate with additional options from '$COMPOSER_OPTS'..."
+echo "\nMerge original \n\t'$COMPOSER_MAIN' with \n\t'$COMPOSER_UNSET' and \n\t'$COMPOSER_OPTS'..."
 php $DIR/deploy/merge_json.php $COMPOSER_MAIN $COMPOSER_UNSET $COMPOSER_OPTS
 
 
