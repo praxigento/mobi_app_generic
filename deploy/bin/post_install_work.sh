@@ -101,14 +101,18 @@ else
     php $M2_ROOT/bin/magento deploy:mode:set developer
     echo "Disable Magento 2 cache."
     php $M2_ROOT/bin/magento cache:disable
+    echo "Run Magento 2 re-index."
+    php $M2_ROOT/bin/magento indexer:reindex
+    echo "Run Magento 2 cron."
+    php $M2_ROOT/bin/magento cron:run
     ##
     echo "\nSet file system ownership and permissions."
     ##
 #    mkdir -p $M2_ROOT/var/cache
 #    mkdir -p $M2_ROOT/var/generation
     chown -R $LOCAL_OWNER:$LOCAL_GROUP $M2_ROOT
-    find $M2_ROOT -type d -exec chmod 770 {} \;
-    find $M2_ROOT -type f -exec chmod 660 {} \;
+    #find $M2_ROOT -type d -exec chmod 770 {} \;
+    #find $M2_ROOT -type f -exec chmod 660 {} \;
     chmod -R g+w $M2_ROOT/var
     chmod -R g+w $M2_ROOT/pub
     chmod u+x $M2_ROOT/bin/magento
