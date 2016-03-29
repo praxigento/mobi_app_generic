@@ -1,19 +1,19 @@
 {
   "data": {
-    "option": {
+    "options": {
       "currency": "USD"
     },
-    "warehouse": {
+    "warehouses": {
       "odooWrhsId_001": {
         "currency": "EUR"
       }
     },
-    "lot": {
+    "lots": {
       "odooLotId_001": {
         "expirationDate": "2015-05-28 14:04:22"
       }
     },
-    "product": {
+    "products": {
       "odooProdId_001": {
         "sku": "1001",
         "pv": 213,
