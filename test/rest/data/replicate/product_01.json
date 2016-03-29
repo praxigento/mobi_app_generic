@@ -4,12 +4,12 @@
       "currency": "USD"
     },
     "warehouses": {
-      "odooWrhsId_001": {
+      "10": {
         "currency": "EUR"
       }
     },
     "lots": {
-      "odooLotId_001": {
+      "1001": {
         "expirationDate": "2015-05-28 14:04:22"
       }
     },
