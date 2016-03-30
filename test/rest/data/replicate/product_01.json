@@ -5,7 +5,16 @@
     },
     "warehouses": {
       "10": {
+        "code": "Germany",
         "currency": "EUR"
+      },
+      "20": {
+        "code": "Baltic",
+        "currency": "EUR"
+      },
+      "30": {
+        "code": "Russia",
+        "currency": "RUB"
       }
     },
     "lots": {
