@@ -23,7 +23,7 @@ COMPOSER_OPTS=$DHOME/composer_opts.json
 ##
 #   Deployment.
 ##
-echo "\nClean up application's root folder ($M2_ROOT)..."
+echo "Clean up application's root folder ($M2_ROOT)..."
 if [ -d "$M2_ROOT" ]
 then
     rm -fr $M2_ROOT
@@ -34,14 +34,16 @@ fi
 cd $M2_ROOT
 
 
-echo "\nCreate M2 CE project in '$M2_ROOT' using 'composer install'..."
+echo "Create M2 CE project in '$M2_ROOT' using 'composer install'..."
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition $M2_ROOT
 
 
-echo "\nMerge original \n\t'$COMPOSER_MAIN' with \n\t'$COMPOSER_UNSET' and \n\t'$COMPOSER_OPTS'..."
+echo "Merge original"
+echo "    '$COMPOSER_MAIN' with"
+echo "    '$COMPOSER_UNSET' and"
+echo "    '$COMPOSER_OPTS'..."
 php $DIR/deploy/merge_json.php $COMPOSER_MAIN $COMPOSER_UNSET $COMPOSER_OPTS
 
 
-echo "\nUpdate M2 CE project with additional options..."
+echo "Update M2 CE project with additional options..."
 composer update
-

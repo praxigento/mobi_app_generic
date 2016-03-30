@@ -94,7 +94,7 @@ mysql --database=$DB_NAME --host=$DB_HOST --user=$DB_USER $MYSQL_PASS -e "source
 
 
 if [ "$DEPLOYMENT_TYPE" = "test" ]; then
-    echo "\nSkip file system ownership and permissions setup."
+    echo "Skip file system ownership and permissions setup."
 else
     ##
     echo "\nSwitch Magento 2 into 'developer' mode."
@@ -106,7 +106,7 @@ else
     echo "Run Magento 2 cron."
     php $M2_ROOT/bin/magento cron:run
     ##
-    echo "\nSet file system ownership and permissions."
+    echo "Set file system ownership and permissions."
     ##
 #    mkdir -p $M2_ROOT/var/cache
 #    mkdir -p $M2_ROOT/var/generation
