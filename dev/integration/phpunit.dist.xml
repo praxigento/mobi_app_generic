@@ -19,7 +19,6 @@
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_core/test/integration</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_dashboard/test/integration</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_downline/test/integration</directory>
-        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_exp_date/test/integration</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_odoo/test/integration</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_pv/test/integration</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_wallet/test/integration</directory>

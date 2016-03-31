@@ -44,7 +44,6 @@
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_core/src</directory>
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_dashboard/src</directory>
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_downline/src</directory>
-            <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_exp_date/src</directory>
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_odoo/src</directory>
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_pv/src</directory>
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_common_wallet/src</directory>
@@ -71,7 +70,6 @@
                 <file>../../work/vendor/praxigento/mobi_mod_common_core/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_common_dashboard/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_common_downline/src/registration.php</file>
-                <file>../../work/vendor/praxigento/mobi_mod_common_exp_date/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_common_odoo/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_common_pv/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_common_wallet/src/registration.php</file>
