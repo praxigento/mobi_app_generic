@@ -11,25 +11,12 @@
          bootstrap="./phpunit_bootstrap.php">
     <testsuite name="Unit Tests for Generic MOBI application (M2)">
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_app_generic_mage2/test/unit</directory>
-        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_accounting/test/unit</directory>
-        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_bonus_base/test/unit</directory>
-        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_bonus_global_sales/test/unit
-        </directory>
-        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_bonus_hybrid/test/unit</directory>
-        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_bonus_retail/test/unit</directory>
-        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_core/test/unit</directory>
-        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_dashboard/test/unit</directory>
-        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_downline/test/unit</directory>
-        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_odoo/test/unit</directory>
-        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_pv/test/unit</directory>
-        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_wallet/test/unit</directory>
-        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_common_warehouse/test/unit</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_accounting/test/unit</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_base/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_global_sales/test/unit</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_hybrid/test/unit</directory>
-        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_retail/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_loyalty/test/unit</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_core/test/unit</directory>
-        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_dashboard/test/unit</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_downline/test/unit</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_exp_date/test/unit</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_odoo/test/unit</directory>
