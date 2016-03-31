@@ -89,10 +89,6 @@
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_mod_mage2_bonus_loyalty"
     },
-    "praxigento/mobi_mod_mage2_core": {
-      "type": "vcs",
-      "url": "https://github.com/praxigento/mobi_mod_mage2_core"
-    },
     "praxigento/mobi_mod_mage2_dashboard": {
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_mod_mage2_dashboard"
