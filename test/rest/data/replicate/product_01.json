@@ -1,53 +1,45 @@
 {
   "data": {
-    "options": {
+    "option": {
       "currency": "USD"
     },
-    "warehouses": {
-      "10": {
+    "warehouse": [
+      {
+        "id": 10,
         "code": "Germany",
         "currency": "EUR"
-      },
-      "20": {
-        "code": "Baltic",
-        "currency": "EUR"
-      },
-      "30": {
-        "code": "Russia",
-        "currency": "RUB"
       }
-    },
-    "lots": {
-      "1001": {
+    ],
+    "lot": [
+      {
+        "id": 1001,
         "code": "L-1001",
         "expirationDate": "2015-05-28 14:04:22"
       },
-      "1002": {
+      {
+        "id": 2002,
         "code": "K-234",
         "expirationDate": "2018-06-29 16:24:32"
       }
-    },
-    "products": {
-      "odooProdId_001": {
+    ],
+    "products": [
+      {
+        "id": 1234,
         "sku": "1001",
         "pv": 213,
         "price": 23.45,
-        "warehouses": {
-          "10": {
+        "warehouses": [
+          {
+            "id": 10,
             "pv": 213,
             "price": 23.45,
-            "lots": {
-              "1001": {
-                "qty": 321
-              },
-              "1002": {
-                "qty": 56
-              }
-            }
+            "lot": [
+              {"id": 1001, "qty": 321},
+              {"id": 2002, "qty": 56}
+            ]
           }
-        }
-      },
-      "odooProdId_002": {}
-    }
+        ]
+      }
+    ]
   }
 }
