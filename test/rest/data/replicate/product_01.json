@@ -3,14 +3,14 @@
     "option": {
       "currency": "USD"
     },
-    "warehouse": [
+    "warehouses": [
       {
         "id": 10,
         "code": "Germany",
         "currency": "EUR"
       }
     ],
-    "lot": [
+    "lots": [
       {
         "id": 1001,
         "code": "L-1001",
@@ -33,7 +33,7 @@
             "id": 10,
             "pv": 213,
             "price": 23.45,
-            "lot": [
+            "lots": [
               {"id": 1001, "qty": 321},
               {"id": 2002, "qty": 56}
             ]
