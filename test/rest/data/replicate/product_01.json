@@ -26,8 +26,10 @@
       {
         "id": 1234,
         "sku": "1001",
+        "name": "Product #1",
         "pv": 213,
         "price": 23.45,
+        "weight": 0.200,
         "warehouses": [
           {
             "id": 10,
