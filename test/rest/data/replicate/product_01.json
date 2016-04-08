@@ -22,10 +22,6 @@
         "expirationDate": "2018-06-29 16:24:32"
       }
     ],
-    "categories": [
-      {"id": 12, "parentId": 12, "name": "Root category"},
-      {"id": 21, "parentId": 12, "name": "Subcategory"}
-    ],
     "products": [
       {
         "id": 1234,
@@ -34,7 +30,7 @@
         "pv": 2135,
         "price": 23.223,
         "weight": 0.256,
-        "categories": [12, 21],
+        "categories": [12, 21, 321],
         "warehouses": [
           {
             "id": 10,
