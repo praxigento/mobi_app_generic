@@ -29,11 +29,11 @@
     "products": [
       {
         "id": 1234,
-        "sku": "1001",
-        "name": "Product #1",
-        "pv": 213,
-        "price": 23.45,
-        "weight": 0.200,
+        "sku": "1001-R",
+        "name": "Product is Updated",
+        "pv": 2135,
+        "price": 23.223,
+        "weight": 0.256,
         "categories": [12, 21],
         "warehouses": [
           {
