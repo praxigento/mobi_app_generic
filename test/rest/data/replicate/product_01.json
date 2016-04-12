@@ -27,6 +27,7 @@
         "id": 1234,
         "sku": "1001-R",
         "name": "Product is Updated",
+        "isActive": false,
         "pv": 2135,
         "price": 23.223,
         "weight": 0.256,
