@@ -20,3 +20,11 @@
 
 * [./live/](./live/) - root folder for live (production) version of the application.
 * [./work/](./work/) - root folder for development version of the application.
+
+
+
+## Code coverage
+
+    $ phpdbg -qrr ./work/vendor/bin/phpunit --configuration ./dev/coverage/phpunit.dist.xml
+
+Report is placed in `build/coverage/index.html`
