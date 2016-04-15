@@ -1,6 +1,7 @@
 {
   "data": {
     "warehouse": {
+      "stock_ref": 1,
       "code": "Latvia",
       "currency": "EUR",
       "note": "Warehouse in Riga."
