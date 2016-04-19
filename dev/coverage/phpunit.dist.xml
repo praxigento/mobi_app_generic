@@ -18,7 +18,7 @@
         <!--<directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_loyalty/test/unit</directory>-->
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_core/test/unit</directory>
         <!--<directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_downline/test/unit</directory>-->
-        <!--<directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_pv/test/unit</directory>-->
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_pv/test/unit</directory>
         <!--<directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_exp_date/test/unit</directory>-->
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_odoo/test/unit</directory>
         <!--<directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_wallet/test/unit</directory>-->
