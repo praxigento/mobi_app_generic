@@ -52,6 +52,7 @@
                 <file>../../work/vendor/praxigento/mobi_mod_mage2_downline/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_mage2_exp_date/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_mage2_odoo/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_mage2_odoo/src/Logger.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_mage2_pv/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_mage2_wallet/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_mage2_warehouse/src/registration.php</file>
