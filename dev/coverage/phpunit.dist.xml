@@ -10,18 +10,19 @@
          syntaxCheck="true"
          bootstrap="./phpunit_bootstrap.php">
     <testsuite name="Code Coverage Tests (based on unit tests) for Generic MOBI application (M2)">
-        <!--<directory suffix="_Test.php">../../work/vendor/praxigento/mobi_app_generic_mage2/test/unit</directory>-->
-        <!--<directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_accounting/test/unit</directory>-->
-        <!--<directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_base/test/unit</directory>-->
-        <!--<directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_global_sales/test/unit</directory>-->
-        <!--<directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_hybrid/test/unit</directory>-->
-        <!--<directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_loyalty/test/unit</directory>-->
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_app_generic_mage2/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_accounting/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_base/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_global_sales/test/unit
+        </directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_hybrid/test/unit</directory>
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_loyalty/test/unit</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_core/test/unit</directory>
-        <!--<directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_downline/test/unit</directory>-->
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_downline/test/unit</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_pv/test/unit</directory>
-        <!--<directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_exp_date/test/unit</directory>-->
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_exp_date/test/unit</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_odoo/test/unit</directory>
-        <!--<directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_wallet/test/unit</directory>-->
+        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_wallet/test/unit</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_warehouse/test/unit</directory>
     </testsuite>
     <filter>
@@ -52,6 +53,7 @@
                 <file>../../work/vendor/praxigento/mobi_mod_mage2_downline/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_mage2_exp_date/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_mage2_odoo/src/registration.php</file>
+                <file>../../work/vendor/praxigento/mobi_mod_mage2_odoo/src/Logger.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_mage2_pv/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_mage2_wallet/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_mage2_warehouse/src/registration.php</file>
