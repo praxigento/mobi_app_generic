@@ -19,10 +19,13 @@ handlers:
         level: EMERGENCY
         formatter: dashed
         stream: ${LOCAL_ROOT}/log/cascade_exception.log
-processors:
-    web_processor:
-        class: Monolog\Processor\WebProcessor
+    odoo_api:
+        class: Monolog\Handler\StreamHandler
+        level: DEBUG
+        formatter: dashed
+        stream: ${LOCAL_ROOT}/var/log/cascade_odoo.log
 loggers:
     main:
         handlers: [debug, system, exception]
-        processors: [web_processor]
+    odoo:
+        handlers: [odoo_api]
