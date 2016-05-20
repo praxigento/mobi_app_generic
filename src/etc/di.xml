@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Console (CLI Commands) -->
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item
+                        name="prxgt_app_init_products_command"
+                        xsi:type="object">Praxigento\App\Generic2\Console\Command\Replicate\Products</item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>
