@@ -3,11 +3,9 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\App\Generic2\Console\Command\Replicate;
+namespace Praxigento\App\Generic2\Console\Command\Init;
 
-use Magento\Framework\ObjectManagerInterface;
 use Magento\Setup\Model\ObjectManagerProvider;
-use Praxigento\Odoo\Service\IReplicate;
 use Praxigento\Odoo\Service\Replicate\Request\ProductSave as ProductSaveRequest;
 use Praxigento\Odoo\Service\Replicate\Response\ProductSave as ProductSaveResponse;
 use Symfony\Component\Console\Command\Command;
@@ -17,24 +15,26 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Products extends Command
 {
-    /**
-     * #@+
-     * Arguments names
-     */
-    const ARG_IDS = 'ids';
-    /**#@- */
-    /** @var IReplicate */
+    /** @var \Praxigento\Odoo\Service\IReplicate */
     protected $_callReplicate;
-    /** @var ObjectManagerInterface */
+    /** @var \Magento\Framework\ObjectManagerInterface */
     protected $_manObj;
+    /** @var \Magento\Framework\Webapi\ServiceInputProcessor */
+    protected $_serviceInputProcessor;
+    /** @var Sub\Init */
+    protected $_subInit;
 
     public function __construct(
-        ObjectManagerInterface $manObj,
-        IReplicate $callReplicate
+        \Magento\Framework\ObjectManagerInterface $manObj,
+        \Magento\Framework\Webapi\ServiceInputProcessor $serviceInputProcessor,
+        \Praxigento\Odoo\Service\IReplicate $callReplicate,
+        Sub\Init $subInit
     ) {
         parent::__construct();
         $this->_manObj = $manObj;
+        $this->_serviceInputProcessor = $serviceInputProcessor;
         $this->_callReplicate = $callReplicate;
+        $this->_subInit = $subInit;
     }
 
     /**
@@ -69,9 +69,17 @@ class Products extends Command
     {
         /* setup session */
         $this->_setAreaCode();
+        /* load JSON data */
+        $fileData = file_get_contents(__DIR__ . '/data.json');
+        $jsonData = json_decode($fileData, true);
+        $bundle = $this->_serviceInputProcessor->convertValue($jsonData['data'],
+            \Praxigento\Odoo\Data\Api\IBundle::class);
+        /* create warehouse */
+        $this->_subInit->warehouse();
         /* call service operation */
         /** @var ProductSaveRequest $req */
         $req = $this->_manObj->create(ProductSaveRequest::class);
+        $req->setProductBundle($bundle);
         /** @var ProductSaveResponse $resp */
         $resp = $this->_callReplicate->productSave($req);
         if ($resp->isSucceed()) {
@@ -80,4 +88,5 @@ class Products extends Command
             $output->writeln('<info>Init is failed.<info>');
         }
     }
+
 }
