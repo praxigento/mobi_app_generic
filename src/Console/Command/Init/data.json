@@ -5,9 +5,9 @@
     },
     "warehouses": [
       {
-        "id": 1,
-        "code": "Germany",
-        "currency": "EUR"
+        "id": 21,
+        "code": "DEFAULT",
+        "currency": "USD"
       }
     ],
     "lots": [
@@ -34,7 +34,7 @@
         "categories": [12, 21, 321],
         "warehouses": [
           {
-            "id": 10,
+            "id": 21,
             "pv": 213,
             "price": 23.45,
             "lots": [

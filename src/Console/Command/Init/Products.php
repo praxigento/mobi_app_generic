@@ -7,7 +7,6 @@ namespace Praxigento\App\Generic2\Console\Command\Init;
 
 use Magento\Setup\Model\ObjectManagerProvider;
 use Praxigento\Odoo\Service\Replicate\Request\ProductSave as ProductSaveRequest;
-use Praxigento\Odoo\Service\Replicate\Response\ProductSave as ProductSaveResponse;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -19,6 +18,8 @@ class Products extends Command
     protected $_callReplicate;
     /** @var \Magento\Framework\ObjectManagerInterface */
     protected $_manObj;
+    /** @var  \Praxigento\Core\Repo\ITransactionManager */
+    protected $_manTrans;
     /** @var \Magento\Framework\Webapi\ServiceInputProcessor */
     protected $_serviceInputProcessor;
     /** @var Sub\Init */
@@ -26,12 +27,14 @@ class Products extends Command
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
+        \Praxigento\Core\Repo\ITransactionManager $manTrans,
         \Magento\Framework\Webapi\ServiceInputProcessor $serviceInputProcessor,
         \Praxigento\Odoo\Service\IReplicate $callReplicate,
         Sub\Init $subInit
     ) {
         parent::__construct();
         $this->_manObj = $manObj;
+        $this->_manTrans = $manTrans;
         $this->_serviceInputProcessor = $serviceInputProcessor;
         $this->_callReplicate = $callReplicate;
         $this->_subInit = $subInit;
@@ -74,18 +77,19 @@ class Products extends Command
         $jsonData = json_decode($fileData, true);
         $bundle = $this->_serviceInputProcessor->convertValue($jsonData['data'],
             \Praxigento\Odoo\Data\Api\IBundle::class);
-        /* create warehouse */
-        $this->_subInit->warehouse();
-        /* call service operation */
-        /** @var ProductSaveRequest $req */
-        $req = $this->_manObj->create(ProductSaveRequest::class);
-        $req->setProductBundle($bundle);
-        /** @var ProductSaveResponse $resp */
-        $resp = $this->_callReplicate->productSave($req);
-        if ($resp->isSucceed()) {
-            $output->writeln('<info>Init is done.<info>');
-        } else {
-            $output->writeln('<info>Init is failed.<info>');
+        $trans = $this->_manTrans->transactionBegin();
+        try {
+            /* create warehouse */
+            $this->_subInit->warehouse();
+            /* call service operation */
+            /** @var ProductSaveRequest $req */
+            $req = $this->_manObj->create(ProductSaveRequest::class);
+            $req->setProductBundle($bundle);
+            $this->_callReplicate->productSave($req);
+            $this->_manTrans->transactionCommit($trans);
+        } finally {
+            // transaction will be rolled back if commit is not done (otherwise - do nothing)
+            $this->_manTrans->transactionClose($trans);
         }
     }
 
