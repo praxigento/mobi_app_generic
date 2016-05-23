@@ -24,22 +24,64 @@
     ],
     "products": [
       {
-        "id": 1234,
-        "sku": "1001-R",
-        "name": "Product is Updated",
+        "id": 101,
+        "sku": "101",
+        "name": "Product #101",
         "isActive": true,
-        "pv": 2135,
-        "price": 23.223,
+        "pv": 101.00,
+        "price": 10.10,
         "weight": 0.256,
-        "categories": [12, 21, 321],
+        "categories": [1, 2, 3],
         "warehouses": [
           {
             "id": 21,
-            "pv": 213,
-            "price": 23.45,
+            "pv": 201.00,
+            "price": 20.10,
             "lots": [
-              {"id": 1001, "quantity": 321},
-              {"id": 2002, "quantity": 56}
+              {"id": 1001, "quantity": 100},
+              {"id": 2002, "quantity": 50}
+            ]
+          }
+        ]
+      },
+      {
+        "id": 102,
+        "sku": "102",
+        "name": "Product #102",
+        "isActive": true,
+        "pv": 102.00,
+        "price": 10.20,
+        "weight": 0.256,
+        "categories": [1, 2, 3],
+        "warehouses": [
+          {
+            "id": 21,
+            "pv": 202.00,
+            "price": 20.20,
+            "lots": [
+              {"id": 1001, "quantity": 200},
+              {"id": 2002, "quantity": 100}
+            ]
+          }
+        ]
+      },
+      {
+        "id": 103,
+        "sku": "103",
+        "name": "Product #103",
+        "isActive": true,
+        "pv": 103.00,
+        "price": 10.30,
+        "weight": 0.256,
+        "categories": [1, 2, 3],
+        "warehouses": [
+          {
+            "id": 21,
+            "pv": 203.00,
+            "price": 20.30,
+            "lots": [
+              {"id": 1001, "quantity": 300},
+              {"id": 2002, "quantity": 150}
             ]
           }
         ]
