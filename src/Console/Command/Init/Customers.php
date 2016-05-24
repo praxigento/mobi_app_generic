@@ -32,6 +32,8 @@ class Customers extends Command
         12 => 10,
         13 => 10
     ];
+    /** @var string 'UserPassword12 */
+    protected $DEFAULT_PASSWORD_HASH = '387cf1ea04874290e8e3c92836e1c4b630c5abea110d8766bddb4b3a6224ea04:QVIfkMF7kfwRkkC3HdqJ84K1XANG38LF:1';
     /** @var \Magento\Framework\ObjectManagerInterface */
     protected $_manObj;
     /** @var  \Praxigento\Core\Repo\ITransactionManager */
@@ -109,13 +111,13 @@ class Customers extends Command
                     $referralCode = $this->_mapCustomerMageIdByIndex[$parentId];
                     $this->_toolReferral->replaceCodeInRegistry($referralCode);
                 }
-
                 /** @var \Magento\Customer\Api\Data\CustomerInterface $customer */
                 $customer = $this->_manObj->create(\Magento\Customer\Api\Data\CustomerInterface::class);
                 $customer->setEmail($email);
                 $customer->setFirstname($first);
                 $customer->setLastname($last);
-                $saved = $this->_repoMageCustomer->save($customer);
+                /** @var \Magento\Customer\Api\Data\CustomerInterface $saved */
+                $saved = $this->_repoMageCustomer->save($customer, $this->DEFAULT_PASSWORD_HASH);
                 $this->_mapCustomerMageIdByIndex[$custId] = $saved->getId();
                 $this->_mapCustomerIndexByMageId[$saved->getId()] = $custId;
             }
