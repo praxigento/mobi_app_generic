@@ -6,7 +6,6 @@
 namespace Praxigento\App\Generic2\Console\Command\Init;
 
 use Magento\Setup\Model\ObjectManagerProvider;
-use Praxigento\Odoo\Service\Replicate\Request\ProductSave as ProductSaveRequest;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -33,23 +32,38 @@ class Customers extends Command
         12 => 10,
         13 => 10
     ];
-
     /** @var \Magento\Framework\ObjectManagerInterface */
     protected $_manObj;
     /** @var  \Praxigento\Core\Repo\ITransactionManager */
     protected $_manTrans;
+    /**
+     * Map index by Magento ID (index started from 1).
+     *
+     * @var array [ $entityId  => $index, ... ]
+     */
+    protected $_mapCustomerIndexByMageId = [];
+    /**
+     * Map Magento ID by index (index started from 1).
+     *
+     * @var array [ $index  => $entityId, ... ]
+     */
+    protected $_mapCustomerMageIdByIndex = [];
     /** @var \Magento\Customer\Model\ResourceModel\CustomerRepository */
     protected $_repoMageCustomer;
+    /** @var \Praxigento\Downline\Tool\IReferral */
+    protected $_toolReferral;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\Repo\ITransactionManager $manTrans,
-        \Magento\Customer\Model\ResourceModel\CustomerRepository $repoMageCustomer
+        \Magento\Customer\Model\ResourceModel\CustomerRepository $repoMageCustomer,
+        \Praxigento\Downline\Tool\IReferral $toolReferral
     ) {
         parent::__construct();
         $this->_manObj = $manObj;
         $this->_manTrans = $manTrans;
         $this->_repoMageCustomer = $repoMageCustomer;
+        $this->_toolReferral = $toolReferral;
     }
 
     /**
@@ -83,10 +97,28 @@ class Customers extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         /* setup session */
-        $this->_setAreaCode();       
+        $this->_setAreaCode();
         $trans = $this->_manTrans->transactionBegin();
         try {
-           
+            foreach ($this->DEFAULT_DWNL_TREE as $custId => $parentId) {
+                $first = 'User' . $custId;
+                $last = 'Last';
+                $email = "customer_$custId@test.com";
+                if ($custId != $parentId) {
+                    /* save parent ID to registry */
+                    $referralCode = $this->_mapCustomerMageIdByIndex[$parentId];
+                    $this->_toolReferral->replaceCodeInRegistry($referralCode);
+                }
+
+                /** @var \Magento\Customer\Api\Data\CustomerInterface $customer */
+                $customer = $this->_manObj->create(\Magento\Customer\Api\Data\CustomerInterface::class);
+                $customer->setEmail($email);
+                $customer->setFirstname($first);
+                $customer->setLastname($last);
+                $saved = $this->_repoMageCustomer->save($customer);
+                $this->_mapCustomerMageIdByIndex[$custId] = $saved->getId();
+                $this->_mapCustomerIndexByMageId[$saved->getId()] = $custId;
+            }
             $this->_manTrans->transactionCommit($trans);
         } finally {
             // transaction will be rolled back if commit is not done (otherwise - do nothing)
