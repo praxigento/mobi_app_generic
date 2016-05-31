@@ -19,6 +19,9 @@ class Init
 
     public function warehouse()
     {
+        /**
+         * TODO: Warehouse initialization should be overridden in app specific code.
+         */
         $data = new \Praxigento\Odoo\Data\Agg\Warehouse();
         $data->setId(1);
         $data->setWebsiteId(0);
