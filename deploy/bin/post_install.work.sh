@@ -105,6 +105,10 @@ else
     php $M2_ROOT/bin/magento indexer:reindex
     echo "Run Magento 2 cron."
     php $M2_ROOT/bin/magento cron:run
+    echo "Init development data: PRODUCTS."
+    php $M2_ROOT/bin/magento prxgt:odoo:init-products
+    echo "Init development data: CUSTOMERS."
+    php $M2_ROOT/bin/magento prxgt:odoo:init-customers
     ##
     echo "Set file system ownership and permissions."
     ##

@@ -1,7 +1,7 @@
 {
   "templates": {
     "bin/post_install.sh": {
-      "src": "../deploy/bin/post_install_work.sh",
+      "src": "../deploy/bin/post_install.work.sh",
       "dst": "../bin/post_install.sh",
       "events": [
         "post-update-cmd",
