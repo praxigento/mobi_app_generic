@@ -101,14 +101,14 @@ else
     php $M2_ROOT/bin/magento deploy:mode:set developer
     echo "Disable Magento 2 cache."
     php $M2_ROOT/bin/magento cache:disable
-    echo "Run Magento 2 re-index."
-    php $M2_ROOT/bin/magento indexer:reindex
     echo "Run Magento 2 cron."
     php $M2_ROOT/bin/magento cron:run
     echo "Init development data: PRODUCTS."
-    php $M2_ROOT/bin/magento prxgt:odoo:init-products
+    php $M2_ROOT/bin/magento prxgt:app:init-products
     echo "Init development data: CUSTOMERS."
-    php $M2_ROOT/bin/magento prxgt:odoo:init-customers
+    php $M2_ROOT/bin/magento prxgt:app:init-customers
+    echo "Run Magento 2 re-index."
+    php $M2_ROOT/bin/magento indexer:reindex
     ##
     echo "Set file system ownership and permissions."
     ##
