@@ -82,6 +82,7 @@ php $M2_ROOT/bin/magento setup:install  \
 --use-secure-admin="${CFG_USE_SECURE_ADMIN}" \
 --admin-use-security-key="${CFG_ADMIN_USE_SECURITY_KEY}" \
 --session-save="${CFG_SESSION_SAVE}" \
+--key="adccc7900047137edb40e4d1be5c56b2" \
 --cleanup-database \
 $MAGE_DBPREFIX \
 $MAGE_DBPASS \
