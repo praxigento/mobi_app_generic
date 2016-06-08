@@ -134,7 +134,7 @@ class Stocks extends Command
         /* Baltic */
         $wrhsBaltic = $this->_repoWrhs->getById(self::DEF_STOCK_ID_BALTIC);
         $wrhsBaltic->setCode('Baltic');
-        $wrhsBaltic->setCurrency('EUR');
+        $wrhsBaltic->setCurrency('USD');
         $wrhsBaltic->setNote('Warehouse for Baltic states (LV, LT, EE)');
         $wrhsBaltic->setOdooId(22);
         $this->_repoWrhs->updateById($wrhsBaltic->getId(), $wrhsBaltic);
@@ -142,7 +142,7 @@ class Stocks extends Command
         $wrhsRussian = $this->_repoWrhs->getById(self::DEF_STOCK_ID_RUSSIAN);
         $shoudCreate = is_null($wrhsRussian->getOdooId());
         $wrhsRussian->setCode('Russian');
-        $wrhsRussian->setCurrency('RUB');
+        $wrhsRussian->setCurrency('USD');
         $wrhsRussian->setNote('Warehouse for Russian Federation');
         $wrhsRussian->setOdooId(33);
         if ($shoudCreate) {
