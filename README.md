@@ -67,16 +67,6 @@ Re-link root folder to switch web server to the new instance:
     $ cd ../
     $ unlink mobi2_test ; ln -s ./mobi2_test.20160520 mobi2_test ;
 
-Fix admin authentication [bug](https://github.com/magento/magento2/issues/4386):
-
-    $ cd mobi2_test/work/
-    $ nano ./vendor/magento/framework/Translate/Inline/Proxy.php
-    ...
-    public function __sleep()
-    {
-        return ['_subject', '_isShared']; // remove '_' before properties' names
-    }
-    ...
 
 
 ## Code coverage
