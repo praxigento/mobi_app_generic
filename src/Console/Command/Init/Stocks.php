@@ -117,7 +117,7 @@ class Stocks extends Command
         /** @var \Magento\CatalogInventory\Model\Stock $stockBaltic */
         $stockBaltic = $this->_mageRepoStock->get(self::DEF_STOCK_ID_DEFAULT);
         $stockBaltic->setStockName('Baltic');
-        $stockBaltic->setWebsiteId(self::DEF_WEBSITE_ID_MAIN);
+        $stockBaltic->setWebsiteId(self::DEF_WEBSITE_ID_ADMIN);
         $this->_mageRepoStock->save($stockBaltic);
         /* create new stock as Russian */
         try {
@@ -127,7 +127,7 @@ class Stocks extends Command
             // $stockRussian->setStockId(self::DEF_STOCK_ID_RUSSIAN);
         } finally {
             $stockRussian->setStockName('Russian');
-            $stockRussian->setWebsiteId(self::DEF_WEBSITE_ID_MAIN);
+            $stockRussian->setWebsiteId(self::DEF_WEBSITE_ID_ADMIN);
             $this->_mageRepoStock->save($stockRussian);
         }
         /* create new warehouses */
