@@ -24,16 +24,13 @@ class Products extends Command
     protected $_serviceInputProcessor;
     /** @var Sub\Categories */
     protected $_subCats;
-    /** @var Sub\Init */
-    protected $_subInit;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\Repo\ITransactionManager $manTrans,
         \Magento\Framework\Webapi\ServiceInputProcessor $serviceInputProcessor,
         \Praxigento\Odoo\Service\IReplicate $callReplicate,
-        Sub\Categories $subCats,
-        Sub\Init $subInit
+        Sub\Categories $subCats
     ) {
         parent::__construct();
         $this->_manObj = $manObj;
@@ -41,7 +38,6 @@ class Products extends Command
         $this->_serviceInputProcessor = $serviceInputProcessor;
         $this->_callReplicate = $callReplicate;
         $this->_subCats = $subCats;
-        $this->_subInit = $subInit;
     }
 
     /**
@@ -83,15 +79,13 @@ class Products extends Command
             \Praxigento\Odoo\Data\Api\IBundle::class);
         $trans = $this->_manTrans->transactionBegin();
         try {
-            /* create warehouse */
-            $this->_subInit->warehouse();
             /* create products using replication */
             /** @var ProductSaveRequest $req */
             $req = $this->_manObj->create(ProductSaveRequest::class);
             $req->setProductBundle($bundle);
             $this->_callReplicate->productSave($req);
             /* enable categories after replication */
-            $this->_subCats->enable();
+            $this->_subCats->enableForAllStoreViews();
             $this->_manTrans->transactionCommit($trans);
         } finally {
             // transaction will be rolled back if commit is not done (otherwise - do nothing)

@@ -7,44 +7,41 @@
 
 namespace Praxigento\App\Generic2\Console\Command\Init\Sub;
 
+use Praxigento\App\Generic2\Config as Cfg;
 
 class Categories
 {
+    const DEF_STORE_VIEW_ID_ADMIN = 0;
+    /* EAV attr ID for catalog_category.is_active (see 'eav_attribute' table) */
+    const DEF_CATEGORY_EAV_ID_IS_ACTIVE = 46;
+
     protected $_mageManCategory;
     /** @var   \Magento\Catalog\Api\CategoryRepositoryInterface */
     protected $_mageRepoCategory;
+    /** @var  \Praxigento\Core\Repo\IGeneric */
+    protected $_repoGeneric;
 
     public function __construct(
         \Magento\Catalog\Api\CategoryManagementInterface $mageManCat,
-        \Magento\Catalog\Api\CategoryRepositoryInterface $mageRepoCat
+        \Magento\Catalog\Api\CategoryRepositoryInterface $mageRepoCat,
+        \Praxigento\Core\Repo\IGeneric $repoGeneric
 
     ) {
         $this->_mageManCategory = $mageManCat;
         $this->_mageRepoCategory = $mageRepoCat;
+        $this->_repoGeneric = $repoGeneric;
     }
 
-    /**
-     * @param \Magento\Catalog\Api\Data\CategoryTreeInterface $tree
-     */
-    public function enable($tree = null)
+    public function enableForAllStoreViews()
     {
-        if (is_null($tree)) {
-            /* get root category*/
-            $tree = $this->_mageManCategory->getTree();
-        }
-        /* check if category is active */
-        if (!$tree->getIsActive()) {
-            $id = $tree->getId();
-            /** @var \Magento\Catalog\Api\Data\CategoryInterface $cat */
-            $cat = $this->_mageRepoCategory->get($id);
-            $cat->setIsActive(true);
-            $this->_mageRepoCategory->save($cat);
-        }
-        /* process subtree*/
-        $subTree = $tree->getChildrenData();
-        foreach ($subTree as $item) {
-            $this->enable($item);
-        }
-
+        /* delete all store views data except admin */
+        $entity = Cfg::ENTITY_MAGE_CATALOG_CATEGORY_EAV_INT;
+        $where = Cfg::E_CATCAT_EAV_INT_STORE_ID . '>' . self::DEF_STORE_VIEW_ID_ADMIN;
+        $this->_repoGeneric->deleteEntity($entity, $where);
+        /* enable all categories */
+        $bind = [Cfg::E_CATCAT_EAV_INT_VALUE => 1];
+        $where = Cfg::E_CATCAT_EAV_INT_ATTR_ID . '=' . self::DEF_CATEGORY_EAV_ID_IS_ACTIVE;
+        $this->_repoGeneric->updateEntity($entity, $bind, $where);
     }
+
 }

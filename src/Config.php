@@ -4,7 +4,7 @@
  */
 namespace Praxigento\App\Generic2;
 
-class Config
+class Config extends \Praxigento\Core\Config
 {
     const MODULE = 'Praxigento_AppGeneric2';
 }
