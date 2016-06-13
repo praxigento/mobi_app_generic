@@ -6,7 +6,12 @@
     "warehouses": [
       {
         "id": 21,
-        "code": "DEFAULT",
+        "code": "Baltic",
+        "currency": "USD"
+      },
+      {
+        "id": 32,
+        "code": "Russian",
         "currency": "USD"
       }
     ],
@@ -55,7 +60,7 @@
         "categories": [1, 2, 3],
         "warehouses": [
           {
-            "id": 21,
+            "id": 32,
             "pv": 202.00,
             "price": 20.20,
             "lots": [
@@ -77,10 +82,17 @@
         "warehouses": [
           {
             "id": 21,
-            "pv": 203.00,
-            "price": 20.30,
+            "pv": 203.21,
+            "price": 20.21,
             "lots": [
-              {"id": 1001, "quantity": 300},
+              {"id": 1001, "quantity": 300}
+            ]
+          },
+          {
+            "id": 32,
+            "pv": 203.32,
+            "price": 20.32,
+            "lots": [
               {"id": 2002, "quantity": 150}
             ]
           }

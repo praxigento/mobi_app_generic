@@ -47,6 +47,13 @@ class Stocks extends Command
     const DEF_WEBSITE_ID_MAIN = 1;
     /**#@-  */
 
+    /**#@+
+     * Odoo IDs for warehouses.
+     */
+    const DEF_WRHS_ODOO_ID_BALTIC = 21;
+    const DEF_WRHS_ODOO_ID_RUSSIAN = 32;
+    /**#@-  */
+
     /** @var  \Magento\Store\Model\Group */
     protected $_groupBaltic;
     /** @var  \Magento\Store\Model\Group */
@@ -133,19 +140,28 @@ class Stocks extends Command
         /* create new warehouses */
         /* Baltic */
         $wrhsBaltic = $this->_repoWrhs->getById(self::DEF_STOCK_ID_BALTIC);
+        $shoudCreate = is_null($wrhsBaltic->getOdooId());
         $wrhsBaltic->setCode('Baltic');
         $wrhsBaltic->setCurrency('USD');
         $wrhsBaltic->setNote('Warehouse for Baltic states (LV, LT, EE)');
-        $wrhsBaltic->setOdooId(22);
-        $this->_repoWrhs->updateById($wrhsBaltic->getId(), $wrhsBaltic);
+        $wrhsBaltic->setOdooId(self::DEF_WRHS_ODOO_ID_BALTIC);
+        if ($shoudCreate) {
+            $this->_repoWrhs->create($wrhsBaltic);
+        } else {
+            $this->_repoWrhs->updateById($wrhsBaltic->getId(), $wrhsBaltic);
+        }
         /* Russian */
         $wrhsRussian = $this->_repoWrhs->getById(self::DEF_STOCK_ID_RUSSIAN);
+        if (!$wrhsRussian) {
+            $wrhsRussian = new \Praxigento\Odoo\Data\Agg\Warehouse();
+        }
         $shoudCreate = is_null($wrhsRussian->getOdooId());
         $wrhsRussian->setCode('Russian');
         $wrhsRussian->setCurrency('USD');
         $wrhsRussian->setNote('Warehouse for Russian Federation');
-        $wrhsRussian->setOdooId(33);
+        $wrhsRussian->setOdooId(self::DEF_WRHS_ODOO_ID_RUSSIAN);
         if ($shoudCreate) {
+            $wrhsRussian->setId($stockRussian->getStockId());
             $this->_repoWrhs->create($wrhsRussian);
         } else {
             $this->_repoWrhs->updateById($wrhsRussian->getId(), $wrhsRussian);
