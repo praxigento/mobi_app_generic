@@ -12,4 +12,11 @@
         </arguments>
     </type>
 
+    <!-- ************************* -->
+    <!-- INTERFACE IMPLEMENTATIONS -->
+    <!-- ************************* -->
+
+    <preference
+            for="Praxigento\Warehouse\Tool\IStockManager"
+            type="Praxigento\App\Generic2\Tool\Warehouse\Def\StockManager"/>
 </config>
