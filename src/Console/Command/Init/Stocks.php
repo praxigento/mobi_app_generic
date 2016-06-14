@@ -76,10 +76,16 @@ class Stocks extends Command
     protected $_storeBalticRu;
     /** @var \Magento\Store\Model\Store */
     protected $_storeRussianRu;
+    /** @var  \Magento\Store\Model\StoreManager */
+    protected $_manStore;
+    /** @var  \Magento\Framework\Event\ManagerInterface */
+    protected $_manEvent;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\Repo\ITransactionManager $manTrans,
+        \Magento\Store\Model\StoreManager $manStore,
+        \Magento\Framework\Event\ManagerInterface $manEvent,
         \Magento\Store\Api\GroupRepositoryInterface $mageRepoGroup,
         \Magento\Store\Api\StoreRepositoryInterface $mageRepoStore,
         \Magento\CatalogInventory\Api\StockRepositoryInterface $mageRepoStock,
@@ -88,6 +94,8 @@ class Stocks extends Command
         parent::__construct();
         $this->_manObj = $manObj;
         $this->_manTrans = $manTrans;
+        $this->_manStore = $manStore;
+        $this->_manEvent = $manEvent;
         $this->_mageRepoGroup = $mageRepoGroup;
         $this->_mageRepoStore = $mageRepoStore;
         $this->_mageRepoStock = $mageRepoStock;
@@ -205,6 +213,18 @@ class Stocks extends Command
     }
 
     /**
+     * We cannot create tables in the DB transaction.
+     */
+    private function _initStores()
+    {
+        /* MOBI-312 : init store view (create sequences tables ) */
+        $this->_manEvent->dispatch('store_add', ['store' => $this->_storeBalticEn]);
+        $this->_manEvent->dispatch('store_add', ['store' => $this->_storeBalticRu]);
+        $this->_manEvent->dispatch('store_add', ['store' => $this->_storeRussianRu]);
+        $this->_manStore->reinitStores();
+    }
+
+    /**
      * Sets area code to start a session for replication.
      */
     private function _setAreaCode()
@@ -242,6 +262,8 @@ class Stocks extends Command
             $this->_processStores();
             $this->_processStocks();
             $this->_manTrans->transactionCommit($trans);
+            /* init stores w/o transaction (DDL is denied in the transaction )*/
+            $this->_initStores();
         } finally {
             // transaction will be rolled back if commit is not done (otherwise - do nothing)
             $this->_manTrans->transactionClose($trans);
