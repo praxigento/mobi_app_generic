@@ -4,6 +4,8 @@
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '1', path ='dev/template/allow_symlink';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '1', path ='dev/log/active';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'America/Los_Angeles', path ='general/locale/timezone';
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '36000', path ='admin/security/session_lifetime';
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '100000', path ='cataloginventory/options/stock_threshold_qty';
 -- REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '0', path ='checkout/options/guest_checkout';
 -- setup Braintree payment gateway
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '1', path ='payment/braintree/active';
