@@ -33,7 +33,7 @@ class Products_Test extends \Praxigento\Core\Test\BaseMockeryCase
     /** @var  \Mockery\MockInterface */
     private $mServiceInputProcessor;
     /** @var  \Mockery\MockInterface */
-    private $mSubInit;
+    private $mSubCats;
     /** @var  ProductsChild */
     private $obj;
 
@@ -45,7 +45,7 @@ class Products_Test extends \Praxigento\Core\Test\BaseMockeryCase
         $this->mManTrans = $this->_mockTransactionManager();
         $this->mServiceInputProcessor = $this->_mock(\Magento\Framework\Webapi\ServiceInputProcessor::class);
         $this->mCallReplicate = $this->_mock(\Praxigento\Odoo\Service\IReplicate::class);
-        $this->mSubInit = $this->_mock(Sub\Init::class);
+        $this->mSubCats = $this->_mock(Sub\Categories::class);
         /* parameters */
         $this->mInput = $this->_mock(\Symfony\Component\Console\Input\InputInterface::class);
         $this->mOutput = $this->_mock(\Symfony\Component\Console\Output\OutputInterface::class);
@@ -55,7 +55,7 @@ class Products_Test extends \Praxigento\Core\Test\BaseMockeryCase
             $this->mManTrans,
             $this->mServiceInputProcessor,
             $this->mCallReplicate,
-            $this->mSubInit
+            $this->mSubCats
         );
     }
 
@@ -103,7 +103,7 @@ class Products_Test extends \Praxigento\Core\Test\BaseMockeryCase
             ->shouldReceive('transactionBegin')->once()
             ->andReturn($mTrans);
         // $this->_subInit->warehouse();
-        $this->mSubInit
+        $this->mSubCats
             ->shouldReceive('warehouse')->once();
         // $req = $this->_manObj->create(ProductSaveRequest::class);
         $mReq = $this->_mock(\Praxigento\Odoo\Service\Replicate\Request\ProductSave::class);
@@ -115,7 +115,9 @@ class Products_Test extends \Praxigento\Core\Test\BaseMockeryCase
         // $this->_callReplicate->productSave($req);
         $this->mCallReplicate
             ->shouldReceive('productSave')->once();
-
+        // $this->_subCats->enableForAllStoreViews();
+        $this->mSubCats
+            ->shouldReceive('enableForAllStoreViews')->once();
         // $this->_manTrans->transactionCommit($trans);
         $this->mManTrans
             ->shouldReceive('transactionCommit')->once();
