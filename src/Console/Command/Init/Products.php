@@ -18,7 +18,7 @@ class Products extends Command
     protected $_callReplicate;
     /** @var \Magento\Framework\ObjectManagerInterface */
     protected $_manObj;
-    /** @var  \Praxigento\Core\Repo\ITransactionManager */
+    /** @var  \Praxigento\Core\Repo\Transaction\IManager */
     protected $_manTrans;
     /** @var \Magento\Framework\Webapi\ServiceInputProcessor */
     protected $_serviceInputProcessor;
@@ -27,7 +27,7 @@ class Products extends Command
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\Core\Repo\ITransactionManager $manTrans,
+        \Praxigento\Core\Repo\Transaction\IManager $manTrans,
         \Magento\Framework\Webapi\ServiceInputProcessor $serviceInputProcessor,
         \Praxigento\Odoo\Service\IReplicate $callReplicate,
         Sub\Categories $subCats

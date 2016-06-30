@@ -66,7 +66,7 @@ class Stocks extends Command
     protected $_mageRepoStore;
     /** @var \Magento\Framework\ObjectManagerInterface */
     protected $_manObj;
-    /** @var  \Praxigento\Core\Repo\ITransactionManager */
+    /** @var  \Praxigento\Core\Repo\Transaction\IManager */
     protected $_manTrans;
     /** @var  \Praxigento\Odoo\Repo\Agg\IWarehouse */
     protected $_repoWrhs;
@@ -83,7 +83,7 @@ class Stocks extends Command
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\Core\Repo\ITransactionManager $manTrans,
+        \Praxigento\Core\Repo\Transaction\IManager $manTrans,
         \Magento\Store\Model\StoreManager $manStore,
         \Magento\Framework\Event\ManagerInterface $manEvent,
         \Magento\Store\Api\GroupRepositoryInterface $mageRepoGroup,

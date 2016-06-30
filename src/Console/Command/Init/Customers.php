@@ -36,7 +36,7 @@ class Customers extends Command
     protected $DEFAULT_PASSWORD_HASH = '387cf1ea04874290e8e3c92836e1c4b630c5abea110d8766bddb4b3a6224ea04:QVIfkMF7kfwRkkC3HdqJ84K1XANG38LF:1';
     /** @var \Magento\Framework\ObjectManagerInterface */
     protected $_manObj;
-    /** @var  \Praxigento\Core\Repo\ITransactionManager */
+    /** @var  \Praxigento\Core\Repo\Transaction\IManager */
     protected $_manTrans;
     /**
      * Map index by Magento ID (index started from 1).
@@ -57,7 +57,7 @@ class Customers extends Command
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\Core\Repo\ITransactionManager $manTrans,
+        \Praxigento\Core\Repo\Transaction\IManager $manTrans,
         \Magento\Customer\Model\ResourceModel\CustomerRepository $repoMageCustomer,
         \Praxigento\Downline\Tool\IReferral $toolReferral
     ) {
