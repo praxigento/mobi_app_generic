@@ -93,7 +93,7 @@ class Products_Test extends \Praxigento\Core\Test\BaseMockeryCase
         // return
         //
         // $bundle = $this->_serviceInputProcessor->convertValue(...);
-        $mBundle = $this->_mock(\Praxigento\Odoo\Data\Api\IBundle::class);
+        $mBundle = $this->_mock(\Praxigento\Odoo\Data\Api\Inventory::class);
         $this->mServiceInputProcessor
             ->shouldReceive('convertValue')->once()
             ->andReturn($mBundle);

@@ -76,7 +76,7 @@ class Products extends Command
         $fileData = file_get_contents(__DIR__ . '/data.json');
         $jsonData = json_decode($fileData, true);
         $bundle = $this->_serviceInputProcessor->convertValue($jsonData['data'],
-            \Praxigento\Odoo\Data\Api\IBundle::class);
+            \Praxigento\Odoo\Data\Api\Inventory::class);
         $trans = $this->_manTrans->transactionBegin();
         try {
             /* create products using replication */
