@@ -5,95 +5,95 @@
     },
     "warehouses": [
       {
-        "id": 21,
+        "id_odoo": 21,
         "code": "Baltic",
         "currency": "USD"
       },
       {
-        "id": 32,
+        "id_odoo": 32,
         "code": "Russian",
         "currency": "USD"
       }
     ],
     "lots": [
       {
-        "id": 1001,
-        "code": "L-1001",
+        "id_odoo": 1001,
+        "number": "L-1001",
         "expirationDate": "2015-05-28 14:04:22"
       },
       {
-        "id": 2002,
-        "code": "K-234",
+        "id_odoo": 2002,
+        "number": "K-234",
         "expirationDate": "2018-06-29 16:24:32"
       }
     ],
     "products": [
       {
-        "id": 101,
+        "id_odoo": 101,
         "sku": "101",
         "name": "Product #101",
-        "isActive": true,
-        "pv": 101.00,
-        "price": 10.10,
+        "is_active": true,
+        "pv_wholesale": 101.00,
+        "price_wholesale": 10.10,
         "weight": 0.256,
         "categories": [1, 2, 3],
         "warehouses": [
           {
-            "id": 21,
-            "pv": 201.00,
-            "price": 20.10,
+            "id_odoo": 21,
+            "pv_warehouse": 201.00,
+            "price_warehouse": 20.10,
             "lots": [
-              {"id": 1001, "quantity": 100},
-              {"id": 2002, "quantity": 50}
+              {"id_odoo": 1001, "quantity": 100},
+              {"id_odoo": 2002, "quantity": 50}
             ]
           }
         ]
       },
       {
-        "id": 102,
+        "id_odoo": 102,
         "sku": "102",
         "name": "Product #102",
-        "isActive": true,
-        "pv": 102.00,
-        "price": 10.20,
+        "is_active": true,
+        "pv_wholesale": 102.00,
+        "price_wholesale": 10.20,
         "weight": 0.256,
         "categories": [1, 2, 3],
         "warehouses": [
           {
-            "id": 32,
-            "pv": 202.00,
-            "price": 20.20,
+            "id_odoo": 32,
+            "pv_warehouse": 202.00,
+            "price_warehouse": 20.20,
             "lots": [
-              {"id": 1001, "quantity": 200},
-              {"id": 2002, "quantity": 100}
+              {"id_odoo": 1001, "quantity": 200},
+              {"id_odoo": 2002, "quantity": 100}
             ]
           }
         ]
       },
       {
-        "id": 103,
+        "id_odoo": 103,
         "sku": "103",
         "name": "Product #103",
-        "isActive": true,
-        "pv": 103.00,
-        "price": 10.30,
+        "is_active": true,
+        "pv_wholesale": 103.00,
+        "price_wholesale": 10.30,
         "weight": 0.256,
         "categories": [1, 2, 3],
         "warehouses": [
           {
-            "id": 21,
-            "pv": 203.21,
-            "price": 20.21,
+            "id_odoo": 21,
+            "pv_warehouse": 203.21,
+            "price_warehouse": 20.21,
             "lots": [
-              {"id": 1001, "quantity": 300}
+              {"id_odoo": 1001, "quantity": 300}
             ]
           },
           {
-            "id": 32,
-            "pv": 203.32,
-            "price": 20.32,
+            "id_odoo": 32,
+            "pv_warehouse": 203.32,
+            "price_warehouse": 20.32,
             "lots": [
-              {"id": 2002, "quantity": 150}
+              {"id_odoo": 2002, "quantity": 150}
             ]
           }
         ]
