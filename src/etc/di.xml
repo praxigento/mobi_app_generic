@@ -17,6 +17,9 @@
     <!-- ************************* -->
 
     <preference
+            for="Praxigento\Odoo\Tool\IBusinessCodesManager"
+            type="Praxigento\App\Generic2\Tool\Odoo\Def\BusinessCodesManager"/>
+    <preference
             for="Praxigento\Warehouse\Tool\IStockManager"
             type="Praxigento\App\Generic2\Tool\Warehouse\Def\StockManager"/>
 </config>
