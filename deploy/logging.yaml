@@ -19,6 +19,11 @@ handlers:
         level: EMERGENCY
         formatter: dashed
         stream: ${LOCAL_ROOT}/log/cascade_exception.log
+    setup_hndl:
+        class: Monolog\Handler\StreamHandler
+        level: DEBUG
+        formatter: dashed
+        stream: ${LOCAL_ROOT}/var/log/cascade_setup.log
     odoo_api:
         class: Monolog\Handler\StreamHandler
         level: DEBUG
@@ -27,5 +32,7 @@ handlers:
 loggers:
     main:
         handlers: [debug, system, exception]
+    setup:
+        handlers: [setup_hndl]
     odoo:
         handlers: [odoo_api]
