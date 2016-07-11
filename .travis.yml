@@ -26,6 +26,7 @@ before_install:
 script:
   - phpunit -c ./dev/unit/phpunit.dist.xml
   - phpunit -c ./dev/integration/phpunit.dist.xml
+  - find / -iname "php*err*"
 #  - phpunit --configuration ./dev/tests/unit/phpunit.xml.dist # run Magento 2 unit tests
 
 notifications:
