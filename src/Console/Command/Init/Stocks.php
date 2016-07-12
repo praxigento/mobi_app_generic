@@ -50,8 +50,8 @@ class Stocks extends Command
     /**#@+
      * Odoo IDs for warehouses.
      */
-    const DEF_WRHS_ODOO_ID_BALTIC = 21;
-    const DEF_WRHS_ODOO_ID_RUSSIAN = 32;
+    const DEF_WRHS_ODOO_ID_BALTIC = 2;
+    const DEF_WRHS_ODOO_ID_RUSSIAN = 3;
     /**#@-  */
 
     /** @var  \Magento\Store\Model\Group */
