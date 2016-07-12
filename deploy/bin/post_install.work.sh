@@ -104,8 +104,8 @@ else
     php $M2_ROOT/bin/magento cache:disable
     echo "Run Magento 2 cron."
     php $M2_ROOT/bin/magento cron:run
-#    echo "Init development data: STOCKS."
-#    php $M2_ROOT/bin/magento prxgt:app:init-stocks
+    echo "Init development data: STOCKS."
+    php $M2_ROOT/bin/magento prxgt:app:init-stocks
 #    echo "Init development data: PRODUCTS."
 #    php $M2_ROOT/bin/magento prxgt:app:init-products
     echo "Init development data: CUSTOMERS."
