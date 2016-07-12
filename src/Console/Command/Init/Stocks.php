@@ -11,7 +11,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Stocks extends Command
+class Stocks
+    extends \Symfony\Component\Console\Command\Command
 {
     /**#@+
      * IDs for groups (stores in adminhtml terms).

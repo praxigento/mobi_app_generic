@@ -11,7 +11,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Customers extends Command
+class Customers 
+    extends \Symfony\Component\Console\Command\Command
 {
     /**
      * Downline tree default dependencies.
