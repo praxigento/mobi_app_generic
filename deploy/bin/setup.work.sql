@@ -21,6 +21,7 @@ REPLACE INTO ${CFG_DB_PREFIX}core_config_data(scope, scope_id, path, value) VALU
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data(scope, scope_id, path, value) VALUES ('default', 0, 'tax/calculation/price_includes_tax', '1');
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data(scope, scope_id, path, value) VALUES ('default', 0, 'tax/calculation/shipping_includes_tax', '1');
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data(scope, scope_id, path, value) VALUES ('default', 0, 'tax/calculation/discount_tax', '1');
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(scope, scope_id, path, value) VALUES ('default', 0, 'tax/calculation/cross_border_trade_enabled', '1');
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data(scope, scope_id, path, value) VALUES ('default', 0, 'tax/notification/ignore_discount', '0');
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data(scope, scope_id, path, value) VALUES ('default', 0, 'tax/notification/ignore_price_display', '0');
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data(scope, scope_id, path, value) VALUES ('default', 0, 'tax/calculation/cross_border_trade_enabled', '0');
