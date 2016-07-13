@@ -16,6 +16,30 @@ REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'authorize_capture', p
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'hrbwv69nr663dxx6', path ='payment/braintree/merchant_id';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '0:2:MNCxt7WoXHyj5pNckGBT7QsW4Rvau5j7:SISqkD6irXdKO1hqJk+YSNZ0QndYJ8HEpGq+XoZ5LtY=', path ='payment/braintree/public_key';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '0:2:Mu2JghxOFGKVkM6RdQOT8BOPWPaSY7rB:UZ+tVA7HvZgGhgdStzAjsr7qaQ6mWsStG8xedKn8mcY=', path ='payment/braintree/private_key';
+-- Setup Taxes (MOBI-336)
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(config_id, scope, scope_id, path, value) VALUES ('default', 0, 'tax/classes/shipping_tax_class', '2');
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(config_id, scope, scope_id, path, value) VALUES ('default', 0, 'tax/calculation/price_includes_tax', '1');
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(config_id, scope, scope_id, path, value) VALUES ('default', 0, 'tax/calculation/shipping_includes_tax', '1');
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(config_id, scope, scope_id, path, value) VALUES ('default', 0, 'tax/calculation/discount_tax', '1');
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(config_id, scope, scope_id, path, value) VALUES ('default', 0, 'tax/notification/ignore_discount', '0');
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(config_id, scope, scope_id, path, value) VALUES ('default', 0, 'tax/notification/ignore_price_display', '0');
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(config_id, scope, scope_id, path, value) VALUES ('default', 0, 'tax/calculation/cross_border_trade_enabled', '0');
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(config_id, scope, scope_id, path, value) VALUES ('default', 0, 'tax/defaults/country', 'LV');
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(config_id, scope, scope_id, path, value) VALUES ('default', 0, 'tax/defaults/postcode', NULL);
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(config_id, scope, scope_id, path, value) VALUES ('default', 0, 'tax/display/type', '2');
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(config_id, scope, scope_id, path, value) VALUES ('default', 0, 'tax/display/shipping', '2');
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(config_id, scope, scope_id, path, value) VALUES ('default', 0, 'tax/cart_display/price', '2');
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(config_id, scope, scope_id, path, value) VALUES ('default', 0, 'tax/cart_display/subtotal', '2');
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(config_id, scope, scope_id, path, value) VALUES ('default', 0, 'tax/cart_display/shipping', '2');
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(config_id, scope, scope_id, path, value) VALUES ('default', 0, 'tax/cart_display/grandtotal', '1');
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(config_id, scope, scope_id, path, value) VALUES ('default', 0, 'tax/cart_display/full_summary', '1');
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(config_id, scope, scope_id, path, value) VALUES ('default', 0, 'tax/cart_display/zero_tax', '1');
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(config_id, scope, scope_id, path, value) VALUES ('default', 0, 'tax/sales_display/price', '2');
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(config_id, scope, scope_id, path, value) VALUES ('default', 0, 'tax/sales_display/subtotal', '2');
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(config_id, scope, scope_id, path, value) VALUES ('default', 0, 'tax/sales_display/shipping', '2');
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(config_id, scope, scope_id, path, value) VALUES ('default', 0, 'tax/sales_display/grandtotal', '1');
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(config_id, scope, scope_id, path, value) VALUES ('default', 0, 'tax/sales_display/full_summary', '1');
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data(config_id, scope, scope_id, path, value) VALUES ('default', 0, 'tax/sales_display/zero_tax', '1');
 
 -- MOBI-254
 ALTER TABLE ${CFG_DB_PREFIX}cataloginventory_stock_item ADD UNIQUE INDEX CATALOGINVENTORY_STOCK_ITEM_PRODUCT_ID_STOCK_ID (product_id, stock_id);
