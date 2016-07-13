@@ -6,6 +6,9 @@
 namespace Praxigento\App\Generic2\Console\Command\Init;
 
 use Magento\Setup\Model\ObjectManagerProvider;
+use Magento\Tax\Model\Calculation\Rate as EntityTaxRate;
+use Magento\Tax\Model\Calculation\Rule as EntityTaxRule;
+use Praxigento\App\Generic2\Config as Cfg;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -59,16 +62,24 @@ class Stocks
     protected $_groupBaltic;
     /** @var  \Magento\Store\Model\Group */
     protected $_groupRussian;
+    /** @var \Psr\Log\LoggerInterface */
+    protected $_logger;
     /** @var  \Magento\Store\Api\GroupRepositoryInterface */
     protected $_mageRepoGroup;
     /** @var  \Magento\CatalogInventory\Api\StockRepositoryInterface */
     protected $_mageRepoStock;
     /** @var  \Magento\Store\Api\StoreRepositoryInterface */
     protected $_mageRepoStore;
+    /** @var  \Magento\Framework\Event\ManagerInterface */
+    protected $_manEvent;
     /** @var \Magento\Framework\ObjectManagerInterface */
     protected $_manObj;
+    /** @var  \Magento\Store\Model\StoreManager */
+    protected $_manStore;
     /** @var  \Praxigento\Core\Repo\Transaction\IManager */
     protected $_manTrans;
+    /** @var  \Praxigento\Core\Repo\IGeneric */
+    protected $_repoGeneric;
     /** @var  \Praxigento\Odoo\Repo\Agg\IWarehouse */
     protected $_repoWrhs;
     /** @var \Magento\Store\Model\Store */
@@ -77,12 +88,9 @@ class Stocks
     protected $_storeBalticRu;
     /** @var \Magento\Store\Model\Store */
     protected $_storeRussianRu;
-    /** @var  \Magento\Store\Model\StoreManager */
-    protected $_manStore;
-    /** @var  \Magento\Framework\Event\ManagerInterface */
-    protected $_manEvent;
 
     public function __construct(
+        \Psr\Log\LoggerInterface $logger,
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\Repo\Transaction\IManager $manTrans,
         \Magento\Store\Model\StoreManager $manStore,
@@ -90,9 +98,11 @@ class Stocks
         \Magento\Store\Api\GroupRepositoryInterface $mageRepoGroup,
         \Magento\Store\Api\StoreRepositoryInterface $mageRepoStore,
         \Magento\CatalogInventory\Api\StockRepositoryInterface $mageRepoStock,
+        \Praxigento\Core\Repo\IGeneric $repoGeneric,
         \Praxigento\Odoo\Repo\Agg\IWarehouse $repoWrhs
     ) {
         parent::__construct();
+        $this->_logger = $logger;
         $this->_manObj = $manObj;
         $this->_manTrans = $manTrans;
         $this->_manStore = $manStore;
@@ -100,7 +110,58 @@ class Stocks
         $this->_mageRepoGroup = $mageRepoGroup;
         $this->_mageRepoStore = $mageRepoStore;
         $this->_mageRepoStock = $mageRepoStock;
+        $this->_repoGeneric = $repoGeneric;
         $this->_repoWrhs = $repoWrhs;
+    }
+
+    private function _getTaxRateByCode($code)
+    {
+        $result = null;
+        $entity = Cfg::ENTITY_MAGE_TAX_CALC_RATE;
+        $cols = [Cfg::E_TAX_CALC_RATE_A_ID];
+        $where = EntityTaxRate::KEY_CODE . '=' . $this->_repoGeneric->getConnection()->quote($code);
+        $rows = $this->_repoGeneric->getEntities($entity, $cols, $where);
+        if (is_array($rows)) {
+            $one = reset($rows);
+            $result = $one[Cfg::E_TAX_CALC_RATE_A_ID];
+        }
+        return $result;
+    }
+
+    private function _getTaxRuleByCode($code)
+    {
+        $result = null;
+        $entity = Cfg::ENTITY_MAGE_TAX_CALC_RULE;
+        $cols = [Cfg::E_TAX_CALC_RULE_A_ID];
+        $where = EntityTaxRule::KEY_CODE . '=' . $this->_repoGeneric->getConnection()->quote($code);
+        $rows = $this->_repoGeneric->getEntities($entity, $cols, $where);
+        if (is_array($rows)) {
+            $one = reset($rows);
+            $result = $one[Cfg::E_TAX_CALC_RULE_A_ID];
+        }
+        return $result;
+    }
+
+    private function _getTaxCalcs($rateId, $ruleId)
+    {
+        $entity = Cfg::ENTITY_MAGE_TAX_CALC;
+        $where = Cfg::E_TAX_CALC_A_RATE_ID . '=' . (int)$rateId;
+        $where .= ' AND ' . Cfg::E_TAX_CALC_A_RULE_ID . '=' . (int)$ruleId;
+        $rows = $this->_repoGeneric->getEntities($entity, null, $where);
+        $result = is_array($rows);
+        return $result;
+    }
+
+    /**
+     * We cannot create tables in the DB transaction.
+     */
+    private function _initStores()
+    {
+        /* MOBI-312 : init store view (create sequences tables ) */
+        $this->_manEvent->dispatch('store_add', ['store' => $this->_storeBalticEn]);
+        $this->_manEvent->dispatch('store_add', ['store' => $this->_storeBalticRu]);
+        $this->_manEvent->dispatch('store_add', ['store' => $this->_storeRussianRu]);
+        $this->_manStore->reinitStores();
     }
 
     /**
@@ -214,15 +275,81 @@ class Stocks
     }
 
     /**
-     * We cannot create tables in the DB transaction.
+     * Setup store related taxes configuration.
      */
-    private function _initStores()
+    private function _processTaxes()
     {
-        /* MOBI-312 : init store view (create sequences tables ) */
-        $this->_manEvent->dispatch('store_add', ['store' => $this->_storeBalticEn]);
-        $this->_manEvent->dispatch('store_add', ['store' => $this->_storeBalticRu]);
-        $this->_manEvent->dispatch('store_add', ['store' => $this->_storeRussianRu]);
-        $this->_manStore->reinitStores();
+        /* Store / Configuration */
+        $this->_saveCfgForRussian('general/country/default', 'RU');
+        $this->_saveCfgForRussian('general/locale/code', 'ru_RU');
+        $this->_saveCfgForRussian('currency/options/default', 'RUB');
+        $this->_saveCfgForRussian('tax/defaults/country', 'RU');
+        /* Tax Rates */
+        $rateIdLv = $this->_saveTaxRate('LV', 'LV Tax', 21);
+        $rateIdRu = $this->_saveTaxRate('RU', 'RU Tax', 18);
+        /* Tax Rules */
+        $ruleIdLv = $this->_saveTaxRule('LV Tax');
+        $ruleIdRu = $this->_saveTaxRule('RU Tax');
+        /* Tax calcs */
+        $this->_saveTaxCalc($rateIdLv, $ruleIdLv);
+        $this->_saveTaxCalc($rateIdRu, $ruleIdRu);
+    }
+
+    private function _saveCfgForRussian($path, $value)
+    {
+        $entity = Cfg::ENTITY_MAGE_CORE_CONFIG_DATA;
+        $stoerViewId = $this->_storeRussianRu->getId();
+        $bind = [
+            Cfg::E_CONFIG_A_SCOPE => Cfg::SCOPE_CFG_STORES,
+            Cfg::E_CONFIG_A_SCOPE_ID => $stoerViewId,
+            Cfg::E_CONFIG_A_PATH => $path,
+            Cfg::E_CONFIG_A_VALUE => $value
+        ];
+        $this->_repoGeneric->replaceEntity($entity, $bind);
+    }
+
+    private function _saveTaxRate($country, $code, $rate)
+    {
+        $result = $this->_getTaxRateByCode($code);
+        if (!$result) {
+            $entity = Cfg::ENTITY_MAGE_TAX_CALC_RATE;
+            $bind = [
+                EntityTaxRate::KEY_COUNTRY_ID => $country,
+                EntityTaxRate::KEY_CODE => $code,
+                EntityTaxRate::KEY_PERCENTAGE_RATE => $rate,
+                EntityTaxRate::KEY_POSTCODE => '*'
+            ];
+            $result = $this->_repoGeneric->addEntity($entity, $bind);
+        }
+        return $result;
+    }
+
+    private function _saveTaxCalc($rateId, $ruleId)
+    {
+        $found = $this->_getTaxCalcs($rateId, $ruleId);
+        if (!$found) {
+            $entity = Cfg::ENTITY_MAGE_TAX_CALC;
+            $bind = [
+                Cfg::E_TAX_CALC_A_RATE_ID => $rateId,
+                Cfg::E_TAX_CALC_A_RULE_ID => $ruleId,
+                Cfg::E_TAX_CALC_A_CUST_TAX_CLASS_ID => 3,
+                Cfg::E_TAX_CALC_A_PROD_TAX_CLASS_ID => 2
+            ];
+            $this->_repoGeneric->replaceEntity($entity, $bind);
+        }
+    }
+
+    private function _saveTaxRule($code)
+    {
+        $result = $this->_getTaxRuleByCode($code);
+        if (!$result) {
+            $entity = Cfg::ENTITY_MAGE_TAX_CALC_RULE;
+            $bind = [
+                EntityTaxRate::KEY_CODE => $code
+            ];
+            $result = $this->_repoGeneric->addEntity($entity, $bind);
+        }
+        return $result;
     }
 
     /**
@@ -262,6 +389,7 @@ class Stocks
             $this->_processGroups();
             $this->_processStores();
             $this->_processStocks();
+            $this->_processTaxes();
             $this->_manTrans->transactionCommit($trans);
             /* init stores w/o transaction (DDL is denied in the transaction )*/
             $this->_initStores();

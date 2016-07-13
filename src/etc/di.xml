@@ -32,6 +32,28 @@
             <argument name="loggerName" xsi:type="string">sql</argument>
         </arguments>
     </virtualType>
+    <virtualType name="loggerSetup" type="Praxigento\Logging\Logger">
+        <arguments>
+            <!-- Config file path is related to Magento 2 base directory. Absolute path can be used too. -->
+            <argument name="configFile" xsi:type="string">var/log/logging.yaml</argument>
+            <!-- Name of the logger in configuration file. Default: "odoo".  -->
+            <argument name="loggerName" xsi:type="string">setup</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Praxigento\AppGeneric2 -->
+    <type name="Praxigento\App\Generic2\Console\Command\Init\Stocks">
+        <arguments>
+            <argument name="logger" xsi:type="object">loggerSetup</argument>
+        </arguments>
+    </type>
+
+    <!-- Praxigento\Core -->
+    <type name="Praxigento\Core\Setup\Dem\Tool">
+        <arguments>
+            <argument name="logger" xsi:type="object">loggerSetup</argument>
+        </arguments>
+    </type>
 
     <!-- Praxigento\Odoo -->
     <type name="Praxigento\Odoo\Repo\Agg\Def\SaleOrderItem">
@@ -50,9 +72,9 @@
         </arguments>
     </type>
 
-    <!-- ************************* -->
-    <!-- INTERFACE IMPLEMENTATIONS -->
-    <!-- ************************* -->
+    <!-- ************************************** -->
+    <!-- APP SPECIFIC INTERFACE IMPLEMENTATIONS -->
+    <!-- ************************************** -->
 
     <preference for="Praxigento\Odoo\Tool\IBusinessCodesManager" type="Praxigento\App\Generic2\Tool\Odoo\Def\BusinessCodesManager"/>
     <preference for="Praxigento\Warehouse\Tool\IStockManager" type="Praxigento\App\Generic2\Tool\Warehouse\Def\StockManager"/>
