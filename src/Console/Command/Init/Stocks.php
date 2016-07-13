@@ -148,7 +148,7 @@ class Stocks
         $where = Cfg::E_TAX_CALC_A_RATE_ID . '=' . (int)$rateId;
         $where .= ' AND ' . Cfg::E_TAX_CALC_A_RULE_ID . '=' . (int)$ruleId;
         $rows = $this->_repoGeneric->getEntities($entity, null, $where);
-        $result = is_array($rows);
+        $result = is_array($rows) && count($rows);
         return $result;
     }
 
