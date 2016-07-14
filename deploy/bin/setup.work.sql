@@ -30,15 +30,12 @@ REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'EUR', path ='currency
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '100000', path ='cataloginventory/options/stock_threshold_qty';
 -- Salex / Tax (MOBI-336)
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '2', path ='tax/classes/shipping_tax_class';
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'origin', path ='tax/calculation/based_on';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '1', path ='tax/calculation/price_includes_tax';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '1', path ='tax/calculation/shipping_includes_tax';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '1', path ='tax/calculation/discount_tax';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '1', path ='tax/calculation/cross_border_trade_enabled';
-REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '0', path ='tax/notification/ignore_discount';
-REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '0', path ='tax/notification/ignore_price_display';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '1', path ='tax/calculation/cross_border_trade_enabled';
-REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'LV', path ='tax/defaults/country';
-REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'LV-1010', path ='tax/defaults/postcode';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '2', path ='tax/display/type';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '2', path ='tax/display/shipping';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '2', path ='tax/cart_display/price';
