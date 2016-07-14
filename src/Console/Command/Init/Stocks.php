@@ -148,7 +148,7 @@ class Stocks
         $where = Cfg::E_TAX_CALC_A_RATE_ID . '=' . (int)$rateId;
         $where .= ' AND ' . Cfg::E_TAX_CALC_A_RULE_ID . '=' . (int)$ruleId;
         $rows = $this->_repoGeneric->getEntities($entity, null, $where);
-        $result = is_array($rows);
+        $result = is_array($rows) && count($rows);
         return $result;
     }
 
@@ -213,6 +213,7 @@ class Stocks
         $shoudCreate = is_null($wrhsBaltic->getOdooId());
         $wrhsBaltic->setCode('Baltic');
         $wrhsBaltic->setCurrency('USD');
+        $wrhsBaltic->setCountryCode('LV');
         $wrhsBaltic->setNote('Warehouse for Baltic states (LV, LT, EE)');
         $wrhsBaltic->setOdooId(self::DEF_WRHS_ODOO_ID_BALTIC);
         if ($shoudCreate) {
@@ -228,6 +229,7 @@ class Stocks
         $shoudCreate = is_null($wrhsRussian->getOdooId());
         $wrhsRussian->setCode('Russian');
         $wrhsRussian->setCurrency('USD');
+        $wrhsRussian->setCountryCode('RU');
         $wrhsRussian->setNote('Warehouse for Russian Federation');
         $wrhsRussian->setOdooId(self::DEF_WRHS_ODOO_ID_RUSSIAN);
         if ($shoudCreate) {
