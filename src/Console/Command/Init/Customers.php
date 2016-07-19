@@ -37,7 +37,7 @@ class Customers
     protected $DEFAULT_PASSWORD_HASH = '387cf1ea04874290e8e3c92836e1c4b630c5abea110d8766bddb4b3a6224ea04:QVIfkMF7kfwRkkC3HdqJ84K1XANG38LF:1';
     /** @var \Magento\Framework\ObjectManagerInterface */
     protected $_manObj;
-    /** @var  \Praxigento\Core\Repo\Transaction\IManager */
+    /** @var  \Praxigento\Core\Transaction\Database\IManager */
     protected $_manTrans;
     /**
      * Map index by Magento ID (index started from 1).
@@ -58,7 +58,7 @@ class Customers
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\Core\Repo\Transaction\IManager $manTrans,
+        \Praxigento\Core\Transaction\Database\IManager $manTrans,
         \Magento\Customer\Model\ResourceModel\CustomerRepository $repoMageCustomer,
         \Praxigento\Downline\Tool\IReferral $toolReferral
     ) {
@@ -101,7 +101,7 @@ class Customers
     {
         /* setup session */
         $this->_setAreaCode();
-        $trans = $this->_manTrans->transactionBegin();
+        $def = $this->_manTrans->begin();
         try {
             foreach ($this->DEFAULT_DWNL_TREE as $custId => $parentId) {
                 $first = 'User' . $custId;
@@ -122,10 +122,10 @@ class Customers
                 $this->_mapCustomerMageIdByIndex[$custId] = $saved->getId();
                 $this->_mapCustomerIndexByMageId[$saved->getId()] = $custId;
             }
-            $this->_manTrans->transactionCommit($trans);
+            $this->_manTrans->commit($def);
         } finally {
             // transaction will be rolled back if commit is not done (otherwise - do nothing)
-            $this->_manTrans->transactionClose($trans);
+            $this->_manTrans->end($def);
         }
     }
 

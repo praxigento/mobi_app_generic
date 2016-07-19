@@ -97,11 +97,11 @@ class Products_Test extends \Praxigento\Core\Test\BaseMockeryCase
         $this->mServiceInputProcessor
             ->shouldReceive('convertValue')->once()
             ->andReturn($mBundle);
-        // $trans = $this->_manTrans->transactionBegin();
-        $mTrans = $this->_mockTransactionDefinition();
+        // $def = $this->_manTrans->begin();
+        $mDef = $this->_mockTransactionDefinition();
         $this->mManTrans
-            ->shouldReceive('transactionBegin')->once()
-            ->andReturn($mTrans);
+            ->shouldReceive('begin')->once()
+            ->andReturn($mDef);
         // $this->_subInit->warehouse();
         $this->mSubCats
             ->shouldReceive('warehouse')->once();
@@ -118,12 +118,12 @@ class Products_Test extends \Praxigento\Core\Test\BaseMockeryCase
         // $this->_subCats->enableForAllStoreViews();
         $this->mSubCats
             ->shouldReceive('enableForAllStoreViews')->once();
-        // $this->_manTrans->transactionCommit($trans);
+        // $this->_manTrans->commit($def);
         $this->mManTrans
-            ->shouldReceive('transactionCommit')->once();
-        // $this->_manTrans->transactionClose($trans);
+            ->shouldReceive('commit')->once();
+        // $this->_manTrans->end($def);
         $this->mManTrans
-            ->shouldReceive('transactionClose')->once();
+            ->shouldReceive('end')->once();
         /** === Call and asserts  === */
         $this->obj->launchExecute($this->mInput, $this->mOutput);
     }

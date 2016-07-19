@@ -19,7 +19,7 @@ class Products
     protected $_callReplicate;
     /** @var \Magento\Framework\ObjectManagerInterface */
     protected $_manObj;
-    /** @var  \Praxigento\Core\Repo\Transaction\IManager */
+    /** @var  \Praxigento\Core\Transaction\Database\IManager */
     protected $_manTrans;
     /** @var \Magento\Framework\Webapi\ServiceInputProcessor */
     protected $_serviceInputProcessor;
@@ -28,7 +28,7 @@ class Products
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\Core\Repo\Transaction\IManager $manTrans,
+        \Praxigento\Core\Transaction\Database\IManager $manTrans,
         \Magento\Framework\Webapi\ServiceInputProcessor $serviceInputProcessor,
         \Praxigento\Odoo\Service\IReplicate $callReplicate,
         Sub\Categories $subCats
@@ -78,7 +78,7 @@ class Products
         $jsonData = json_decode($fileData, true);
         $bundle = $this->_serviceInputProcessor->convertValue($jsonData['data'],
             \Praxigento\Odoo\Data\Odoo\Inventory::class);
-        $trans = $this->_manTrans->transactionBegin();
+        $def = $this->_manTrans->begin();
         try {
             /* create products using replication */
             /** @var ProductSaveRequest $req */
@@ -87,10 +87,10 @@ class Products
             $this->_callReplicate->productSave($req);
             /* enable categories after replication */
             $this->_subCats->enableForAllStoreViews();
-            $this->_manTrans->transactionCommit($trans);
+            $this->_manTrans->commit($def);
         } finally {
             // transaction will be rolled back if commit is not done (otherwise - do nothing)
-            $this->_manTrans->transactionClose($trans);
+            $this->_manTrans->end($def);
         }
     }
 

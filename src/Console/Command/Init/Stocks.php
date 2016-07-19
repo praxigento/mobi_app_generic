@@ -76,7 +76,7 @@ class Stocks
     protected $_manObj;
     /** @var  \Magento\Store\Model\StoreManager */
     protected $_manStore;
-    /** @var  \Praxigento\Core\Repo\Transaction\IManager */
+    /** @var  \Praxigento\Core\Transaction\Database\IManager */
     protected $_manTrans;
     /** @var  \Praxigento\Core\Repo\IGeneric */
     protected $_repoGeneric;
@@ -92,7 +92,7 @@ class Stocks
     public function __construct(
         \Psr\Log\LoggerInterface $logger,
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\Core\Repo\Transaction\IManager $manTrans,
+        \Praxigento\Core\Transaction\Database\IManager $manTrans,
         \Magento\Store\Model\StoreManager $manStore,
         \Magento\Framework\Event\ManagerInterface $manEvent,
         \Magento\Store\Api\GroupRepositoryInterface $mageRepoGroup,
@@ -386,18 +386,18 @@ class Stocks
     {
         /* setup session */
         $this->_setAreaCode();
-        $trans = $this->_manTrans->transactionBegin();
+        $def = $this->_manTrans->begin();
         try {
             $this->_processGroups();
             $this->_processStores();
             $this->_processStocks();
             $this->_processTaxes();
-            $this->_manTrans->transactionCommit($trans);
+            $this->_manTrans->commit($def);
             /* init stores w/o transaction (DDL is denied in the transaction )*/
             $this->_initStores();
         } finally {
             // transaction will be rolled back if commit is not done (otherwise - do nothing)
-            $this->_manTrans->transactionClose($trans);
+            $this->_manTrans->end($def);
         }
     }
 }

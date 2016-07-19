@@ -89,11 +89,11 @@ class Customers_Test extends \Praxigento\Core\Test\BaseMockeryCase
             ->shouldReceive('configure')->once();
         // return
         //
-        // $trans = $this->_manTrans->transactionBegin();
-        $mTrans = $this->_mockTransactionDefinition();
+        // $def = $this->_manTrans->begin();
+        $mDef = $this->_mockTransactionDefinition();
         $this->mManTrans
-            ->shouldReceive('transactionBegin')->once()
-            ->andReturn($mTrans);
+            ->shouldReceive('begin')->once()
+            ->andReturn($mDef);
         // $this->_toolReferral->replaceCodeInRegistry($referralCode);
         $this->mToolReferal
             ->shouldReceive('replaceCodeInRegistry');
@@ -114,12 +114,12 @@ class Customers_Test extends \Praxigento\Core\Test\BaseMockeryCase
             ->andReturn($mSaved);
         // .. $saved->getId() ...
         $mSaved->shouldReceive('getId');
-        // $this->_manTrans->transactionCommit($trans);
+        // $this->_manTrans->commit($def);
         $this->mManTrans
-            ->shouldReceive('transactionCommit')->once();
-        // $this->_manTrans->transactionClose($trans);
+            ->shouldReceive('commit')->once();
+        // $this->_manTrans->end($def);
         $this->mManTrans
-            ->shouldReceive('transactionClose')->once();
+            ->shouldReceive('end')->once();
         /** === Call and asserts  === */
         $this->obj->launchExecute($this->mInput, $this->mOutput);
     }
