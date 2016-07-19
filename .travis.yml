@@ -22,14 +22,11 @@ before_install:
   - cp deploy_cfg.sh.travis deploy_cfg.sh # create configuration for Travis from template
   - sh deploy.sh
   - sh ./bin/post_install.sh
-  - cat ./work/var/log/cascade_setup.log
+  - cat ./work/var/log/setup.log
 
 script:
   - phpunit -c ./dev/unit/phpunit.dist.xml
   - phpunit -c ./dev/integration/phpunit.dist.xml
-#  - cat ./work/var/log/cascade_setup.log
-#  - cat ./work/var/log/cascade_system.log
-#  - cat ./work/var/log/cascade_exception.log
 #  - phpunit --configuration ./dev/tests/unit/phpunit.xml.dist # run Magento 2 unit tests
 
 notifications:
