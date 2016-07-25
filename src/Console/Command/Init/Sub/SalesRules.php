@@ -14,13 +14,13 @@ class SalesRules
     protected $_builderSearchCriteria;
     /** @var \Magento\Rule\Model\Condition\Context */
     protected $_contextCondition;
+    /** @var \Magento\SalesRule\Model\Converter\ToDataModel */
+    protected $_convertRule;
     protected $_custGroups = [];
     /** @var \Magento\SalesRule\Model\Rule\Condition\CombineFactory */
     protected $_factoryCondCombain;
     /** @var \Magento\SalesRule\Api\Data\ConditionInterfaceFactory */
     protected $_factoryCondition;
-    /** @var \Magento\SalesRule\Model\Converter\ToDataModel */
-    protected $_convertRule;
     /** @var \Magento\Customer\Api\GroupRepositoryInterface */
     protected $_repoCustomerGroup;
     /** @var \Magento\SalesRule\Api\RuleRepositoryInterface */

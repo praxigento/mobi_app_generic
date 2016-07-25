@@ -5,12 +5,10 @@
 
 namespace Praxigento\App\Generic2\Console\Command\Init;
 
-use Magento\Setup\Model\ObjectManagerProvider;
 use Magento\Tax\Model\Calculation\Rate as EntityTaxRate;
 use Magento\Tax\Model\Calculation\Rule as EntityTaxRule;
 use Praxigento\App\Generic2\Config as Cfg;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -88,6 +86,8 @@ class Stocks
     protected $_storeBalticRu;
     /** @var \Magento\Store\Model\Store */
     protected $_storeRussianRu;
+    /** @var Sub\SalesRules */
+    protected $_subRules;
 
     public function __construct(
         \Psr\Log\LoggerInterface $logger,
@@ -99,7 +99,8 @@ class Stocks
         \Magento\Store\Api\StoreRepositoryInterface $mageRepoStore,
         \Magento\CatalogInventory\Api\StockRepositoryInterface $mageRepoStock,
         \Praxigento\Core\Repo\IGeneric $repoGeneric,
-        \Praxigento\Odoo\Repo\Agg\IWarehouse $repoWrhs
+        \Praxigento\Odoo\Repo\Agg\IWarehouse $repoWrhs,
+        Sub\SalesRules $subRules
     ) {
         parent::__construct();
         $this->_logger = $logger;
@@ -112,6 +113,17 @@ class Stocks
         $this->_mageRepoStock = $mageRepoStock;
         $this->_repoGeneric = $repoGeneric;
         $this->_repoWrhs = $repoWrhs;
+        $this->_subRules = $subRules;
+    }
+
+    private function _getTaxCalcs($rateId, $ruleId)
+    {
+        $entity = Cfg::ENTITY_MAGE_TAX_CALC;
+        $where = Cfg::E_TAX_CALC_A_RATE_ID . '=' . (int)$rateId;
+        $where .= ' AND ' . Cfg::E_TAX_CALC_A_RULE_ID . '=' . (int)$ruleId;
+        $rows = $this->_repoGeneric->getEntities($entity, null, $where);
+        $result = is_array($rows) && count($rows);
+        return $result;
     }
 
     private function _getTaxRateByCode($code)
@@ -139,16 +151,6 @@ class Stocks
             $one = reset($rows);
             $result = $one[Cfg::E_TAX_CALC_RULE_A_ID];
         }
-        return $result;
-    }
-
-    private function _getTaxCalcs($rateId, $ruleId)
-    {
-        $entity = Cfg::ENTITY_MAGE_TAX_CALC;
-        $where = Cfg::E_TAX_CALC_A_RATE_ID . '=' . (int)$rateId;
-        $where .= ' AND ' . Cfg::E_TAX_CALC_A_RULE_ID . '=' . (int)$ruleId;
-        $rows = $this->_repoGeneric->getEntities($entity, null, $where);
-        $result = is_array($rows) && count($rows);
         return $result;
     }
 
@@ -310,6 +312,21 @@ class Stocks
         $this->_repoGeneric->replaceEntity($entity, $bind);
     }
 
+    private function _saveTaxCalc($rateId, $ruleId)
+    {
+        $found = $this->_getTaxCalcs($rateId, $ruleId);
+        if (!$found) {
+            $entity = Cfg::ENTITY_MAGE_TAX_CALC;
+            $bind = [
+                Cfg::E_TAX_CALC_A_RATE_ID => $rateId,
+                Cfg::E_TAX_CALC_A_RULE_ID => $ruleId,
+                Cfg::E_TAX_CALC_A_CUST_TAX_CLASS_ID => 3,
+                Cfg::E_TAX_CALC_A_PROD_TAX_CLASS_ID => 2
+            ];
+            $this->_repoGeneric->replaceEntity($entity, $bind);
+        }
+    }
+
     private function _saveTaxRate($country, $code, $rate)
     {
         $result = $this->_getTaxRateByCode($code);
@@ -324,21 +341,6 @@ class Stocks
             $result = $this->_repoGeneric->addEntity($entity, $bind);
         }
         return $result;
-    }
-
-    private function _saveTaxCalc($rateId, $ruleId)
-    {
-        $found = $this->_getTaxCalcs($rateId, $ruleId);
-        if (!$found) {
-            $entity = Cfg::ENTITY_MAGE_TAX_CALC;
-            $bind = [
-                Cfg::E_TAX_CALC_A_RATE_ID => $rateId,
-                Cfg::E_TAX_CALC_A_RULE_ID => $ruleId,
-                Cfg::E_TAX_CALC_A_CUST_TAX_CLASS_ID => 3,
-                Cfg::E_TAX_CALC_A_PROD_TAX_CLASS_ID => 2
-            ];
-            $this->_repoGeneric->replaceEntity($entity, $bind);
-        }
     }
 
     private function _saveTaxRule($code)
@@ -392,6 +394,8 @@ class Stocks
             $this->_processStores();
             $this->_processStocks();
             $this->_processTaxes();
+            /* init sales rules */
+            $this->_subRules->init();
             $this->_manTrans->commit($def);
             /* init stores w/o transaction (DDL is denied in the transaction )*/
             $this->_initStores();
