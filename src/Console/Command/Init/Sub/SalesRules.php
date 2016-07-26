@@ -49,7 +49,8 @@ class SalesRules
         $name,
         $description,
         $sku,
-        $discountPercent
+        $discountPercent,
+        $applyToShipping = false
 
     ) {
         /* rule */
@@ -62,6 +63,7 @@ class SalesRules
         $rule->setCustomerGroupIds($this->_custGroups);
         $rule->setDiscountAmount($discountPercent);
         $rule->setStopRulesProcessing(false);
+        $rule->setApplyToShipping($applyToShipping);
         $rule->setSimpleAction(\Magento\SalesRule\Model\Rule::BY_PERCENT_ACTION);
         /* combined condition */
         /** @var \Magento\SalesRule\Model\Rule\Condition\Combine $combo */
@@ -162,7 +164,7 @@ class SalesRules
         $this->_loadCustomerGroups();
         $desc = 'This rule is added by initialization script for test proposes.';
         $this->_createRuleBySku('10% off to Bee Royal', $desc, '212San', 10);
-        $this->_createRuleBySku('20% off to BoostIron', $desc, '10674San', 20);
+        $this->_createRuleBySku('20% off to BoostIron', $desc, '10674San', 20, true);
         $this->_createRuleForOrder('$20 off to cart subtotal above $100', $desc, 100, 20);
     }
 }
