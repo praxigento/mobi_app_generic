@@ -56,11 +56,6 @@
     </type>
 
     <!-- Praxigento\Odoo -->
-    <type name="Praxigento\Odoo\Repo\Agg\Def\SaleOrderItem">
-        <arguments>
-            <argument name="logger" xsi:type="object">loggerSql</argument>
-        </arguments>
-    </type>
     <type name="Praxigento\Odoo\Repo\Odoo\Connector\Rest">
         <arguments>
             <argument name="logger" xsi:type="object">loggerOdoo</argument>
@@ -69,6 +64,13 @@
     <type name="Praxigento\Odoo\Service\Replicate\Sub\Replicator\Product">
         <arguments>
             <argument name="logger" xsi:type="object">loggerOdoo</argument>
+        </arguments>
+    </type>
+
+    <!-- Praxigento_Warehouse -->
+    <type name="Praxigento\Odoo\Repo\Agg\Def\SaleOrderItem\SelectFactory">
+        <arguments>
+            <argument name="logger" xsi:type="object">loggerSql</argument>
         </arguments>
     </type>
 
