@@ -6,19 +6,16 @@
     "warehouses": [
       {
         "id": 10,
-        "code": "Germany",
         "currency": "EUR"
       }
     ],
     "lots": [
       {
         "id": 1001,
-        "code": "L-1001",
         "expirationDate": "2015-05-28 14:04:22"
       },
       {
         "id": 2002,
-        "code": "K-234",
         "expirationDate": "2018-06-29 16:24:32"
       }
     ],
