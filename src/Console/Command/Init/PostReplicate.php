@@ -2,15 +2,17 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-
 namespace Praxigento\App\Generic2\Console\Command\Init;
 
-use Magento\Setup\Model\ObjectManagerProvider;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Post replication routines:
+ *  - enable all categories;
+ *  - create ACL User for Odoo Replication;
+ */
 class PostReplicate
     extends \Symfony\Component\Console\Command\Command
 {
@@ -18,14 +20,17 @@ class PostReplicate
     protected $_manObj;
     /** @var Sub\Categories */
     protected $_subCats;
+    protected $_subAclUser;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        Sub\Categories $subCats
+        Sub\Categories $subCats,
+        Sub\AclUser $subAclUser
     ) {
         parent::__construct();
         $this->_manObj = $manObj;
         $this->_subCats = $subCats;
+        $this->_subAclUser = $subAclUser;
     }
 
     /**
@@ -63,6 +68,8 @@ class PostReplicate
         try {
             /* enable categories after replication */
             $this->_subCats->enableForAllStoreViews();
+            /* create ACL user for Odoo push replication */
+            $this->_subAclUser->createAclUsers();
         } finally {
         }
     }
