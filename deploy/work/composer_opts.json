@@ -16,7 +16,7 @@
   },
   "require-dev": {
     "phpunit/php-code-coverage": "^2",
-    "mockery/mockery": "^0.9.4"
+    "mockery/mockery": "dev-master"
   },
   "autoload-dev": {
     "psr-4": {
