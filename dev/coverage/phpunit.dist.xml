@@ -10,7 +10,7 @@
          syntaxCheck="true"
          bootstrap="./phpunit_bootstrap.php">
     <testsuite name="Code Coverage Tests (based on unit tests) for Generic MOBI application (M2)">
-        <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_app_generic_mage2/test/unit</directory>
+        <!--<directory suffix="_Test.php">../../work/vendor/praxigento/mobi_app_generic_mage2/test/unit</directory>-->
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_accounting/test/unit</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_base/test/unit</directory>
         <directory suffix="_Test.php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_global_sales/test/unit
@@ -29,7 +29,7 @@
         <whitelist
                 processUncoveredFilesFromWhitelist="false"
                 addUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">../../work/vendor/praxigento/mobi_app_generic_mage2/src</directory>
+            <!--<directory suffix=".php">../../work/vendor/praxigento/mobi_app_generic_mage2/src</directory>-->
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_accounting/src</directory>
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_base/src</directory>
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_bonus_global_sales/src</directory>
@@ -43,7 +43,7 @@
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_wallet/src</directory>
             <directory suffix=".php">../../work/vendor/praxigento/mobi_mod_mage2_warehouse/src</directory>
             <exclude>
-                <file>../../work/vendor/praxigento/mobi_app_generic_mage2/src/registration.php</file>
+                <!--<file>../../work/vendor/praxigento/mobi_app_generic_mage2/src/registration.php</file>-->
                 <file>../../work/vendor/praxigento/mobi_mod_mage2_accounting/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_mage2_bonus_base/src/registration.php</file>
                 <file>../../work/vendor/praxigento/mobi_mod_mage2_bonus_global_sales/src/registration.php</file>
