@@ -9,7 +9,7 @@ use Magento\Framework\App\ObjectManager;
 
 include_once(__DIR__ . '/../../../../phpunit_bootstrap.php');
 
-class SalesRules_ManualTest extends \Praxigento\Core\Test\BaseMockeryCase
+class SalesRules_ManualTest extends \Praxigento\Core\Test\BaseCase\Mockery
 {
     /** @var  \Praxigento\App\Generic2\Console\Command\Init\Sub\SalesRules */
     private $_obj;

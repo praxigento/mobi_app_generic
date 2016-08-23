@@ -18,7 +18,7 @@ class CustomersChild extends Customers
     }
 }
 
-class Customers_Test extends \Praxigento\Core\Test\BaseMockeryCase
+class Customers_Test extends \Praxigento\Core\Test\BaseCase\Mockery
 {
     /** @var  \Mockery\MockInterface */
     private $mInput;

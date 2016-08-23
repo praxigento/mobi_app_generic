@@ -18,7 +18,7 @@ class ProductsChild extends Products
     }
 }
 
-class Products_Test extends \Praxigento\Core\Test\BaseMockeryCase
+class Products_Test extends \Praxigento\Core\Test\BaseCase\Mockery
 {
     /** @var  \Mockery\MockInterface */
     private $mCallReplicate;
