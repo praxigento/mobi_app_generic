@@ -5,13 +5,11 @@
 
 namespace Praxigento\App\Generic2\Console\Command\Init;
 
-use Magento\Setup\Model\ObjectManagerProvider;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Customers 
+class Customers
     extends \Symfony\Component\Console\Command\Command
 {
     /**
@@ -55,18 +53,22 @@ class Customers
     protected $_repoMageCustomer;
     /** @var \Praxigento\Downline\Tool\IReferral */
     protected $_toolReferral;
+    /** @var \Praxigento\App\Generic2\Console\Command\Init\Sub\CustomerGroups */
+    protected $_subCustomerGroups;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\Transaction\Database\IManager $manTrans,
         \Magento\Customer\Model\ResourceModel\CustomerRepository $repoMageCustomer,
-        \Praxigento\Downline\Tool\IReferral $toolReferral
+        \Praxigento\Downline\Tool\IReferral $toolReferral,
+        \Praxigento\App\Generic2\Console\Command\Init\Sub\CustomerGroups $subCustomerGroups
     ) {
         parent::__construct();
         $this->_manObj = $manObj;
         $this->_manTrans = $manTrans;
         $this->_repoMageCustomer = $repoMageCustomer;
         $this->_toolReferral = $toolReferral;
+        $this->_subCustomerGroups = $subCustomerGroups;
     }
 
     /**
@@ -103,25 +105,27 @@ class Customers
         $this->_setAreaCode();
         $def = $this->_manTrans->begin();
         try {
-            foreach ($this->DEFAULT_DWNL_TREE as $custId => $parentId) {
-                $first = 'User' . $custId;
-                $last = 'Last';
-                $email = "customer_$custId@test.com";
-                if ($custId != $parentId) {
-                    /* save parent ID to registry */
-                    $referralCode = $this->_mapCustomerMageIdByIndex[$parentId];
-                    $this->_toolReferral->replaceCodeInRegistry($referralCode);
-                }
-                /** @var \Magento\Customer\Api\Data\CustomerInterface $customer */
-                $customer = $this->_manObj->create(\Magento\Customer\Api\Data\CustomerInterface::class);
-                $customer->setEmail($email);
-                $customer->setFirstname($first);
-                $customer->setLastname($last);
-                /** @var \Magento\Customer\Api\Data\CustomerInterface $saved */
-                $saved = $this->_repoMageCustomer->save($customer, $this->DEFAULT_PASSWORD_HASH);
-                $this->_mapCustomerMageIdByIndex[$custId] = $saved->getId();
-                $this->_mapCustomerIndexByMageId[$saved->getId()] = $custId;
-            }
+//            foreach ($this->DEFAULT_DWNL_TREE as $custId => $parentId) {
+//                $first = 'User' . $custId;
+//                $last = 'Last';
+//                $email = "customer_$custId@test.com";
+//                if ($custId != $parentId) {
+//                    /* save parent ID to registry */
+//                    $referralCode = $this->_mapCustomerMageIdByIndex[$parentId];
+//                    $this->_toolReferral->replaceCodeInRegistry($referralCode);
+//                }
+//                /** @var \Magento\Customer\Api\Data\CustomerInterface $customer */
+//                $customer = $this->_manObj->create(\Magento\Customer\Api\Data\CustomerInterface::class);
+//                $customer->setEmail($email);
+//                $customer->setFirstname($first);
+//                $customer->setLastname($last);
+//                /** @var \Magento\Customer\Api\Data\CustomerInterface $saved */
+//                $saved = $this->_repoMageCustomer->save($customer, $this->DEFAULT_PASSWORD_HASH);
+//                $this->_mapCustomerMageIdByIndex[$custId] = $saved->getId();
+//                $this->_mapCustomerIndexByMageId[$saved->getId()] = $custId;
+//            }
+            /* MOBI-426 : rename customer groups according to Generic App scheme. */
+            $this->_subCustomerGroups->renameGroups();
             $this->_manTrans->commit($def);
         } finally {
             // transaction will be rolled back if commit is not done (otherwise - do nothing)
