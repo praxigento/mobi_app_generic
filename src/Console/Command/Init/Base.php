@@ -5,8 +5,6 @@
 
 namespace Praxigento\App\Generic2\Console\Command\Init;
 
-use Symfony\Component\Console\Command\Command;
-
 /**
  * Base class to create console commands.
  */
@@ -43,14 +41,20 @@ abstract class Base
         $this->setName($this->_cmdName);
         $this->setDescription($this->_cmdDesc);
         /* Magento related config (Object Manager) */
-        $areaCode = 'adminhtml';
         /** @var \Magento\Framework\App\State $appState */
         $appState = $this->_manObj->get(\Magento\Framework\App\State::class);
-        $appState->setAreaCode($areaCode);
-        /** @var \Magento\Framework\ObjectManager\ConfigLoaderInterface $configLoader */
-        $configLoader = $this->_manObj->get(\Magento\Framework\ObjectManager\ConfigLoaderInterface::class);
-        $config = $configLoader->load($areaCode);
-        $this->_manObj->configure($config);
+        try {
+            /* area code should be set only once */
+            $appState->getAreaCode();
+        } catch (\Magento\Framework\Exception\LocalizedException $e) {
+            /* exception will be thrown if no area code is set */
+            $areaCode = 'adminhtml';
+            $appState->setAreaCode($areaCode);
+            /** @var \Magento\Framework\ObjectManager\ConfigLoaderInterface $configLoader */
+            $configLoader = $this->_manObj->get(\Magento\Framework\ObjectManager\ConfigLoaderInterface::class);
+            $config = $configLoader->load($areaCode);
+            $this->_manObj->configure($config);
+        }
     }
 
 }
