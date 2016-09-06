@@ -13,10 +13,15 @@ class SaleOrders
 {
     /** @var  \Praxigento\Core\Transaction\Database\IManager */
     protected $_manTrans;
+    /** @var array SKU and count for order items (all orders have the same items). */
+    protected $DATA_ORDER_ITEMS = ['10674San' => 1, '215San' => 2];
+    /** @var  \Praxigento\App\Generic2\Console\Command\Init\Sub\SaleOrder */
+    protected $_subSaleOrder;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\Core\Transaction\Database\IManager $manTrans
+        \Praxigento\Core\Transaction\Database\IManager $manTrans,
+        \Praxigento\App\Generic2\Console\Command\Init\Sub\SaleOrder $subSaleOrder
     ) {
         parent::__construct(
             $manObj,
@@ -24,6 +29,7 @@ class SaleOrders
             'Create orders to calculate bonus after that.'
         );
         $this->_manTrans = $manTrans;
+        $this->_subSaleOrder = $subSaleOrder;
     }
 
     protected function execute(
@@ -32,7 +38,10 @@ class SaleOrders
     ) {
         $def = $this->_manTrans->begin();
         try {
-
+            $customers = $this->_subSaleOrder->getAllCustomers();
+            foreach ($customers as $customerData) {
+                $this->_subSaleOrder->addOrder($customerData, $this->DATA_ORDER_ITEMS);
+            }
             $this->_manTrans->commit($def);
         } finally {
             // transaction will be rolled back if commit is not done (otherwise - do nothing)
