@@ -8,12 +8,9 @@ namespace Praxigento\App\Generic2\Console\Command\Init;
 use Magento\Tax\Model\Calculation\Rate as EntityTaxRate;
 use Magento\Tax\Model\Calculation\Rule as EntityTaxRule;
 use Praxigento\App\Generic2\Config as Cfg;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 
 class Stocks
-    extends \Symfony\Component\Console\Command\Command
+    extends \Praxigento\App\Generic2\Console\Command\Init\Base
 {
     /**#@+
      * IDs for groups (stores in adminhtml terms).
@@ -70,8 +67,6 @@ class Stocks
     protected $_mageRepoStore;
     /** @var  \Magento\Framework\Event\ManagerInterface */
     protected $_manEvent;
-    /** @var \Magento\Framework\ObjectManagerInterface */
-    protected $_manObj;
     /** @var  \Magento\Store\Model\StoreManager */
     protected $_manStore;
     /** @var  \Praxigento\Core\Transaction\Database\IManager */
@@ -102,7 +97,11 @@ class Stocks
         \Praxigento\Odoo\Repo\Agg\IWarehouse $repoWrhs,
         Sub\SalesRules $subRules
     ) {
-        parent::__construct();
+        parent::__construct(
+            $manObj,
+            'prxgt:app:init-stocks',
+            'Create sample stores in application and map warehouses/stocks to stores.'
+        );
         $this->_logger = $logger;
         $this->_manObj = $manObj;
         $this->_manTrans = $manTrans;
@@ -356,38 +355,10 @@ class Stocks
         return $result;
     }
 
-    /**
-     * Sets area code to start a session for replication.
-     */
-    private function _setAreaCode()
-    {
-        $areaCode = 'adminhtml';
-        /** @var \Magento\Framework\App\State $appState */
-        $appState = $this->_manObj->get(\Magento\Framework\App\State::class);
-        $appState->setAreaCode($areaCode);
-        /** @var \Magento\Framework\ObjectManager\ConfigLoaderInterface $configLoader */
-        $configLoader = $this->_manObj->get(\Magento\Framework\ObjectManager\ConfigLoaderInterface::class);
-        $config = $configLoader->load($areaCode);
-        $this->_manObj->configure($config);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function configure()
-    {
-        $this->setName('prxgt:app:init-stocks');
-        $this->setDescription('Create sample stores in application and map warehouses/stocks to stores.');
-        parent::configure();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        /* setup session */
-        $this->_setAreaCode();
+    protected function execute(
+        \Symfony\Component\Console\Input\InputInterface $input,
+        \Symfony\Component\Console\Output\OutputInterface $output
+    ) {
         $def = $this->_manTrans->begin();
         try {
             $this->_processGroups();

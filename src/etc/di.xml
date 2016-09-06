@@ -8,6 +8,7 @@
                 <item name="prxgt_app_command_init_customers" xsi:type="object">Praxigento\App\Generic2\Console\Command\Init\Customers</item>
                 <item name="prxgt_app_command_post_replicate" xsi:type="object">Praxigento\App\Generic2\Console\Command\Init\PostReplicate</item>
                 <item name="prxgt_app_command_init_products" xsi:type="object">Praxigento\App\Generic2\Console\Command\Init\Products</item>
+                <item name="prxgt_app_command_init_orders" xsi:type="object">Praxigento\App\Generic2\Console\Command\Init\SaleOrders</item>
                 <item name="prxgt_app_command_init_stocks" xsi:type="object">Praxigento\App\Generic2\Console\Command\Init\Stocks</item>
             </argument>
         </arguments>
