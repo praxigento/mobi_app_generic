@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "praxigento/composer_plugin_templates": "1.0.6",
+    "praxigento/composer_plugin_templates": "^1",
     "flancer32/php_data_object": "dev-master",
     "mgtcommerce/module-mgtdevelopertoolbar": "dev-master",
     "praxigento/mobi_app_generic_mage2": "dev-master"
@@ -27,10 +27,6 @@
     "praxigento/mobi_app_generic_mage2": {
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_app_generic_mage2"
-    },
-    "flancer32/php_data_object": {
-      "type": "vcs",
-      "url": "https://github.com/flancer32/php_data_object"
     },
     "mgtcommerce/module-mgtdevelopertoolbar": {
       "type": "vcs",
