@@ -39,6 +39,7 @@ class SaleOrders
         $def = $this->_manTrans->begin();
         try {
             $customers = $this->_subSaleOrder->getAllCustomers();
+            /** @var \Magento\Customer\Api\Data\CustomerInterface $customerData */
             foreach ($customers as $customerData) {
                 $this->_subSaleOrder->addOrder($customerData, $this->DATA_ORDER_ITEMS);
             }

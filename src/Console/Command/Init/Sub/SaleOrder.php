@@ -7,9 +7,22 @@ namespace Praxigento\App\Generic2\Console\Command\Init\Sub;
 
 class SaleOrder
 {
-    const STOCK_ID = 2;
-    /** @var \Magento\Sales\Api\OrderManagementInterface */
-    protected $_apiMgrOrder;
+    const METHOD_PAYMENT = 'checkmo';
+    const METHOD_SHIPPING = 'flatrate_flatrate';
+    const SKU = '10674San';
+    const STOCK_ID_RUS = 2;
+    const STORE_ID_RUS = 3;
+    const DATE_PAID = '2016-06-21 16:32:21';
+    /**
+     * Cache for products data from DB.
+     *
+     * @var array [sku=>$product]
+     */
+    protected $_cacheProducts = [];
+    /** @var \Magento\Framework\Event\ManagerInterface */
+    protected $_manEvent;
+    /** @var  \Magento\Sales\Model\Service\InvoiceService */
+    protected $_manInvoice;
     /** @var \Magento\Framework\ObjectManagerInterface */
     protected $_manObj;
     /** @var \Magento\Quote\Model\QuoteManagement */
@@ -20,25 +33,41 @@ class SaleOrder
     protected $_repoCatProd;
     /** @var \Magento\Customer\Api\CustomerRepositoryInterface */
     protected $_repoCust;
-    /** @var \Praxigento\Core\Repo\IGeneric */
-    protected $_repoGeneric;
+    /** @var \Praxigento\Pv\Repo\Entity\ISale */
+    protected $_repoPvSale;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Magento\Sales\Api\OrderManagementInterface $apiMgrOrder,
+        \Magento\Framework\Event\ManagerInterface $manEvent,
         \Magento\Store\Model\StoreManagerInterface $manStore,
         \Magento\Quote\Model\QuoteManagement $manQuote,
+        \Magento\Sales\Api\InvoiceManagementInterface $manInvoice,
         \Magento\Catalog\Api\ProductRepositoryInterface $repoCatProd,
         \Magento\Customer\Api\CustomerRepositoryInterface $repoCust,
-        \Praxigento\Core\Repo\IGeneric $repoGeneric
+        \Praxigento\Pv\Repo\Entity\ISale $repoPvSale
     ) {
         $this->_manObj = $manObj;
-        $this->_apiMgrOrder = $apiMgrOrder;
+        $this->_manEvent = $manEvent;
         $this->_manStore = $manStore;
         $this->_manQuote = $manQuote;
+        $this->_manInvoice = $manInvoice;
         $this->_repoCatProd = $repoCatProd;
         $this->_repoCust = $repoCust;
-        $this->_repoGeneric = $repoGeneric;
+        $this->_repoPvSale = $repoPvSale;
+    }
+
+    /**
+     * Cached access to product in DB.
+     *
+     * @param string $sku
+     * @return \Magento\Catalog\Api\Data\ProductInterface
+     */
+    public function _getProductBySku($sku)
+    {
+        if (!isset($this->_cacheProducts[$sku])) {
+            $this->_cacheProducts[$sku] = $this->_repoCatProd->get($sku);
+        }
+        return $this->_cacheProducts[$sku];
     }
 
     public function _populateQuoteAddrBilling(
@@ -79,48 +108,89 @@ class SaleOrder
         return $quote;
     }
 
+    public function _populateQuoteItems(
+        \Magento\Quote\Model\Quote $quote
+    ) {
+        /** @var \Magento\Catalog\Model\Product $product */
+        $product = $this->_getProductBySku(self::SKU);
+//        $product->setPrice(8.00);
+        $req = new \Magento\Framework\DataObject();
+        $req->setQty(1);
+        $req->setCustomPrice(8);
+        $quote->addProduct($product, $req);
+        return $quote;
+    }
+
+    public function _populateQuotePaymentMethod(\Magento\Quote\Model\Quote $quote)
+    {
+        $quote->setPaymentMethod(self::METHOD_PAYMENT);
+        $quote->getPayment()->setMethod(self::METHOD_PAYMENT);
+    }
+
     public function _populateQuoteShippingMethod(\Magento\Quote\Model\Quote $quote)
     {
         /** @var \Magento\Quote\Model\Quote\Address $addr */
         $addr = $quote->getShippingAddress();
-        $addr->setShippingMethod('flatrate_flatrate');
+        $addr->setShippingMethod(self::METHOD_SHIPPING);
         $addr->setCollectShippingRates(true);
         $addr->collectShippingRates();
     }
 
+    /**
+     * Add one order to customer.
+     *
+     * @param $customer
+     * @param $itemsData
+     */
     public function addOrder(
         $customer,
         $itemsData
     ) {
-        $store = $this->_manStore->getStore(2);
-        $storeId = $store->getId();
-        $websiteId = $store->getWebsiteId();
+        /* create order for Russian store/stock */
+        $store = $this->_manStore->getStore(self::STORE_ID_RUS);
         /** @var \Magento\Quote\Model\Quote $quote */
         $quote = $this->_manObj->create(\Magento\Quote\Model\Quote::class);
         $quote->setStore($store);
-//        $quote->setCurrency();
         $quote->assignCustomer($customer);
-        /** @var \Magento\Catalog\Model\Product $product */
-        $product = $this->_manObj->create(\Magento\Catalog\Model\Product::class);
-        $product->load(1);
-        $quote->addProduct($product);
+        $quote->setInventoryProcessed(false); //not effect inventory
+        /** Populate orders with data. */
+        $this->_populateQuoteItems($quote);
         $this->_populateQuoteAddrShipping($quote, $customer);
         $this->_populateQuoteAddrBilling($quote, $customer);
         $this->_populateQuoteShippingMethod($quote);
-        $quote->setPaymentMethod('checkmo'); //payment method
-        $quote->setInventoryProcessed(false); //not effect inventory
+        $this->_populateQuotePaymentMethod($quote);
+        /* save quote then reload it by ID to create IDs for items (see MOBI-434, $_items, $_data['items'], $_data['items_collection']) */
+        $quote->collectTotals();
         $quote->save();
         $id = $quote->getId();
         $quote = $this->_manObj->create(\Magento\Quote\Model\Quote::class);
         $quote->load($id);
-        $quote->getPayment()->setMethod('checkmo');
-        $quote->collectTotals();
-
         // Create Order From Quote
+        /** @var \Magento\Sales\Api\Data\OrderInterface $order */
         $order = $this->_manQuote->submit($quote);
-
+        $items = $order->getItems();
+        $item = reset($items);
+        $item->setBaseOriginalPrice(8);
+        $item->save();
+        $order->save();
+        /* register PV */
+        $this->_manEvent->dispatch('checkout_submit_all_after', ['order' => $order, 'quote' => $quote]);
+        /* prepare invoice */
+        $invoice = $this->_manInvoice->prepareInvoice($order);
+        $invoice->register();
+        $invoice->save();
+        $order->save();
+        /* update date paid in PV register */
+        $orderId = $order->getEntityId();
+        $bind = [
+            \Praxigento\Pv\Data\Entity\Sale::ATTR_DATE_PAID => self::DATE_PAID
+        ];
+        $this->_repoPvSale->updateById($orderId, $bind);
     }
 
+    /**
+     * @return \Magento\Customer\Api\Data\CustomerInterface[]
+     */
     public function getAllCustomers()
     {
         $crit = $this->_manObj->create(\Magento\Framework\Api\SearchCriteriaInterface::class);
