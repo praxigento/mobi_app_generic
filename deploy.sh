@@ -47,3 +47,9 @@ php $DIR/deploy/merge_json.php $COMPOSER_MAIN $COMPOSER_UNSET $COMPOSER_OPTS
 
 echo "Update M2 CE project with additional options..."
 composer update
+
+echo "Create scripts from templates..."
+composer status
+
+# Finalize job
+cd $CUR_DIR

@@ -3,37 +3,21 @@
     "bin/post_install.sh": {
       "src": "../deploy/bin/post_install.work.sh",
       "dst": "../bin/post_install.sh",
-      "events": [
-        "post-update-cmd",
-        "post-status-cmd"
-      ],
       "rewrite": true
     },
     "bin/setup.sql": {
       "src": "../deploy/bin/setup.work.sql",
       "dst": "../bin/setup.sql",
-      "events": [
-        "post-update-cmd",
-        "post-status-cmd"
-      ],
       "rewrite": true
     },
     "bin/cron_coverage.work.sh": {
       "src": "../deploy/bin/cron_coverage.work.sh",
       "dst": "../bin/cron_coverage.sh",
-      "events": [
-        "post-update-cmd",
-        "post-status-cmd"
-      ],
       "rewrite": true
     },
     "var/log/logging.yaml": {
       "src": "../deploy/logging.yaml",
       "dst": "./var/log/logging.yaml",
-      "events": [
-        "post-update-cmd",
-        "post-status-cmd"
-      ],
       "rewrite": true
     }
   }
