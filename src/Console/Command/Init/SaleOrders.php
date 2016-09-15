@@ -41,7 +41,10 @@ class SaleOrders
             $customers = $this->_subSaleOrder->getAllCustomers();
             /** @var \Magento\Customer\Api\Data\CustomerInterface $customerData */
             foreach ($customers as $customerData) {
-                $this->_subSaleOrder->addOrder($customerData, $this->DATA_ORDER_ITEMS);
+                $mail = $customerData->getEmail();
+                if ($mail != 'MOBI_REPRESENTATIVE') {
+                    $this->_subSaleOrder->addOrder($customerData, $this->DATA_ORDER_ITEMS);
+                }
             }
             $this->_manTrans->commit($def);
         } finally {
