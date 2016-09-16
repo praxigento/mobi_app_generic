@@ -6,6 +6,7 @@
 namespace Praxigento\App\Generic2\Console\Command\Init;
 
 use Praxigento\App\Generic2\Config as Cfg;
+use Praxigento\Core\Tool\IPeriod;
 
 /**
  * Initialize bonus parameters for Generic Application.
@@ -61,21 +62,14 @@ class Bonus
         try {
             $this->_initTypeCalc();
 
-            /* account orders PV */
-            /** @var \Praxigento\Pv\Service\Sale\Request\AccountPv $reqAcc */
-            $reqAcc = $this->_manObj->create(\Praxigento\Pv\Service\Sale\Request\AccountPv::class);
-            $reqAcc->setSaleOrderId(1);
-            $reqAcc->setDateApplied(\Praxigento\App\Generic2\Console\Command\Init\Sub\SaleOrder::DATE_PAID);
-            $respAcc = $this->_callPvSale->accountPv($reqAcc);
-
             /** @var \Praxigento\BonusBase\Service\Period\Request\GetForPvBasedCalc $req */
             $req = $this->_manObj->create(\Praxigento\BonusBase\Service\Period\Request\GetForPvBasedCalc::class);
             $req->setCalcTypeCode(Cfg::CODE_TYPE_CALC_BONUS);
-
+            $req->setPeriodType(IPeriod::TYPE_DAY);
             $resp = $this->_callBonusPeriod->getForPvBasedCalc($req);
 
 
-//            $this->_manTrans->commit($def);
+            $this->_manTrans->commit($def);
         } finally {
             // transaction will be rolled back if commit is not done (otherwise - do nothing)
             $this->_manTrans->end($def);
