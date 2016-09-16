@@ -14,10 +14,6 @@ use Praxigento\Core\Tool\IPeriod;
 class Bonus
     extends \Praxigento\App\Generic2\Console\Command\Init\Base
 {
-    /** @var \Praxigento\BonusBase\Service\IPeriod */
-    protected $_callBonusPeriod;
-    /** @var \Praxigento\Pv\Service\ISale */
-    protected $_callPvSale;
     /** @var  \Praxigento\Core\Transaction\Database\IManager */
     protected $_manTrans;
 
@@ -33,8 +29,64 @@ class Bonus
             'Initialize bonus parameters for Generic Application.'
         );
         $this->_manTrans = $manTrans;
-        $this->_callBonusPeriod = $callBonusPeriod;
-        $this->_callPvSale = $callPvSale;
+    }
+
+    protected function _calcBonus()
+    {
+        /** @var \Praxigento\BonusLoyalty\Service\Calc\Request\Bonus $req */
+        $req = $this->_manObj->create(\Praxigento\BonusLoyalty\Service\Calc\Request\Bonus::class);
+        /** @var \Praxigento\BonusLoyalty\Service\ICalc $call */
+        $call = $this->_manObj->get(\Praxigento\BonusLoyalty\Service\ICalc::class);
+        $resp = $call->bonus($req);
+        $calcId = $resp->getCalcId();
+        return $calcId;
+    }
+
+    protected function _calcPeriod()
+    {
+        /** @var \Praxigento\BonusBase\Service\IPeriod $call */
+        $call = $this->_manObj->get(\Praxigento\BonusBase\Service\IPeriod::class);
+        /** @var \Praxigento\BonusBase\Service\Period\Request\GetForPvBasedCalc $req */
+        $req = $this->_manObj->create(\Praxigento\BonusBase\Service\Period\Request\GetForPvBasedCalc::class);
+        $req->setCalcTypeCode(Cfg::CODE_TYPE_CALC_BONUS);
+        $req->setPeriodType(IPeriod::TYPE_DAY);
+        $resp = $call->getForPvBasedCalc($req);
+        $period = $resp->getPeriodData();
+        $result = $period[\Praxigento\BonusBase\Data\Entity\Period::ATTR_DSTAMP_END];
+        return $result;
+    }
+
+    protected function _calcQualification()
+    {
+        /** @var \Praxigento\BonusLoyalty\Service\ICalc $call */
+        $call = $this->_manObj->get(\Praxigento\BonusLoyalty\Service\ICalc::class);
+        /** @var \Praxigento\BonusLoyalty\Service\Calc\Request\Qualification $req */
+        $req = $this->_manObj->create(\Praxigento\BonusLoyalty\Service\Calc\Request\Qualification::class);
+        $req->setGvMaxLevels(Cfg::QUAL_LEVEL_GV);
+        $req->setPsaaLevel(Cfg::QUAL_LEVEL_PSAA);
+        $resp = $call->qualification($req);
+        $calcId = $resp->getCalcId();
+        return $calcId;
+    }
+
+    protected function _calcTreeCompression()
+    {
+        /** @var \Praxigento\BonusLoyalty\Service\ICalc $call */
+        $call = $this->_manObj->get(\Praxigento\BonusLoyalty\Service\ICalc::class);
+        $req = new \Praxigento\BonusLoyalty\Service\Calc\Request\Compress();
+        $resp = $call->compress($req);
+        $calcId = $resp->getCalcId();
+        return $calcId;
+    }
+
+    protected function _calcTreeSnapshots($periodTo)
+    {
+        /** @var \Praxigento\Downline\Service\ISnap $call */
+        $call = $this->_manObj->get(\Praxigento\Downline\Service\ISnap::class);
+        /** @var \Praxigento\Downline\Service\Snap\Request\Calc $req */
+        $req = $this->_manObj->create(\Praxigento\Downline\Service\Snap\Request\Calc::class);
+        $req->setDatestampTo($periodTo);
+        $call->calc($req);
     }
 
     protected function _initGenerationPercents()
@@ -166,41 +218,23 @@ class Bonus
         }
     }
 
-    /**
-     * Create type of the bonus calculation.
-     */
-    protected function _initTypeCalc()
-    {
-        try {
-            /** @var \Praxigento\BonusBase\Repo\Entity\Type\ICalc $repo */
-            $repo = $this->_manObj->get(\Praxigento\BonusBase\Repo\Entity\Type\ICalc::class);
-            /** @var \Praxigento\BonusBase\Data\Entity\Type\Calc $data */
-            $data = $this->_manObj->create(\Praxigento\BonusBase\Data\Entity\Type\Calc::class);
-            $data->setCode(Cfg::CODE_TYPE_CALC_BONUS);
-            $data->setNote('Bonus for Generic App');
-            $repo->create($data);
-        } catch (\Exception $e) {
-            // do nothing if data is already created
-        }
-    }
-
     protected function execute(
         \Symfony\Component\Console\Input\InputInterface $input,
         \Symfony\Component\Console\Output\OutputInterface $output
     ) {
         $def = $this->_manTrans->begin();
         try {
-            $this->_initTypeCalc();
+            /* init data */
             $this->_initRanks();
             $this->_initGenerationPercents();
             $this->_initLoyaltyCfg();
 
-            /** @var \Praxigento\BonusBase\Service\Period\Request\GetForPvBasedCalc $req */
-            $req = $this->_manObj->create(\Praxigento\BonusBase\Service\Period\Request\GetForPvBasedCalc::class);
-            $req->setCalcTypeCode(Cfg::CODE_TYPE_CALC_BONUS);
-            $req->setPeriodType(IPeriod::TYPE_DAY);
-            $resp = $this->_callBonusPeriod->getForPvBasedCalc($req);
-
+            /* calc bonus */
+            $periodTo = $this->_calcPeriod();
+            $this->_calcTreeSnapshots($periodTo);
+            $this->_calcTreeCompression();
+            $this->_calcQualification();
+            $this->_calcBonus();
 
             $this->_manTrans->commit($def);
         } finally {
@@ -208,5 +242,4 @@ class Bonus
             $this->_manTrans->end($def);
         }
     }
-
 }

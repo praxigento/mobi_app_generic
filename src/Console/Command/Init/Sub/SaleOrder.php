@@ -179,13 +179,13 @@ class SaleOrder
         $invoice = $this->_manInvoice->prepareInvoice($order);
         $invoice->register();
         $invoice->save();
-        $invoiceId = $invoice->getEntityId();
+//        $invoiceId = $invoice->getEntityId();
         /* update date paid in PV register */
-        $orderId = $order->getEntityId();
-        $bind = [
-            \Praxigento\Pv\Data\Entity\Sale::ATTR_DATE_PAID => self::DATE_PAID
-        ];
-        $this->_repoPvSale->updateById($orderId, $bind);
+//        $orderId = $order->getEntityId();
+//        $bind = [
+//            \Praxigento\Pv\Data\Entity\Sale::ATTR_DATE_PAID => self::DATE_PAID
+//        ];
+//        $this->_repoPvSale->updateById($orderId, $bind);
         /* transfer PV to customer account */
 //        $invoice->load($invoiceId);
 //        $order->load($orderId);
