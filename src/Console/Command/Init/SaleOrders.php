@@ -42,7 +42,7 @@ class SaleOrders
             /** @var \Magento\Customer\Api\Data\CustomerInterface $customerData */
             foreach ($customers as $customerData) {
                 $mail = $customerData->getEmail();
-                if ($mail != 'MOBI_REPRESENTATIVE') {
+                if ($mail != \Praxigento\Accounting\Config::CUSTOMER_REPRESENTATIVE_EMAIL) {
                     $this->_subSaleOrder->addOrder($customerData, $this->DATA_ORDER_ITEMS);
                 }
             }
