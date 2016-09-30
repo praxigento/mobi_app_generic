@@ -52,7 +52,7 @@ class Bonus
         $req->setPeriodType(IPeriod::TYPE_DAY);
         $resp = $call->getForPvBasedCalc($req);
         $period = $resp->getPeriodData();
-        $result = $period[\Praxigento\BonusBase\Data\Entity\Period::ATTR_DSTAMP_END];
+        $result = $period->getDstampEnd();
         return $result;
     }
 
