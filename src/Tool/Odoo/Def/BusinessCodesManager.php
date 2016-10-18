@@ -23,6 +23,7 @@ class BusinessCodesManager
      */
     const B_PAY_BRAINTREE = 'ccard_braintree';
     const B_PAY_CHECK_MONEY = 'check_money';
+    const B_PAY_INTERNAL_MONEY = 'internal_money';
     /**#@- */
 
     /**#@+
@@ -50,6 +51,7 @@ class BusinessCodesManager
      */
     const M_PAY_BRAINTREE = 'braintree';
     const M_PAY_CHECK_MONEY = 'checkmo';
+    const M_PAY_INTERNAL_MONEY = 'praxigento_wallet';
     /**#@- */
 
     /**#@+
@@ -71,10 +73,8 @@ class BusinessCodesManager
         $groupId = $customer->getGroupId();
         if ($groupId == self::M_CUST_GROUP_DISTRIBUTOR) {
             $result = self::B_CUST_GROUP_DISTRIBUTOR;
-        } else {
-            if ($groupId == self::M_CUST_GROUP_WHOLESALE) {
-                $result = self::B_CUST_GROUP_WHOLESALE;
-            }
+        } elseif ($groupId == self::M_CUST_GROUP_WHOLESALE) {
+            $result = self::B_CUST_GROUP_WHOLESALE;
         }
         return $result;
     }
@@ -86,8 +86,11 @@ class BusinessCodesManager
         $mage = $payment->getMethod();
         if ($mage == self::M_PAY_BRAINTREE) {
             $result = self::B_PAY_BRAINTREE;
-        }
-        if ($mage == self::M_PAY_CHECK_MONEY) {
+        } elseif ($mage == self::M_PAY_CHECK_MONEY) {
+            $result = self::B_PAY_CHECK_MONEY;
+        } elseif ($mage == self::M_PAY_INTERNAL_MONEY) {
+            /* TODO set valid conversion for internal money */
+            $result = self::B_PAY_INTERNAL_MONEY;
             $result = self::B_PAY_CHECK_MONEY;
         }
         return $result;
