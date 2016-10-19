@@ -63,6 +63,8 @@ REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'authorize_capture', p
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'hrbwv69nr663dxx6', path ='payment/braintree/merchant_id';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '0:2:MNCxt7WoXHyj5pNckGBT7QsW4Rvau5j7:SISqkD6irXdKO1hqJk+YSNZ0QndYJ8HEpGq+XoZ5LtY=', path ='payment/braintree/public_key';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '0:2:Mu2JghxOFGKVkM6RdQOT8BOPWPaSY7rB:UZ+tVA7HvZgGhgdStzAjsr7qaQ6mWsStG8xedKn8mcY=', path ='payment/braintree/private_key';
+-- Sales / Payment Methods (Internal Money)
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '1', path ='payment/praxigento_wallet/active';
 -- Advanced / Admin
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '36000', path ='admin/security/session_lifetime';
 -- Advanced / Developer
