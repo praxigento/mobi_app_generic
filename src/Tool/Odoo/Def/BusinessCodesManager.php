@@ -89,9 +89,7 @@ class BusinessCodesManager
         } elseif ($mage == self::M_PAY_CHECK_MONEY) {
             $result = self::B_PAY_CHECK_MONEY;
         } elseif ($mage == self::M_PAY_INTERNAL_MONEY) {
-            /* TODO set valid conversion for internal money */
             $result = self::B_PAY_INTERNAL_MONEY;
-            $result = self::B_PAY_CHECK_MONEY;
         }
         return $result;
     }
