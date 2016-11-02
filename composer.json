@@ -12,6 +12,7 @@
     }
   ],
   "require": {
+    "flancer32/mage2_ext_log": "dev-master",
     "praxigento/mobi_mod_mage2_bonus_global_sales": "dev-master",
     "praxigento/mobi_mod_mage2_bonus_hybrid": "dev-master",
     "praxigento/mobi_mod_mage2_odoo": "dev-master"
