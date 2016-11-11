@@ -9,37 +9,51 @@ handlers:
         level: DEBUG
         formatter: dashed
         stream: ${LOCAL_ROOT}/var/log/debug.log
-    system:
+    events:
         class: Monolog\Handler\StreamHandler
-        level: INFO
+        level: EMERGENCY
         formatter: dashed
-        stream: ${LOCAL_ROOT}/var/log/system.log
+        stream: ${LOCAL_ROOT}/log/events.log
     exception:
         class: Monolog\Handler\StreamHandler
         level: EMERGENCY
         formatter: dashed
         stream: ${LOCAL_ROOT}/log/exception.log
-    setup_hndl:
-        class: Monolog\Handler\StreamHandler
-        level: DEBUG
-        formatter: dashed
-        stream: ${LOCAL_ROOT}/var/log/setup.log
     odoo_api:
         class: Monolog\Handler\StreamHandler
         level: DEBUG
         formatter: dashed
         stream: ${LOCAL_ROOT}/var/log/odoo.log
+    setup_hndl:
+        class: Monolog\Handler\StreamHandler
+        level: DEBUG
+        formatter: dashed
+        stream: ${LOCAL_ROOT}/var/log/setup.log
     sql_hndl:
         class: Monolog\Handler\StreamHandler
         level: DEBUG
         formatter: dashed
         stream: ${LOCAL_ROOT}/var/log/sql.log
+    system:
+        class: Monolog\Handler\StreamHandler
+        level: INFO
+        formatter: dashed
+        stream: ${LOCAL_ROOT}/var/log/system.log
+    webapi:
+        class: Monolog\Handler\StreamHandler
+        level: DEBUG
+        formatter: dashed
+        stream: ${LOCAL_ROOT}/var/log/webapi.log
 loggers:
+    events:
+        handlers: [events]
     main:
         handlers: [debug, system, exception]
-    setup:
-        handlers: [setup_hndl]
     odoo:
         handlers: [odoo_api]
+    setup:
+        handlers: [setup_hndl]
     sql:
         handlers: [sql_hndl]
+    webapi:
+        handlers: [webapi]
