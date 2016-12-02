@@ -65,6 +65,9 @@ REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '0:2:MNCxt7WoXHyj5pNck
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '0:2:Mu2JghxOFGKVkM6RdQOT8BOPWPaSY7rB:UZ+tVA7HvZgGhgdStzAjsr7qaQ6mWsStG8xedKn8mcY=', path ='payment/braintree/private_key';
 -- Sales / Payment Methods (Internal Money)
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '1', path ='payment/praxigento_wallet/active';
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '1', path ='payment/praxigento_wallet/negative_balance_enabled';
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '1', path ='payment/praxigento_wallet/partial_enabled';
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '0.80', path ='payment/praxigento_wallet/partial_percent';
 -- Advanced / Admin
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '36000', path ='admin/security/session_lifetime';
 -- Advanced / Developer
