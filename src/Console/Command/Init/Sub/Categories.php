@@ -11,25 +11,21 @@ use Praxigento\App\Generic2\Config as Cfg;
 
 class Categories
 {
-    const DEF_STORE_VIEW_ID_ADMIN = 0;
-    /* EAV attr ID for catalog_category.is_active (see 'eav_attribute' table) */
     const DEF_CATEGORY_EAV_ID_IS_ACTIVE = 46;
-
-    protected $_mageManCategory;
+    /* EAV attr ID for catalog_category.is_active (see 'eav_attribute' table) */
+    const DEF_STORE_VIEW_ID_ADMIN = 0;
     /** @var   \Magento\Catalog\Api\CategoryRepositoryInterface */
-    protected $_mageRepoCategory;
+    protected $repoCategory;
     /** @var  \Praxigento\Core\Repo\IGeneric */
-    protected $_repoGeneric;
+    protected $repoGeneric;
 
     public function __construct(
-        \Magento\Catalog\Api\CategoryManagementInterface $mageManCat,
-        \Magento\Catalog\Api\CategoryRepositoryInterface $mageRepoCat,
+        \Magento\Catalog\Api\CategoryRepositoryInterface $repoCat,
         \Praxigento\Core\Repo\IGeneric $repoGeneric
 
     ) {
-        $this->_mageManCategory = $mageManCat;
-        $this->_mageRepoCategory = $mageRepoCat;
-        $this->_repoGeneric = $repoGeneric;
+        $this->repoCategory = $repoCat;
+        $this->repoGeneric = $repoGeneric;
     }
 
     public function enableForAllStoreViews()
@@ -37,11 +33,11 @@ class Categories
         /* delete all store views data except admin */
         $entity = Cfg::ENTITY_MAGE_CATALOG_CATEGORY_EAV_INT;
         $where = Cfg::E_CATCAT_EAV_INT_STORE_ID . '>' . self::DEF_STORE_VIEW_ID_ADMIN;
-        $this->_repoGeneric->deleteEntity($entity, $where);
+        $this->repoGeneric->deleteEntity($entity, $where);
         /* enable all categories */
         $bind = [Cfg::E_CATCAT_EAV_INT_VALUE => 1];
         $where = Cfg::E_CATCAT_EAV_INT_ATTR_ID . '=' . self::DEF_CATEGORY_EAV_ID_IS_ACTIVE;
-        $this->_repoGeneric->updateEntity($entity, $bind, $where);
+        $this->repoGeneric->updateEntity($entity, $bind, $where);
     }
 
 }

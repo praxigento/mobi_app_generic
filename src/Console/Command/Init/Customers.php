@@ -26,35 +26,35 @@ class Customers
         12 => 10,
         13 => 10
     ];
-    /** Retail customers */
-    protected $GROUP_RETAIL = [9, 12];
     /** @var string 'UserPassword12 */
     protected $DEFAULT_PASSWORD_HASH = '387cf1ea04874290e8e3c92836e1c4b630c5abea110d8766bddb4b3a6224ea04:QVIfkMF7kfwRkkC3HdqJ84K1XANG38LF:1';
+    /** Retail customers */
+    protected $GROUP_RETAIL = [9, 12];
     /** @var  \Praxigento\Core\Transaction\Database\IManager */
-    protected $_manTrans;
+    protected $manTrans;
     /**
      * Map index by Magento ID (index started from 1).
      *
      * @var array [ $entityId  => $index, ... ]
      */
-    protected $_mapCustomerIndexByMageId = [];
+    protected $mapCustomerIndexByMageId = [];
     /**
      * Map Magento ID by index (index started from 1).
      *
      * @var array [ $index  => $entityId, ... ]
      */
-    protected $_mapCustomerMageIdByIndex = [];
-    /** @var \Magento\Customer\Model\ResourceModel\CustomerRepository */
-    protected $_repoMageCustomer;
-    /** @var \Praxigento\Downline\Tool\IReferral */
-    protected $_toolReferral;
+    protected $mapCustomerMageIdByIndex = [];
+    /** @var \Magento\Customer\Api\CustomerRepositoryInterface */
+    protected $repoCustomer;
     /** @var \Praxigento\App\Generic2\Console\Command\Init\Sub\CustomerGroups */
-    protected $_subCustomerGroups;
+    protected $subCustomerGroups;
+    /** @var \Praxigento\Downline\Tool\IReferral */
+    protected $toolReferral;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\Transaction\Database\IManager $manTrans,
-        \Magento\Customer\Model\ResourceModel\CustomerRepository $repoMageCustomer,
+        \Magento\Customer\Api\CustomerRepositoryInterface\Proxy $repoCustomer,
         \Praxigento\Downline\Tool\IReferral $toolReferral,
         \Praxigento\App\Generic2\Console\Command\Init\Sub\CustomerGroups $subCustomerGroups
     ) {
@@ -63,17 +63,17 @@ class Customers
             'prxgt:app:init-customers',
             'Create sample downline tree in application.'
         );
-        $this->_manTrans = $manTrans;
-        $this->_repoMageCustomer = $repoMageCustomer;
-        $this->_toolReferral = $toolReferral;
-        $this->_subCustomerGroups = $subCustomerGroups;
+        $this->manTrans = $manTrans;
+        $this->repoCustomer = $repoCustomer;
+        $this->toolReferral = $toolReferral;
+        $this->subCustomerGroups = $subCustomerGroups;
     }
 
     protected function execute(
         \Symfony\Component\Console\Input\InputInterface $input,
         \Symfony\Component\Console\Output\OutputInterface $output
     ) {
-        $def = $this->_manTrans->begin();
+        $def = $this->manTrans->begin();
         try {
             foreach ($this->DEFAULT_DWNL_TREE as $custId => $parentId) {
                 $first = 'User' . $custId;
@@ -81,8 +81,8 @@ class Customers
                 $email = "customer_$custId@test.com";
                 if ($custId != $parentId) {
                     /* save parent ID to registry */
-                    $referralCode = $this->_mapCustomerMageIdByIndex[$parentId];
-                    $this->_toolReferral->replaceCodeInRegistry($referralCode);
+                    $referralCode = $this->mapCustomerMageIdByIndex[$parentId];
+                    $this->toolReferral->replaceCodeInRegistry($referralCode);
                 }
                 /** @var \Magento\Customer\Api\Data\CustomerInterface $customer */
                 $customer = $this->_manObj->create(\Magento\Customer\Api\Data\CustomerInterface::class);
@@ -94,16 +94,16 @@ class Customers
                     $customer->setGroupId(BusinessCodesManager::M_CUST_GROUP_RETAIL);
                 }
                 /** @var \Magento\Customer\Api\Data\CustomerInterface $saved */
-                $saved = $this->_repoMageCustomer->save($customer, $this->DEFAULT_PASSWORD_HASH);
-                $this->_mapCustomerMageIdByIndex[$custId] = $saved->getId();
-                $this->_mapCustomerIndexByMageId[$saved->getId()] = $custId;
+                $saved = $this->repoCustomer->save($customer, $this->DEFAULT_PASSWORD_HASH);
+                $this->mapCustomerMageIdByIndex[$custId] = $saved->getId();
+                $this->mapCustomerIndexByMageId[$saved->getId()] = $custId;
             }
             /* MOBI-426 : rename customer groups according to Generic App scheme. */
-            $this->_subCustomerGroups->renameGroups();
-            $this->_manTrans->commit($def);
+            $this->subCustomerGroups->renameGroups();
+            $this->manTrans->commit($def);
         } finally {
             // transaction will be rolled back if commit is not done (otherwise - do nothing)
-            $this->_manTrans->end($def);
+            $this->manTrans->end($def);
         }
     }
 
