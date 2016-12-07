@@ -48,7 +48,7 @@ abstract class Base
             $appState->getAreaCode();
         } catch (\Magento\Framework\Exception\LocalizedException $e) {
             /* exception will be thrown if no area code is set */
-            $areaCode = 'adminhtml';
+            $areaCode = \Magento\Framework\App\Area::AREA_FRONTEND;
             $appState->setAreaCode($areaCode);
             /** @var \Magento\Framework\ObjectManager\ConfigLoaderInterface $configLoader */
             $configLoader = $this->_manObj->get(\Magento\Framework\ObjectManager\ConfigLoaderInterface::class);
