@@ -40,7 +40,7 @@ class SaleOrder
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Magento\Framework\Event\ManagerInterface $manEvent,
         \Magento\Store\Model\StoreManagerInterface $manStore,
-        \Magento\Quote\Model\QuoteManagement\Proxy $manQuote,
+        \Magento\Quote\Api\CartManagementInterface $manQuote,
         \Magento\Sales\Api\InvoiceManagementInterface $manInvoice,
         \Magento\Catalog\Api\ProductRepositoryInterface $repoCatProd,
         \Magento\Customer\Api\CustomerRepositoryInterface $repoCust,

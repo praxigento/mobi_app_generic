@@ -54,7 +54,7 @@ class Customers
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\Transaction\Database\IManager $manTrans,
-        \Magento\Customer\Api\CustomerRepositoryInterface\Proxy $repoCustomer,
+        \Magento\Customer\Api\CustomerRepositoryInterface $repoCustomer,
         \Praxigento\Downline\Tool\IReferral $toolReferral,
         \Praxigento\App\Generic2\Console\Command\Init\Sub\CustomerGroups $subCustomerGroups
     ) {
