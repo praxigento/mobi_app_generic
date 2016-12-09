@@ -147,7 +147,8 @@ class SaleOrder
         $itemsData
     ) {
         /* create order for Russian store/stock */
-        $store = $this->_manStore->getStore(self::STORE_ID_RUS);
+        $this->_manStore->setCurrentStore(self::STORE_ID_RUS);
+        $store = $this->_manStore->getStore();
         /** @var \Magento\Quote\Model\Quote $quote */
         $quote = $this->_manObj->create(\Magento\Quote\Model\Quote::class);
         $quote->setStore($store);
@@ -163,8 +164,9 @@ class SaleOrder
         $quote->collectTotals();
         $quote->save();
         $id = $quote->getId();
-        $quote = $this->_manObj->create(\Magento\Quote\Model\Quote::class);
-        $quote->load($id);
+//        $quote = $this->_manObj->create(\Magento\Quote\Model\Quote::class);
+//        $quote->load($id);
+        $quoteItems = $quote->getItems();
         // Create Order From Quote
         /** @var \Magento\Sales\Api\Data\OrderInterface $order */
         $order = $this->_manQuote->submit($quote);
