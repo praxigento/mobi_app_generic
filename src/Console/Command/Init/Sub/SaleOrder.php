@@ -166,15 +166,16 @@ class SaleOrder
         $id = $quote->getId();
 //        $quote = $this->_manObj->create(\Magento\Quote\Model\Quote::class);
 //        $quote->load($id);
-        $quoteItems = $quote->getItems();
+//        $quoteItems = $quote->getItems();
         // Create Order From Quote
         /** @var \Magento\Sales\Api\Data\OrderInterface $order */
         $order = $this->_manQuote->submit($quote);
-        $items = $order->getItems();
-        $item = reset($items);
-        $item->setBaseOriginalPrice(8);
-        $item->save();
+//        $items = $order->getItems();
+//        $item = reset($items);
+//        $item->setBaseOriginalPrice(8);
+//        $item->save();
         $order->save();
+
         /* register PV */
         $this->_manEvent->dispatch('checkout_submit_all_after', ['order' => $order, 'quote' => $quote]);
         /* prepare invoice */
