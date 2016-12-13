@@ -4,22 +4,27 @@ formatters:
         class: Monolog\Formatter\LineFormatter
         format: "%datetime%-%channel%.%level_name% - %message%\n"
 handlers:
-    debug:
+    application_hndl:
+        class: Monolog\Handler\StreamHandler
+        level: DEBUG
+        formatter: dashed
+        stream: ${LOCAL_ROOT}/var/log/application.log
+    debug_hndl:
         class: Monolog\Handler\StreamHandler
         level: DEBUG
         formatter: dashed
         stream: ${LOCAL_ROOT}/var/log/debug.log
-    events:
+    events_hndl:
         class: Monolog\Handler\StreamHandler
         level: DEBUG
         formatter: dashed
         stream: ${LOCAL_ROOT}/var/log/events.log
-    exception:
+    exception_hndl:
         class: Monolog\Handler\StreamHandler
         level: DEBUG
         formatter: dashed
         stream: ${LOCAL_ROOT}/var/log/exception.log
-    odoo_api:
+    odoo_api_hndl:
         class: Monolog\Handler\StreamHandler
         level: DEBUG
         formatter: dashed
@@ -34,26 +39,28 @@ handlers:
         level: DEBUG
         formatter: dashed
         stream: ${LOCAL_ROOT}/var/log/sql.log
-    system:
+    system_hndl:
         class: Monolog\Handler\StreamHandler
         level: INFO
         formatter: dashed
         stream: ${LOCAL_ROOT}/var/log/system.log
-    webapi:
+    webapi_hndl:
         class: Monolog\Handler\StreamHandler
         level: DEBUG
         formatter: dashed
         stream: ${LOCAL_ROOT}/var/log/webapi.log
 loggers:
+    app:
+        handlers: [application_hndl]
     events:
-        handlers: [events]
+        handlers: [events_hndl]
     main:
-        handlers: [debug, system, exception]
+        handlers: [debug_hndl, system_hndl, exception_hndl]
     odoo:
-        handlers: [odoo_api]
+        handlers: [odoo_api_hndl]
     setup:
         handlers: [setup_hndl]
     sql:
         handlers: [sql_hndl]
     webapi:
-        handlers: [webapi]
+        handlers: [webapi_hndl]
