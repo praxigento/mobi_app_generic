@@ -11,14 +11,14 @@ handlers:
         stream: ${LOCAL_ROOT}/var/log/debug.log
     events:
         class: Monolog\Handler\StreamHandler
-        level: EMERGENCY
+        level: DEBUG
         formatter: dashed
-        stream: ${LOCAL_ROOT}/log/events.log
+        stream: ${LOCAL_ROOT}/var/log/events.log
     exception:
         class: Monolog\Handler\StreamHandler
-        level: EMERGENCY
+        level: DEBUG
         formatter: dashed
-        stream: ${LOCAL_ROOT}/log/exception.log
+        stream: ${LOCAL_ROOT}/var/log/exception.log
     odoo_api:
         class: Monolog\Handler\StreamHandler
         level: DEBUG
