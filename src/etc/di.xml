@@ -18,7 +18,8 @@
     <!-- ************************* -->
     <!-- PSR LOGGERS CONFIGURATION -->
     <!-- ************************* -->
-    <virtualType name="loggerOdoo" type="Praxigento\Logging\Logger">
+    <virtualType name="loggerOdooInternal" type="\Praxigento\Logging\Logger">
+        <!-- Configure internal logger from Praxigento_Logger module -->
         <arguments>
             <!-- Config file path is related to Magento 2 base directory. Absolute path can be used too. -->
             <argument name="configFile" xsi:type="string">var/log/logging.yaml</argument>
@@ -26,7 +27,14 @@
             <argument name="loggerName" xsi:type="string">odoo</argument>
         </arguments>
     </virtualType>
-    <virtualType name="loggerSql" type="Praxigento\Logging\Logger">
+    <virtualType name="loggerOdoo" type="\Praxigento\Core\Fw\Logger\App">
+        <!-- Configure this application logger from Praxigneto_Core module -->
+        <arguments>
+            <!-- Name of the logger in configuration file. Default: "odoo".  -->
+            <argument name="logger" xsi:type="object">loggerOdooInternal</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="loggerSqlInternal" type="Praxigento\Logging\Logger">
         <arguments>
             <!-- Config file path is related to Magento 2 base directory. Absolute path can be used too. -->
             <argument name="configFile" xsi:type="string">var/log/logging.yaml</argument>
@@ -34,12 +42,26 @@
             <argument name="loggerName" xsi:type="string">sql</argument>
         </arguments>
     </virtualType>
-    <virtualType name="loggerSetup" type="Praxigento\Logging\Logger">
+    <virtualType name="loggerSql" type="\Praxigento\Core\Fw\Logger\App">
+        <!-- Configure this application logger from Praxigneto_Core module -->
+        <arguments>
+            <!-- Name of the logger in configuration file. Default: "odoo".  -->
+            <argument name="logger" xsi:type="object">loggerSqlInternal</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="loggerSetupInternal" type="Praxigento\Logging\Logger">
         <arguments>
             <!-- Config file path is related to Magento 2 base directory. Absolute path can be used too. -->
             <argument name="configFile" xsi:type="string">var/log/logging.yaml</argument>
             <!-- Name of the logger in configuration file. Default: "odoo".  -->
             <argument name="loggerName" xsi:type="string">setup</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="loggerSetup" type="\Praxigento\Core\Fw\Logger\App">
+        <!-- Configure this application logger from Praxigneto_Core module -->
+        <arguments>
+            <!-- Name of the logger in configuration file. Default: "odoo".  -->
+            <argument name="logger" xsi:type="object">loggerSetupInternal</argument>
         </arguments>
     </virtualType>
 
@@ -71,13 +93,6 @@
     <type name="Praxigento\Odoo\Service\Replicate\Sub\Replicator\Product">
         <arguments>
             <argument name="logger" xsi:type="object">loggerOdoo</argument>
-        </arguments>
-    </type>
-
-    <!-- Praxigento_Warehouse -->
-    <type name="Praxigento\Odoo\Repo\Agg\Def\SaleOrderItem\SelectFactory">
-        <arguments>
-            <argument name="logger" xsi:type="object">loggerSql</argument>
         </arguments>
     </type>
 

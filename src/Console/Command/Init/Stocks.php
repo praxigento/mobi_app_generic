@@ -85,7 +85,7 @@ class Stocks
     protected $_subRules;
 
     public function __construct(
-        \Psr\Log\LoggerInterface $logger,
+        \Praxigento\Core\Fw\Logger\App $logger,
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\Transaction\Database\IManager $manTrans,
         \Magento\Store\Model\StoreManager $manStore,
