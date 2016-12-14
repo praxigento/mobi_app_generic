@@ -1,0 +1,49 @@
+{
+  "data": {
+    "option": {
+      "currency": "USD"
+    },
+    "warehouses": [
+      {
+        "id_odoo": 10,
+        "code": "REST_TEST",
+        "currency": "EUR"
+      }
+    ],
+    "lots": [
+      {
+        "id_odoo": 1001,
+        "number": "LOT-1001",
+        "expiration_date": "2015-05-28 14:04:22"
+      },
+      {
+        "id_odoo": 2002,
+        "number": "LOT-2002",
+        "expirationDate": "2018-06-29 16:24:32"
+      }
+    ],
+    "products": [
+      {
+        "id_odoo": 1234,
+        "sku": "1001-REST",
+        "name": "REST Test Product",
+        "is_active": true,
+        "price_wholesale": 23.223,
+        "pv_wholesale": 2135,
+        "weight": 0.256,
+        "categories": [12, 21, 321],
+        "warehouses": [
+          {
+            "id_odoo": 10,
+            "pv_warehouse": 213,
+            "price_warehouse": 23.45,
+            "lots": [
+              {"id_odoo": 1001, "quantity": 321},
+              {"id_odoo": 2002, "quantity": 56}
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
