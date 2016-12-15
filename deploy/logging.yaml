@@ -21,7 +21,7 @@ handlers:
         stream: ${LOCAL_ROOT}/var/log/events.log
     exception_hndl:
         class: Monolog\Handler\StreamHandler
-        level: DEBUG
+        level: ERROR
         formatter: dashed
         stream: ${LOCAL_ROOT}/var/log/exception.log
     odoo_api_hndl:
