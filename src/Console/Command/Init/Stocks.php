@@ -54,35 +54,35 @@ class Stocks
     /**#@-  */
 
     /** @var  \Magento\Store\Model\Group */
-    protected $_groupBaltic;
+    protected $groupBaltic;
     /** @var  \Magento\Store\Model\Group */
-    protected $_groupRussian;
+    protected $groupRussian;
     /** @var \Psr\Log\LoggerInterface */
-    protected $_logger;
+    protected $logger;
     /** @var  \Magento\Store\Api\GroupRepositoryInterface */
-    protected $_mageRepoGroup;
+    protected $mageRepoGroup;
     /** @var  \Magento\CatalogInventory\Api\StockRepositoryInterface */
-    protected $_mageRepoStock;
+    protected $mageRepoStock;
     /** @var  \Magento\Store\Api\StoreRepositoryInterface */
-    protected $_mageRepoStore;
+    protected $mageRepoStore;
     /** @var  \Magento\Framework\Event\ManagerInterface */
-    protected $_manEvent;
+    protected $manEvent;
     /** @var  \Magento\Store\Model\StoreManager */
-    protected $_manStore;
+    protected $manStore;
     /** @var  \Praxigento\Core\Transaction\Database\IManager */
-    protected $_manTrans;
+    protected $manTrans;
     /** @var  \Praxigento\Core\Repo\IGeneric */
-    protected $_repoGeneric;
+    protected $repoGeneric;
     /** @var  \Praxigento\Odoo\Repo\Agg\IWarehouse */
-    protected $_repoWrhs;
+    protected $repoWrhs;
     /** @var \Magento\Store\Model\Store */
-    protected $_storeBalticEn;
+    protected $storeBalticEn;
     /** @var \Magento\Store\Model\Store */
-    protected $_storeBalticRu;
+    protected $storeBalticRu;
     /** @var \Magento\Store\Model\Store */
-    protected $_storeRussianRu;
+    protected $storeRussianRu;
     /** @var Sub\SalesRules */
-    protected $_subRules;
+    protected $subRules;
 
     public function __construct(
         \Praxigento\Core\Fw\Logger\App $logger,
@@ -102,36 +102,49 @@ class Stocks
             'prxgt:app:init-stocks',
             'Create sample stores in application and map warehouses/stocks to stores.'
         );
-        $this->_logger = $logger;
+        $this->logger = $logger;
         $this->_manObj = $manObj;
-        $this->_manTrans = $manTrans;
-        $this->_manStore = $manStore;
-        $this->_manEvent = $manEvent;
-        $this->_mageRepoGroup = $mageRepoGroup;
-        $this->_mageRepoStore = $mageRepoStore;
-        $this->_mageRepoStock = $mageRepoStock;
-        $this->_repoGeneric = $repoGeneric;
-        $this->_repoWrhs = $repoWrhs;
-        $this->_subRules = $subRules;
+        $this->manTrans = $manTrans;
+        $this->manStore = $manStore;
+        $this->manEvent = $manEvent;
+        $this->mageRepoGroup = $mageRepoGroup;
+        $this->mageRepoStore = $mageRepoStore;
+        $this->mageRepoStock = $mageRepoStock;
+        $this->repoGeneric = $repoGeneric;
+        $this->repoWrhs = $repoWrhs;
+        $this->subRules = $subRules;
     }
 
-    private function _getTaxCalcs($rateId, $ruleId)
+    protected function execute(
+        \Symfony\Component\Console\Input\InputInterface $input,
+        \Symfony\Component\Console\Output\OutputInterface $output
+    ) {
+        $this->processGroups();
+        $this->processStores();
+        $this->processStocks();
+        $this->processTaxes();
+        /* init sales rules */
+        $this->subRules->init();
+        $output->writeln("Generic store views configuration is completed.");
+    }
+
+    private function getTaxCalcs($rateId, $ruleId)
     {
         $entity = Cfg::ENTITY_MAGE_TAX_CALC;
         $where = Cfg::E_TAX_CALC_A_RATE_ID . '=' . (int)$rateId;
         $where .= ' AND ' . Cfg::E_TAX_CALC_A_RULE_ID . '=' . (int)$ruleId;
-        $rows = $this->_repoGeneric->getEntities($entity, null, $where);
+        $rows = $this->repoGeneric->getEntities($entity, null, $where);
         $result = is_array($rows) && count($rows);
         return $result;
     }
 
-    private function _getTaxRateByCode($code)
+    private function getTaxRateByCode($code)
     {
         $result = null;
         $entity = Cfg::ENTITY_MAGE_TAX_CALC_RATE;
         $cols = [Cfg::E_TAX_CALC_RATE_A_ID];
-        $where = EntityTaxRate::KEY_CODE . '=' . $this->_repoGeneric->getConnection()->quote($code);
-        $rows = $this->_repoGeneric->getEntities($entity, $cols, $where);
+        $where = EntityTaxRate::KEY_CODE . '=' . $this->repoGeneric->getConnection()->quote($code);
+        $rows = $this->repoGeneric->getEntities($entity, $cols, $where);
         if (is_array($rows)) {
             $one = reset($rows);
             $result = $one[Cfg::E_TAX_CALC_RATE_A_ID];
@@ -139,13 +152,13 @@ class Stocks
         return $result;
     }
 
-    private function _getTaxRuleByCode($code)
+    private function getTaxRuleByCode($code)
     {
         $result = null;
         $entity = Cfg::ENTITY_MAGE_TAX_CALC_RULE;
         $cols = [Cfg::E_TAX_CALC_RULE_A_ID];
-        $where = EntityTaxRule::KEY_CODE . '=' . $this->_repoGeneric->getConnection()->quote($code);
-        $rows = $this->_repoGeneric->getEntities($entity, $cols, $where);
+        $where = EntityTaxRule::KEY_CODE . '=' . $this->repoGeneric->getConnection()->quote($code);
+        $rows = $this->repoGeneric->getEntities($entity, $cols, $where);
         if (is_array($rows)) {
             $one = reset($rows);
             $result = $one[Cfg::E_TAX_CALC_RULE_A_ID];
@@ -156,61 +169,63 @@ class Stocks
     /**
      * We cannot create tables in the DB transaction.
      */
-    private function _initStores()
+    private function initStores()
     {
         /* MOBI-312 : init store view (create sequences tables ) */
-        $this->_manEvent->dispatch('store_add', ['store' => $this->_storeBalticEn]);
-        $this->_manEvent->dispatch('store_add', ['store' => $this->_storeBalticRu]);
-        $this->_manEvent->dispatch('store_add', ['store' => $this->_storeRussianRu]);
-        $this->_manStore->reinitStores();
+        $this->manEvent->dispatch('store_add', ['store' => $this->storeBalticEn]);
+        $this->manEvent->dispatch('store_add', ['store' => $this->storeBalticRu]);
+        $this->manEvent->dispatch('store_add', ['store' => $this->storeRussianRu]);
+        $this->manStore->reinitStores();
     }
 
     /**
      * Update default group (store) as 'Baltic' and create new group for 'Russian'.
      */
-    private function _processGroups()
+    private function processGroups()
     {
         /* load and update Baltic group (store)*/
-        $this->_groupBaltic = $this->_manObj->create(\Magento\Store\Model\Group::class);
-        $this->_groupBaltic->load(self::DEF_GROUP_ID_MAIN);
-        $rootCatId = $this->_groupBaltic->getRootCategoryId();
-        $this->_groupBaltic->setName('Baltic');
-        $this->_groupBaltic->save();
+        $this->groupBaltic = $this->_manObj->create(\Magento\Store\Model\Group::class);
+        $this->groupBaltic->load(self::DEF_GROUP_ID_MAIN);
+        $rootCatId = $this->groupBaltic->getRootCategoryId();
+        $this->groupBaltic->setName('Baltic');
+        $this->groupBaltic->save();
+        $this->manEvent->dispatch('store_group_save', ['group' => $this->groupBaltic]);
         /* create Russian group (store) */
-        $this->_groupRussian = $this->_manObj->create(\Magento\Store\Model\Group::class);
-        $this->_groupRussian->load(self::DEF_GROUP_ID_RUSSIAN);
-        $this->_groupRussian->setName('Russian');
-        $this->_groupRussian->setWebsiteId(self::DEF_WEBSITE_ID_MAIN);
-        $this->_groupRussian->setRootCategoryId($rootCatId);
-        $this->_groupRussian->save();
+        $this->groupRussian = $this->_manObj->create(\Magento\Store\Model\Group::class);
+        $this->groupRussian->load(self::DEF_GROUP_ID_RUSSIAN);
+        $this->groupRussian->setName('Russian');
+        $this->groupRussian->setWebsiteId(self::DEF_WEBSITE_ID_MAIN);
+        $this->groupRussian->setRootCategoryId($rootCatId);
+        $this->groupRussian->save();
+        $this->manEvent->dispatch('store_group_save', ['group' => $this->groupRussian]);
     }
 
     /**
      * Update default stock (switch to website #1 from website #0), add new stock and 2 warehouses; bind warehouses
      * with stocks.
      */
-    private function _processStocks()
+    private function processStocks()
     {
         /* update default stock as Baltic */
         /** @var \Magento\CatalogInventory\Model\Stock $stockBaltic */
-        $stockBaltic = $this->_mageRepoStock->get(self::DEF_STOCK_ID_DEFAULT);
+        $stockBaltic = $this->mageRepoStock->get(self::DEF_STOCK_ID_DEFAULT);
         $stockBaltic->setStockName('Baltic');
         $stockBaltic->setWebsiteId(self::DEF_WEBSITE_ID_ADMIN);
-        $this->_mageRepoStock->save($stockBaltic);
+        $this->mageRepoStock->save($stockBaltic);
         /* create new stock as Russian */
         try {
-            $stockRussian = $this->_mageRepoStock->get(self::DEF_STOCK_ID_RUSSIAN);
+            $stockRussian = $this->mageRepoStock->get(self::DEF_STOCK_ID_RUSSIAN);
         } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
             $stockRussian = $this->_manObj->create(\Magento\CatalogInventory\Model\Stock::class);
             // $stockRussian->setStockId(self::DEF_STOCK_ID_RUSSIAN);
         } finally {
             $stockRussian->setStockName('Russian');
             $stockRussian->setWebsiteId(self::DEF_WEBSITE_ID_ADMIN);
-            $this->_mageRepoStock->save($stockRussian);
+            $this->mageRepoStock->save($stockRussian);
         }
         /* create new warehouses */
         /* Baltic */
-        $wrhsBaltic = $this->_repoWrhs->getById(self::DEF_STOCK_ID_BALTIC);
+        $wrhsBaltic = $this->repoWrhs->getById(self::DEF_STOCK_ID_BALTIC);
         $shoudCreate = is_null($wrhsBaltic->getOdooId());
         $wrhsBaltic->setCode('Baltic');
         $wrhsBaltic->setCurrency('USD');
@@ -218,12 +233,12 @@ class Stocks
         $wrhsBaltic->setNote('Warehouse for Baltic states (LV, LT, EE)');
         $wrhsBaltic->setOdooId(self::DEF_WRHS_ODOO_ID_BALTIC);
         if ($shoudCreate) {
-            $this->_repoWrhs->create($wrhsBaltic);
+            $this->repoWrhs->create($wrhsBaltic);
         } else {
-            $this->_repoWrhs->updateById($wrhsBaltic->getId(), $wrhsBaltic);
+            $this->repoWrhs->updateById($wrhsBaltic->getId(), $wrhsBaltic);
         }
         /* Russian */
-        $wrhsRussian = $this->_repoWrhs->getById(self::DEF_STOCK_ID_RUSSIAN);
+        $wrhsRussian = $this->repoWrhs->getById(self::DEF_STOCK_ID_RUSSIAN);
         if (!$wrhsRussian) {
             $wrhsRussian = new \Praxigento\Odoo\Data\Agg\Warehouse();
         }
@@ -235,9 +250,9 @@ class Stocks
         $wrhsRussian->setOdooId(self::DEF_WRHS_ODOO_ID_RUSSIAN);
         if ($shoudCreate) {
             $wrhsRussian->setId($stockRussian->getStockId());
-            $this->_repoWrhs->create($wrhsRussian);
+            $this->repoWrhs->create($wrhsRussian);
         } else {
-            $this->_repoWrhs->updateById($wrhsRussian->getId(), $wrhsRussian);
+            $this->repoWrhs->updateById($wrhsRussian->getId(), $wrhsRussian);
         }
         return;
 
@@ -247,73 +262,103 @@ class Stocks
      * Update default store (store view) for Baltic group (as EN store) and create new stores for Balrics (as RU store)
      * and for Russian group (as RU store).
      */
-    private function _processStores()
+    private function processStores()
     {
         /* load default store and update it as Baltic_EN*/
-        $this->_storeBalticEn = $this->_manObj->create(\Magento\Store\Model\Store::class);
-        $this->_storeBalticEn->load(self::DEF_STORE_ID_DEFAULT);
-        $this->_storeBalticEn->setName('EN');
-        $this->_storeBalticEn->setCode('baltic_en');
-        $this->_storeBalticEn->save();
+        $this->storeBalticEn = $this->saveStore(
+            self::DEF_STORE_ID_DEFAULT, true, 'EN' /* don't change 'default' code for default store */
+        );
         /* create RU-store for Baltic group */
-        $this->_storeBalticRu = $this->_manObj->create(\Magento\Store\Model\Store::class);
-        $this->_storeBalticRu->load(self::DEF_STORE_ID_BALTIC_RU);
-        $this->_storeBalticRu->setName('RU');
-        $this->_storeBalticRu->setCode('baltic_ru');
-        $this->_storeBalticRu->setWebsiteId(self::DEF_WEBSITE_ID_MAIN);
-        $this->_storeBalticRu->setGroupId($this->_groupBaltic->getId());
-        $this->_storeBalticRu->setSortOrder(10);
-        $this->_storeBalticRu->setIsActive(true);
-        $this->_storeBalticRu->save();
+        $this->storeBalticRu = $this->saveStore(
+            self::DEF_STORE_ID_BALTIC_RU, true, 'RU', 'baltic_ru',
+            self::DEF_WEBSITE_ID_MAIN, $this->groupBaltic->getId(), 10
+        );
         /* create Ru-store for Russian group */
-        $this->_storeRussianRu = $this->_manObj->create(\Magento\Store\Model\Store::class);
-        $this->_storeRussianRu->load(self::DEF_STORE_ID_RUSSIAN_RU);
-        $this->_storeRussianRu->setName('RU');
-        $this->_storeRussianRu->setCode('russian_ru');
-        $this->_storeRussianRu->setWebsiteId(self::DEF_WEBSITE_ID_MAIN);
-        $this->_storeRussianRu->setGroupId($this->_groupRussian->getId());
-        $this->_storeRussianRu->setSortOrder(10);
-        $this->_storeRussianRu->setIsActive(true);
-        $this->_storeRussianRu->save();
+        $this->storeRussianRu = $this->saveStore(
+            self::DEF_STORE_ID_RUSSIAN_RU, true, 'RU', 'russian_ru',
+            self::DEF_WEBSITE_ID_MAIN, $this->groupRussian->getId(), 10
+        );
     }
 
     /**
      * Setup store related taxes configuration.
      */
-    private function _processTaxes()
+    private function processTaxes()
     {
         /* Store / Configuration */
-        $this->_saveCfgForRussian('general/country/default', 'RU');
-        $this->_saveCfgForRussian('general/locale/code', 'ru_RU');
-        $this->_saveCfgForRussian('currency/options/default', 'RUB');
-        $this->_saveCfgForRussian('tax/defaults/country', 'RU');
+        $this->saveCfgForRussian('general/country/default', 'RU');
+        $this->saveCfgForRussian('general/locale/code', 'ru_RU');
+        $this->saveCfgForRussian('currency/options/default', 'RUB');
+        $this->saveCfgForRussian('tax/defaults/country', 'RU');
         /* Tax Rates */
-        $rateIdLv = $this->_saveTaxRate('LV', 'LV Tax', 21);
-        $rateIdRu = $this->_saveTaxRate('RU', 'RU Tax', 18);
+        $rateIdLv = $this->saveTaxRate('LV', 'LV Tax', 21);
+        $rateIdRu = $this->saveTaxRate('RU', 'RU Tax', 18);
         /* Tax Rules */
-        $ruleIdLv = $this->_saveTaxRule('LV Tax');
-        $ruleIdRu = $this->_saveTaxRule('RU Tax');
+        $ruleIdLv = $this->saveTaxRule('LV Tax');
+        $ruleIdRu = $this->saveTaxRule('RU Tax');
         /* Tax calcs */
-        $this->_saveTaxCalc($rateIdLv, $ruleIdLv);
-        $this->_saveTaxCalc($rateIdRu, $ruleIdRu);
+        $this->saveTaxCalc($rateIdLv, $ruleIdLv);
+        $this->saveTaxCalc($rateIdRu, $ruleIdRu);
     }
 
-    private function _saveCfgForRussian($path, $value)
+    private function saveCfgForRussian($path, $value)
     {
         $entity = Cfg::ENTITY_MAGE_CORE_CONFIG_DATA;
-        $stoerViewId = $this->_storeRussianRu->getId();
+        $stoerViewId = $this->storeRussianRu->getId();
         $bind = [
             Cfg::E_CONFIG_A_SCOPE => Cfg::SCOPE_CFG_STORES,
             Cfg::E_CONFIG_A_SCOPE_ID => $stoerViewId,
             Cfg::E_CONFIG_A_PATH => $path,
             Cfg::E_CONFIG_A_VALUE => $value
         ];
-        $this->_repoGeneric->replaceEntity($entity, $bind);
+        $this->repoGeneric->replaceEntity($entity, $bind);
     }
 
-    private function _saveTaxCalc($rateId, $ruleId)
+    /**
+     * Update/create store (frontname: "Store View").
+     *
+     * @param int $storeId ID to update existing store or 'null' to create new one
+     * @param string $name
+     * @param string $code
+     * @param int $websiteId
+     * @param int $groupId (frontname: "Store")
+     * @param int $sortOrder
+     * @param bool $isActive
+     * @return \Magento\Store\Model\Store
+     */
+    private function saveStore(
+        $storeId = null,
+        $isActive = false,
+        $name = null,
+        $code = null,
+        $websiteId = null,
+        $groupId = null,
+        $sortOrder = null
+    ) {
+        $event = 'store_add';
+        /** @var \Magento\Store\Model\Store $store */
+        $store = $this->_manObj->create(\Magento\Store\Model\Store::class);
+        $store->load($storeId);
+        $event = is_null($store->getCode()) ? 'store_add' : 'store_edit';
+        !is_null($isActive) ? $store->setIsActive($isActive) : '';
+        !is_null($name) ? $store->setName($name) : '';
+        !is_null($code) ? $store->setCode($code) : '';
+        !is_null($websiteId) ? $store->setWebsiteId($websiteId) : '';
+        !is_null($websiteId) ? $store->setGroupId($groupId) : '';
+        !is_null($sortOrder) ? $store->setSortOrder($sortOrder) : '';
+        $store->save();
+//        $storeId = $store->getId();
+//        $store->load($storeId);
+        /** @var  \Magento\Store\Model\StoreManager */
+        $this->manStore->reinitStores();
+        /** @var  \Magento\Framework\Event\ManagerInterface */
+        $this->manEvent->dispatch($event, ['store' => $store]);
+        return $store;
+    }
+
+    private function saveTaxCalc($rateId, $ruleId)
     {
-        $found = $this->_getTaxCalcs($rateId, $ruleId);
+        $found = $this->getTaxCalcs($rateId, $ruleId);
         if (!$found) {
             $entity = Cfg::ENTITY_MAGE_TAX_CALC;
             $bind = [
@@ -322,13 +367,13 @@ class Stocks
                 Cfg::E_TAX_CALC_A_CUST_TAX_CLASS_ID => 3,
                 Cfg::E_TAX_CALC_A_PROD_TAX_CLASS_ID => 2
             ];
-            $this->_repoGeneric->replaceEntity($entity, $bind);
+            $this->repoGeneric->replaceEntity($entity, $bind);
         }
     }
 
-    private function _saveTaxRate($country, $code, $rate)
+    private function saveTaxRate($country, $code, $rate)
     {
-        $result = $this->_getTaxRateByCode($code);
+        $result = $this->getTaxRateByCode($code);
         if (!$result) {
             $entity = Cfg::ENTITY_MAGE_TAX_CALC_RATE;
             $bind = [
@@ -337,42 +382,21 @@ class Stocks
                 EntityTaxRate::KEY_PERCENTAGE_RATE => $rate,
                 EntityTaxRate::KEY_POSTCODE => '*'
             ];
-            $result = $this->_repoGeneric->addEntity($entity, $bind);
+            $result = $this->repoGeneric->addEntity($entity, $bind);
         }
         return $result;
     }
 
-    private function _saveTaxRule($code)
+    private function saveTaxRule($code)
     {
-        $result = $this->_getTaxRuleByCode($code);
+        $result = $this->getTaxRuleByCode($code);
         if (!$result) {
             $entity = Cfg::ENTITY_MAGE_TAX_CALC_RULE;
             $bind = [
                 EntityTaxRate::KEY_CODE => $code
             ];
-            $result = $this->_repoGeneric->addEntity($entity, $bind);
+            $result = $this->repoGeneric->addEntity($entity, $bind);
         }
         return $result;
-    }
-
-    protected function execute(
-        \Symfony\Component\Console\Input\InputInterface $input,
-        \Symfony\Component\Console\Output\OutputInterface $output
-    ) {
-        $def = $this->_manTrans->begin();
-        try {
-            $this->_processGroups();
-            $this->_processStores();
-            $this->_processStocks();
-            $this->_processTaxes();
-            /* init sales rules */
-            $this->_subRules->init();
-            $this->_manTrans->commit($def);
-            /* init stores w/o transaction (DDL is denied in the transaction )*/
-            $this->_initStores();
-        } finally {
-            // transaction will be rolled back if commit is not done (otherwise - do nothing)
-            $this->_manTrans->end($def);
-        }
     }
 }
