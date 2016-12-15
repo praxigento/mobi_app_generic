@@ -64,28 +64,28 @@ echo "(Re)install Magento using database '$DB_NAME' (connecting as '$DB_USER')."
 # http://devdocs.magento.com/guides/v2.0/install-gde/install/cli/install-cli-install.html#instgde-install-cli-magento
 
 php $M2_ROOT/bin/magento setup:install  \
---admin-firstname="${CFG_ADMIN_FIRSTNAME}" \
---admin-lastname="${CFG_ADMIN_LASTNAME}" \
---admin-email="${CFG_ADMIN_EMAIL}" \
---admin-user="${CFG_ADMIN_USER}" \
---admin-password="${CFG_ADMIN_PASSWORD}" \
---base-url="${CFG_BASE_URL}" \
---backend-frontname="${CFG_BACKEND_FRONTNAME}" \
---db-host="${CFG_DB_HOST}" \
---db-name="${CFG_DB_NAME}" \
---db-user="${CFG_DB_USER}" \
---language="${CFG_LANGUAGE}" \
---currency="${CFG_CURRENCY}" \
---timezone="${CFG_TIMEZONE}" \
---use-rewrites="${CFG_USE_REWRITES}" \
---use-secure="${CFG_USE_SECURE}" \
---use-secure-admin="${CFG_USE_SECURE_ADMIN}" \
---admin-use-security-key="${CFG_ADMIN_USE_SECURITY_KEY}" \
---session-save="${CFG_SESSION_SAVE}" \
---key="adccc7900047137edb40e4d1be5c56b2" \
---cleanup-database \
-$MAGE_DBPREFIX \
-$MAGE_DBPASS \
+    --admin-firstname="${CFG_ADMIN_FIRSTNAME}" \
+    --admin-lastname="${CFG_ADMIN_LASTNAME}" \
+    --admin-email="${CFG_ADMIN_EMAIL}" \
+    --admin-user="${CFG_ADMIN_USER}" \
+    --admin-password="${CFG_ADMIN_PASSWORD}" \
+    --base-url="${CFG_BASE_URL}" \
+    --backend-frontname="${CFG_BACKEND_FRONTNAME}" \
+    --db-host="${CFG_DB_HOST}" \
+    --db-name="${CFG_DB_NAME}" \
+    --db-user="${CFG_DB_USER}" \
+    --language="${CFG_LANGUAGE}" \
+    --currency="${CFG_CURRENCY}" \
+    --timezone="${CFG_TIMEZONE}" \
+    --use-rewrites="${CFG_USE_REWRITES}" \
+    --use-secure="${CFG_USE_SECURE}" \
+    --use-secure-admin="${CFG_USE_SECURE_ADMIN}" \
+    --admin-use-security-key="${CFG_ADMIN_USE_SECURITY_KEY}" \
+    --session-save="${CFG_SESSION_SAVE}" \
+    --key="adccc7900047137edb40e4d1be5c56b2" \
+    --cleanup-database \
+    $MAGE_DBPREFIX \
+    $MAGE_DBPASS \
 
 ##
 echo "Post installation setup for database '$DB_NAME'."
@@ -93,7 +93,12 @@ echo "Post installation setup for database '$DB_NAME'."
 #
 mysql --database=$DB_NAME --host=$DB_HOST --user=$DB_USER $MYSQL_PASS -e "source $LOCAL_ROOT/../bin/setup.sql"
 
+##
+echo "Upgrade Magento DB structure and data"
+##
+php ${M2_ROOT}/bin/magento setup:upgrade
 
+##
 if [ "$DEPLOYMENT_TYPE" = "test" ]; then
     echo "Skip file system ownership and permissions setup."
 else
@@ -104,12 +109,12 @@ else
     php $M2_ROOT/bin/magento cache:disable
     echo "Run Magento 2 cron."
     php $M2_ROOT/bin/magento cron:run
-    echo "Init development data: STOCKS."
-    php $M2_ROOT/bin/magento prxgt:app:init-stocks
+#    echo "Init development data: STOCKS."
+#    php $M2_ROOT/bin/magento prxgt:app:init-stocks
 #    echo "Init development data: PRODUCTS."
 #    php $M2_ROOT/bin/magento prxgt:app:init-products
-    echo "Init development data: CUSTOMERS."
-    php $M2_ROOT/bin/magento prxgt:app:init-customers
+#    echo "Init development data: CUSTOMERS."
+#    php $M2_ROOT/bin/magento prxgt:app:init-customers
     echo "Run Magento 2 re-index."
     php $M2_ROOT/bin/magento indexer:reindex
     ##
