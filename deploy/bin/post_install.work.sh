@@ -110,11 +110,11 @@ else
     echo "Run Magento 2 cron."
     php $M2_ROOT/bin/magento cron:run
 #    echo "Init development data: STOCKS."
-#    php $M2_ROOT/bin/magento prxgt:app:init-stocks
+    php $M2_ROOT/bin/magento prxgt:app:init-stocks
 #    echo "Init development data: PRODUCTS."
 #    php $M2_ROOT/bin/magento prxgt:app:init-products
 #    echo "Init development data: CUSTOMERS."
-#    php $M2_ROOT/bin/magento prxgt:app:init-customers
+    php $M2_ROOT/bin/magento prxgt:app:init-customers
     echo "Run Magento 2 re-index."
     php $M2_ROOT/bin/magento indexer:reindex
     ##
