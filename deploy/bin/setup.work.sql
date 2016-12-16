@@ -7,7 +7,7 @@
 --
 
 -- MGT-COMMERCE.COM / Developer Toolbar
-REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '1', path ='mgt_developer_toolbar/module/is_enabled';
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '0', path ='mgt_developer_toolbar/module/is_enabled';
 -- General / General
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'Europe/Riga', path ='general/locale/timezone';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'LV', path ='general/country/default';
@@ -59,8 +59,9 @@ REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'Ausekla iela 5-28', p
 -- Sales / Payment Methods (setup Braintree payment gateway)
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '1', path ='payment/braintree/active';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'sandbox', path ='payment/braintree/environment';
-REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'authorize_capture', path ='payment/braintree/payment_actish ./wo on';
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'authorize_capture', path ='payment/braintree/payment_action';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'hrbwv69nr663dxx6', path ='payment/braintree/merchant_id';
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'praxigento_usd', path ='payment/braintree/merchant_account_id';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '0:2:MNCxt7WoXHyj5pNckGBT7QsW4Rvau5j7:SISqkD6irXdKO1hqJk+YSNZ0QndYJ8HEpGq+XoZ5LtY=', path ='payment/braintree/public_key';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '0:2:Mu2JghxOFGKVkM6RdQOT8BOPWPaSY7rB:UZ+tVA7HvZgGhgdStzAjsr7qaQ6mWsStG8xedKn8mcY=', path ='payment/braintree/private_key';
 -- Sales / Payment Methods (Internal Money)
