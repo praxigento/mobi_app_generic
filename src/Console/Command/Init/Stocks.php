@@ -339,16 +339,15 @@ class Stocks
         /** @var \Magento\Store\Model\Store $store */
         $store = $this->_manObj->create(\Magento\Store\Model\Store::class);
         $store->load($storeId);
+        /* 'code' is required attr. and should be set for existing store */
         $event = is_null($store->getCode()) ? 'store_add' : 'store_edit';
-        !is_null($isActive) ? $store->setIsActive($isActive) : '';
-        !is_null($name) ? $store->setName($name) : '';
-        !is_null($code) ? $store->setCode($code) : '';
-        !is_null($websiteId) ? $store->setWebsiteId($websiteId) : '';
-        !is_null($websiteId) ? $store->setGroupId($groupId) : '';
-        !is_null($sortOrder) ? $store->setSortOrder($sortOrder) : '';
+        $store->setIsActive($isActive);
+        if (!is_null($name)) $store->setName($name);
+        if (!is_null($code)) $store->setCode($code);
+        if (!is_null($websiteId)) $store->setWebsiteId($websiteId);
+        if (!is_null($websiteId)) $store->setGroupId($groupId);
+        if (!is_null($sortOrder)) $store->setSortOrder($sortOrder);
         $store->save();
-//        $storeId = $store->getId();
-//        $store->load($storeId);
         /** @var  \Magento\Store\Model\StoreManager */
         $this->manStore->reinitStores();
         /** @var  \Magento\Framework\Event\ManagerInterface */
