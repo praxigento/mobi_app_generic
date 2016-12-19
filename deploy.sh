@@ -52,9 +52,12 @@ echo "Create scripts from templates..."
 composer status
 
 ## MOBI-522
-echo "Replace wrong Magento files by own versions."
-cp -f $DIR/deploy/mage/magento/module-catalog-search/etc/di.xml M2_ROOT/vendor/magento/module-catalog-search/etc/di.xml
+echo "Replace wrong Magento files by own versions:"
+cp -f ${DIR}/deploy/mage/magento/module-catalog-search/etc/di.xml ${M2_ROOT}/vendor/magento/module-catalog-search/etc/di.xml
+echo "    ${M2_ROOT}/vendor/magento/module-catalog-search/etc/di.xml is replaced;"
 
 
 # Finalize job
+echo "Deployment is done. Launch post-installation script:"
+echo "    sh ./bin/post_install.sh"
 cd $CUR_DIR
