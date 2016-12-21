@@ -1,0 +1,20 @@
+{
+  "name": "mobi-app-test-generic",
+  "version": "1.0.0",
+  "description": "Testing scenarios for MOBI Generic app.",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "casperjs": "^1.1.3",
+    "phantomjs": "^2.1.7"
+  },
+  "scripts": {
+    "test": "node_modules/casperjs/bin/casperjs test ./scenarios/"
+  },
+  "author": "Alex Gusev <alex@flancer64.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/praxigento/mobi_app_generic_mage2.git"
+  }
+}
