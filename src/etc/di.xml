@@ -102,7 +102,7 @@
     <!-- see "praxigento/mobi_mod_mage2_odoo/src/etc/di.xml" -->
     <virtualType name="odooTestConfigParams" type="Praxigento\Odoo\Repo\Odoo\Connector\Config\Def\Params">
         <arguments>
-            <argument xsi:type="array" name="arg1">
+            <argument xsi:type="array" name="data">
                 <item name="baseUri" xsi:type="string">http://lion.host.prxgt.com:8122</item>
                 <item name="dbName" xsi:type="string">odoo_mobi_test_shop</item>
                 <item name="userName" xsi:type="string">magento</item>
