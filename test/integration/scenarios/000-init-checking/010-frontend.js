@@ -16,7 +16,7 @@ casper.test.begin(
             // this.echo(this.status(true));
             test.assertExists('div.page-wrapper', 'homepage is loaded.');
             /* sceenshot: initial */
-            var screenFile = 'screen/' + scenario + '/' + scene + '/010-homepage.png';
+            var screenFile = 'screen/' + scenario + '/' + scene + '/010.png';
             this.capture(screenFile);
         })
 
@@ -33,7 +33,7 @@ casper.test.begin(
         casper.waitForSelector('#switcher-language-trigger + DIV', function () {
             var code = casper.fetchText('#ui-id-2 > li > a');
             test.assertEquals(code.trim(), 'RU', 'RU code exists in language switcher.');
-            var screenFile = 'screen/' + scenario + '/' + scene + '/020-homepage-langs.png';
+            var screenFile = 'screen/' + scenario + '/' + scene + '/020.png';
             casper.capture(screenFile);
         });
 
@@ -47,7 +47,7 @@ casper.test.begin(
         casper.waitForSelector('#switcher-currency-trigger + DIV', function () {
             var code = casper.fetchText('#ui-id-1 > li > a');
             test.assertEquals(code.trim(), 'USD - US Dollar', 'USD code exists in currency switcher.');
-            var screenFile = 'screen/' + scenario + '/' + scene + '/030-homepage-currency.png';
+            var screenFile = 'screen/' + scenario + '/' + scene + '/030.png';
             casper.capture(screenFile);
         });
 
@@ -63,7 +63,7 @@ casper.test.begin(
 
         casper.waitForSelector('.switcher-dropdown[aria-hidden="false"]', function () {
             test.assertExists('.switcher-dropdown[aria-hidden="false"]', 'store switcher is expanded.');
-            var screenFile = 'screen/' + scenario + '/' + scene + '/040-homepage-stores.png';
+            var screenFile = 'screen/' + scenario + '/' + scene + '/040.png';
             casper.capture(screenFile);
         });
 
@@ -72,7 +72,7 @@ casper.test.begin(
         });
 
         casper.then(function () {
-            var screenFile = 'screen/' + scenario + '/' + scene + '/050-homepage-russian.png';
+            var screenFile = 'screen/' + scenario + '/' + scene + '/050.png';
             casper.capture(screenFile);
         });
 
@@ -86,7 +86,7 @@ casper.test.begin(
         casper.waitForSelector('#switcher-currency-trigger + DIV', function () {
             var code = casper.fetchText('#ui-id-1 > li > a');
             test.assertEquals(code.trim(), 'EUR - Евро', 'EUR code exists in currency switcher (Russian store).');
-            var screenFile = 'screen/' + scenario + '/' + scene + '/060-homepage-russian-currency.png';
+            var screenFile = 'screen/' + scenario + '/' + scene + '/060.png';
             casper.capture(screenFile);
         });
 
