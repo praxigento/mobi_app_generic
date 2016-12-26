@@ -65,7 +65,7 @@ casper.test.begin(desc, function suite_030_010(test) {
 
             casper.waitForSelector('#product-addtocart-button', function () {
                 casper.click('#product-addtocart-button > span');
-                test.assert("'Add to Cart' button is clicked.");
+                test.assert(true, "'Add to Cart' button is clicked.");
             });
 
             var css = 'span.counter-number';
