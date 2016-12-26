@@ -12,7 +12,7 @@ casper.test.begin(desc, 23, function suite_000_010(test) {
         /**
          * Start scene and load catalog page.
          */
-        var url = mobi.getNavigationUrl('catalog.category');
+        var url = mobi.getNavigationUrl('front.catalog.category', 'mage');
         /* load page */
         casper.start(url, function () {
             mobi.setViewport();
@@ -21,7 +21,7 @@ casper.test.begin(desc, 23, function suite_000_010(test) {
         });
 
         /**
-         * Load catalog page and validate Baltic store: 4 products, 2 locales and 2 currencies..
+         * Load catalog page and validate Baltic store: 4 products, 2 locales and 2 currencies.
          */
         casper.then(function () {
 

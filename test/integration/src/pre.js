@@ -3,6 +3,11 @@
 casper.echo("=== PRE SUITE BEGIN ===");
 
 /**
+ * Load URLs codifier.
+ */
+var urls = require('../src/codes/url');
+
+/**
  * Add 'mobi' object to globals.
  */
 var mobi = {};
@@ -11,12 +16,7 @@ var mobi = {};
  * Add testing configuration to 'mobi' object.
  */
 mobi.opts = {
-    navig: {
-        base: 'http://mobi2.mage.test.prxgt.com',   // Base URL for the site should be tested (w/o ending '/')
-        catalog: {
-            category: '/catalog/category/view/s/cat-2/id/3/'
-        },
-    },
+    navig: urls,
     path: {                                         // Paths configuration
         screenshots: 'screen/'                      // Root folder for screenshots (with ending '/')
     },
@@ -52,9 +52,16 @@ mobi.capture = function capture(img, scene, scenario) {
 };
 
 
-mobi.getNavigationUrl = function getNavigationUrl(path) {
-    var uri = mobi.objPath.get(mobi.opts.navig, path);
-    var result = mobi.opts.navig.base + uri;
+/**
+ *
+ * @param {string} path 'front.catalog.category'
+ * @param {string} scope 'mage|odoo|...'
+ * @returns {string} 'http://mobi2.mage.test.prxgt.com/catalog/category/view/s/cat-2/id/3/'
+ */
+mobi.getNavigationUrl = function getNavigationUrl(path, scope) {
+    var scoped = mobi.opts.navig[scope];    // shortcut for Magento URLs
+    var uri = mobi.objPath.get(scoped, path);   // get URL value by path
+    var result = scoped.base + uri; // compose full URL
     return result;
 };
 
