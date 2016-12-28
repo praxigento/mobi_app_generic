@@ -5,47 +5,15 @@ var dump = require('utils').dump;
 
 var scenario = '030';
 var scene = '010';
-var desc = 'scene ' + scenario + '/' + scene + ': distributor order checking:';
+var desc = 'scene ' + scenario + '/' + scene + ': distributor simple order (1 product, check payment):';
 var pathScreens = mobi.opts.path.screenshots;
 
 casper.test.begin(desc, function suite_030_010(test) {
-        /**
-         * Start scene and go to login form.
-         */
-        var url = mobi.getNavigationUrl('front.customer.account.login', 'mage');
-        /* load page */
-        casper.start(url, function () {
-            mobi.setViewport();
-            test.assertExists('div.page-wrapper', 'Default login form is loaded.');
-            mobi.capture('010', scene, scenario);
-        });
+
+        mobi.sub.front.authenticate(test, scene, scenario);
 
         /**
-         * Fill the login form and authenticate.
-         */
-        casper.then(function () {
-
-            casper.waitForSelector('#login-form', function () {
-                casper.fillSelectors('#login-form', {
-                    'input#email': 'customer_10@test.com',
-                    'input#pass': 'UserPassword12'
-                }, false);
-                mobi.capture('020', scene, scenario);
-                casper.click('#send2 > span');
-                test.assert(true, 'Authentication data is posted.');
-            });
-
-
-            casper.waitForSelector('#maincontent', function () {
-                test.assert(true, 'Account dashboard is loaded.');
-                mobi.capture('030', scene, scenario);
-            });
-
-        });
-
-
-        /**
-         * Go to category and add 2 products to the cart.
+         * Go to category and add product to the cart.
          */
         casper.then(function () {
 

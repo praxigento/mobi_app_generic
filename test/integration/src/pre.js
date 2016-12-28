@@ -46,7 +46,7 @@ mobi.setViewport = function setViewport() {
  */
 mobi.capture = function capture(img, scene, scenario) {
     var fileTag = scenario + '/' + scene + '/' + img;
-    casper.test.assert(true, 'Screen captured: ' + fileTag);
+    casper.test.assert(true, '  screen captured: ' + fileTag);
     var fileName = mobi.opts.path.screenshots + fileTag + '.png';
     casper.capture(fileName);
 };
@@ -65,6 +65,57 @@ mobi.getNavigationUrl = function getNavigationUrl(path, scope) {
     return result;
 };
 
+/* add sub scenarios to root object */
+mobi.sub = {front: {}, admin: {}, odoo: {}};
+
+
+mobi.sub.front.authenticate = function frontAuthentication(test, scene, scenario) {
+    /**
+     * Start scene and go to login form.
+     */
+    var url = mobi.getNavigationUrl('front.customer.account.login', 'mage');
+    /* load page */
+    casper.start(url, function () {
+        mobi.setViewport();
+        test.assertExists('div.page-wrapper', '0010: Default login form is loaded.');
+        mobi.capture('010', scene, scenario);
+    });
+
+    /**
+     * Fill the login form and authenticate.
+     */
+    casper.then(function () {
+
+        casper.waitForSelector('#login-form', function () {
+            casper.fillSelectors('#login-form', {
+                'input#email': 'customer_10@test.com',
+                'input#pass': 'UserPassword12'
+            }, false);
+            mobi.capture('020', scene, scenario);
+            casper.click('#send2 > span');
+            test.assert(true, '0020: Authentication data is posted.');
+        });
+
+
+        casper.waitForSelector('#maincontent', function () {
+            test.assert(true, '0030: Account dashboard is loaded.');
+            mobi.capture('030', scene, scenario);
+        });
+
+        // current store is Baltic
+        casper.waitForSelector('#switcher-store-trigger', function () {
+            var text = casper.fetchText('#switcher-store-trigger > strong > span');
+            test.assertEquals(text.trim(), 'Baltic', '... current store is Baltic.');
+        });
+
+        // current currency is EUR
+        casper.waitForSelector('#switcher-currency-trigger', function () {
+            var text = casper.fetchText('#switcher-currency-trigger > strong > span');
+            test.assertEquals(text.trim(), 'EUR - Euro', '... current currency is EUR.');
+        });
+
+    });
+}
 
 /* should we call this? */
 casper.test.done();
