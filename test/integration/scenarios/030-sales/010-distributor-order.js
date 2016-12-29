@@ -3,6 +3,7 @@
 
 var dump = require('utils').dump;
 
+var conf = mobi.opts.conf;
 var scenario = '030';
 var scene = '010';
 var desc = 'scene ' + scenario + '/' + scene + ': distributor simple order (1 product, check payment):';
@@ -10,7 +11,14 @@ var pathScreens = mobi.opts.path.screenshots;
 
 casper.test.begin(desc, function suite_030_010(test) {
 
-        mobi.sub.front.authenticate(test, scene, scenario);
+        /** Define authentication options and authenticate*/
+        var opts = {
+            scenario: scenario,
+            scene: scene,
+            store: conf.app.store.baltic,
+            currency: conf.app.currency.eur
+        }
+        mobi.sub.front.authenticate(test, opts);
 
         /**
          * Go to category and add product to the cart.
@@ -91,6 +99,9 @@ casper.test.begin(desc, function suite_030_010(test) {
 
         });
 
+        /**
+         * Run scenario and finalize test.
+         */
         casper.run(function () {
             test.done()
         })

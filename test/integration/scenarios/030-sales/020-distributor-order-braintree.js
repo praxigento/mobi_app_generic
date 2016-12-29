@@ -3,6 +3,7 @@
 
 var dump = require('utils').dump;
 
+var conf = mobi.opts.conf;
 var scenario = '030';
 var scene = '020';
 var desc = 'scene ' + scenario + '/' + scene + ': distributor order (3 products, different qty, braintree payment):';
@@ -10,7 +11,14 @@ var pathScreens = mobi.opts.path.screenshots;
 
 casper.test.begin(desc, function suite_030_020(test) {
 
-        mobi.sub.front.authenticate(test, scene, scenario);
+        /** Define authentication options and authenticate*/
+        var opts = {
+            scenario: scenario,
+            scene: scene,
+            store: conf.app.store.baltic,
+            currency: conf.app.currency.eur
+        }
+        mobi.sub.front.authenticate(test, opts);
 
         /**
          * Go to product page and add 'Black Walnut' (215san) to the cart.
@@ -214,18 +222,18 @@ casper.test.begin(desc, function suite_030_020(test) {
 
         casper.then(function () {
             /* submit data and place the order */
-            // casper.waitForSelector('#checkout-payment-method-load', function () {
-            //     var css = "#checkout-payment-method-load > div > div > div.payment-method._active > div.payment-method-content > div.actions-toolbar > div > button > span";
-            //     casper.click(css);
-            //     test.assert(true, '0180: Order placement is started.');
-            //     mobi.capture('150', scene, scenario);
-            // });
+            casper.waitForSelector('#checkout-payment-method-load', function () {
+                var css = "#checkout-payment-method-load > div > div > div.payment-method._active > div.payment-method-content > div.actions-toolbar > div > button > span";
+                casper.click(css);
+                test.assert(true, '0180: Order placement is started.');
+                mobi.capture('150', scene, scenario);
+            });
 
             /* finalaize order placement */
-            // casper.waitForSelector('.checkout-success', function () {
-            //     test.assert(true, '0190: Order placement is completed.');
-            //     mobi.capture('160', scene, scenario);
-            // }, null, 20000);
+            casper.waitForSelector('.checkout-success', function () {
+                test.assert(true, '0190: Order placement is completed.');
+                mobi.capture('160', scene, scenario);
+            }, null, 20000);
             mobi.capture('160', scene, scenario);
         });
 

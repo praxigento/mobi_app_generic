@@ -9,11 +9,11 @@ var desc = 'scene ' + scenario + '/' + scene + ': frontend initial checking:';
 var pathScreens = mobi.opts.path.screenshots;
 
 casper.test.begin(desc, 23, function suite_000_010(test) {
+
         /**
          * Start scene and load catalog page.
          */
         var url = mobi.getNavigationUrl('front.catalog.category', 'mage');
-        /* load page */
         casper.start(url, function () {
             mobi.setViewport();
             test.assertExists('div.page-wrapper', 'Catalog page is loaded.');
@@ -121,7 +121,7 @@ casper.test.begin(desc, 23, function suite_000_010(test) {
          */
         casper.then(function () {
 
-            /* switch to Russian store */
+            /** Switch to Russian store */
             casper.then(function () {
 
                 casper.waitForSelector('#switcher-store', function () {
@@ -134,7 +134,7 @@ casper.test.begin(desc, 23, function suite_000_010(test) {
                 });
             });
 
-            /* verify checklist */
+            /** Verify checklist */
             casper.then(function () {
                 // current store is Russian
                 casper.waitForSelector('#switcher-store-trigger', function () {
@@ -158,7 +158,7 @@ casper.test.begin(desc, 23, function suite_000_010(test) {
                 });
             });
 
-            /* click on currency switcher */
+            /** Click on currency switcher */
             casper.then(function () {
 
                 casper.waitForSelector('#switcher-currency', function () {
@@ -180,7 +180,9 @@ casper.test.begin(desc, 23, function suite_000_010(test) {
 
         });
 
-
+        /**
+         * Run scenario and finalize test.
+         */
         casper.run(function () {
             test.done()
         })

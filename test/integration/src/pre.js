@@ -3,10 +3,11 @@
 casper.echo("=== PRE SUITE BEGIN ===");
 
 /**
- * Load URLs codifier.
+ * Load MOBI parts (data objects and functions)
  */
-var urls = require('../src/codes/url');
-
+var urls = require('../src/codes/url'); // URLs codifier
+var conf = require('../src/codes/conf'); // application constants
+var funcFrontAuthentication = require('../src/sub/front/auth'); // frontend authentication function
 /**
  * Add 'mobi' object to globals.
  */
@@ -16,6 +17,7 @@ var mobi = {};
  * Add testing configuration to 'mobi' object.
  */
 mobi.opts = {
+    conf: conf,
     navig: urls,
     path: {                                         // Paths configuration
         screenshots: 'screen/'                      // Root folder for screenshots (with ending '/')
@@ -67,55 +69,7 @@ mobi.getNavigationUrl = function getNavigationUrl(path, scope) {
 
 /* add sub scenarios to root object */
 mobi.sub = {front: {}, admin: {}, odoo: {}};
-
-
-mobi.sub.front.authenticate = function frontAuthentication(test, scene, scenario) {
-    /**
-     * Start scene and go to login form.
-     */
-    var url = mobi.getNavigationUrl('front.customer.account.login', 'mage');
-    /* load page */
-    casper.start(url, function () {
-        mobi.setViewport();
-        test.assertExists('div.page-wrapper', '0010: Default login form is loaded.');
-        mobi.capture('010', scene, scenario);
-    });
-
-    /**
-     * Fill the login form and authenticate.
-     */
-    casper.then(function () {
-
-        casper.waitForSelector('#login-form', function () {
-            casper.fillSelectors('#login-form', {
-                'input#email': 'customer_10@test.com',
-                'input#pass': 'UserPassword12'
-            }, false);
-            mobi.capture('020', scene, scenario);
-            casper.click('#send2 > span');
-            test.assert(true, '0020: Authentication data is posted.');
-        });
-
-
-        casper.waitForSelector('#maincontent', function () {
-            test.assert(true, '0030: Account dashboard is loaded.');
-            mobi.capture('030', scene, scenario);
-        });
-
-        // current store is Baltic
-        casper.waitForSelector('#switcher-store-trigger', function () {
-            var text = casper.fetchText('#switcher-store-trigger > strong > span');
-            test.assertEquals(text.trim(), 'Baltic', '... current store is Baltic.');
-        });
-
-        // current currency is EUR
-        casper.waitForSelector('#switcher-currency-trigger', function () {
-            var text = casper.fetchText('#switcher-currency-trigger > strong > span');
-            test.assertEquals(text.trim(), 'EUR - Euro', '... current currency is EUR.');
-        });
-
-    });
-}
+mobi.sub.front.authenticate = funcFrontAuthentication;
 
 /* should we call this? */
 casper.test.done();
