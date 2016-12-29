@@ -4,7 +4,7 @@
  */
 var urls = {
     mage: {
-        base: 'http://mobi2.mage.test.prxgt.com',   // Base URL for the site should be tested (w/o ending '/')
+        base: 'http://mage2.local.host.com',   // Base URL for the site should be tested (w/o ending '/')
         admin: {},
         api: {},
         front: {

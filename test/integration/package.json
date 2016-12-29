@@ -22,6 +22,7 @@
   },
   "scripts": {
     "test": "node_modules/casperjs/bin/casperjs --pre=src/pre.js --includes=src/inc.js --post=src/post.js --xunit=xunit.xml --verbose test scenarios/",
+    "scene_030_020": "node_modules/casperjs/bin/casperjs --pre=src/pre.js --includes=src/inc.js --post=src/post.js --xunit=xunit.xml --verbose test scenarios/030-sales/020-distributor-order-braintree.js",
     "scene": "node_modules/casperjs/bin/casperjs --pre=src/pre.js --includes=src/inc.js --post=src/post.js --xunit=xunit.xml --verbose test "
   },
   "author": "Alex Gusev <alex@flancer64.com>",
