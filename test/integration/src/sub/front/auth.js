@@ -149,8 +149,8 @@ var result = function frontAuthentication($test, $opts) {
                     casper.click('#switcher-currency-trigger > strong > span');
                 });
                 /* ... then click other currency */
-                casper.waitForSelector('#switcher-currency > div > ul > li > a', function () {
-                    casper.click('#switcher-currency > div > ul > li > a');
+                casper.waitForSelector('#ui-id-1 > li > a', function () {
+                    casper.click('#ui-id-1 > li > a');
                 });
 
                 /* ... and wait while loading */

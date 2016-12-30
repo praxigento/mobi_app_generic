@@ -141,100 +141,100 @@ casper.test.begin(desc, function suite_030_020(test) {
             });
 
         });
-        //
-        // /** Go to checkout and place the order. */
-        // casper.then(function () {
-        //
-        //     var url = mobi.getNavigationUrl('front.checkout.self', 'mage');
-        //     casper.open(url);
-        //
-        //     casper.waitForSelector('div#checkout', function () {
-        //         test.assert(true, '0130: Checkout page is loaded.');
-        //     });
-        //
-        //     /** Load shipping methods and check shipping fee */
-        //     casper.waitForSelector('#shipping-method-buttons-container', function () {
-        //         test.assert(true, '0140: Shipping methods are loaded.');
-        //         mobi.capture('130', scene, scenario);
-        //         var css = '#checkout-shipping-method-load > table > tbody > tr > td.col.col-price > span.price-including-tax > span > span';
-        //         casper.waitForSelector(css, function () {
-        //             var text = casper.fetchText(css);
-        //             // test.assertEquals(text.trim(), '€4.28', "... shipping fee is equal to '€4.28'.");
-        //         });
-        //     });
-        //
-        //     var css = '#shipping-method-buttons-container > div > button > span > span';
-        //     casper.waitForSelector(css, function () {
-        //         casper.click(css);
-        //         test.assert(true, '0150: Shipping is proceed in order placement.');
-        //     });
-        //
-        //     casper.waitForSelector('#braintree', function () {
-        //         test.assert(true, '0160: Payment methods are loaded.');
-        //         mobi.capture('140', scene, scenario);
-        //     }, null, 20000);
-        //
-        //     /** Select 'braintree' method */
-        //     casper.waitForSelector('label[for=braintree]', function () {
-        //         casper.click('label[for=braintree]');
-        //         test.assert(true, '0170: Payment method is selected (braintree).');
-        //     });
-        //
-        //     /* wait untill braintree form will be loaded */
-        //     casper.waitWhileVisible('body > div.loading-mask', function () {
-        //
-        //         /* switch to the child frames one by one and fill braintree payment form fields */
-        //         /* (each field on the separate iframe) */
-        //         casper.waitForSelector('iframe#braintree-hosted-field-number', function () {
-        //
-        //             /* credit card number */
-        //             casper.page.switchToChildFrame('braintree-hosted-field-number');
-        //             casper.waitForSelector('input#credit-card-number', function () {
-        //                 casper.fillSelectors('body', {'input#credit-card-number': '4111111111111111'}, false);
-        //                 casper.page.switchToParentFrame();
-        //
-        //                 /* exp. month */
-        //                 casper.page.switchToChildFrame('braintree-hosted-field-expirationMonth');
-        //                 casper.waitForSelector('input#expiration-month', function () {
-        //                     casper.fillSelectors('body', {'input#expiration-month': '12'}, false);
-        //                     casper.page.switchToParentFrame();
-        //
-        //                     /* exp. year */
-        //                     casper.page.switchToChildFrame('braintree-hosted-field-expirationYear');
-        //                     casper.waitForSelector('input#expiration-year', function () {
-        //                         casper.fillSelectors('body', {'input#expiration-year': '21'}, false);
-        //                         casper.page.switchToParentFrame();
-        //
-        //                         /* cvv code */
-        //                         casper.page.switchToChildFrame('braintree-hosted-field-cvv');
-        //                         casper.waitForSelector('input#cvv', function () {
-        //                             casper.fillSelectors('body', {'input#cvv': '321'}, false);
-        //                             casper.page.switchToParentFrame();
-        //                         });
-        //                     });
-        //                 });
-        //             });
-        //         });
-        //     });
-        // });
-        //
-        // /** Submit payment data and place the order */
-        // casper.then(function () {
-        //     casper.waitForSelector('#checkout-payment-method-load', function () {
-        //         var css = "#checkout-payment-method-load > div > div > div.payment-method._active > div.payment-method-content > div.actions-toolbar > div > button > span";
-        //         casper.click(css);
-        //         test.assert(true, '0180: Order placement is started.');
-        //         mobi.capture('150', scene, scenario);
-        //     });
-        // });
-        //
-        // /** Validate successfull placement (wait max 30 sec) */
-        // casper.then(function () {
-        //     casper.waitForSelector('.checkout-success', function () {
-        //         test.assert(true, '0190: Order placement is completed.');
-        //         mobi.capture('160', scene, scenario);
-        //     }, null, 30000);
-        // });
+
+        /** Go to checkout and place the order. */
+        casper.then(function () {
+
+            var url = mobi.getNavigationUrl('front.checkout.self', 'mage');
+            casper.open(url);
+
+            casper.waitForSelector('div#checkout', function () {
+                test.assert(true, '0130: Checkout page is loaded.');
+            });
+
+            /** Load shipping methods and check shipping fee */
+            casper.waitForSelector('#shipping-method-buttons-container', function () {
+                test.assert(true, '0140: Shipping methods are loaded.');
+                mobi.capture('130', scene, scenario);
+                var css = '#checkout-shipping-method-load > table > tbody > tr > td.col.col-price > span.price-including-tax > span > span';
+                casper.waitForSelector(css, function () {
+                    var text = casper.fetchText(css);
+                    // test.assertEquals(text.trim(), '€4.28', "... shipping fee is equal to '€4.28'.");
+                });
+            });
+
+            var css = '#shipping-method-buttons-container > div > button > span > span';
+            casper.waitForSelector(css, function () {
+                casper.click(css);
+                test.assert(true, '0150: Shipping is proceed in order placement.');
+            });
+
+            casper.waitForSelector('#braintree', function () {
+                test.assert(true, '0160: Payment methods are loaded.');
+                mobi.capture('140', scene, scenario);
+            }, null, 20000);
+
+            /** Select 'braintree' method */
+            casper.waitForSelector('label[for=braintree]', function () {
+                casper.click('label[for=braintree]');
+                test.assert(true, '0170: Payment method is selected (braintree).');
+            });
+
+            /* wait untill braintree form will be loaded */
+            casper.waitWhileVisible('body > div.loading-mask', function () {
+
+                /* switch to the child frames one by one and fill braintree payment form fields */
+                /* (each field on the separate iframe) */
+                casper.waitForSelector('iframe#braintree-hosted-field-number', function () {
+
+                    /* credit card number */
+                    casper.page.switchToChildFrame('braintree-hosted-field-number');
+                    casper.waitForSelector('input#credit-card-number', function () {
+                        casper.fillSelectors('body', {'input#credit-card-number': '4111111111111111'}, false);
+                        casper.page.switchToParentFrame();
+
+                        /* exp. month */
+                        casper.page.switchToChildFrame('braintree-hosted-field-expirationMonth');
+                        casper.waitForSelector('input#expiration-month', function () {
+                            casper.fillSelectors('body', {'input#expiration-month': '12'}, false);
+                            casper.page.switchToParentFrame();
+
+                            /* exp. year */
+                            casper.page.switchToChildFrame('braintree-hosted-field-expirationYear');
+                            casper.waitForSelector('input#expiration-year', function () {
+                                casper.fillSelectors('body', {'input#expiration-year': '21'}, false);
+                                casper.page.switchToParentFrame();
+
+                                /* cvv code */
+                                casper.page.switchToChildFrame('braintree-hosted-field-cvv');
+                                casper.waitForSelector('input#cvv', function () {
+                                    casper.fillSelectors('body', {'input#cvv': '321'}, false);
+                                    casper.page.switchToParentFrame();
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        });
+
+        /** Submit payment data and place the order */
+        casper.then(function () {
+            casper.waitForSelector('#checkout-payment-method-load', function () {
+                var css = "#checkout-payment-method-load > div > div > div.payment-method._active > div.payment-method-content > div.actions-toolbar > div > button > span";
+                casper.click(css);
+                test.assert(true, '0180: Order placement is started.');
+                mobi.capture('150', scene, scenario);
+            });
+        });
+
+        /** Validate successfull placement (wait max 30 sec) */
+        casper.then(function () {
+            casper.waitForSelector('.checkout-success', function () {
+                test.assert(true, '0190: Order placement is completed.');
+                mobi.capture('160', scene, scenario);
+            }, null, 30000);
+        });
 
         /** Run scenario and finalize test. */
         casper.run(function () {
