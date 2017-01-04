@@ -4,11 +4,10 @@
 
 ## Files
 
-* [./cfg](./cfg) - templates for scripts that are used in the deployment process;
-* [./live](./live) - live (production) instance of the application (with own composer.json);
+* [./deploy](./deploy) - scripts that are used in the deployment process;
+* [./dev](./dev) - application level files for development (tests, coverage, etc.);
 * [./src](./src) - source files for the main module of the application;
 * [./test](./test) - test scripts for the own code of the application's main module;
-* [./work](./work) - development instance of the application (with own composer.json);
 * [./.travis.yml](./.travis.yml) - descriptor for Travis CI; 
 * [./composer.json](./composer.json) - descriptor for the main module of the application (type: "magento2-module");
 * *./templates.vars.live.json* - configuration variables for templates (live version); is not under version control; 
