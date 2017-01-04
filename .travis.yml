@@ -17,9 +17,8 @@ before_install:
 # Get auth keys: http://devdocs.magento.com/guides/v2.0/install-gde/prereq/connect-auth.html
   - composer config -g http-basic.repo.magento.com $M2_KEY_PUB $M2_KEY_PRIV
 # Copy Travis CI configuration from template and deploy Magento 2 application
-  - pwd # control current path ('LOCAL_ROOT' in templates.json)
-  - cp templates.vars.json.travis templates.vars.work.json # create configuration for Travis from template
-  - cp deploy_cfg.sh.travis deploy_cfg.sh # create configuration for Travis from template
+  - pwd # control current path
+  - cp deploy.cfg.sh.init deploy.cfg.work.sh # create configuration for Travis from template
   - sh deploy.sh
   - sh ./bin/post_install.sh
   - cat ./work/var/log/setup.log

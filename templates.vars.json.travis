@@ -1,7 +1,6 @@
 {
   "vars": {
     "LOCAL_ROOT": "/home/travis/build/praxigento/mobi_app_generic_mage2/work",
-    "DEPLOYMENT_TYPE": "test",
     "LOCAL_OWNER": "travis",
     "LOCAL_GROUP": "apache",
     "CFG_ADMIN_FIRSTNAME": "Store",

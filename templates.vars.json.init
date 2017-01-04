@@ -1,7 +1,6 @@
 {
   "vars": {
     "LOCAL_ROOT": "/home/magento/instance/mobi_app_generic_mage2/work",
-    "DEPLOYMENT_TYPE": "live|pilot|test|development",
     "LOCAL_OWNER": "magento",
     "LOCAL_GROUP": "apache",
     "CFG_ADMIN_FIRSTNAME": "Store",

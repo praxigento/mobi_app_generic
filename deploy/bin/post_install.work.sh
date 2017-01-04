@@ -1,69 +1,81 @@
 #!/bin/sh
 ##
 #   Setup Magento instance after install with Composer.
-#   (all placeholders ${...} should be replaced by real values from ./work/template.json file)
+#   (all placeholders ${CFG_...} should be replaced by real values from "/templates.vars.work.json" file)
 ##
 
+# pin current folder and deployment root folder
+CUR_DIR="$PWD"
+DIR_ROOT="$( cd "$(dirname $( dirname "$0" ))" && pwd )"    # 2 levels up from scripts dir
 
-# type of the deployment (skip some steps when app is deployed in TRAVIS CI, $DEPLOYMENT_TYPE='test')
-DEPLOYMENT_TYPE=${DEPLOYMENT_TYPE}
-# local specific environment
-LOCAL_ROOT=${LOCAL_ROOT}    # root folder for the deployed instance
-M2_ROOT=$LOCAL_ROOT       # root folder for Magento app (in common case can be other than LOCAL_ROOT)
-# The owner of the Magento file system:
-#   * Must have full control (read/write/execute) of all files and directories.
-#   * Must not be the web server user; it should be a different user.
-# Web server:
-#   * must be a member of the '${LOCAL_GROUP}' group.
-LOCAL_OWNER=${LOCAL_OWNER}
-LOCAL_GROUP=${LOCAL_GROUP}
+# current mode is 'work'
+MODE=work
+
+# check configuration file exists and load deployment config (db connection, Magento installation opts, etc.).
+FILE_CFG=${DIR_ROOT}/deploy.cfg.${MODE}.sh
+if [ -f "${FILE_CFG}" ]
+then
+    echo "There is deployment configuration in ${FILE_CFG}."
+    . ${FILE_CFG}
+else
+    echo "There is no expected configuration in ${FILE_CFG}. Aborting..."
+    cd ${DIR_CUR}
+    exit
+fi
+echo "Post install routines are started in the '${MODE}' mode."
+
+# Folders shortcuts
+DIR_SRC=${DIR_ROOT}/src             # folder with sources
+DIR_DEPLOY=${DIR_ROOT}/deploy       # folder with deployment templates
+DIR_MAGE=${DIR_ROOT}/${MODE}        # root folder for Magento application
+DIR_BIN=${DIR_ROOT}/bin             # root folder for shell scripts
+
+
 # DB connection params
 DB_HOST=${CFG_DB_HOST}
 DB_NAME=${CFG_DB_NAME}
 DB_USER=${CFG_DB_USER}
 # use 'skip_password' to connect to server w/o password.
 DB_PASS=${CFG_DB_PASSWORD}
-if [ "$DB_PASS" = "skip_password" ]; then
+if [ "${DB_PASS}" = "skip_password" ]; then
     MYSQL_PASS=""
     MAGE_DBPASS=""
 else
-    MYSQL_PASS="--password=$DB_PASS"
+    MYSQL_PASS="--password=${DB_PASS}"
     MAGE_DBPASS="--db-password=""${CFG_DB_PASSWORD}"""
 fi
 # DB prefix can be empty
 DB_PREFIX="${CFG_DB_PREFIX}"
-if [ "$DB_PREFIX" = "" ]; then
+if [ "${DB_PREFIX}" = "" ]; then
     MAGE_DBPREFIX=""
 else
-    MAGE_DBPREFIX="--db-prefix=$DB_PREFIX"
+    MAGE_DBPREFIX="--db-prefix=${DB_PREFIX}"
 fi
 
 ##
-echo "Restore write access on folder '$M2_ROOT/app/etc' for owner when launches are repeated."
+echo "Restore write access on folder '${DIR_MAGE}/app/etc' for owner when launches are repeated."
 ##
-if [ -d "$M2_ROOT/app/etc" ]
+if [ -d "${DIR_MAGE}/app/etc" ]
 then
-    chmod -R go+w $M2_ROOT/app/etc
+    chmod -R go+w ${DIR_MAGE}/app/etc
 fi
 
 
-
 ##
-echo "Drop/create database $DB_NAME."
+echo "Drop/create database ${DB_NAME}."
 ##
-mysqladmin -f -u"$DB_USER" $MYSQL_PASS -h"$DB_HOST" drop "$DB_NAME"
-mysqladmin -f -u"$DB_USER" $MYSQL_PASS -h"$DB_HOST" create "$DB_NAME"
-
+mysqladmin -f -u"${DB_USER}" ${MYSQL_PASS} -h"${DB_HOST}" drop "${DB_NAME}"
+mysqladmin -f -u"${DB_USER}" ${MYSQL_PASS} -h"${DB_HOST}" create "${DB_NAME}"
 
 
 ##
-echo "(Re)install Magento using database '$DB_NAME' (connecting as '$DB_USER')."
+echo "(Re)install Magento using database '${DB_NAME}' (connecting as '${DB_USER}')."
 ##
 
 # Full list of the available options:
 # http://devdocs.magento.com/guides/v2.0/install-gde/install/cli/install-cli-install.html#instgde-install-cli-magento
 
-php $M2_ROOT/bin/magento setup:install  \
+php ${DIR_MAGE}/bin/magento setup:install  \
     --admin-firstname="${CFG_ADMIN_FIRSTNAME}" \
     --admin-lastname="${CFG_ADMIN_LASTNAME}" \
     --admin-email="${CFG_ADMIN_EMAIL}" \
@@ -82,54 +94,51 @@ php $M2_ROOT/bin/magento setup:install  \
     --use-secure-admin="${CFG_USE_SECURE_ADMIN}" \
     --admin-use-security-key="${CFG_ADMIN_USE_SECURITY_KEY}" \
     --session-save="${CFG_SESSION_SAVE}" \
-    --key="adccc7900047137edb40e4d1be5c56b2" \
+    --key="${CFG_SECURE_KEY}" \
     --cleanup-database \
     $MAGE_DBPREFIX \
     $MAGE_DBPASS \
 
 ##
-echo "Post installation setup for database '$DB_NAME'."
+echo "Post installation setup for database '${DB_NAME}'."
 ##
 #
-mysql --database=$DB_NAME --host=$DB_HOST --user=$DB_USER $MYSQL_PASS -e "source $LOCAL_ROOT/../bin/setup.sql"
+mysql --database=${DB_NAME} --host=${DB_HOST} --user=${DB_USER} ${MYSQL_PASS} -e "source ${DIR_BIN}/setup.sql"
 
-##
-echo "Upgrade Magento DB structure and data"
-##
-php ${M2_ROOT}/bin/magento setup:upgrade
 
-##
-if [ "$DEPLOYMENT_TYPE" = "test" ]; then
-    echo "Skip file system ownership and permissions setup."
-else
-    ##
-    echo "\nSwitch Magento 2 into 'developer' mode."
-    php $M2_ROOT/bin/magento deploy:mode:set developer
-    echo "Disable Magento 2 cache."
-    php $M2_ROOT/bin/magento cache:disable
-    echo "Run Magento 2 cron."
-    php $M2_ROOT/bin/magento cron:run
-#    echo "Init development data: STOCKS."
-    php $M2_ROOT/bin/magento prxgt:app:init-stocks
+echo ""
+echo "Upgrade Magento DB structure and data..."
+php ${DIR_MAGE}/bin/magento setup:upgrade
+echo "Switch Magento 2 into 'developer' mode..."
+php ${DIR_MAGE}/bin/magento deploy:mode:set developer
+echo "Disable Magento 2 cache..."
+php ${DIR_MAGE}/bin/magento cache:disable
+echo "Run Magento 2 cron..."
+php ${DIR_MAGE}/bin/magento cron:run
+
+echo ""
+echo "Init development data: STOCKS."
+php ${DIR_MAGE}/bin/magento prxgt:app:init-stocks
 #    echo "Init development data: PRODUCTS."
-#    php $M2_ROOT/bin/magento prxgt:app:init-products
-#    echo "Init development data: CUSTOMERS."
-    php $M2_ROOT/bin/magento prxgt:app:init-customers
-    echo "Run Magento 2 re-index."
-    php $M2_ROOT/bin/magento indexer:reindex
-    ##
-    echo "Set file system ownership and permissions."
-    ##
-#    mkdir -p $M2_ROOT/var/cache
-#    mkdir -p $M2_ROOT/var/generation
-    chown -R $LOCAL_OWNER:$LOCAL_GROUP $M2_ROOT
-    #find $M2_ROOT -type d -exec chmod 770 {} \;
-    #find $M2_ROOT -type f -exec chmod 660 {} \;
-    chmod -R g+w $M2_ROOT/var
-    chmod -R g+w $M2_ROOT/pub
-    chmod u+x $M2_ROOT/bin/magento
-    chmod -R go-w $M2_ROOT/app/etc
-fi
+#    php ${DIR_MAGE}/bin/magento prxgt:app:init-products
+echo "Init development data: CUSTOMERS."
+php ${DIR_MAGE}/bin/magento prxgt:app:init-customers
+
+echo ""
+echo "Run Magento 2 re-index."
+php ${DIR_MAGE}/bin/magento indexer:reindex
+
+echo ""
+echo "Set file system ownership and permissions."
+mkdir -p ${DIR_MAGE}/var/cache
+mkdir -p ${DIR_MAGE}/var/generation
+chown -R ${LOCAL_OWNER}:${LOCAL_GROUP} ${DIR_MAGE}
+find ${DIR_MAGE} -type d -exec chmod 770 {} \;
+find ${DIR_MAGE} -type f -exec chmod 660 {} \;
+chmod -R g+w ${DIR_MAGE}/var
+chmod -R g+w ${DIR_MAGE}/pub
+chmod u+x ${DIR_MAGE}/bin/magento
+chmod -R go-w ${DIR_MAGE}/app/etc
 
 
 ##
