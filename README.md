@@ -10,8 +10,8 @@
 * [./test](./test) - test scripts for the own code of the application's main module;
 * [./.travis.yml](./.travis.yml) - descriptor for Travis CI; 
 * [./composer.json](./composer.json) - descriptor for the main module of the application (type: "magento2-module");
-* *./templates.vars.live.json* - configuration variables for templates (live version); is not under version control; 
-* *./templates.vars.work.json* - configuration variables for templates (development version); is not under version control;
+* [./deploy.cfg.sh.init](./deploy.cfg.sh.init) - template for deployment configuration;
+* [./deploy.sh](./deploy.sh) - deployment script;
 
 
 
@@ -19,42 +19,55 @@
 
 ### Development / Test
 
-    $ git clone git@github.com:praxigento/mobi_app_generic_mage2.git mobi2_test.20160520
-    $ cd mobi2_test.20160520
-    $ cp ../mobi2_test/deploy_cfg.sh .
-    $ cp ../mobi2_test/templates.vars.work.json .
-    $ nano templates.vars.work.json
+    $ git clone git@github.com:praxigento/mobi_app_generic_mage2.git mobi.test_20160520
+    $ cd mobi.test_20160520
+    
+Copy existing configuration from previous version:
+    
+    $ cp ../mobi.test/deploy.cfg.work.sh .
+    
+... or new one from initial template:
+ 
+    $ cp ./deploy.cfg.sh.init deploy.cfg.work.sh
 
-Change path to the instance (LOCAL_ROOT).
+Then edit deployment configuration: 
 
-    {
-      "vars": {
-        "LOCAL_ROOT": "/home/magento/instance/mobi2_test.20160520/work",
-        "DEPLOYMENT_TYPE": "development",
-        "LOCAL_OWNER": "magento",
-        "LOCAL_GROUP": "apache",
-        "CFG_ADMIN_FIRSTNAME": "Store",
-        "CFG_ADMIN_LASTNAME": "Admin",
-        "CFG_ADMIN_EMAIL": "admin@store.com",
-        "CFG_ADMIN_USER": "admin",
-        "CFG_ADMIN_PASSWORD": "...",
-        "CFG_BASE_URL": "http://mobi2.mage.test.prxgt.com/",
-        "CFG_BACKEND_FRONTNAME": "admin",
-        "CFG_DB_HOST": "localhost",
-        "CFG_DB_NAME": "mage_mobi2_test",
-        "CFG_DB_USER": "mage_mobi2_test",
-        "CFG_DB_PASSWORD": "...",
-        "CFG_DB_PREFIX": "",
-        "CFG_LANGUAGE": "en_US",
-        "CFG_CURRENCY": "USD",
-        "CFG_TIMEZONE": "UTC",
-        "CFG_USE_REWRITES": "0",
-        "CFG_USE_SECURE": "0",
-        "CFG_USE_SECURE_ADMIN": "0",
-        "CFG_ADMIN_USE_SECURITY_KEY": "0",
-        "CFG_SESSION_SAVE": "db"
-      }
-    }
+    $ nano deploy.cfg.work.sh
+
+Change owners and Magento 2 deployment options:
+
+    #!/usr/bin/env bash
+    
+    # The owner of the Magento file system:
+    #   * Must have full control (read/write/execute) of all files and directories.
+    #   * Must not be the web server user; it should be a different user.
+    # Web server:
+    #   * must be a member of the '${LOCAL_GROUP}' group.
+    LOCAL_OWNER="owner"
+    LOCAL_GROUP="www-data"
+    
+    # Magento 2 installation configuration
+    # see http://devdocs.magento.com/guides/v2.0/install-gde/install/cli/install-cli-install.html#instgde-install-cli-magento
+    ADMIN_FIRSTNAME="Store"
+    ADMIN_LASTNAME="Admin"
+    ADMIN_EMAIL="admin@store.com"
+    ADMIN_USER="admin"
+    ADMIN_PASSWORD="..."
+    BASE_URL="http://mage2.host.org:8080/"
+    BACKEND_FRONTNAME="admin"
+    SECURE_KEY="..."
+    DB_HOST="localhost"
+    DB_NAME="mage2"
+    DB_USER="www"
+    DB_PASS="..."
+    LANGUAGE="en_US"
+    CURRENCY="USD"
+    TIMEZONE="UTC"
+    USE_REWRITES="0"
+    USE_SECURE="0"
+    USE_SECURE_ADMIN="0"
+    ADMI_USE_SECURITY_KEY="0"
+    SESSION_SAVE="db"
 
 Start deploy and post-installation routines:
 
@@ -64,7 +77,7 @@ Start deploy and post-installation routines:
 Re-link root folder to switch web server to the new instance:
 
     $ cd ../
-    $ unlink mobi2_test ; ln -s ./mobi2_test.20160520 mobi2_test ;
+    $ unlink mobi.test ; ln -s ./mobi.test_20160520 mobi.test ;
 
 
 
