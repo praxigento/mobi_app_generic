@@ -8,47 +8,47 @@ handlers:
         class: Monolog\Handler\StreamHandler
         level: DEBUG
         formatter: dashed
-        stream: ${LOCAL_ROOT}/var/log/application.log
+        stream: ${CFG_DIR_MAGE}/var/log/application.log
     debug_hndl:
         class: Monolog\Handler\StreamHandler
         level: DEBUG
         formatter: dashed
-        stream: ${LOCAL_ROOT}/var/log/debug.log
+        stream: ${CFG_DIR_MAGE}/var/log/debug.log
     events_hndl:
         class: Monolog\Handler\StreamHandler
         level: DEBUG
         formatter: dashed
-        stream: ${LOCAL_ROOT}/var/log/events.log
+        stream: ${CFG_DIR_MAGE}/var/log/events.log
     exception_hndl:
         class: Monolog\Handler\StreamHandler
         level: ERROR
         formatter: dashed
-        stream: ${LOCAL_ROOT}/var/log/exception.log
+        stream: ${CFG_DIR_MAGE}/var/log/exception.log
     odoo_api_hndl:
         class: Monolog\Handler\StreamHandler
         level: DEBUG
         formatter: dashed
-        stream: ${LOCAL_ROOT}/var/log/odoo.log
+        stream: ${CFG_DIR_MAGE}/var/log/odoo.log
     setup_hndl:
         class: Monolog\Handler\StreamHandler
         level: DEBUG
         formatter: dashed
-        stream: ${LOCAL_ROOT}/var/log/setup.log
+        stream: ${CFG_DIR_MAGE}/var/log/setup.log
     sql_hndl:
         class: Monolog\Handler\StreamHandler
         level: DEBUG
         formatter: dashed
-        stream: ${LOCAL_ROOT}/var/log/sql.log
+        stream: ${CFG_DIR_MAGE}/var/log/sql.log
     system_hndl:
         class: Monolog\Handler\StreamHandler
         level: INFO
         formatter: dashed
-        stream: ${LOCAL_ROOT}/var/log/system.log
+        stream: ${CFG_DIR_MAGE}/var/log/system.log
     webapi_hndl:
         class: Monolog\Handler\StreamHandler
         level: DEBUG
         formatter: dashed
-        stream: ${LOCAL_ROOT}/var/log/webapi.log
+        stream: ${CFG_DIR_MAGE}/var/log/webapi.log
 loggers:
     app:
         handlers: [application_hndl]
