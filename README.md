@@ -9,6 +9,7 @@
 * [./src](./src) - source files for the main module of the application;
 * [./test](./test) - test scripts for the own code of the application's main module;
 * [./.travis.yml](./.travis.yml) - descriptor for Travis CI; 
+* [./autodeploy.sh](./autodeploy.sh) - script to refresh deployment by cron; 
 * [./composer.json](./composer.json) - descriptor for the main module of the application (type: "magento2-module");
 * [./deploy.cfg.sh.init](./deploy.cfg.sh.init) - template for deployment configuration;
 * [./deploy.sh](./deploy.sh) - deployment script;
