@@ -37,7 +37,7 @@
   "minimum-stability": "dev",
   "extra": {
     "praxigento_templates_config": [
-      "../deploy/work/templates.cfg.json",
+      "../deploy/composer/templates.cfg.work.json",
       "../templates.vars.work.json"
     ]
   }

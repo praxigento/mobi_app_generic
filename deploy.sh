@@ -136,7 +136,13 @@ echo "Link automated tests folder to the web root..."
 cd ${DIR_MAGE}
 ln -s ${DIR_ROOT}/test/integration theater
 
-## TODO: add timestamp mark to web root
+echo ""
+echo "Add file with timestamp mark into the web root..."
+CURRENT_TIMESTAMP=`date +%Y%m%d-%H%M%S`
+cat << EOF > ${DIR_MAGE}/date_deployed.txt
+${CURRENT_TIMESTAMP}
+EOF
+
 
 # Finalize job
 echo ""
