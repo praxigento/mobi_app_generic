@@ -48,8 +48,8 @@ mobi.setViewport = function setViewport() {
  */
 mobi.capture = function capture(img, scene, scenario) {
     var fileTag = scenario + '/' + scene + '/' + img;
-    casper.test.assert(true, '  screen captured: ' + fileTag);
     var fileName = mobi.opts.path.screenshots + fileTag + '.png';
+    casper.echo('  screen captured: ' + fileName);
     casper.capture(fileName);
 };
 
@@ -63,7 +63,8 @@ mobi.capture = function capture(img, scene, scenario) {
 mobi.getNavigationUrl = function getNavigationUrl(path, scope) {
     var scoped = mobi.opts.navig[scope];    // shortcut for Magento URLs
     var uri = mobi.objPath.get(scoped, path);   // get URL value by path
-    var result = scoped.base + uri; // compose full URL
+    var result = scoped.self + uri; // compose full URL
+    casper.echo('URL: ' + result);
     return result;
 };
 

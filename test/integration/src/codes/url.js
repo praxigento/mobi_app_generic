@@ -4,10 +4,17 @@
  */
 var urls = {
     mage: {
-        base: 'http://mobi2.mage.test.prxgt.com',   // Base URL for the site should be tested (w/o ending '/')
-        admin: {},
-        api: {},
+        self: 'http://mobi.mage.test-auto.prxgt.com',   // Base URL for the site (w/o ending '/')
+        admin: {
+            self: '/admin/',
+            admin: '/admin/admin/'
+        },
+        api: {
+            self: '/rest/schema/',
+            schema: '/rest/schema/'
+        },
         front: {
+            self: '/',
             catalog: {
                 category: '/catalog/category/view/s/cat-2/id/3/',
                 product: {
@@ -26,6 +33,18 @@ var urls = {
                     login: '/customer/account/login/'
                 }
             }
+        }
+    },
+    odoo: {
+        self: 'http://lion.host.prxgt.com:8122',    // Base URL for the site (w/o ending '/')
+        admin: {
+            self: '/web'
+        },
+        api: {
+            self: '/api'
+        },
+        shop: {
+            self: '/shop'
         }
     }
 }
