@@ -137,7 +137,7 @@ cd ${DIR_MAGE}
 ln -s ${DIR_ROOT}/test/integration theater
 echo ""
 echo "Install npm module for integration tests..."
-cd ${DIR_MAGE}/test/integration
+cd ${DIR_ROOT}/test/integration
 /usr/bin/npm install
 
 echo ""
