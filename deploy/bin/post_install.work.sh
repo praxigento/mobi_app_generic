@@ -109,22 +109,23 @@ mysql --database=${DB_NAME} --host=${DB_HOST} --user=${DB_USER} ${MYSQL_PASS} -e
 echo ""
 echo "Upgrade Magento DB structure and data..."
 php ${DIR_MAGE}/bin/magento setup:upgrade
-echo "Switch Magento 2 into 'developer' mode..."
-php ${DIR_MAGE}/bin/magento deploy:mode:set developer
-echo "Disable Magento 2 cache..."
-php ${DIR_MAGE}/bin/magento cache:disable
-echo "Run Magento 2 cron..."
-php ${DIR_MAGE}/bin/magento cron:run
+echo "Switch Magento 2 into 'production' mode..."
+php ${DIR_MAGE}/bin/magento deploy:mode:set production
+#echo "Enable Magento 2 cache..."
+#php ${DIR_MAGE}/bin/magento cache:enable
+
 
 echo ""
-echo "Init development data: STOCKS."
-php ${DIR_MAGE}/bin/magento prxgt:app:init-stocks
-#    echo "Init development data: PRODUCTS."
-#    php ${DIR_MAGE}/bin/magento prxgt:app:init-products
+echo "Initial data: USERS."
+php ${DIR_MAGE}/bin/magento prxgt:app:init-users
 echo "Init development data: CUSTOMERS."
 php ${DIR_MAGE}/bin/magento prxgt:app:init-customers
+echo "Init development data: STOCKS."
+php ${DIR_MAGE}/bin/magento prxgt:app:init-stocks
 
 echo ""
+echo "Run Magento 2 cron..."
+php ${DIR_MAGE}/bin/magento cron:run
 echo "Run Magento 2 re-index."
 php ${DIR_MAGE}/bin/magento indexer:reindex
 
