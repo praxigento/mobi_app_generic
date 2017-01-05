@@ -135,6 +135,10 @@ echo ""
 echo "Link automated tests folder to the web root..."
 cd ${DIR_MAGE}
 ln -s ${DIR_ROOT}/test/integration theater
+echo ""
+echo "Install npm module for integration tests..."
+cd ${DIR_MAGE}/test/integration
+/usr/bin/npm install
 
 echo ""
 echo "Add file with timestamp mark into the web root..."
