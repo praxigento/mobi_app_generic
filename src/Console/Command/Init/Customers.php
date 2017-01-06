@@ -28,8 +28,9 @@ class Customers
     ];
     /** @var string 'UserPassword12 */
     protected $DEFAULT_PASSWORD_HASH = '387cf1ea04874290e8e3c92836e1c4b630c5abea110d8766bddb4b3a6224ea04:QVIfkMF7kfwRkkC3HdqJ84K1XANG38LF:1';
-    /** Retail customers */
-    protected $GROUP_RETAIL = [9, 12];
+    /** Retail & Wholesale customers */
+    protected $GROUP_RETAIL = [8, 13];
+    protected $GROUP_WHOLESALE = [3];
     /** @var  \Praxigento\Core\Transaction\Database\IManager */
     protected $manTrans;
     /**
@@ -92,6 +93,9 @@ class Customers
                 /* MOBI-427: change group ID for retail customers */
                 if (in_array($custId, $this->GROUP_RETAIL)) {
                     $customer->setGroupId(BusinessCodesManager::M_CUST_GROUP_RETAIL);
+                }
+                if (in_array($custId, $this->GROUP_WHOLESALE)) {
+                    $customer->setGroupId(BusinessCodesManager::M_CUST_GROUP_WHOLESALE);
                 }
                 /** @var \Magento\Customer\Api\Data\CustomerInterface $saved */
                 $saved = $this->repoCustomer->save($customer, $this->DEFAULT_PASSWORD_HASH);
