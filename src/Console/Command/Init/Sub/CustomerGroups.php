@@ -5,9 +5,6 @@
 
 namespace Praxigento\App\Generic2\Console\Command\Init\Sub;
 
-use Praxigento\App\Generic2\Config as Cfg;
-use Praxigento\App\Generic2\Tool\Odoo\Def\BusinessCodesManager as Codes;
-
 class CustomerGroups
 {
     /** @var \Praxigento\App\Generic2\Tool\Odoo\Def\BusinessCodesManager */
@@ -29,23 +26,6 @@ class CustomerGroups
         $this->manBusCodes = $manBusCodes;
         $this->repoGeneric = $repoGeneric;
         $this->repoGroup = $repoGroup;
-    }
-
-    public function renameGroups()
-    {
-        $entity = Cfg::ENTITY_MAGE_CUSTOMER_GROUP;
-        /* retail */
-        $id = [Cfg::E_CUSTGROUP_A_ID => Codes::M_CUST_GROUP_RETAIL];
-        $bind = [Cfg::E_CUSTGROUP_A_CODE => Codes::B_CUST_GROUP_RETAIL];
-        $this->repoGeneric->updateEntityById($entity, $bind, $id);
-        /* distributor */
-        $id = [Cfg::E_CUSTGROUP_A_ID => Codes::M_CUST_GROUP_DISTRIBUTOR];
-        $bind = [Cfg::E_CUSTGROUP_A_CODE => Codes::B_CUST_GROUP_DISTRIBUTOR];
-        $this->repoGeneric->updateEntityById($entity, $bind, $id);
-        /* wholesaler */
-        $id = [Cfg::E_CUSTGROUP_A_ID => Codes::M_CUST_GROUP_WHOLESALE];
-        $bind = [Cfg::E_CUSTGROUP_A_CODE => Codes::B_CUST_GROUP_WHOLESALE];
-        $this->repoGeneric->updateEntityById($entity, $bind, $id);
     }
 
     /**
