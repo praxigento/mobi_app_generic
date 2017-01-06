@@ -7,7 +7,12 @@ var urls = {
         self: 'http://mobi.mage.test-auto.prxgt.com',   // Base URL for the site (w/o ending '/')
         admin: {
             self: '/admin/',
-            admin: '/admin/admin/'
+            admin: {
+                self: '/admin/',
+                auth: {
+                    logout: '/admin/admin/auth/logout/'
+                }
+            },
         },
         api: {
             self: '/rest/schema/',

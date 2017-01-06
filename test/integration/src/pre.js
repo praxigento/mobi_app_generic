@@ -5,8 +5,9 @@ casper.echo("=== PRE SUITE BEGIN ===");
 /**
  * Load MOBI parts (data objects and functions)
  */
-var urls = require('../src/codes/url'); // URLs codifier
+var auth = require('../src/codes/auth'); // authentication data
 var conf = require('../src/codes/conf'); // application constants
+var urls = require('../src/codes/url'); // URLs codifier
 var funcFrontAuthentication = require('../src/sub/front/auth'); // frontend authentication function
 /**
  * Add 'mobi' object to globals.
@@ -17,6 +18,7 @@ var mobi = {};
  * Add testing configuration to 'mobi' object.
  */
 mobi.opts = {
+    auth: auth,
     conf: conf,
     navig: urls,
     path: {                                         // Paths configuration
@@ -47,9 +49,9 @@ mobi.setViewport = function setViewport() {
  * @param scenario
  */
 mobi.capture = function capture(img, scene, scenario) {
-    var fileTag = scenario + '/' + scene + '/' + img;
-    var fileName = mobi.opts.path.screenshots + fileTag + '.png';
-    casper.echo('  screen captured: ' + fileName);
+    var fileTag = scenario + "/" + scene + "/" + img;
+    var fileName = mobi.opts.path.screenshots + fileTag + ".png";
+    casper.echo("  screen captured: " + fileName, "INFO");
     casper.capture(fileName);
 };
 
@@ -61,10 +63,12 @@ mobi.capture = function capture(img, scene, scenario) {
  * @returns {string} 'http://mobi2.mage.test.prxgt.com/catalog/category/view/s/cat-2/id/3/'
  */
 mobi.getNavigationUrl = function getNavigationUrl(path, scope) {
-    var scoped = mobi.opts.navig[scope];    // shortcut for Magento URLs
-    var uri = mobi.objPath.get(scoped, path);   // get URL value by path
+    casper.echo("  construct URL for path '" + path + "' and scope '" + scope + "'.", "PARAMETER");
+    var scoped = mobi.opts.navig[scope];        // shortcut for Magento URLs
+    var isAlias = path.indexOf('/') === -1;     // absolute path contains at least one '/' char
+    var uri = (isAlias) ? mobi.objPath.get(scoped, path) : path;   // get URL value by path or use path as-is
     var result = scoped.self + uri; // compose full URL
-    casper.echo('URL: ' + result);
+    casper.echo("  result URL: " + result, "PARAMETER");
     return result;
 };
 
