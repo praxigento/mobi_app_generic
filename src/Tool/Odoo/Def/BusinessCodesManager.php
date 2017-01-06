@@ -14,6 +14,7 @@ class BusinessCodesManager
      * Business codes for Customer Groups.
      */
     const B_CUST_GROUP_DISTRIBUTOR = 'distributor';
+    const B_CUST_GROUP_REFERRAL = 'referral';
     const B_CUST_GROUP_RETAIL = 'retail';
     const B_CUST_GROUP_WHOLESALE = 'wholesale';
     /**#@- */
@@ -42,6 +43,7 @@ class BusinessCodesManager
      * Magento IDs for Customer Groups.
      */
     const M_CUST_GROUP_DISTRIBUTOR = 1;
+    const M_CUST_GROUP_REFERRAL = 4;
     const M_CUST_GROUP_RETAIL = 3;
     const M_CUST_GROUP_WHOLESALE = 2;
     /**#@- */
@@ -66,20 +68,19 @@ class BusinessCodesManager
     const M_TRACK_TITLE__FLAT_RATE = 'Pseudo tracking code for tests.';
     /**#@- */
 
-    /** @inheritdoc */
-    public function getBusCodeForCustomerGroup(\Magento\Customer\Api\Data\CustomerInterface $customer)
+    public function getBusCodeForCustomerGroupById($groupId)
     {
         $result = self::B_CUST_GROUP_RETAIL;
-        $groupId = $customer->getGroupId();
         if ($groupId == self::M_CUST_GROUP_DISTRIBUTOR) {
             $result = self::B_CUST_GROUP_DISTRIBUTOR;
         } elseif ($groupId == self::M_CUST_GROUP_WHOLESALE) {
             $result = self::B_CUST_GROUP_WHOLESALE;
+        } elseif ($groupId == self::M_CUST_GROUP_REFERRAL) {
+            $result = self::B_CUST_GROUP_REFERRAL;
         }
         return $result;
     }
 
-    /** @inheritdoc */
     public function getBusCodeForPaymentMethod(\Magento\Sales\Api\Data\OrderPaymentInterface $payment)
     {
         $result = null;
@@ -94,7 +95,6 @@ class BusinessCodesManager
         return $result;
     }
 
-    /** @inheritdoc */
     public function getBusCodeForShippingMethod(\Magento\Sales\Api\Data\OrderInterface $order)
     {
         $result = null;
@@ -105,7 +105,6 @@ class BusinessCodesManager
         return $result;
     }
 
-    /** @inheritdoc */
     public function getMagCodeForCarrier($businessCode)
     {
         $result = 'unknown carrier';
@@ -115,7 +114,6 @@ class BusinessCodesManager
         return $result;
     }
 
-    /** @inheritdoc */
     public function getTitleForCarrier($businessCode)
     {
         $result = 'unknown tracking';

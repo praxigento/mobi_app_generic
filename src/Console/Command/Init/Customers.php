@@ -98,8 +98,8 @@ class Customers
                 $this->mapCustomerMageIdByIndex[$custId] = $saved->getId();
                 $this->mapCustomerIndexByMageId[$saved->getId()] = $custId;
             }
-            /* MOBI-426 : rename customer groups according to Generic App scheme. */
-            $this->subCustomerGroups->renameGroups();
+            /* MOBI-426 : rename customer groups according to Generic App scheme and create new ones. */
+            $this->subCustomerGroups->updateGroups();
             $this->manTrans->commit($def);
         } finally {
             // transaction will be rolled back if commit is not done (otherwise - do nothing)
