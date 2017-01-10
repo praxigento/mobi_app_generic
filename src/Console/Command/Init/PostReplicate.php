@@ -13,21 +13,18 @@ class PostReplicate
     extends \Praxigento\App\Generic2\Console\Command\Init\Base
 {
     /** @var Sub\Categories */
-    protected $_subCats;
-    protected $_subAclUser;
+    protected $subCats;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        Sub\Categories $subCats,
-        Sub\AclUser $subAclUser
+        Sub\Categories $subCats
     ) {
         parent::__construct(
             $manObj,
             'prxgt:odoo:post-replicate',
             'Enable data after replication from Odoo.'
         );
-        $this->_subCats = $subCats;
-        $this->_subAclUser = $subAclUser;
+        $this->subCats = $subCats;
     }
 
     protected function execute(
@@ -35,9 +32,7 @@ class PostReplicate
         \Symfony\Component\Console\Output\OutputInterface $output
     ) {
         /* enable categories after replication */
-        $this->_subCats->enableForAllStoreViews();
-        /* create ACL user for Odoo push replication */
-        $this->_subAclUser->createAclUsers();
+        $this->subCats->enableForAllStoreViews();
     }
 
 }
