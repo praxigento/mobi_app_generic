@@ -42,7 +42,7 @@ if [ "${DB_PASS}" = "skip_password" ]; then
     MAGE_DBPASS=""
 else
     MYSQL_PASS="--password=${DB_PASS}"
-    MAGE_DBPASS="--db-password=""${CFG_DB_PASSWORD}"""
+    MAGE_DBPASS="--db-password=""${DB_PASS}"""
 fi
 # DB prefix can be empty
 DB_PREFIX="${CFG_DB_PREFIX}"
@@ -122,6 +122,9 @@ echo "Init development data: CUSTOMERS."
 php ${DIR_MAGE}/bin/magento prxgt:app:init-customers
 echo "Init development data: STOCKS."
 php ${DIR_MAGE}/bin/magento prxgt:app:init-stocks
+echo "Init development data: replicate Odoo products."
+php ${DIR_MAGE}/bin/magento prxgt:odoo:replicate-products
+
 
 echo ""
 echo "Run Magento 2 cron..."
