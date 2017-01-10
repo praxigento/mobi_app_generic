@@ -54,7 +54,7 @@ REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '1', path ='tax/sales_
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '1', path ='tax/sales_display/full_summary';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '1', path ='tax/sales_display/zero_tax';
 -- Sales / Checkout
-REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '0', path ='checkout/options/guest_checkout';
+-- REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '0', path ='checkout/options/guest_checkout';
 -- Sales / Shipping Settings
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'Riga', path ='shipping/origin/city';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'LV', path ='shipping/origin/country_id';
