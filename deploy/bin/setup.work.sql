@@ -8,6 +8,11 @@
 
 -- MGT-COMMERCE.COM / Developer Toolbar
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '0', path ='mgt_developer_toolbar/module/is_enabled';
+-- MOBI options
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '${SQL_ODOO_URI}', path ='praxigento_odoo/connect/uri';
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '${SQL_ODOO_DB}', path ='praxigento_odoo/connect/database';
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '${SQL_ODOO_USER}', path ='praxigento_odoo/connect/user';
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '${SQL_ODOO_PASSWORD}', path ='praxigento_odoo/connect/password';
 -- General / General
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'Europe/Riga', path ='general/locale/timezone';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'LV', path ='general/country/default';

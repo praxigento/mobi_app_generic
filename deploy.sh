@@ -47,6 +47,10 @@ echo "Generate JSON config for templates processing..."
 cat << EOF > ${DIR_ROOT}/templates.vars.${MODE}.json
 {
   "vars": {
+    "SQL_ODOO_URI": "${SQL_ODOO_URI}",
+    "SQL_ODOO_DB": "${SQL_ODOO_DB}",
+    "SQL_ODOO_USER": "${SQL_ODOO_USER}",
+    "SQL_ODOO_PASSWORD": "${SQL_ODOO_PASSWORD}",
     "CFG_DIR_MAGE": "${DIR_MAGE}",
     "CFG_ADMIN_FIRSTNAME": "${ADMIN_FIRSTNAME}",
     "CFG_ADMIN_LASTNAME": "${ADMIN_LASTNAME}",

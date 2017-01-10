@@ -46,7 +46,13 @@ Change owners and Magento 2 deployment options:
     #   * must be a member of the '${LOCAL_GROUP}' group.
     LOCAL_OWNER="owner"
     LOCAL_GROUP="www-data"
-    
+            
+    # SQL update options
+    SQL_ODOO_URI=
+    SQL_ODOO_DB=
+    SQL_ODOO_USER=
+    SQL_ODOO_PASSWORD=
+
     # Magento 2 installation configuration
     # see http://devdocs.magento.com/guides/v2.0/install-gde/install/cli/install-cli-install.html#instgde-install-cli-magento
     ADMIN_FIRSTNAME="Store"
