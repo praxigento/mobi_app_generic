@@ -23,6 +23,7 @@
   "scripts": {
     "test": "node_modules/casperjs/bin/casperjs --pre=src/pre.js --includes=src/inc.js --post=src/post.js --xunit=xunit.xml --verbose test scenarios/",
     "scene_000_000": "node_modules/casperjs/bin/casperjs --pre=src/pre.js --includes=src/inc.js --post=src/post.js --xunit=xunit.xml test scenarios/000-init-checking/000-entries.js",
+    "scene_020_020": "node_modules/casperjs/bin/casperjs --pre=src/pre.js --includes=src/inc.js --post=src/post.js --xunit=xunit.xml test scenarios/020-customers/020-sugnup-anon.js",
     "scene_030_020": "node_modules/casperjs/bin/casperjs --pre=src/pre.js --includes=src/inc.js --post=src/post.js --xunit=xunit.xml --verbose test scenarios/030-sales/020-distributor-order-braintree.js",
     "scene": "node_modules/casperjs/bin/casperjs --pre=src/pre.js --includes=src/inc.js --post=src/post.js --xunit=xunit.xml --verbose test "
   },

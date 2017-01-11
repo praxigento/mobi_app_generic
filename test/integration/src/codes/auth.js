@@ -23,6 +23,14 @@ var result = {
             customer01: {
                 email: 'customer_1@test.com',
                 password: 'UserPassword12'
+            },
+            customerAnon: {
+                email: 'mobi.anon@gmail.com',
+                password: 'UserPassword12'
+            },
+            customerReferral: {
+                email: 'mobi.referral@gmail.com',
+                password: 'UserPassword12'
             }
         }
     },
@@ -30,6 +38,12 @@ var result = {
         api: {},
         shop: {},
         web: {}
+    },
+    gmail: {
+        customerAnon: {
+            email: 'mobi.anon@gmail.com',
+            password: 'p11PGCLEVMjsRCVNemja'
+        }
     }
 }
 
