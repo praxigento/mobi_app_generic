@@ -186,19 +186,22 @@ casper.test.begin(desc, function scene_020_020(test) {
         });
     });
 
+    // casper.then(function () {
+    //     var css = "#registration p"
+    //     mobi.capture("0499", scenario, pack);
+    //     casper.waitForSelector(css, function () {
+    //         test.assertSelectorHasText(
+    //             css,
+    //             "A letter with further instructions will be sent to your email.",
+    //             "A letter with further instructions will be sent to your email."
+    //         );
+    //         mobi.capture("050", scenario, pack);
+    //     });
+    // });
 
-    casper.then(function () {
-        var css = "#registration p"
-        mobi.capture("0499", scenario, pack);
-        casper.waitForSelector(css, function () {
-            test.assertSelectorHasText(
-                css,
-                "A letter with further instructions will be sent to your email.",
-                "A letter with further instructions will be sent to your email."
-            );
-            mobi.capture("050", scenario, pack);
-        });
-    });
+    /** Gmail login form is loaded */
+
+
 
     /** Run scenario and finalize test. */
     casper.run(function () {
