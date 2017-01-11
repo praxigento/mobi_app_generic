@@ -10,6 +10,7 @@ var pathScreens = mobi.opts.path.screenshots;
 var authMageCustomer = mobi.opts.auth.mage.front.customerAnon;
 var authGmailCustomer = mobi.opts.auth.gmail.customerAnon;
 var address = mobi.opts.address.anonymous;
+var uriMageSignup; // URI extracted from Gmail message
 
 casper.test.begin(desc, function scene_020_020(test) {
 
@@ -199,9 +200,127 @@ casper.test.begin(desc, function scene_020_020(test) {
     //     });
     // });
 
+
     /** Gmail login form is loaded */
+    casper.then(function () {
+        var url = "https://mail.google.com/mail/u/0/h/1pq68r75kzvdr/?v%3Dlui";
+        casper.open(url).then(function () {
+            var cssBtnNext = "input#next";
+            casper.waitForSelector(cssBtnNext, function () {
+                test.assert(true, 'Gmail login form is loaded.');
+                casper.fillSelectors("#identifier-shown", {
+                    "#Email": authGmailCustomer.email
+                }, false);
+                mobi.capture("100", scenario, pack);
+                casper.click(cssBtnNext, "50%", "50%");
 
+                /** fill in passwd */
+                var cssFldPasswd = '#Passwd';
+                casper.waitFor(function check() {
+                    var result = casper.visible(cssFldPasswd);
+                    return result;
+                }, function then() {
+                    casper.fillSelectors("#password-shown", {
+                        "#Passwd": authGmailCustomer.password
+                    }, false);
+                    casper.click(cssBtnNext, "50%", "50%");
+                });
+            });
+        });
+    });
 
+    /** User is logged into Gmail. */
+    casper.then(function () {
+        var cssEmail = "#guser > nobr > b";
+        casper.waitForSelector(cssEmail, function () {
+            var email = casper.fetchText(cssEmail);
+            test.assertEquals(email, authGmailCustomer.email, "User is logged into Gmail.");
+            mobi.capture("110", scenario, pack);
+        });
+    });
+
+    /** Open signup email */
+    casper.then(function () {
+        var cssItem = "body > table:nth-child(16) > tbody > tr > td:nth-child(2) > table:nth-child(1) > tbody > tr > td:nth-child(2) > form > table.th > tbody > tr:nth-child(1) > td:nth-child(3) > a ";
+        casper.waitForSelector(cssItem, function () {
+            var subject = casper.fetchText(cssItem);
+            var isSignupEmail = (subject.indexOf("Welcome to MOBI Test Store") !== -1);
+            casper.click(cssItem);
+        });
+    });
+
+    /** Extract signup URI */
+    casper.then(function () {
+        mobi.capture("120", scenario, pack);
+        var cssLink = "body > table:nth-child(16) > tbody > tr > td:nth-child(2) > table:nth-child(1) > tbody > tr > td:nth-child(2) > table:nth-child(4) > tbody > tr > td > table:nth-child(2) > tbody > tr:nth-child(4) > td > div > div > table > tbody > tr > td > table > tbody > tr:nth-child(2) > td > p:nth-child(3) > a";
+        var href = casper.getElementAttribute(cssLink, "href");
+        var replaced = href.replace("http://www.google.com/url?q=", "");
+        var decoded = decodeURIComponent(replaced);
+        uriMageSignup = decoded;
+    });
+
+    /** Goto Inbox */
+    casper.then(function () {
+        var cssBackToInbox = "a.searchPageLink"; // there are 2 links on the page
+        casper.click(cssBackToInbox);
+        mobi.capture("130", scenario, pack);
+    });
+
+    /** Check all messages */
+    casper.then(function () {
+        var cssCheckbox = "input[type=checkbox]";
+        var elements = casper.getElementsInfo(cssCheckbox);
+        elements.forEach(function (element) {
+            casper.echo("::: " + JSON.stringify(element));
+            casper.click("input[value='" + element.attributes.value + "']");
+        });
+        mobi.capture("140", scenario, pack);
+    });
+
+    /** Press "Delete" button */
+    casper.then(function () {
+        var cssBtnDelete = "input[value='Delete']";
+        casper.click(cssBtnDelete);
+        mobi.capture("150", scenario, pack);
+    });
+
+    // Magento
+
+    /** "Set a New Password" page is loaded */
+    casper.then(function () {
+        var url = uriMageSignup;
+        casper.open(url).then(function () {
+            casper.waitForSelector("#form-validate > div > div > button", function () {
+                test.assert(true, '"Set a New Password" page is loaded.');
+            });
+        });
+    });
+
+    /** Password value is filled in and submitted */
+    casper.then(function () {
+        casper.fillSelectors("#form-validate", {"#password": authMageCustomer.password}, false);
+        casper.fillSelectors("#form-validate", {"#password-confirmation": authMageCustomer.password}, true);
+        test.assert(true, "Password value is filled in and submitted.");
+        mobi.capture("310", scenario, pack);
+    });
+
+    /** Login form is filled in and submitted */
+    casper.then(function () {
+        casper.waitForSelector("#send2", function () {
+            casper.fillSelectors("#login-form", {"#email": authMageCustomer.email}, false);
+            casper.fillSelectors("#login-form", {"#pass": authMageCustomer.password}, true);
+            test.assert(true, "Login form is filled in and submitted.");
+            mobi.capture("320", scenario, pack);
+        });
+    });
+
+    /** Dashboard is loaded */
+    casper.then(function () {
+        casper.waitForSelector("h1.page-title", function () {
+            test.assert(true, "Dashboard is loaded.");
+            mobi.capture("330", scenario, pack);
+        });
+    });
 
     /** Run scenario and finalize test. */
     casper.run(function () {
