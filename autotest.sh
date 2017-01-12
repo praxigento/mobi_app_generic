@@ -15,5 +15,5 @@ cd ${DIR_ROOT}/work/theater
 
 # Finalize job
 echo ""
-echo "Auto deployment is done."
+echo "Auto test is done."
 cd ${CUR_DIR}
