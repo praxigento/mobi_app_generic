@@ -19,6 +19,10 @@ casper.test.begin(desc, function scene_020_020(test) {
         mobi.setViewport();
     });
 
+
+    // Magento Front: composer order
+
+
     /** Product page is loaded for "215San" */
     casper.then(function () {
         var url = mobi.getUrlMage("front.catalog.product.san215");
@@ -91,7 +95,7 @@ casper.test.begin(desc, function scene_020_020(test) {
         });
     });
 
-
+    // CSS selectors for checkout page
     var cssRadio = "div.payment-method.payment-method-braintree > div.payment-method-title.field.choice > label > span";
     var cssBtnPlace = "div.payment-method-braintree > div.payment-method-content > div.actions-toolbar > div > button > span";
 
@@ -112,7 +116,6 @@ casper.test.begin(desc, function scene_020_020(test) {
         casper.click(cssRadio);
         test.assert(true, "Credit card payment method is selected.");
     });
-
 
     /** Payment data is filled in */
     casper.waitWhileVisible('body > div.loading-mask', function () {
@@ -155,7 +158,6 @@ casper.test.begin(desc, function scene_020_020(test) {
         });
     });
 
-
     /** "Place Order" button is clicked */
     casper.then(function () {
         casper.waitForSelector('#checkout-payment-method-load', function () {
@@ -165,7 +167,6 @@ casper.test.begin(desc, function scene_020_020(test) {
             test.assert(true, '"Place Order" button is clicked.');
         });
     });
-
 
     /** Order placement is completed */
     casper.then(function () {
@@ -180,25 +181,16 @@ casper.test.begin(desc, function scene_020_020(test) {
         var cssBtnCreate = "input[type=submit]";
         casper.waitForSelector(cssBtnCreate, function () {
             test.assert(true, '... "Create an Account" button is visible.');
-            mobi.capture("045", scenario, pack);
             casper.click(cssBtnCreate);
             test.assert(true, '"Create an Account" button is clicked.');
-            mobi.capture("049", scenario, pack);
+            mobi.capture("050", scenario, pack);
         });
     });
 
-    // casper.then(function () {
-    //     var css = "#registration p"
-    //     mobi.capture("0499", scenario, pack);
-    //     casper.waitForSelector(css, function () {
-    //         test.assertSelectorHasText(
-    //             css,
-    //             "A letter with further instructions will be sent to your email.",
-    //             "A letter with further instructions will be sent to your email."
-    //         );
-    //         mobi.capture("050", scenario, pack);
-    //     });
-    // });
+    // TODO: check "letter will be send" message
+
+
+    //  Gmail: get signup link
 
 
     /** Gmail login form is loaded */
@@ -207,11 +199,11 @@ casper.test.begin(desc, function scene_020_020(test) {
         casper.open(url).then(function () {
             var cssBtnNext = "input#next";
             casper.waitForSelector(cssBtnNext, function () {
+                mobi.capture("100", scenario, pack);
                 test.assert(true, 'Gmail login form is loaded.');
                 casper.fillSelectors("#identifier-shown", {
                     "#Email": authGmailCustomer.email
                 }, false);
-                mobi.capture("100", scenario, pack);
                 casper.click(cssBtnNext, "50%", "50%");
 
                 /** fill in passwd */
@@ -239,17 +231,18 @@ casper.test.begin(desc, function scene_020_020(test) {
         });
     });
 
-    /** Open signup email */
+    /** Signup email is found */
     casper.then(function () {
         var cssItem = "body > table:nth-child(16) > tbody > tr > td:nth-child(2) > table:nth-child(1) > tbody > tr > td:nth-child(2) > form > table.th > tbody > tr:nth-child(1) > td:nth-child(3) > a ";
         casper.waitForSelector(cssItem, function () {
             var subject = casper.fetchText(cssItem);
             var isSignupEmail = (subject.indexOf("Welcome to MOBI Test Store") !== -1);
             casper.click(cssItem);
+            test.assert(true, "Signup email is found.");
         });
     });
 
-    /** Extract signup URI */
+    /** "Set password" link is extracted */
     casper.then(function () {
         mobi.capture("120", scenario, pack);
         var cssLink = "body > table:nth-child(16) > tbody > tr > td:nth-child(2) > table:nth-child(1) > tbody > tr > td:nth-child(2) > table:nth-child(4) > tbody > tr > td > table:nth-child(2) > tbody > tr:nth-child(4) > td > div > div > table > tbody > tr > td > table > tbody > tr:nth-child(2) > td > p:nth-child(3) > a";
@@ -257,16 +250,16 @@ casper.test.begin(desc, function scene_020_020(test) {
         var replaced = href.replace("http://www.google.com/url?q=", "");
         var decoded = decodeURIComponent(replaced);
         uriMageSignup = decoded;
+        test.assert(true, '"Set password" link is extracted.');
     });
 
-    /** Goto Inbox */
+    /** Inbox is loaded again */
     casper.then(function () {
         var cssBackToInbox = "a.searchPageLink"; // there are 2 links on the page
         casper.click(cssBackToInbox);
-        mobi.capture("130", scenario, pack);
     });
 
-    /** Check all messages */
+    /** All inbox messages are checked */
     casper.then(function () {
         var cssCheckbox = "input[type=checkbox]";
         var elements = casper.getElementsInfo(cssCheckbox);
@@ -274,17 +267,21 @@ casper.test.begin(desc, function scene_020_020(test) {
             casper.echo("::: " + JSON.stringify(element));
             casper.click("input[value='" + element.attributes.value + "']");
         });
-        mobi.capture("140", scenario, pack);
+        mobi.capture("130", scenario, pack);
+        test.assert(true, "All inbox messages are checked.");
     });
 
-    /** Press "Delete" button */
+    /** "Delete" button is pressed */
     casper.then(function () {
         var cssBtnDelete = "input[value='Delete']";
         casper.click(cssBtnDelete);
-        mobi.capture("150", scenario, pack);
+        test.assert(true, '"Delete" button is pressed.');
+        mobi.capture("140", scenario, pack);
     });
 
-    // Magento
+
+    // Magento Front: create password and login
+
 
     /** "Set a New Password" page is loaded */
     casper.then(function () {
@@ -301,7 +298,7 @@ casper.test.begin(desc, function scene_020_020(test) {
         casper.fillSelectors("#form-validate", {"#password": authMageCustomer.password}, false);
         casper.fillSelectors("#form-validate", {"#password-confirmation": authMageCustomer.password}, true);
         test.assert(true, "Password value is filled in and submitted.");
-        mobi.capture("310", scenario, pack);
+        mobi.capture("200", scenario, pack);
     });
 
     /** Login form is filled in and submitted */
@@ -310,15 +307,24 @@ casper.test.begin(desc, function scene_020_020(test) {
             casper.fillSelectors("#login-form", {"#email": authMageCustomer.email}, false);
             casper.fillSelectors("#login-form", {"#pass": authMageCustomer.password}, true);
             test.assert(true, "Login form is filled in and submitted.");
-            mobi.capture("320", scenario, pack);
+            mobi.capture("210", scenario, pack);
         });
     });
 
-    /** Dashboard is loaded */
+    /** Customer Dashboard is loaded */
     casper.then(function () {
         casper.waitForSelector("h1.page-title", function () {
-            test.assert(true, "Dashboard is loaded.");
-            mobi.capture("330", scenario, pack);
+            test.assert(true, "Customer Dashboard is loaded.");
+            mobi.capture("220", scenario, pack);
+        });
+    });
+
+    /** Logout is performed */
+    casper.then(function () {
+        var url = mobi.getUrlMage("/customer/account/logout/");
+        casper.open(url).then(function () {
+            test.assert(true, "Logout is performed.");
+            mobi.capture("030", scene, scenario);
         });
     });
 
