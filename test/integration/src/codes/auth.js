@@ -43,6 +43,10 @@ var result = {
         customerAnon: {
             email: 'mobi.anon@gmail.com',
             password: 'p11PGCLEVMjsRCVNemja'
+        },
+        customerReferral: {
+            email: 'mobi.referral@gmail.com',
+            password: 'TGxduvOCg1XlgkNkkeyn'
         }
     }
 }
