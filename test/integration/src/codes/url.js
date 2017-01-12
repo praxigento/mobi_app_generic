@@ -41,7 +41,7 @@ var urls = {
         }
     },
     odoo: {
-        self: 'http://lion.host.prxgt.com:8122',    // Base URL for the site (w/o ending '/')
+        self: 'http://mobi.odoo.test-auto.prxgt.com',    // Base URL for the site (w/o ending '/')
         admin: {
             self: '/web'
         },

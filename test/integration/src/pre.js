@@ -9,7 +9,8 @@ var address = require('../src/codes/address'); // address data
 var auth = require('../src/codes/auth'); // authentication data
 var conf = require('../src/codes/conf'); // application constants
 var urls = require('../src/codes/url'); // URLs codifier
-var funcFrontAuthentication = require('../src/sub/front/auth'); // frontend authentication function
+var fnFrontAuthentication = require('../src/sub/front/auth'); // Magento frontend authentication function
+var fnOdooAuthentication = require('../src/sub/odoo/auth'); // Odoo authentication function
 /**
  * Add 'mobi' object to globals.
  */
@@ -83,17 +84,33 @@ mobi.getNavigationUrl = function getNavigationUrl(path, scope) {
  * @returns {string}
  */
 mobi.getUrlMage = function getUrlMage(path) {
-    casper.echo("  construct URL for path '" + path + "'.", "PARAMETER");
+    casper.echo("  construct Mage URL for path '" + path + "'.", "PARAMETER");
     var isAlias = path.indexOf('/') === -1;     // absolute path contains at least one '/' char
     var uri = (isAlias) ? mobi.objPath.get(mobi.opts.navig.mage, path) : path;   // get URL value by path or use path as-is
     var result = mobi.opts.navig.mage.self + uri; // compose full URL
     casper.echo("  result URL: " + result, "PARAMETER");
     return result;
 };
+/**
+ * If path contains '/' then return Odoo Base URL (mobi.opts.navig.odoo.self) + "path"
+ * else return Odoo Base URL + "path" in "mobi.opts.navig.odoo" structure.
+ *
+ * @param {string} path dot-separated path to the URL in "mobi.opts.navig.odoo" or "/real/path/to/the/point/"
+ * @returns {string}
+ */
+mobi.getUrlOdoo = function getUrlOdoo(path) {
+    casper.echo("  construct Odoo URL for path '" + path + "'.", "PARAMETER");
+    var isAlias = path.indexOf('/') === -1;     // absolute path contains at least one '/' char
+    var uri = (isAlias) ? mobi.objPath.get(mobi.opts.navig.odoo, path) : path;   // get URL value by path or use path as-is
+    var result = mobi.opts.navig.odoo.self + uri; // compose full URL
+    casper.echo("  result URL: " + result, "PARAMETER");
+    return result;
+};
 
 /* add sub scenarios to root object */
 mobi.sub = {front: {}, admin: {}, odoo: {}};
-mobi.sub.front.authenticate = funcFrontAuthentication;
+mobi.sub.front.authenticate = fnFrontAuthentication;
+mobi.sub.odoo.authenticate = fnOdooAuthentication;
 
 /* should we call this? */
 casper.test.done();
