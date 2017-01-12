@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MOBI Theater</title>
+    <link href="./node_modules/lightgallery/dist/css/lightgallery.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+</head>
+<body class="home">
+
+<div class="demo-gallery">
+    <ul id="lightgallery" class="list-unstyled row">
+        <!-- Magento Front: compose order  -->
+        <li data-src="./screen/020/020/010.png"><img src="./screen/020/020/010.png"/></li>
+        <li data-src="./screen/020/020/020.png"><img src="./screen/020/020/020.png"/></li>
+        <li data-src="./screen/020/020/030.png"><img src="./screen/020/020/030.png"/></li>
+        <li data-src="./screen/020/020/040.png"><img src="./screen/020/020/040.png"/></li>
+        <li data-src="./screen/020/020/050.png"><img src="./screen/020/020/050.png"/></li>
+        <!-- Gmail: get signup link  -->
+        <li data-src="./screen/020/020/100.png"><img src="./screen/020/020/100.png"/></li>
+        <li data-src="./screen/020/020/110.png"><img src="./screen/020/020/110.png"/></li>
+        <li data-src="./screen/020/020/120.png"><img src="./screen/020/020/120.png"/></li>
+        <li data-src="./screen/020/020/130.png"><img src="./screen/020/020/130.png"/></li>
+        <li data-src="./screen/020/020/140.png"><img src="./screen/020/020/140.png"/></li>
+        <!-- Magento Front: create password and login  -->
+        <li data-src="./screen/020/020/200.png"><img src="./screen/020/020/200.png"/></li>
+        <li data-src="./screen/020/020/210.png"><img src="./screen/020/020/210.png"/></li>
+        <li data-src="./screen/020/020/220.png"><img src="./screen/020/020/220.png"/></li>
+        <li data-src="./screen/020/020/230.png"><img src="./screen/020/020/230.png"/></li>
+    </ul>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#lightgallery').lightGallery(
+            {
+                thumbnail: true
+            }
+        );
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/picturefill/2.3.1/picturefill.min.js"></script>
+<script src="./node_modules/lightgallery/dist/js/lightgallery.js"></script>
+<script src="./node_modules/lg-fullscreen/dist/lg-fullscreen.js"></script>
+<script src="./node_modules/lg-thumbnail/dist/lg-thumbnail.js"></script>
+<script src="./node_modules/lg-video/dist/lg-video.js"></script>
+<script src="./node_modules/lg-autoplay/dist/lg-autoplay.js"></script>
+<script src="./node_modules/lg-zoom/dist/lg-zoom.js"></script>
+<script src="./node_modules/lg-hash/dist/lg-hash.js"></script>
+<script src="./node_modules/lg-pager/dist/lg-pager.js"></script>
+<script src="./node_modules/lightgallery/lib/jquery.mousewheel.min.js"></script>
+
+</body>
+</html>

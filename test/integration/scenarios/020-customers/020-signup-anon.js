@@ -20,7 +20,7 @@ casper.test.begin(desc, function scene_020_020(test) {
     });
 
 
-    // Magento Front: composer order
+    // Magento Front: compose order
 
 
     /** Product page is loaded for "215San" */
@@ -324,7 +324,7 @@ casper.test.begin(desc, function scene_020_020(test) {
         var url = mobi.getUrlMage("/customer/account/logout/");
         casper.open(url).then(function () {
             test.assert(true, "Logout is performed.");
-            mobi.capture("030", scene, scenario);
+            mobi.capture("230", scene, scenario);
         });
     });
 
