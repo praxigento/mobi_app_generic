@@ -267,7 +267,6 @@ casper.test.begin(desc, function scene_020_020(test) {
             casper.echo("::: " + JSON.stringify(element));
             casper.click("input[value='" + element.attributes.value + "']");
         });
-        mobi.capture("130", scenario, pack);
         test.assert(true, "All inbox messages are checked.");
     });
 
@@ -276,7 +275,7 @@ casper.test.begin(desc, function scene_020_020(test) {
         var cssBtnDelete = "input[value='Delete']";
         casper.click(cssBtnDelete);
         test.assert(true, '"Delete" button is pressed.');
-        mobi.capture("140", scenario, pack);
+        mobi.capture("130", scenario, pack);
     });
 
 
@@ -324,7 +323,7 @@ casper.test.begin(desc, function scene_020_020(test) {
         var url = mobi.getUrlMage("/customer/account/logout/");
         casper.open(url).then(function () {
             test.assert(true, "Logout is performed.");
-            mobi.capture("230", scene, scenario);
+            mobi.capture("230", scenario, pack);
         });
     });
 
