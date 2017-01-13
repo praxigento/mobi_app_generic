@@ -20,10 +20,18 @@ casper.test.begin(desc, function scene_020_040(test) {
 
     // Odoo: register new customer
 
+    var url = mobi.getUrlMage("/");
+    casper.open(url);
+
     casper.then(function () {
         var opts;
-        mobi.sub.odoo.authenticate(test, opts);
+        mobi.sub.front.swtichStore();
     });
+
+    // casper.then(function () {
+    //     var opts;
+    //     mobi.sub.odoo.authenticate(test, opts);
+    // });
 
 
     /** Run scenario and finalize test. */

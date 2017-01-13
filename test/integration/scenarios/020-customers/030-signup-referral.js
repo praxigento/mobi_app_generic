@@ -21,14 +21,15 @@ casper.test.begin(desc, function scene_020_020(test) {
 
 
     // Magento Front: compose order
-
+    var url = mobi.getUrlMage("front.catalog.product.san215");
+    casper.open(url);
+    casper.then(function () {
+        mobi.sub.front.swtichStore({pack: pack, scenario: scenario});
+    });
 
     /** Product page is loaded for "215San" */
     casper.then(function () {
-        var url = mobi.getUrlMage("front.catalog.product.san215");
-        // add referral code to URI (see \Praxigento\Downline\Plugin\Framework\App\FrontControllerPlugin::REQ_REFERRAL)
-        url += "?prxgtDwnlReferral=10";
-        casper.open(url).then(function () {
+        casper.then(function () {
             test.assertSelectorHasText("div.product.attribute.sku > div", "215San", 'Product page is loaded for "215San".');
             mobi.capture("010", scenario, pack);
         });

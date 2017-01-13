@@ -10,6 +10,7 @@ var auth = require('../src/codes/auth'); // authentication data
 var conf = require('../src/codes/conf'); // application constants
 var urls = require('../src/codes/url'); // URLs codifier
 var fnFrontAuthentication = require('../src/sub/front/auth'); // Magento frontend authentication function
+var fnFrontSwitchStore = require('../src/sub/front/swicthStore'); // Magento frontend switching function (store, view, currency)
 var fnOdooAuthentication = require('../src/sub/odoo/auth'); // Odoo authentication function
 /**
  * Add 'mobi' object to globals.
@@ -110,6 +111,7 @@ mobi.getUrlOdoo = function getUrlOdoo(path) {
 /* add sub scenarios to root object */
 mobi.sub = {front: {}, admin: {}, odoo: {}};
 mobi.sub.front.authenticate = fnFrontAuthentication;
+mobi.sub.front.swtichStore = fnFrontSwitchStore;
 mobi.sub.odoo.authenticate = fnOdooAuthentication;
 
 /* should we call this? */
