@@ -37,7 +37,12 @@ var result = {
     odoo: {
         api: {},
         shop: {},
-        web: {}
+        web: {
+            consignee:{
+                name: 'Consignee MOBI Casper',
+                password: 'UserPassword12'
+            }
+        }
     },
     gmail: {
         customerAnon: {

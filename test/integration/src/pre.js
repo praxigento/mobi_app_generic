@@ -12,6 +12,8 @@ var urls = require('../src/codes/url'); // URLs codifier
 var fnFrontAuthentication = require('../src/sub/front/auth'); // Magento frontend authentication function
 var fnFrontSwitchStore = require('../src/sub/front/swicthStore'); // Magento frontend switching function (store, view, currency)
 var fnOdooAuthentication = require('../src/sub/odoo/auth'); // Odoo authentication function
+var fnOdooGetUrlWeb = require('../src/sub/odoo/getUrlWeb'); // Odoo function to get URL for "web" realm
+
 /**
  * Add 'mobi' object to globals.
  */
@@ -113,6 +115,7 @@ mobi.sub = {front: {}, admin: {}, odoo: {}};
 mobi.sub.front.authenticate = fnFrontAuthentication;
 mobi.sub.front.swtichStore = fnFrontSwitchStore;
 mobi.sub.odoo.authenticate = fnOdooAuthentication;
+mobi.sub.odoo.getUrlWeb = fnOdooGetUrlWeb;
 
 /* should we call this? */
 casper.test.done();

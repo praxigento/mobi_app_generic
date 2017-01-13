@@ -45,6 +45,16 @@ var urls = {
         admin: {
             self: '/web'
         },
+        web: {
+            self: '/web',
+            sales: {
+                customers: {
+                    new: {
+                        self: '#view_type=form&model=res.partner&action=54'
+                    }
+                }
+            }
+        },
         api: {
             self: '/api'
         },

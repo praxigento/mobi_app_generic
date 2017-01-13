@@ -17,15 +17,15 @@ var result = function switchStore($opts) {
     var store = opts.store || 'baltic';
     var storeView = opts.storeView || 'EN';
     var currency = opts.currency || 'EUR';
-    var saveScreens = opts.saveScreens || true; // save screen shots
+    var saveScreens = opts.saveScreens || false; // save screenshots
 
-    /* workin variables */
+    /* working variables */
     var currentStore, currentStoreView, currentCurrency;
 
     /** Save screenshot for init state */
     casper.then(function () {
         casper.echo("Switching options (store/view/cur): " + store + "/" + storeView + "/" + currency + ".");
-        mobi.capture("switchStore-before", pack, scenario);
+        if (saveScreens) mobi.capture("switchStore-before", pack, scenario);
     });
 
     /**
@@ -70,7 +70,6 @@ var result = function switchStore($opts) {
 
                 /* ... and wait while loading */
                 casper.waitForSelector('div.page-wrapper', function () {
-                    test.assertExists('div.page-wrapper', 'Store is switched.');
                     mobi.capture('001', scenario, pack);
                 });
             });
