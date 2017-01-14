@@ -201,13 +201,15 @@ casper.test.begin(desc, function scene_020_020(test) {
     casper.then(function () {
         var url = "https://mail.google.com/mail/u/0/h/1pq68r75kzvdr/?v%3Dlui";
         casper.open(url).then(function () {
+            mobi.capture("100", scenario, pack);
             var cssBtnNext = "input#next";
             casper.waitForSelector(cssBtnNext, function () {
-                mobi.capture("100", scenario, pack);
+                mobi.capture("100-010", scenario, pack);
                 test.assert(true, 'Gmail login form is loaded.');
                 casper.fillSelectors("#identifier-shown", {
                     "#Email": authGmailCustomer.email
                 }, false);
+                mobi.capture("100-020", scenario, pack);
                 casper.click(cssBtnNext, "50%", "50%");
 
                 /** fill in passwd */
@@ -216,6 +218,7 @@ casper.test.begin(desc, function scene_020_020(test) {
                     var result = casper.visible(cssFldPasswd);
                     return result;
                 }, function then() {
+                    mobi.capture("100-020", scenario, pack);
                     casper.fillSelectors("#password-shown", {
                         "#Passwd": authGmailCustomer.password
                     }, false);
@@ -261,6 +264,7 @@ casper.test.begin(desc, function scene_020_020(test) {
     casper.then(function () {
         var cssBackToInbox = "a.searchPageLink"; // there are 2 links on the page
         casper.click(cssBackToInbox);
+        mobi.capture("120-001", scenario, pack);
     });
 
     /** All inbox messages are checked */
@@ -271,11 +275,13 @@ casper.test.begin(desc, function scene_020_020(test) {
             casper.echo("::: " + JSON.stringify(element));
             casper.click("input[value='" + element.attributes.value + "']");
         });
+        mobi.capture("120-002", scenario, pack);
         test.assert(true, "All inbox messages are checked.");
     });
 
     /** "Delete" button is pressed */
     casper.then(function () {
+        mobi.capture("120-003", scenario, pack);
         var cssBtnDelete = "input[value='Delete']";
         casper.click(cssBtnDelete);
         test.assert(true, '"Delete" button is pressed.');
