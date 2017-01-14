@@ -115,13 +115,16 @@ mobi.getUrlOdoo = function getUrlOdoo(path) {
 
 /* add subs to root object */
 mobi.sub = {
-    mage: {front: {}, admin: {}},
-    odoo: {}
+    mage: require("../src/sub/mage/default"),
+    odoo: {},
+    test: require("../src/sub/test/default")
 };
-mobi.sub.mage.admin.authenticate = fnMageAdminAuthenticate;
-mobi.sub.mage.admin.getUrl = fnMageAdminGetUrl;
-mobi.sub.mage.front.authenticate = fnMageFrontAuthenticate;
-mobi.sub.mage.front.swtichStore = fnMageFrontSwitchStore;
+// Magento related functions
+// mobi.sub.mage.admin.authenticate = fnMageAdminAuthenticate;
+// mobi.sub.mage.admin.getUrl = fnMageAdminGetUrl;
+// mobi.sub.mage.front.authenticate = fnMageFrontAuthenticate;
+// mobi.sub.mage.front.swtichStore = fnMageFrontSwitchStore;
+// Odoo related functions
 mobi.sub.odoo.authenticate = fnOdooAuthenticate;
 mobi.sub.odoo.getUrlWeb = fnOdooGetUrlWeb;
 
