@@ -1,15 +1,14 @@
 "use strict"
-/* globals: casper, mobi */
-
-var dump = require("utils").dump;
-
+// globals vars
+var casper = casper;
+var mobi = mobi;
+// local vars
+var pack = "000";
 var scenario = "000";
-var scene = "000";
-var desc = "scene " + scenario + "/" + scene + ": entries points checking:";
+var desc = "scenario " + pack + "/" + scenario + ": entries points checking:";
 var authMageAdmin = mobi.opts.auth.mage.admin.tester;
-var authMageCustomer = mobi.opts.auth.mage.front.customer01;
+var authMageFront = mobi.opts.auth.mage.front.customer01;
 var authMageApi = mobi.opts.auth.mage.api.odoo;
-var pathScreens = mobi.opts.path.screenshots;
 
 casper.test.begin(desc, 10, function suite_000_000(test) {
 
@@ -18,16 +17,14 @@ casper.test.begin(desc, 10, function suite_000_000(test) {
             mobi.setViewport();
         });
 
-        /**
-         * Magento Admin
-         */
+        // Magento Admin
 
         /** Magento admin is alive */
         casper.then(function () {
             var url = mobi.getNavigationUrl("/admin/admin/", "mage");
             casper.open(url).then(function () {
                 test.assertSelectorHasText("head > title", "Magento Admin", "Magento admin is alive");
-                mobi.capture("010", scene, scenario);
+                mobi.capture("010", scenario, pack);
             });
         });
 
@@ -47,7 +44,7 @@ casper.test.begin(desc, 10, function suite_000_000(test) {
 
             casper.waitForSelector(".page-title-wrapper", function () {
                 test.assertSelectorHasText("head > title", "Dashboard / Magento Admin", "Test user is authenticated in Magento Admin.");
-                mobi.capture('020', scene, scenario);
+                mobi.capture('020', scenario, pack);
             });
         });
 
@@ -56,7 +53,7 @@ casper.test.begin(desc, 10, function suite_000_000(test) {
             var url = mobi.getNavigationUrl("/admin/admin/auth/logout/", "mage");
             casper.open(url).then(function () {
                 test.assertSelectorHasText("div.message-success > div", "You have logged out.", "Test user is logged out of Magento Admin.");
-                mobi.capture("030", scene, scenario);
+                mobi.capture("030", scenario, pack);
             });
         });
 
@@ -69,15 +66,15 @@ casper.test.begin(desc, 10, function suite_000_000(test) {
             var url = mobi.getNavigationUrl("/customer/account/login/", "mage");
             casper.open(url).then(function () {
                 test.assertSelectorHasText("head > title", "Customer Login", "Magento front is alive");
-                mobi.capture("040", scene, scenario);
+                mobi.capture("040", scenario, pack);
             });
         });
 
         /** Test customer is authenticated in Magento Front */
         casper.then(function () {
             /* fill username & password */
-            var email = authMageCustomer.email;
-            var password = authMageCustomer.password;
+            var email = authMageFront.email;
+            var password = authMageFront.password;
             casper.waitForSelector("#email", function () {
                 casper.fillSelectors('#login-form', {
                     'input#email': email,
@@ -90,7 +87,7 @@ casper.test.begin(desc, 10, function suite_000_000(test) {
             /* load account dashboard */
             casper.waitForSelector('#maincontent', function () {
                 test.assert(true, 'Test customer is authenticated in Magento Front');
-                mobi.capture('050', scene, scenario);
+                mobi.capture('050', scenario, pack);
             });
         });
 
@@ -99,7 +96,7 @@ casper.test.begin(desc, 10, function suite_000_000(test) {
             var url = mobi.getNavigationUrl("/customer/account/logout/", "mage");
             casper.open(url).then(function () {
                 test.assertSelectorHasText("h1.page-title > span", "You are signed out", "Test user is logged out of Magento Front.");
-                mobi.capture("060", scene, scenario);
+                mobi.capture("060", scenario, pack);
             });
         });
 
@@ -136,7 +133,7 @@ casper.test.begin(desc, 10, function suite_000_000(test) {
             var url = mobi.getNavigationUrl("admin.self", "odoo");
             casper.open(url).then(function () {
                 test.assertSelectorHasText("head > title", "Odoo", "Odoo admin is alive");
-                mobi.capture("070", scene, scenario);
+                mobi.capture("070", scenario, pack);
             });
         });
 
@@ -151,7 +148,7 @@ casper.test.begin(desc, 10, function suite_000_000(test) {
                 // var content = casper.getPageContent();
                 // casper.echo(content);
                 test.assertSelectorHasText("head > title", "Odoo", "Odoo shop is alive");
-                mobi.capture("080", scene, scenario);
+                mobi.capture("080", scenario, pack);
             });
         });
 
@@ -166,7 +163,7 @@ casper.test.begin(desc, 10, function suite_000_000(test) {
                 // var content = casper.getPageContent();
                 // casper.echo(content);
                 test.assert(false, "Odoo API is alive");
-                mobi.capture("090", scene, scenario);
+                mobi.capture("090", scenario, pack);
             });
         });
 

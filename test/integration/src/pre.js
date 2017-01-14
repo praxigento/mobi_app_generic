@@ -9,9 +9,12 @@ var address = require('../src/codes/address'); // address data
 var auth = require('../src/codes/auth'); // authentication data
 var conf = require('../src/codes/conf'); // application constants
 var urls = require('../src/codes/url'); // URLs codifier
-var fnFrontAuthentication = require('../src/sub/front/auth'); // Magento frontend authentication function
-var fnFrontSwitchStore = require('../src/sub/front/swicthStore'); // Magento frontend switching function (store, view, currency)
-var fnOdooAuthentication = require('../src/sub/odoo/auth'); // Odoo authentication function
+/* collect functions; TODO: move collections to level below (odoo, mage, mage/admin, etc.) */
+var fnMageAdminAuthenticate = require('../src/sub/mage/admin/auth'); // Magento admin authentication
+var fnMageAdminGetUrl = require('../src/sub/mage/admin/getUrl'); // Get URL for Magento page
+var fnMageFrontAuthenticate = require('../src/sub/mage/front/auth'); // Magento frontend authentication
+var fnMageFrontSwitchStore = require('../src/sub/mage/front/swicthStore'); // Magento frontend switching (store, view, currency)
+var fnOdooAuthenticate = require('../src/sub/odoo/auth'); // Odoo authentication
 var fnOdooGetUrlWeb = require('../src/sub/odoo/getUrlWeb'); // Odoo function to get URL for "web" realm
 
 /**
@@ -110,12 +113,23 @@ mobi.getUrlOdoo = function getUrlOdoo(path) {
     return result;
 };
 
-/* add sub scenarios to root object */
-mobi.sub = {front: {}, admin: {}, odoo: {}};
-mobi.sub.front.authenticate = fnFrontAuthentication;
-mobi.sub.front.swtichStore = fnFrontSwitchStore;
-mobi.sub.odoo.authenticate = fnOdooAuthentication;
+/* add subs to root object */
+mobi.sub = {
+    mage: {front: {}, admin: {}},
+    odoo: {}
+};
+mobi.sub.mage.admin.authenticate = fnMageAdminAuthenticate;
+mobi.sub.mage.admin.getUrl = fnMageAdminGetUrl;
+mobi.sub.mage.front.authenticate = fnMageFrontAuthenticate;
+mobi.sub.mage.front.swtichStore = fnMageFrontSwitchStore;
+mobi.sub.odoo.authenticate = fnOdooAuthenticate;
 mobi.sub.odoo.getUrlWeb = fnOdooGetUrlWeb;
+
+/* deprecated, use "mobi.sub.mage.front" instead */
+mobi.sub.front = {}
+mobi.sub.front.authenticate = fnMageFrontAuthenticate;
+mobi.sub.front.swtichStore = fnMageFrontSwitchStore;
+
 
 /* should we call this? */
 casper.test.done();

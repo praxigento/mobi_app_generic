@@ -1,11 +1,11 @@
 "use strict"
-// var casper = global.casper;
-// var mobi = global.mobi;
+var casper = global.casper;
+var mobi = global.mobi;
 
 /**
- * Odoo authentication function.
+ * Construct URL for Odoo.
  *
- * @param opts authentication options
+ * @param {string} path path to part of the Odoo (absolute path started with '/', alias - w/o)
  */
 var result = function getUrlWeb(path) {
     casper.echo("  construct Odoo Web URL for path '" + path + "'.", "PARAMETER");
@@ -13,7 +13,7 @@ var result = function getUrlWeb(path) {
     var root = mobi.opts.navig.odoo;
     var result;
     if (isAlias) {
-        /* composer URI based on "#route.to.page"*/
+        /* compose URI based on "#route.to.page"*/
         var route = mobi.objPath.get(root.web, path);
         result = root.self + root.web.self + route.self;
     } else {

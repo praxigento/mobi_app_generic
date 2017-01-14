@@ -6,9 +6,9 @@ var urls = {
     mage: {
         self: 'http://mobi.mage.test-auto.prxgt.com',   // Base URL for the site (w/o ending '/')
         admin: {
-            self: '/admin/',
+            self: '/admin',
             admin: {
-                self: '/admin/',
+                self: '/admin',
                 auth: {
                     logout: '/admin/admin/auth/logout/'
                 }
