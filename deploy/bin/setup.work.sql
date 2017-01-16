@@ -36,6 +36,8 @@ REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'USD', path ='currency
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'EUR', path ='currency/options/default';
 -- Catalog / Inventory
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '100000', path ='cataloginventory/options/stock_threshold_qty';
+-- Customers / Customer Configuration
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '3', path ='customer/create_account/default_group';
 -- Salex / Tax (MOBI-336)
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '2', path ='tax/classes/shipping_tax_class';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'origin', path ='tax/calculation/based_on';
