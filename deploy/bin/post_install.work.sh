@@ -139,8 +139,8 @@ echo "Set file system ownership and permissions."
 mkdir -p ${DIR_MAGE}/var/cache
 mkdir -p ${DIR_MAGE}/var/generation
 chown -R ${LOCAL_OWNER}:${LOCAL_GROUP} ${DIR_MAGE}
-find ${DIR_MAGE} -type d -exec chmod 770 {} \;
-find ${DIR_MAGE} -type f -exec chmod 660 {} \;
+# find ${DIR_MAGE} -type d -exec chmod 770 {} \;
+# find ${DIR_MAGE} -type f -exec chmod 660 {} \;
 chmod -R g+w ${DIR_MAGE}/var
 chmod -R g+w ${DIR_MAGE}/pub
 chmod u+x ${DIR_MAGE}/bin/magento

@@ -3,6 +3,7 @@
 var casper = casper
 var mobi = mobi
 var subAdmin = mobi.sub.mage.admin
+var subFront = mobi.sub.mage.front
 var subTest = mobi.sub.test
 
 
@@ -46,6 +47,18 @@ casper.test.begin(desc, function suite_000_000(test) {
         })
 
         // Magento Front
+
+        /** Magento front is alive */
+        casper.then(function () {
+
+            // TODO: authenticate on front using sub-func
+
+            var url = mobi.getNavigationUrl("/customer/account/login/", "mage");
+            casper.open(url).then(function () {
+                test.assertSelectorHasText("head > title", "Customer Login", "Magento front is alive");
+                mobi.capture("040", scenario, pack);
+            });
+        });
 
         // Run scenario and finalize test.
         subTest.run(test)

@@ -9,6 +9,9 @@
 -- MGT-COMMERCE.COM / Developer Toolbar
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '0', path ='mgt_developer_toolbar/module/is_enabled';
 -- MOBI options
+--    Downline
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '4', path ='praxigento_odoo/downline/group_referrals';
+--    Odoo
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '${SQL_ODOO_URI}', path ='praxigento_odoo/connect/uri';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '${SQL_ODOO_DB}', path ='praxigento_odoo/connect/database';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '${SQL_ODOO_USER}', path ='praxigento_odoo/connect/user';
