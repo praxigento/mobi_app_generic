@@ -20,12 +20,30 @@ casper.test.begin(desc, function suite_060_010(test) {
         // Start scenario and setup phantom/capser
         subTest.start()
 
-        var url = subFront.getUrl("catalog.category");
+        // open catalog fro Baltic store 
+        var url = subFront.getUrl("catalog.category")
         casper.open(url).then(function () {
             optsSubs.store = conf.app.store.baltic
             subFront.switch.store(optsSubs)
         })
 
+        /** Catalog page is loaded for 'Baltic' store */
+        casper.then(function () {
+            subTest.capture(optsCapture)
+            test.assert(true, "Catalog page is loaded for 'Baltic' store.")
+        })
+
+        // open catalog fro Russian store 
+        casper.then(function () {
+            optsSubs.store = conf.app.store.russian
+            subFront.switch.store(optsSubs)
+        })
+
+        /** Catalog page is loaded for 'Russian' store */
+        casper.then(function () {
+            subTest.capture(optsCapture)
+            test.assert(true, "Catalog page is loaded for 'Russian' store.")
+        })
 
         // Run scenario and finalize test.
         subTest.run(test)

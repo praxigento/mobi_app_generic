@@ -5,6 +5,12 @@
  * Expected that front page is opened.
  *
  * @param {Object} opts
+ * @param {Object} opts.screen
+ * @param {boolean} opts.screen.save
+ * @param {string} opts.screen.prefix
+ * @param {Object} opts.suite
+ * @param {string} opts.suite.pack
+ * @param {string} opts.suite.scenario
  */
 var result = function mageFrontSwitchStore(opts) {
     // shortcut globals
