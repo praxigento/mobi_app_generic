@@ -23,7 +23,19 @@ casper.test.begin(desc, function scene_020_020(test) {
     // Magento Front: compose order
 
     var url = mobi.getUrlMage("front.catalog.product.san215")
-    url = url + "?prxgtDwnlReferral=10"
+    //url = url + "?prxgtDwnlReferral=10"
+
+    var arr = url.split("/")
+    var domain = arr[2]
+    phantom.addCookie({
+        name: "prxgtDwnlReferral",
+        value: "11%3A20170112",
+        domain: domain,
+        path: "/",
+        expires: (new Date()).getTime() + (1000 * 60 * 60)   /* <-- expires in 1 hour */
+    });
+
+
     casper.open(url)
     casper.then(function () {
         mobi.sub.front.swtichStore({pack: pack, scenario: scenario})
