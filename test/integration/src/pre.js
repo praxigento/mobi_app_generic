@@ -1,6 +1,6 @@
 'use strict'
 
-casper.echo("=== PRE SUITE BEGIN ===");
+// casper.echo("=== PRE SUITE BEGIN ===");
 
 /**
  * Load MOBI parts (data objects and functions)
@@ -137,4 +137,4 @@ mobi.sub.front.swtichStore = fnMageFrontSwitchStore;
 /* should we call this? */
 casper.test.done();
 
-casper.echo("=== PRE SUITE END ===");
+// casper.echo("=== PRE SUITE END ===");

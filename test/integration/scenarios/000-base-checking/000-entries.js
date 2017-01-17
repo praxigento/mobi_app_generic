@@ -21,7 +21,7 @@ var authOdooApi = mobi.opts.auth.odoo.api.mage;
 // var authMageFront = mobi.opts.auth.mage.front.customer01
 // var authMageApi = mobi.opts.auth.mage.api.odoo
 
-casper.test.begin(desc, function suite_000_000(test) {
+casper.test.begin(desc, 7, function suite_000_000(test) {
 
         // Start scenario and setup phantom/capser
         subTest.start()
