@@ -22,7 +22,7 @@
   },
   "scripts": {
     "test": "node_modules/casperjs/bin/casperjs --pre=src/pre.js --includes=src/inc.js --post=src/post.js --xunit=xunit.xml --verbose test scenarios/",
-    "scene_000_000": "node_modules/casperjs/bin/casperjs --pre=src/pre.js --includes=src/inc.js --post=src/post.js --xunit=xunit.xml test scenarios/000-init-checking/000-entries-1.js",
+    "scene_000_000": "node_modules/casperjs/bin/casperjs --pre=src/pre.js --includes=src/inc.js --post=src/post.js --xunit=xunit.xml test scenarios/000-init-checking/000-entries.js",
     "scene_020_020": "node_modules/casperjs/bin/casperjs --pre=src/pre.js --includes=src/inc.js --post=src/post.js --xunit=xunit.xml test scenarios/020-customers/020-signup-anon.js",
     "scene_020_030": "node_modules/casperjs/bin/casperjs --pre=src/pre.js --includes=src/inc.js --post=src/post.js --xunit=xunit.xml test scenarios/020-customers/030-signup-referral.js",
     "scene_020_040": "node_modules/casperjs/bin/casperjs --pre=src/pre.js --includes=src/inc.js --post=src/post.js --xunit=xunit.xml test scenarios/020-customers/040-signup-consignee.js",

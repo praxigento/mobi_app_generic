@@ -35,7 +35,13 @@ var result = {
         }
     },
     odoo: {
-        api: {},
+        api: {
+            mage: {
+                dbname: 'odoo_mobi_test',
+                admin: 'magento',
+                password: 'HekGpzkY89bt'
+            }
+        },
         shop: {},
         web: {
             consignee:{

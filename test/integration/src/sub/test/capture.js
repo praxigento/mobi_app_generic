@@ -8,6 +8,7 @@ var registry = {}
 
 
 /**
+ *  Register counter for pack/scenario/prefix/suffix.
  *
  * @param {Object} opts - test suite structure
  * @param {string} opts.pack
@@ -19,8 +20,8 @@ var register = function (opts) {
     var opts = opts || {}
     var pack = opts.pack || "undef"
     var scenario = opts.scenario || "undef"
-    var prefix = "p" + (opts.prefix || "undef")
-    var suffix = "s" + (opts.suffix || "undef")
+    var prefix = opts.prefix || "undef"
+    var suffix = opts.suffix || "undef"
     registry[pack] = registry[pack] || {}
     registry[pack][scenario] = registry[pack][scenario] || {}
     registry[pack][scenario][prefix] = registry[pack][scenario][prefix] || {}
@@ -64,7 +65,6 @@ var result = function capture(opts) {
     var fileName = root + fileTag + ".png";
     casper.echo("  screen captured: " + fileName, "INFO");
     casper.capture(fileName);
-    casper.echo(JSON.stringify(registry))
     return result
 }
 

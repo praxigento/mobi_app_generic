@@ -116,7 +116,7 @@ mobi.getUrlOdoo = function getUrlOdoo(path) {
 /* add subs to root object */
 mobi.sub = {
     mage: require("../src/sub/mage/default"),
-    odoo: {},
+    odoo: require("../src/sub/odoo/default"),
     test: require("../src/sub/test/default")
 };
 // Magento related functions
