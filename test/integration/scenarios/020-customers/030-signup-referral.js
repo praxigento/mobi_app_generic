@@ -25,14 +25,16 @@ casper.test.begin(desc, function scene_020_020(test) {
     var url = mobi.getUrlMage("front.catalog.product.san215")
     //url = url + "?prxgtDwnlReferral=10"
 
+    /** cookies are not saved in PhantomJS session (some troubles). Add cookie directly. */
     var arr = url.split("/")
     var domain = arr[2]
+    casper.echo("domain:" + arr[2])
     phantom.addCookie({
-        name: "prxgtDwnlReferral",
-        value: "11%3A20170112",
+        name: "prxgtDwnlReferral",  // see \Praxigento\Downline\Tool\Def\Referral::COOKIE_REFERRAL_CODE
+        value: "11%3A20170101",     // "REF_CODE:DATE_SAVED_YYYYMMDD"
         domain: domain,
         path: "/",
-        expires: (new Date()).getTime() + (1000 * 60 * 60)   /* <-- expires in 1 hour */
+        expires: (new Date()).getTime() + (1000 * 60 * 60 * 24 * 365)   /* <-- expires in 1 year */
     });
 
 

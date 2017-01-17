@@ -19,6 +19,7 @@ casper.test.begin(desc, function scene_020_020(test) {
         mobi.setViewport();
     });
 
+    casper.page.deleteCookie("prxgtDwnlReferral") // \Praxigento\Downline\Tool\Def\Referral::COOKIE_REFERRAL_CODE
 
     // Magento Front: compose order
     var url = mobi.getUrlMage("front.catalog.product.san215");
