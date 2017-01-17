@@ -10,15 +10,16 @@ var result = function mageFrontAuth(opts) {
     var casper = global.casper
     var mobi = global.mobi
     var subFront = mobi.sub.mage.front
+    var subTest = mobi.sub.test
 
     // parse input options
     var opts = opts || {}
     var suite = opts.suite || {pack: "undef", scenario: "undef"}
-    var user = opts.username || "customer_10@test.com"
-    var password = opts.userpass || "UserPassword12"
     var optsScreen = opts.screen || {} // screenshots related opts
     var saveScreens = optsScreen.save || false // don't save screenshots by
     var savePrefix = optsScreen.prefix || "mage-front-auth-" // default prefix for screenshots
+    var user = opts.username || "customer_10@test.com"
+    var password = opts.userpass || "UserPassword12"
 
     // local vars
     var optsCapture = {suite: suite, prefix: savePrefix}

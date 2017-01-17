@@ -29,6 +29,7 @@
     "scene_020_030": "node_modules/casperjs/bin/casperjs --pre=src/pre.js  --xunit=xunit.xml test scenarios/020-customers/030-signup-referral.js",
     "scene_020_040": "node_modules/casperjs/bin/casperjs --pre=src/pre.js  --xunit=xunit.xml test scenarios/020-customers/040-signup-consignee.js",
     "scene_030_020": "node_modules/casperjs/bin/casperjs --pre=src/pre.js  --xunit=xunit.xml test scenarios/030-sales/020-distributor-order-braintree.js",
+    "scene_060_010": "node_modules/casperjs/bin/casperjs --pre=src/pre.js  --xunit=xunit.xml test scenarios/060-products/010-anon-pv-price.js",
     "scene": "node_modules/casperjs/bin/casperjs --pre=src/pre.js  --xunit=xunit.xml test "
   },
   "author": "Alex Gusev <alex@flancer64.com>",
