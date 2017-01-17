@@ -1,65 +1,67 @@
-'use strict'
+"use strict"
 /**
  * URLs codifier for MOBI testing.
  */
 var urls = {
     mage: {
-        self: 'http://mobi.mage.test-auto.prxgt.com',   // Base URL for the site (w/o ending '/')
+        self: "http://mobi.mage.test-auto.prxgt.com",   // Base URL for the site (w/o ending "/")
         admin: {
-            self: '/admin',
+            self: "/admin",
             admin: {
-                self: '/admin',
+                self: "/admin",
                 auth: {
-                    logout: '/admin/admin/auth/logout/'
+                    logout: "/admin/admin/auth/logout/"
                 }
             },
         },
         api: {
-            self: '/rest/schema/',
-            schema: '/rest/schema/'
+            self: "/rest/schema/",
+            schema: "/rest/schema/"
         },
         front: {
-            self: '/',
+            self: "/",
             catalog: {
-                category: '/catalog/category/view/s/cat-2/id/3/',
+                category: {
+                    self: "/catalog/category/view/s/cat-2/id/3/"
+                },
                 product: {
-                    san10674: '/catalog/product/view/id/1',
-                    san136: '/catalog/product/view/id/2',
-                    san203: '/catalog/product/view/id/3',
-                    san212: '/catalog/product/view/id/4',
-                    san215: '/catalog/product/view/id/5'
+                    san10674: "/catalog/product/view/id/1",
+                    san136: "/catalog/product/view/id/2",
+                    san203: "/catalog/product/view/id/3",
+                    san212: "/catalog/product/view/id/4",
+                    san215: "/catalog/product/view/id/5"
                 }
             },
             checkout: {
-                self: '/checkout/'
+                self: "/checkout/"
             },
             customer: {
                 account: {
-                    login: '/customer/account/login/'
+                    login: "/customer/account/login/"
                 }
             }
         }
     },
     odoo: {
-        self: 'http://mobi.odoo.test-auto.prxgt.com',    // Base URL for the site (w/o ending '/')
+        self: "http://mobi.odoo.test-auto.prxgt.com",    // Base URL for the site (w/o ending "/")
         admin: {
-            self: '/web'
+            self: "/web"
         },
         web: {
-            self: '/web',
+            self: "/web",
             sales: {
                 customers: {
                     new: {
-                        self: '#view_type=form&model=res.partner&action=54'
+                        self: "#view_type=form&model=res.partner&action=54"
                     }
                 }
             }
         },
         api: {
-            self: '/api'
+            self: "/api"
         },
         shop: {
-            self: '/shop'
+            self: "/shop"
         }
     }
 }
