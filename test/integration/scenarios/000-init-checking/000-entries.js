@@ -106,9 +106,9 @@ casper.test.begin(desc, function suite_000_000(test) {
             subOdoo.auth(optsSubs)
         })
 
-        /** Odd Web is alive  */
+        /** Odoo Web is alive  */
         casper.then(function () {
-            test.assert(true, "Odd Web is alive.")
+            test.assert(true, "Odoo Web is alive.")
             subTest.capture(optsCapture)
         })
 
