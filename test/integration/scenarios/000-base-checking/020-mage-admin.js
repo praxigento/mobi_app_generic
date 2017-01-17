@@ -59,6 +59,27 @@ casper.test.begin(desc, function suite_000_020(test) {
             })
         })
 
+        /** Config / Customers / Create New Account Options */
+        casper.then(function () {
+            var url = subAdmin.getUrl("/admin/system_config/edit/section/customer/")
+            casper.open(url).then(function () {
+                if (!casper.visible("#customer_create_account")) {
+                    casper.click("#customer_create_account-head")
+                }
+            }).then(function () {
+                casper.waitFor(function () {
+                    var result = casper.visible("#customer_create_account")
+                    return result
+                }, function then() {
+                    test.assert(true, "Config / Customers / Create New Account Options.")
+                    subTest.capture(optsCapture)
+                }, function onTimeout() {
+                    subTest.capture(optsCapture)
+                })
+
+            })
+        })
+
 
         // logout
         casper.then(function () {
