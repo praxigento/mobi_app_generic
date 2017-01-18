@@ -111,8 +111,8 @@ echo "Upgrade Magento DB structure and data..."
 php ${DIR_MAGE}/bin/magento setup:upgrade
 echo "Switch Magento 2 into 'production' mode..."
 php ${DIR_MAGE}/bin/magento deploy:mode:set production
-#echo "Enable Magento 2 cache..."
-#php ${DIR_MAGE}/bin/magento cache:enable
+echo "Deploy static content for 'ru_RU'..."
+php ${DIR_MAGE}/bin/magento setup:static-content:deploy ru_RU
 
 
 echo ""
