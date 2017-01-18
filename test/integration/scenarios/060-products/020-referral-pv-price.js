@@ -1,5 +1,5 @@
 "use strict"
-// shortcuts for globals
+// shortcuts globals
 var casper = casper
 var mobi = mobi
 var conf = mobi.opts.conf
@@ -8,23 +8,22 @@ var subTest = mobi.sub.test
 
 // local vars
 var pack = "060"
-var scenario = "010"
+var scenario = "020"
 var suite = {pack: pack, scenario: scenario}
 var optsCapture = {suite: suite}
 var optsSubs = {suite: suite, screen: {save: false}}
-var desc = "scenario " + pack + "/" + scenario + ": Anon Price and PV checking:"
+var desc = "scenario " + pack + "/" + scenario + ": Referral Price and PV checking:"
 
-
+// function itself
 casper.test.begin(desc, function suite_060_010(test) {
 
     // Start scenario and setup phantom/capser
     subTest.start()
 
-    // clean up referral cookies
-    subFront.auth.anon()
-
-    // open catalog fro Baltic store & EUR currency
+    // open catalog for Baltic store & EUR currency as referred by Customer #10
     var url = subFront.getUrl("catalog.category")
+    subFront.auth.referral({url: url, code: 10})
+
     casper.open(url).then(function () {
         optsSubs.store = conf.app.store.baltic
         optsSubs.currency = conf.app.currency.eur

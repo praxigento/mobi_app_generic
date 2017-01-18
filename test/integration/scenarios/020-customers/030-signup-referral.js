@@ -1,56 +1,45 @@
 "use strict"
-/* globals: casper, mobi */
-
-var dump = require("utils").dump
-
-var pack = "020"
-var scenario = "030"
-var desc = "scenario " + pack + "/" + scenario + ": Referral Signup:"
-var pathScreens = mobi.opts.path.screenshots
+// shortcut globals
+var casper = casper
+var mobi = mobi
+var subFront = mobi.sub.mage.front
+var subTest = mobi.sub.test
 var authMageCustomer = mobi.opts.auth.mage.front.customerReferral
 var authGmailCustomer = mobi.opts.auth.gmail.customerReferral
 var address = mobi.opts.address.referral
+
+// local vars
+var pack = "020"
+var scenario = "030"
+var suite = {pack: pack, scenario: scenario}
+var optsCapture = {suite: suite}
+var optsSubs = {suite: suite, screen: {save: false}}
+var desc = "scenario " + pack + "/" + scenario + ": Referral Signup:"
 var uriMageSignup // URI extracted from Gmail message
 
-casper.test.begin(desc, function scene_020_020(test) {
+// function itself
+casper.test.begin(desc, 39, function scene_020_030(test) {
 
-    /** Start scenario and setup phantom/capser */
-    casper.start().then(function () {
-        mobi.setViewport()
-    })
-
+    // Start scenario and setup phantom/capser
+    subTest.start()
 
     // Magento Front: compose order
 
+    // open catalog for Baltic store & EUR currency as referred by Customer #10
     var url = mobi.getUrlMage("front.catalog.product.san215")
-    //url = url + "?prxgtDwnlReferral=10"
-
-    /** cookies are not saved in PhantomJS session (some troubles). Add cookie directly. */
-    var arr = url.split("/")
-    var domain = arr[2]
-    casper.echo("domain:" + arr[2])
-    phantom.addCookie({
-        name: "prxgtDwnlReferral",  // see \Praxigento\Downline\Tool\Def\Referral::COOKIE_REFERRAL_CODE
-        value: "11%3A20170101",     // "REF_CODE:DATE_SAVED_YYYYMMDD"
-        domain: domain,
-        path: "/",
-        expires: (new Date()).getTime() + (1000 * 60 * 60 * 24 * 365)   /* <-- expires in 1 year */
-    });
-
-
-    casper.open(url)
-    casper.then(function () {
-        mobi.sub.front.swtichStore({pack: pack, scenario: scenario})
+    subFront.auth.referral({url: url, code: 10})
+    casper.open(url).then(function () {
+        optsSubs.store = conf.app.store.baltic
+        optsSubs.currency = conf.app.currency.eur
+        subFront.switch.store(optsSubs)
+        subFront.switch.currency(optsSubs)
     })
 
     /** Product page is loaded for "215San" */
     casper.then(function () {
-        casper.then(function () {
-            test.assertSelectorHasText("div.product.attribute.sku > div", "215San", 'Product page is loaded for "215San".')
-            mobi.capture("010", scenario, pack)
-        })
+        test.assertSelectorHasText("div.product.attribute.sku > div", "215San", 'Product page is loaded for "215San".')
+        subTest.capture(optsCapture)
     })
-
 
     /** "Add to Cart" button is clicked */
     casper.waitForSelector('#product-addtocart-button', function () {
@@ -77,7 +66,7 @@ casper.test.begin(desc, function scene_020_020(test) {
             casper.waitForSelector(css, function () {
                 test.assertSelectorHasText(css, "Next", '... "Next" button is appeared.')
             }, function () {
-                mobi.capture("020-timeout", scenario, pack)
+                subTest.capture(optsCapture)
             })
         })
     })
@@ -113,7 +102,7 @@ casper.test.begin(desc, function scene_020_020(test) {
             test.assert(true, "... country id: " + address.country)
             test.assert(true, "... state id: " + address.state)
             test.assert(true, "... registration data is filled in")
-            mobi.capture("020", scenario, pack)
+            subTest.capture(optsCapture)
         })
     })
 
@@ -184,7 +173,7 @@ casper.test.begin(desc, function scene_020_020(test) {
     casper.then(function () {
         casper.waitForSelector('#checkout-payment-method-load', function () {
             var css = "#checkout-payment-method-load > div > div > div.payment-method._active > div.payment-method-content > div.actions-toolbar > div > button > span"
-            mobi.capture("030", scenario, pack)
+            subTest.capture(optsCapture)
             casper.click(css)
             test.assert(true, '"Place Order" button is clicked.')
         })
@@ -194,9 +183,9 @@ casper.test.begin(desc, function scene_020_020(test) {
     casper.then(function () {
         casper.waitForSelector('.checkout-success', function () {
             test.assert(true, 'Order placement is completed.')
-            mobi.capture("040", scenario, pack)
+            subTest.capture(optsCapture)
         }, function () {
-            mobi.capture("045", scenario, pack)
+            subTest.capture(optsCapture)
         }, 30000)
     })
 
@@ -207,9 +196,9 @@ casper.test.begin(desc, function scene_020_020(test) {
             test.assert(true, '... "Create an Account" button is visible.')
             casper.click(cssBtnCreate)
             test.assert(true, '"Create an Account" button is clicked.')
-            mobi.capture("050", scenario, pack)
+            subTest.capture(optsCapture)
         }, function () {
-            mobi.capture("055", scenario, pack)
+            subTest.capture(optsCapture)
         })
     })
 
@@ -223,15 +212,13 @@ casper.test.begin(desc, function scene_020_020(test) {
     casper.then(function () {
         var url = "https://mail.google.com/mail/u/0/h/1pq68r75kzvdr/?v%3Dlui"
         casper.open(url).then(function () {
-            mobi.capture("100", scenario, pack)
+            subTest.capture(optsCapture)
             var cssBtnNext = "input#next"
             casper.waitForSelector(cssBtnNext, function () {
-                mobi.capture("100-010", scenario, pack)
                 test.assert(true, 'Gmail login form is loaded.')
                 casper.fillSelectors("#identifier-shown", {
                     "#Email": authGmailCustomer.email
                 }, false)
-                mobi.capture("100-020", scenario, pack)
                 casper.click(cssBtnNext, "50%", "50%")
 
                 /** fill in passwd */
@@ -240,7 +227,6 @@ casper.test.begin(desc, function scene_020_020(test) {
                     var result = casper.visible(cssFldPasswd)
                     return result
                 }, function then() {
-                    mobi.capture("100-020", scenario, pack)
                     casper.fillSelectors("#password-shown", {
                         "#Passwd": authGmailCustomer.password
                     }, false)
@@ -256,7 +242,7 @@ casper.test.begin(desc, function scene_020_020(test) {
         casper.waitForSelector(cssEmail, function () {
             var email = casper.fetchText(cssEmail)
             test.assertEquals(email, authGmailCustomer.email, "User is logged into Gmail.")
-            mobi.capture("110", scenario, pack)
+            subTest.capture(optsCapture)
         })
     })
 
@@ -273,7 +259,7 @@ casper.test.begin(desc, function scene_020_020(test) {
 
     /** "Set password" link is extracted */
     casper.then(function () {
-        mobi.capture("120", scenario, pack)
+        subTest.capture(optsCapture)
         var cssLink = "body > table:nth-child(16) > tbody > tr > td:nth-child(2) > table:nth-child(1) > tbody > tr > td:nth-child(2) > table:nth-child(4) > tbody > tr > td > table:nth-child(2) > tbody > tr:nth-child(4) > td > div > div > table > tbody > tr > td > table > tbody > tr:nth-child(2) > td > p:nth-child(3) > a"
         var href = casper.getElementAttribute(cssLink, "href")
         var replaced = href.replace("http://www.google.com/url?q=", "")
@@ -286,7 +272,6 @@ casper.test.begin(desc, function scene_020_020(test) {
     casper.then(function () {
         var cssBackToInbox = "a.searchPageLink" // there are 2 links on the page
         casper.click(cssBackToInbox)
-        mobi.capture("120-001", scenario, pack)
     })
 
     /** All inbox messages are checked */
@@ -297,17 +282,15 @@ casper.test.begin(desc, function scene_020_020(test) {
             casper.echo("::: " + JSON.stringify(element))
             casper.click("input[value='" + element.attributes.value + "']")
         })
-        mobi.capture("120-002", scenario, pack)
         test.assert(true, "All inbox messages are checked.")
     })
 
     /** "Delete" button is pressed */
     casper.then(function () {
-        mobi.capture("120-003", scenario, pack)
         var cssBtnDelete = "input[value='Delete']"
         casper.click(cssBtnDelete)
         test.assert(true, '"Delete" button is pressed.')
-        mobi.capture("130", scenario, pack)
+        subTest.capture(optsCapture)
     })
 
 
@@ -329,7 +312,7 @@ casper.test.begin(desc, function scene_020_020(test) {
         casper.fillSelectors("#form-validate", {"#password": authMageCustomer.password}, false)
         casper.fillSelectors("#form-validate", {"#password-confirmation": authMageCustomer.password}, true)
         test.assert(true, "Password value is filled in and submitted.")
-        mobi.capture("200", scenario, pack)
+        subTest.capture(optsCapture)
     })
 
     /** Login form is filled in and submitted */
@@ -338,7 +321,7 @@ casper.test.begin(desc, function scene_020_020(test) {
             casper.fillSelectors("#login-form", {"#email": authMageCustomer.email}, false)
             casper.fillSelectors("#login-form", {"#pass": authMageCustomer.password}, true)
             test.assert(true, "Login form is filled in and submitted.")
-            mobi.capture("210", scenario, pack)
+            subTest.capture(optsCapture)
         })
     })
 
@@ -346,7 +329,7 @@ casper.test.begin(desc, function scene_020_020(test) {
     casper.then(function () {
         casper.waitForSelector("h1.page-title", function () {
             test.assert(true, "Customer Dashboard is loaded.")
-            mobi.capture("220", scenario, pack)
+            subTest.capture(optsCapture)
         })
     })
 
@@ -355,14 +338,11 @@ casper.test.begin(desc, function scene_020_020(test) {
         var url = mobi.getUrlMage("/customer/account/logout/")
         casper.open(url).then(function () {
             test.assert(true, "Logout is performed.")
-            mobi.capture("230", scenario, pack)
+            subTest.capture(optsCapture)
         })
     })
 
-    /** Run scenario and finalize test. */
-    casper.run(function () {
-        mobi.capture("999", scenario, pack)
-        test.done()
-    })
+    // Run scenario and finalize test.
+    subTest.run(test)
 
 })

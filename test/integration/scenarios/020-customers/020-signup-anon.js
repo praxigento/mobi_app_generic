@@ -1,11 +1,9 @@
 "use strict"
-// shortcuts for globals
+// shortcut globals
 var casper = casper
 var mobi = mobi
-var conf = mobi.opts.conf
 var subFront = mobi.sub.mage.front
 var subTest = mobi.sub.test
-var pathScreens = mobi.opts.path.screenshots
 var authMageCustomer = mobi.opts.auth.mage.front.customerAnon
 var authGmailCustomer = mobi.opts.auth.gmail.customerAnon
 var address = mobi.opts.address.anonymous
@@ -19,27 +17,30 @@ var optsSubs = {suite: suite, screen: {save: false}}
 var desc = "scenario " + pack + "/" + scenario + ": Anonymous Signup:"
 var uriMageSignup // URI extracted from Gmail message
 
-casper.test.begin(desc, function scene_020_020(test) {
+// function itself
+casper.test.begin(desc, 39, function scene_020_020(test) {
 
     // Start scenario and setup phantom/capser
     subTest.start()
 
-    casper.page.deleteCookie("prxgtDwnlReferral") // \Praxigento\Downline\Tool\Def\Referral::COOKIE_REFERRAL_CODE
-
     // Magento Front: compose order
+
+    // open catalog for Baltic store & EUR currency as anonymous
     var url = mobi.getUrlMage("front.catalog.product.san215")
-    casper.open(url)
-    casper.then(function () {
-        mobi.sub.front.swtichStore({pack: pack, scenario: scenario})
+    subFront.auth.anon()
+    casper.open(url).then(function () {
+        optsSubs.store = conf.app.store.baltic
+        optsSubs.currency = conf.app.currency.eur
+        subFront.switch.store(optsSubs)
+        subFront.switch.currency(optsSubs)
     })
 
     /** Product page is loaded for "215San" */
     casper.then(function () {
-        casper.then(function () {
-            test.assertSelectorHasText("div.product.attribute.sku > div", "215San", 'Product page is loaded for "215San".')
-            subTest.capture(optsCapture)
-        })
+        test.assertSelectorHasText("div.product.attribute.sku > div", "215San", 'Product page is loaded for "215San".')
+        subTest.capture(optsCapture)
     })
+
 
     /** "Add to Cart" button is clicked */
     casper.waitForSelector('#product-addtocart-button', function () {

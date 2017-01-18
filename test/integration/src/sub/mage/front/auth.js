@@ -25,6 +25,8 @@ var result = function mageFrontAuth(opts) {
     var optsCapture = {suite: suite, prefix: savePrefix}
 
 
+    // function itself
+
     /** Magento Front authentication itself */
     casper.then(function () {
 
