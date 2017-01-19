@@ -15,7 +15,7 @@ var optsSubs = {suite: suite, screen: {save: false}}
 var desc = "scenario " + pack + "/" + scenario + ": Referral Price and PV checking:"
 
 // function itself
-casper.test.begin(desc, function suite_060_010(test) {
+casper.test.begin(desc, 6, function suite_060_010(test) {
 
     // Start scenario and setup phantom/capser
     subTest.start()
@@ -38,14 +38,19 @@ casper.test.begin(desc, function suite_060_010(test) {
 
         var cssSan212 = "div.price-final_price[data-product-id='4']"
         var expectPrice = "€10.26"
-        var expectPv = "?.??"
+        var expectPv = "10.80"
 
         /** price for Bee Royal is €10.26 */
+        /** PV for Bee Royal is 10.80 */
         casper.waitForSelector(cssSan212, function then() {
             var text = casper.fetchText("#price-including-tax-product-price-4 > span")
             text = text.toLowerCase()
             text = text.trim()
             test.assertEquals(text.trim(), expectPrice, "... price for Bee Royal is " + text + ".")
+            text = casper.fetchText("#prxgt_pv_4 > span")
+            text = text.toLowerCase()
+            text = text.trim()
+            test.assertEquals(text.trim(), expectPv, "... PV for Bee Royal is " + text + ".")
         })
 
     })
@@ -64,14 +69,19 @@ casper.test.begin(desc, function suite_060_010(test) {
 
         var cssSan212 = "div.price-final_price[data-product-id='4']"
         var expectPrice = "14,16 $"
-        var expectPv = "?.??"
+        var expectPv = "9.60"
 
         /** price for Bee Royal is 14,16 $ */
+        /** PV for Bee Royal is 9.60 */
         casper.waitForSelector(cssSan212, function then() {
             var text = casper.fetchText("#price-including-tax-product-price-4 > span")
             text = text.toLowerCase()
             text = text.trim()
             test.assertEquals(text.trim(), expectPrice, "... price for Bee Royal is " + text + ".")
+            text = casper.fetchText("#prxgt_pv_4 > span")
+            text = text.toLowerCase()
+            text = text.trim()
+            test.assertEquals(text.trim(), expectPv, "... PV for Bee Royal is " + text + ".")
         })
 
     })
