@@ -13,6 +13,7 @@ class BusinessCodesManager
     /**#@+
      * Business codes for Customer Groups.
      */
+    const B_CUST_GROUP_ANONYMOUS = 'anon';
     const B_CUST_GROUP_DISTRIBUTOR = 'distributor';
     const B_CUST_GROUP_REFERRAL = 'referral';
     const B_CUST_GROUP_RETAIL = 'retail';
@@ -42,6 +43,7 @@ class BusinessCodesManager
     /**#@+
      * Magento IDs for Customer Groups.
      */
+    const M_CUST_GROUP_ANONYMOUS = 0;
     const M_CUST_GROUP_DISTRIBUTOR = 1;
     const M_CUST_GROUP_REFERRAL = 4;
     const M_CUST_GROUP_RETAIL = 3;
@@ -77,6 +79,8 @@ class BusinessCodesManager
             $result = self::B_CUST_GROUP_WHOLESALE;
         } elseif ($groupId == self::M_CUST_GROUP_REFERRAL) {
             $result = self::B_CUST_GROUP_REFERRAL;
+        } elseif ($groupId == self::M_CUST_GROUP_ANONYMOUS) {
+            $result = self::B_CUST_GROUP_ANONYMOUS;
         }
         return $result;
     }
@@ -110,6 +114,21 @@ class BusinessCodesManager
         $result = 'unknown carrier';
         if ($businessCode == self::B_SHIP_FLAT_RATE) {
             $result = self::M_CARRIER_FLAT_RATE;
+        }
+        return $result;
+    }
+
+    public function getMageIdForCustomerGroupByCode($groupCode)
+    {
+        $result = null;
+        if ($groupCode == self::B_CUST_GROUP_DISTRIBUTOR) {
+            $result = self::M_CUST_GROUP_DISTRIBUTOR;
+        } elseif ($groupCode == self::B_CUST_GROUP_WHOLESALE) {
+            $result = self::M_CUST_GROUP_WHOLESALE;
+        } elseif ($groupCode == self::B_CUST_GROUP_REFERRAL) {
+            $result = self::M_CUST_GROUP_REFERRAL;
+        } elseif ($groupCode == self::B_CUST_GROUP_ANONYMOUS) {
+            $result = self::M_CUST_GROUP_ANONYMOUS;
         }
         return $result;
     }
