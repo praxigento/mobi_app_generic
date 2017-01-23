@@ -214,7 +214,7 @@ casper.test.begin(desc, 39, function scene_020_030(test) {
         casper.open(url).then(function () {
             subTest.capture(optsCapture)
             var cssBtnNext = "input#next"
-            casper.waitForSelector(cssBtnNext, function () {
+            casper.waitForSelector(cssBtnNext, function then() {
                 test.assert(true, 'Gmail login form is loaded.')
                 casper.fillSelectors("#identifier-shown", {
                     "#Email": authGmailCustomer.email
@@ -232,6 +232,8 @@ casper.test.begin(desc, 39, function scene_020_030(test) {
                     }, false)
                     casper.click(cssBtnNext, "50%", "50%")
                 })
+            }, function onTimeout() {
+                subTest.capture(optsCapture)
             })
         })
     })
