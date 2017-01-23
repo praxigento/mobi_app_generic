@@ -37,10 +37,10 @@ casper.test.begin(desc, 6, function suite_060_010(test) {
         test.assert(true, "Catalog page is loaded for 'Baltic' store.")
 
         var cssSan212 = "div.price-final_price[data-product-id='4']"
-        var expectPrice = "€10.26"
+        var expectPrice = "€11.29"
         var expectPv = "10.80"
 
-        /** price for Bee Royal is €10.26 */
+        /** price for Bee Royal is €11.29 */
         /** PV for Bee Royal is 10.80 */
         casper.waitForSelector(cssSan212, function then() {
             var text = casper.fetchText("#price-including-tax-product-price-4 > span")
@@ -68,10 +68,10 @@ casper.test.begin(desc, 6, function suite_060_010(test) {
         test.assert(true, "Catalog page is loaded for 'Russian' store.")
 
         var cssSan212 = "div.price-final_price[data-product-id='4']"
-        var expectPrice = "14,16 $"
+        var expectPrice = "15,58 $"
         var expectPv = "9.60"
 
-        /** price for Bee Royal is 14,16 $ */
+        /** price for Bee Royal is 15,58 $ */
         /** PV for Bee Royal is 9.60 */
         casper.waitForSelector(cssSan212, function then() {
             var text = casper.fetchText("#price-including-tax-product-price-4 > span")
