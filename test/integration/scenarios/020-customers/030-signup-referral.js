@@ -262,10 +262,14 @@ casper.test.begin(desc, 39, function scene_020_030(test) {
         subTest.capture(optsCapture)
         var cssLink = "body > table:nth-child(16) > tbody > tr > td:nth-child(2) > table:nth-child(1) > tbody > tr > td:nth-child(2) > table:nth-child(4) > tbody > tr > td > table:nth-child(2) > tbody > tr:nth-child(4) > td > div > div > table > tbody > tr > td > table > tbody > tr:nth-child(2) > td > p:nth-child(3) > a"
         var href = casper.getElementAttribute(cssLink, "href")
-        var replaced = href.replace("http://www.google.com/url?q=", "")
-        var decoded = decodeURIComponent(replaced)
-        uriMageSignup = decoded
-        test.assert(true, '"Set password" link is extracted.')
+        if (href) {
+            var replaced = href.replace("http://www.google.com/url?q=", "")
+            var decoded = decodeURIComponent(replaced)
+            uriMageSignup = decoded
+            test.assert(true, '"Set password" link is extracted.')
+        } else {
+            casper.echo('"Set password" link is NOT extracted.')
+        }
     })
 
     /** Inbox is loaded again */
