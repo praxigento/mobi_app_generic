@@ -175,9 +175,11 @@ casper.test.begin(desc, function suite_030_020(test) {
             }, null, 20000);
 
             /** Select 'braintree' method */
-            casper.waitForSelector('label[for=braintree]', function () {
+            casper.waitForSelector('label[for=braintree]', function then() {
                 casper.click('label[for=braintree]');
                 test.assert(true, '0170: Payment method is selected (braintree).');
+            }, function onTimeout() {
+                mobi.capture('140-fail', scene, scenario);
             });
 
             /* wait untill braintree form will be loaded */
