@@ -42,8 +42,8 @@ REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '3', path ='customer/c
 -- Salex / Tax (MOBI-336)
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '2', path ='tax/classes/shipping_tax_class';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'origin', path ='tax/calculation/based_on';
-REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '0', path ='tax/calculation/price_includes_tax';
-REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '0', path ='tax/calculation/shipping_includes_tax';
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '1', path ='tax/calculation/price_includes_tax';
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '1', path ='tax/calculation/shipping_includes_tax';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '1', path ='tax/calculation/cross_border_trade_enabled';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '3', path ='tax/display/type';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '3', path ='tax/display/shipping';
