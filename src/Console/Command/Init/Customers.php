@@ -85,7 +85,7 @@ class Customers
                     $this->toolReferral->replaceCodeInRegistry($referralCode);
                 }
                 /** @var \Magento\Customer\Api\Data\CustomerInterface $customer */
-                $customer = $this->_manObj->create(\Magento\Customer\Api\Data\CustomerInterface::class);
+                $customer = $this->manObj->create(\Magento\Customer\Api\Data\CustomerInterface::class);
                 $customer->setEmail($email);
                 $customer->setFirstname($first);
                 $customer->setLastname($last);
