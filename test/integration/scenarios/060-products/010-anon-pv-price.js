@@ -61,6 +61,7 @@ casper.test.begin(desc, 6, function suite_060_010(test) {
         optsSubs.store = conf.app.store.russian
         optsSubs.currency = conf.app.currency.usd
         subFront.switch.store(optsSubs)
+        subFront.switch.currency(optsSubs)
     })
 
     /** Catalog page is loaded for 'Russian' store */
