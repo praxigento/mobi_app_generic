@@ -2,13 +2,12 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-
 namespace Praxigento\App\Generic2\Console\Command\Init;
 
 use Praxigento\App\Generic2\Tool\Odoo\Def\BusinessCodesManager;
 
 class Customers
-    extends \Praxigento\App\Generic2\Console\Command\Init\Base
+    extends \Praxigento\Core\Console\Command\Base
 {
     /** Default downline tree */
     protected $DEFAULT_DWNL_TREE = [

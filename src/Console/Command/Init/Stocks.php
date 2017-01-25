@@ -2,7 +2,6 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-
 namespace Praxigento\App\Generic2\Console\Command\Init;
 
 use Magento\Tax\Model\Calculation\Rate as EntityTaxRate;
@@ -10,7 +9,7 @@ use Magento\Tax\Model\Calculation\Rule as EntityTaxRule;
 use Praxigento\App\Generic2\Config as Cfg;
 
 class Stocks
-    extends \Praxigento\App\Generic2\Console\Command\Init\Base
+    extends \Praxigento\Core\Console\Command\Base
 {
     /**#@+
      * IDs for groups (stores in adminhtml terms).

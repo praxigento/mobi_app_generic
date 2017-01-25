@@ -2,7 +2,6 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-
 namespace Praxigento\App\Generic2\Console\Command\Init;
 
 use Praxigento\App\Generic2\Config as Cfg;
@@ -12,7 +11,7 @@ use Praxigento\Core\Tool\IPeriod;
  * Initialize bonus parameters for Generic Application.
  */
 class Bonus
-    extends \Praxigento\App\Generic2\Console\Command\Init\Base
+    extends \Praxigento\Core\Console\Command\Base
 {
     /** @var  \Praxigento\Core\Transaction\Database\IManager */
     protected $_manTrans;

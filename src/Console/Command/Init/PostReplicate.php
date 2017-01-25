@@ -10,7 +10,7 @@ namespace Praxigento\App\Generic2\Console\Command\Init;
  *  - create ACL User for Odoo Replication;
  */
 class PostReplicate
-    extends \Praxigento\App\Generic2\Console\Command\Init\Base
+    extends \Praxigento\Core\Console\Command\Base
 {
     /** @var Sub\Categories */
     protected $subCats;

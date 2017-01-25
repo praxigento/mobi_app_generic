@@ -2,13 +2,12 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-
 namespace Praxigento\App\Generic2\Console\Command\Init;
 
 use Praxigento\Odoo\Service\Replicate\Request\ProductSave as ProductSaveRequest;
 
 class Products
-    extends \Praxigento\App\Generic2\Console\Command\Init\Base
+    extends \Praxigento\Core\Console\Command\Base
 {
     /** @var \Praxigento\Odoo\Service\IReplicate */
     protected $_callReplicate;

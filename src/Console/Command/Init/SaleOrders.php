@@ -2,14 +2,13 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-
 namespace Praxigento\App\Generic2\Console\Command\Init;
 
 /**
  * Create sale orders to calculate bonus and collect internal money on customer accounts.
  */
 class SaleOrders
-    extends \Praxigento\App\Generic2\Console\Command\Init\Base
+    extends \Praxigento\Core\Console\Command\Base
 {
     /** @var  \Praxigento\Core\Transaction\Database\IManager */
     protected $_manTrans;
