@@ -8,7 +8,7 @@
 ## =========================================================================
 
 # pin current folder and deployment root folder
-CUR_DIR="$PWD"
+DIR_CUR="$PWD"
 DIR_ROOT="$( cd "$( dirname "$0" )" && pwd )"
 
 # Available deployment modes
@@ -156,4 +156,4 @@ EOF
 echo ""
 echo "Deployment is done. Launch post-installation script:"
 echo "    sh ./bin/post_install.sh"
-cd ${CUR_DIR}
+cd ${DIR_CUR}
