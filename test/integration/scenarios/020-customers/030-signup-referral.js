@@ -18,7 +18,7 @@ var desc = "scenario " + pack + "/" + scenario + ": Referral Signup:"
 var uriMageSignup // URI extracted from Gmail message
 
 // function itself
-casper.test.begin(desc, 39, function scene_020_030(test) {
+casper.test.begin(desc, 38, function scene_020_030(test) {
 
     // Start scenario and setup phantom/capser
     subTest.start()
@@ -285,7 +285,6 @@ casper.test.begin(desc, 39, function scene_020_030(test) {
         var cssCheckbox = "input[type=checkbox]"
         var elements = casper.getElementsInfo(cssCheckbox)
         elements.forEach(function (element) {
-            casper.echo("::: " + JSON.stringify(element))
             casper.click("input[value='" + element.attributes.value + "']")
         })
         test.assert(true, "All inbox messages are checked.")
@@ -340,13 +339,7 @@ casper.test.begin(desc, 39, function scene_020_030(test) {
     })
 
     /** Logout is performed */
-    casper.then(function () {
-        var url = mobi.getUrlMage("/customer/account/logout/")
-        casper.open(url).then(function () {
-            test.assert(true, "Logout is performed.")
-            subTest.capture(optsCapture)
-        })
-    })
+    subFront.auth.logout(optsSubs)
 
     // Run scenario and finalize test.
     subTest.run(test)
