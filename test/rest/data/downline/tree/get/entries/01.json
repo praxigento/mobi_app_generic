@@ -1,7 +1,6 @@
 {
   "data": {
     "max_depth": 2,
-    "max_entries": 4,
     "period": "20171231",
     "request_return": true,
     "root_node": 3
