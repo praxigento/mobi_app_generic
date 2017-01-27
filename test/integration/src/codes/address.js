@@ -15,6 +15,18 @@ var result = {
         phone: "2918180",
         state: "471" // Ādažu novads
     },
+    distributor: {
+        email: "customer_1@test.com",
+        nameFirst: "Distributor",
+        nameLast: "MOBI",
+        company: "Company",
+        street: "Street",
+        city: "Riga",
+        zip: "1010",
+        country: "LV",
+        phone: "2918180",
+        state: "471" // Ādažu novads
+    },
     referral: {
         email: "mobi.referral@gmail.com",
         nameFirst: "Referral",

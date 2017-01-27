@@ -25,11 +25,11 @@ var urls = {
                     self: "/catalog/category/view/s/cat-2/id/3/"
                 },
                 product: {
-                    san10674: "/catalog/product/view/id/1",
-                    san136: "/catalog/product/view/id/2",
-                    san203: "/catalog/product/view/id/3",
-                    san212: "/catalog/product/view/id/4",
-                    san215: "/catalog/product/view/id/5"
+                    san10674: {self: "/catalog/product/view/id/1"},
+                    san136: {self: "/catalog/product/view/id/2"},
+                    san203: {self: "/catalog/product/view/id/3"},
+                    san212: {self: "/catalog/product/view/id/4"},
+                    san215: {self: "/catalog/product/view/id/5"}
                 }
             },
             checkout: {
