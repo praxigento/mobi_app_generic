@@ -83,21 +83,6 @@ mobi.getNavigationUrl = function getNavigationUrl(path, scope) {
 };
 
 /**
- * If path contains '/' then return Mage Base URL (mobi.opts.navig.mage.self) + "path"
- * else return Mage Base URL + "path" in "mobi.opts.navig.mage" structure.
- *
- * @param {string} path dot-separated path to the URL in "mobi.opts.navig.mage" or "/real/path/to/the/point/"
- * @returns {string}
- */
-mobi.getUrlMage = function getUrlMage(path) {
-    casper.echo("  construct Mage URL for path '" + path + "'.", "PARAMETER");
-    var isAlias = path.indexOf('/') === -1;     // absolute path contains at least one '/' char
-    var uri = (isAlias) ? mobi.objPath.get(mobi.opts.navig.mage, path) : path;   // get URL value by path or use path as-is
-    var result = mobi.opts.navig.mage.self + uri; // compose full URL
-    casper.echo("  result URL: " + result, "PARAMETER");
-    return result;
-};
-/**
  * If path contains '/' then return Odoo Base URL (mobi.opts.navig.odoo.self) + "path"
  * else return Odoo Base URL + "path" in "mobi.opts.navig.odoo" structure.
  *

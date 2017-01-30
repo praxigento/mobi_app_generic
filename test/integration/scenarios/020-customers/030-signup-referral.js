@@ -26,7 +26,7 @@ casper.test.begin(desc, 38, function scene_020_030(test) {
     // Magento Front: compose order
 
     // open catalog for Baltic store & EUR currency as referred by Customer #10
-    var url = mobi.getUrlMage("front.catalog.product.san215")
+    var url = subFront.getUrl("front.catalog.product.san215")
     subFront.auth.referral({url: url, code: 10})
     casper.open(url).then(function () {
         optsSubs.store = conf.app.store.baltic
@@ -59,7 +59,7 @@ casper.test.begin(desc, 38, function scene_020_030(test) {
 
     /** Checkout "Shipping" step is loaded */
     casper.then(function () {
-        var url = mobi.getUrlMage("/checkout/")
+        var url = subFront.getUrl("/checkout/")
         casper.open(url).then(function () {
             test.assert(true, 'Checkout "Shipping" step is loaded.')
             var css = "#shipping-method-buttons-container > div > button > span > span"
