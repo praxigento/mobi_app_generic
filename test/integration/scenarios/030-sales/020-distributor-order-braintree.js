@@ -181,7 +181,7 @@ casper.test.begin(desc, function suite_030_020(test) {
             })
 
             var cssFldFirstname = "input[name='firstname']";
-            casper.waitForSelector('', function () {
+            casper.waitForSelector(cssFldFirstname, function () {
                 /** Fill in the form with  */
 
                 if (casper.visible(cssFldFirstname)) {
