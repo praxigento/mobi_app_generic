@@ -7,7 +7,8 @@ var result = function mageFrontAuthAnon() {
     var casper = global.casper
 
     // function itself
-    casper.page.deleteCookie("prxgtDwnlReferral") // \Praxigento\Downline\Tool\Def\Referral::COOKIE_REFERRAL_CODE
+    casper.page.deleteCookie("PHPSESSID")           // clean up session cookie
+    casper.page.deleteCookie("prxgtDwnlReferral")   // \Praxigento\Downline\Tool\Def\Referral::COOKIE_REFERRAL_CODE
 }
 
 module.exports = result
