@@ -4,7 +4,7 @@
  */
 var urls = {
     mage: {
-        self: "http://mage2.local.host.com",   // Base URL for the site (w/o ending "/")
+        self: "http://mobi.mage.test-auto.prxgt.com",   // Base URL for the site (w/o ending "/")
         admin: {
             self: "/admin",
             admin: {
