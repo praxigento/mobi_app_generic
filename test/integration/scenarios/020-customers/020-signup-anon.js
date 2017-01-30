@@ -23,11 +23,14 @@ casper.test.begin(desc, 38, function scene_020_020(test) {
     // Start scenario and setup phantom/capser
     subTest.start()
 
+    // clean up referral cookies
+    subFront.auth.anon()
+
     // Magento Front: compose order
 
     // open catalog for Baltic store & EUR currency as anonymous
-    var url = subFront.getUrl("front.catalog.product.san215")
-    subFront.auth.anon()
+    var url = subFront.getUrl('catalog.product.san215')
+
     casper.open(url).then(function () {
         optsSubs.store = conf.app.store.baltic
         optsSubs.currency = conf.app.currency.eur

@@ -23,10 +23,13 @@ casper.test.begin(desc, 38, function scene_020_030(test) {
     // Start scenario and setup phantom/capser
     subTest.start()
 
+    // clean up referral cookies
+    subFront.auth.anon()
+
     // Magento Front: compose order
 
     // open catalog for Baltic store & EUR currency as referred by Customer #10
-    var url = subFront.getUrl("front.catalog.product.san215")
+    var url = subFront.getUrl('catalog.product.san215')
     subFront.auth.referral({url: url, code: 10})
     casper.open(url).then(function () {
         optsSubs.store = conf.app.store.baltic

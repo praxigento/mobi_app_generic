@@ -20,6 +20,9 @@ casper.test.begin(desc, 6, function suite_060_010(test) {
     // Start scenario and setup phantom/capser
     subTest.start()
 
+    // clean up referral cookies
+    subFront.auth.anon()
+
     // open catalog for Baltic store & EUR currency as referred by Customer #10
     var url = subFront.getUrl("catalog.category")
     subFront.auth.referral({url: url, code: 10})
