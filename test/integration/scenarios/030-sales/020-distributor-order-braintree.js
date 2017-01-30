@@ -296,7 +296,9 @@ casper.test.begin(desc, function suite_030_020(test) {
                 }
             ).then(function (response) {
                 var pvExpected = 94.4
-                var json = JSON.parse(casper.getPageContent());
+                var content = casper.getPageContent()
+                casper.echo(content)
+                var json = JSON.parse(content);
                 test.assertEqual(json.data.total, pvExpected, 'Order #' + orderIdInc + ' has expected PV (' + pvExpected + ').')
             })
 
