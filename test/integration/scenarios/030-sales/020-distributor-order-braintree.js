@@ -21,20 +21,20 @@ var orderIdInc // incremental ID of the order to use in API to get PV
 // function itself
 casper.test.begin(desc, function suite_030_020(test) {
 
-    // Start scenario and setup phantom/capser
-    subTest.start()
+        // Start scenario and setup phantom/capser
+        subTest.start()
 
-    // Define options: authentication data, store and currency
-    var opts = JSON.parse(JSON.stringify(optsSubs))
-    opts.username = confAuth.email
-    opts.userpass = confAuth.password
-    opts.store = conf.app.store.baltic
-    opts.currency = conf.app.currency.eur
+        // Define options: authentication data, store and currency
+        var opts = JSON.parse(JSON.stringify(optsSubs))
+        opts.username = confAuth.email
+        opts.userpass = confAuth.password
+        opts.store = conf.app.store.baltic
+        opts.currency = conf.app.currency.eur
 
-    // authenticate then switch store & currency
-    subFront.auth(opts)
-    subFront.switch.store(optsSubs)
-    subFront.switch.currency(optsSubs)
+        // authenticate then switch store & currency
+        subFront.auth(opts)
+        subFront.switch.store(optsSubs)
+        subFront.switch.currency(optsSubs)
 
         /**
          * Go to product page and add 'Black Walnut' (215san) to the cart.
@@ -180,11 +180,11 @@ casper.test.begin(desc, function suite_030_020(test) {
                 })
             })
 
-            var css = '#shipping-method-buttons-container > div > button > span > span'
-            casper.waitForSelector(css, function () {
-
+            var cssFldFirstname = "input[name='firstname']";
+            casper.waitForSelector('', function () {
                 /** Fill in the form with  */
-                if (casper.visible("input[name='firstname']")) {
+
+                if (casper.visible(cssFldFirstname)) {
                     var cssFormAddress = "#co-shipping-form"
                     casper.waitForSelector("input[name=telephone]", function () {
                         casper.fillSelectors(cssFormAddress, {
@@ -200,9 +200,14 @@ casper.test.begin(desc, function suite_030_020(test) {
                         }, false)
                         subTest.capture(optsCapture)
                     })
+                } else {
+                    subTest.capture(optsCapture)
                 }
 
+            })
 
+            var css = '#shipping-method-buttons-container > div > button > span > span'
+            casper.waitForSelector(css, function () {
                 casper.click(css)
                 test.assert(true, 'Shipping is proceed in order placement.')
             })
@@ -280,32 +285,32 @@ casper.test.begin(desc, function suite_030_020(test) {
             casper.echo('Order #' + orderIdInc + ' is created.')
         }, null, 30000)
 
-    /** Logout is performed */
-    subFront.auth.logout(optsSubs)
+        /** Logout is performed */
+        subFront.auth.logout(optsSubs)
 
-    casper.then(function () {
-            var url = subFront.getUrl('/rest/V1/prxgt/pv/sale/order/get')
-            var data = {data: {id_inc: orderIdInc}}
-            casper.open(url, {
-                    method: "post",
-                    headers: {
-                        "Accept": "*/*",
-                        "Content-Type": "application/json"
-                    },
-                    data: data
-                }
-            ).then(function (response) {
-                var pvExpected = 94.4
-                var content = casper.getPageContent()
-                casper.echo(content)
-                var json = JSON.parse(content);
-                test.assertEqual(json.data.total, pvExpected, 'Order #' + orderIdInc + ' has expected PV (' + pvExpected + ').')
-            })
+        casper.then(function () {
+                var url = subFront.getUrl('/rest/V1/prxgt/pv/sale/order/get')
+                var data = {data: {id_inc: orderIdInc}}
+                casper.open(url, {
+                        method: "post",
+                        headers: {
+                            "Accept": "*/*",
+                            "Content-Type": "application/json"
+                        },
+                        data: data
+                    }
+                ).then(function (response) {
+                    var pvExpected = 94.4
+                    var content = casper.getPageContent()
+                    casper.echo(content)
+                    var json = JSON.parse(content);
+                    test.assertEqual(json.data.total, pvExpected, 'Order #' + orderIdInc + ' has expected PV (' + pvExpected + ').')
+                })
 
-        }
-    )
+            }
+        )
 
-    // Run scenario and finalize test.
-    subTest.run(test)
+        // Run scenario and finalize test.
+        subTest.run(test)
     }
 )
