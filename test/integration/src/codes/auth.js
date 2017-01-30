@@ -24,6 +24,10 @@ var result = {
                 email: 'customer_1@test.com',
                 password: 'UserPassword12'
             },
+            customer10: {
+                email: 'customer_10@test.com',
+                password: 'UserPassword12'
+            },
             customerAnon: {
                 email: 'mobi.anon@gmail.com',
                 password: 'UserPassword12'
