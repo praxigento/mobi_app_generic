@@ -9,6 +9,8 @@ use Praxigento\Core\Tool\IPeriod;
 
 /**
  * Initialize bonus parameters for Generic Application.
+ *
+ * @deprecated Use classes in Praxigento\App\Generic2\Console\Command\Test\...
  */
 class Bonus
     extends \Praxigento\Core\Console\Command\Base
