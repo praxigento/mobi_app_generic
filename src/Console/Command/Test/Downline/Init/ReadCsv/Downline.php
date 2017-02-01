@@ -20,7 +20,7 @@ class Downline
 
     public function do()
     {
-        $csv = $this->readCsvFile($path = __DIR__ . '/../../../data/downline.csv');
+        $csv = $this->readCsvFile($path = __DIR__ . '/../../../data/downline.csv', 0);
         $result = [];
         foreach ($csv as $item) {
             /* extract read data */

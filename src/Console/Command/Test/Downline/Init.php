@@ -15,10 +15,13 @@ class Init
     const A_DATE_ENROLLED = 'date_enrolled';
     const A_EMAIL = 'email';
     const A_PARENT_MLM_ID = 'parent_mlm_id';
+
     /** @var \Praxigento\App\Generic2\Console\Command\Test\Downline\Init\CleanCustomers */
     protected $subClearCust;
     /** @var \Praxigento\App\Generic2\Console\Command\Test\Downline\Init\CreateCustomers */
     protected $subCreateCust;
+    /** @var \Praxigento\App\Generic2\Console\Command\Test\Downline\Init\CreateDownline */
+    protected $subCreateDwnl;
     /** @var \Praxigento\App\Generic2\Console\Command\Test\Downline\Init\UpdateGroups */
     protected $subUpdateGroups;
 
@@ -26,6 +29,7 @@ class Init
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\App\Generic2\Console\Command\Test\Downline\Init\CleanCustomers $subClearCust,
         \Praxigento\App\Generic2\Console\Command\Test\Downline\Init\CreateCustomers $subCreateCust,
+        \Praxigento\App\Generic2\Console\Command\Test\Downline\Init\CreateDownline $subCreateDwnl,
         \Praxigento\App\Generic2\Console\Command\Test\Downline\Init\UpdateGroups $subUpdateGroups
     ) {
         parent::__construct(
@@ -35,6 +39,7 @@ class Init
         );
         $this->subClearCust = $subClearCust;
         $this->subCreateCust = $subCreateCust;
+        $this->subCreateDwnl = $subCreateDwnl;
         $this->subUpdateGroups = $subUpdateGroups;
     }
 
@@ -45,7 +50,8 @@ class Init
         $succeed = false;
         $this->subUpdateGroups->do();
         $this->subClearCust->do();
-        $this->subCreateCust->do();
+        $maps = $this->subCreateCust->do();
+        $this->subCreateDwnl->do($maps);
         if ($succeed) {
             $output->writeln('<info>Command is completed.<info>');
         } else {
