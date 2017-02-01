@@ -15,15 +15,18 @@ class Init
     const A_DATE_ENROLLED = 'date_enrolled';
     const A_EMAIL = 'email';
     const A_PARENT_MLM_ID = 'parent_mlm_id';
-
+    /** @var \Praxigento\App\Generic2\Console\Command\Test\Downline\Init\UpdateGroups */
+    protected $subUpdateGroups;
     public function __construct(
-        \Magento\Framework\ObjectManagerInterface $manObj
+        \Magento\Framework\ObjectManagerInterface $manObj,
+        \Praxigento\App\Generic2\Console\Command\Test\Downline\Init\UpdateGroups $subUpdateGroups
     ) {
         parent::__construct(
             $manObj,
             'prxgt:test:downline-init',
             'Initialize customers downline for integration testing.'
         );
+        $this->subUpdateGroups = $subUpdateGroups;
     }
 
     protected function execute(
@@ -31,7 +34,7 @@ class Init
         \Symfony\Component\Console\Output\OutputInterface $output
     ) {
         $succeed = false;
-
+        $this->subUpdateGroups->do();
         if ($succeed) {
             $output->writeln('<info>Command is completed.<info>');
         } else {
