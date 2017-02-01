@@ -15,6 +15,7 @@
                 <item name="prxgt_app_init_users" xsi:type="object">\Praxigento\App\Generic2\Console\Command\Init\Users</item>
                 <item name="prxgt_app_init_post_replicate" xsi:type="object">\Praxigento\App\Generic2\Console\Command\Init\PostReplicate</item>
                 <item name="prxgt_app_test_bonus_config" xsi:type="object">\Praxigento\App\Generic2\Console\Command\Test\Bonus\Config</item>
+                <item name="prxgt_app_test_downline_init" xsi:type="object">\Praxigento\App\Generic2\Console\Command\Test\Downline\Init</item>
             </argument>
         </arguments>
     </type>
