@@ -47,15 +47,10 @@ class Init
         \Symfony\Component\Console\Input\InputInterface $input,
         \Symfony\Component\Console\Output\OutputInterface $output
     ) {
-        $succeed = false;
         $this->subUpdateGroups->do();
         $this->subClearCust->do();
         $maps = $this->subCreateCust->do();
         $this->subCreateDwnl->do($maps);
-        if ($succeed) {
-            $output->writeln('<info>Command is completed.<info>');
-        } else {
-            $output->writeln('<info>Command is failed.<info>');
-        }
+        $output->writeln('<info>Command is completed.<info>');
     }
 }

@@ -23,16 +23,19 @@ class CreateDownline
     protected $repoDwnlCust;
     /** @var \Magento\Framework\App\ResourceConnection */
     protected $resource;
-
+    /** @var  \Praxigento\Core\Tool\IFormat */
+    protected $hlpFormat;
     public function __construct(
         \Praxigento\Core\Fw\Logger\App $logger,
         \Magento\Framework\App\ResourceConnection $resource,
+        \Praxigento\Core\Tool\IFormat $hlpFormat,
         \Praxigento\Downline\Repo\Entity\IChange $repoDwnlChange,
         \Praxigento\Downline\Repo\Entity\ICustomer $repoDwnlCust,
         \Praxigento\Downline\Service\ISnap $callDwnlSnap
     ) {
         $this->logger = $logger;
         $this->resource = $resource;
+        $this->hlpFormat = $hlpFormat;
         $this->repoDwnlChange = $repoDwnlChange;
         $this->repoDwnlCust = $repoDwnlCust;
         $this->callDwnlSnap = $callDwnlSnap;
@@ -49,6 +52,14 @@ class CreateDownline
         $reqExpand->setKeyParentId(\Praxigento\App\Generic2\Console\Command\Test\Downline\Init\ReadCsv\Downline::A_PARENT_ID);
         $respExpand = $this->callDwnlSnap->expandMinimal($reqExpand);
         $expandedTree = $respExpand->getSnapData();
+        /* order tree by depth */
+        uasort($expandedTree, function ($a, $b) {
+            $result = $a[\Praxigento\Downline\Data\Entity\Snap::ATTR_DEPTH] - $b[\Praxigento\Downline\Data\Entity\Snap::ATTR_DEPTH];
+            return $result;
+        });
+        /* save customer data into repo */
+        $dtChanged = \DateTime::createFromFormat('Ymd', '20170101');
+        $timeStarted = $dtChanged->getTimestamp();
         foreach ($expandedTree as $item) {
             $custMlmId = $item[\Praxigento\Downline\Data\Entity\Snap::ATTR_CUSTOMER_ID];
             $parentMlmId = $item[\Praxigento\Downline\Data\Entity\Snap::ATTR_PARENT_ID];
@@ -64,6 +75,9 @@ class CreateDownline
                 return $result;
             }, $parts);
             $pathIds = implode(Cfg::DTPS, $partsMapped);
+            $timeStarted += 600;
+            $dtChanged->setTimestamp($timeStarted);
+            $dateChanged = $this->hlpFormat->dateTimeForDb($dtChanged);
             /* add record to downline tree */
             $eCust = new \Praxigento\Downline\Data\Entity\Customer();
             $eCust->setCustomerId($cusMageId);
@@ -78,6 +92,7 @@ class CreateDownline
             $eChange = new \Praxigento\Downline\Data\Entity\Change();
             $eChange->setCustomerId($cusMageId);
             $eChange->setParentId($parentMageId);
+            $eChange->setDateChanged($dateChanged);
             $this->repoDwnlChange->create($eChange);
         }
     }
