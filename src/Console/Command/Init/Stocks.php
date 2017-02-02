@@ -21,7 +21,7 @@ class Stocks
     /**#@-  */
 
     /**#@+
-     * IDs for stores (store views in adminhtml terms).
+     * IDs for stocks (warehouses).
      */
     const DEF_STOCK_ID_BALTIC = self::DEF_STOCK_ID_DEFAULT;
     const DEF_STOCK_ID_DEFAULT = 1;
@@ -102,7 +102,6 @@ class Stocks
             'Create sample stores in application and map warehouses/stocks to stores.'
         );
         $this->logger = $logger;
-        $this->_manObj = $manObj;
         $this->manTrans = $manTrans;
         $this->manStore = $manStore;
         $this->manEvent = $manEvent;
@@ -183,14 +182,14 @@ class Stocks
     private function processGroups()
     {
         /* load and update Baltic group (store)*/
-        $this->groupBaltic = $this->_manObj->create(\Magento\Store\Model\Group::class);
+        $this->groupBaltic = $this->manObj->create(\Magento\Store\Model\Group::class);
         $this->groupBaltic->load(self::DEF_GROUP_ID_MAIN);
         $rootCatId = $this->groupBaltic->getRootCategoryId();
         $this->groupBaltic->setName('Baltic');
         $this->groupBaltic->save();
         $this->manEvent->dispatch('store_group_save', ['group' => $this->groupBaltic]);
         /* create Russian group (store) */
-        $this->groupRussian = $this->_manObj->create(\Magento\Store\Model\Group::class);
+        $this->groupRussian = $this->manObj->create(\Magento\Store\Model\Group::class);
         $this->groupRussian->load(self::DEF_GROUP_ID_RUSSIAN);
         $this->groupRussian->setName('Russian');
         $this->groupRussian->setWebsiteId(self::DEF_WEBSITE_ID_MAIN);
@@ -215,7 +214,7 @@ class Stocks
         try {
             $stockRussian = $this->mageRepoStock->get(self::DEF_STOCK_ID_RUSSIAN);
         } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
-            $stockRussian = $this->_manObj->create(\Magento\CatalogInventory\Model\Stock::class);
+            $stockRussian = $this->manObj->create(\Magento\CatalogInventory\Model\Stock::class);
             // $stockRussian->setStockId(self::DEF_STOCK_ID_RUSSIAN);
         } finally {
             $stockRussian->setStockName('Russian');
@@ -336,7 +335,7 @@ class Stocks
     ) {
         $event = 'store_add';
         /** @var \Magento\Store\Model\Store $store */
-        $store = $this->_manObj->create(\Magento\Store\Model\Store::class);
+        $store = $this->manObj->create(\Magento\Store\Model\Store::class);
         $store->load($storeId);
         /* 'code' is required attr. and should be set for existing store */
         $event = is_null($store->getCode()) ? 'store_add' : 'store_edit';
