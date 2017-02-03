@@ -118,6 +118,8 @@ php ${DIR_MAGE}/bin/magento setup:static-content:deploy ru_RU
 echo ""
 echo "Initial data: USERS."
 php ${DIR_MAGE}/bin/magento prxgt:app:init-users
+echo "Init Generic customer groups."
+php ${DIR_MAGE}/bin/magento prxgt:app:init-groups
 echo "Init development data: CUSTOMERS."
 php ${DIR_MAGE}/bin/magento prxgt:app:init-customers
 echo "Init development data: STOCKS."

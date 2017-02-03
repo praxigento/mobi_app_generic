@@ -27,8 +27,8 @@ class Customers
     ];
     /** @var string 'UserPassword12 */
     protected $DEFAULT_PASSWORD_HASH = '387cf1ea04874290e8e3c92836e1c4b630c5abea110d8766bddb4b3a6224ea04:QVIfkMF7kfwRkkC3HdqJ84K1XANG38LF:1';
-    /** Retail & Wholesale customers */
-    protected $GROUP_RETAIL = [8, 13];
+    /** Distributors & Wholesale customers */
+    protected $GROUP_DISTR = [8, 13];
     protected $GROUP_WHOLESALE = [3];
     /** @var  \Praxigento\Core\Transaction\Database\IManager */
     protected $manTrans;
@@ -46,8 +46,6 @@ class Customers
     protected $mapCustomerMageIdByIndex = [];
     /** @var \Magento\Customer\Api\CustomerRepositoryInterface */
     protected $repoCustomer;
-    /** @var \Praxigento\App\Generic2\Console\Command\Init\Sub\CustomerGroups */
-    protected $subCustomerGroups;
     /** @var \Praxigento\Downline\Tool\IReferral */
     protected $toolReferral;
 
@@ -55,8 +53,7 @@ class Customers
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\Transaction\Database\IManager $manTrans,
         \Magento\Customer\Api\CustomerRepositoryInterface $repoCustomer,
-        \Praxigento\Downline\Tool\IReferral $toolReferral,
-        \Praxigento\App\Generic2\Console\Command\Init\Sub\CustomerGroups $subCustomerGroups
+        \Praxigento\Downline\Tool\IReferral $toolReferral
     ) {
         parent::__construct(
             $manObj,
@@ -66,7 +63,6 @@ class Customers
         $this->manTrans = $manTrans;
         $this->repoCustomer = $repoCustomer;
         $this->toolReferral = $toolReferral;
-        $this->subCustomerGroups = $subCustomerGroups;
     }
 
     protected function execute(
@@ -89,9 +85,9 @@ class Customers
                 $customer->setEmail($email);
                 $customer->setFirstname($first);
                 $customer->setLastname($last);
-                /* MOBI-427: change group ID for retail customers */
-                if (in_array($custId, $this->GROUP_RETAIL)) {
-                    $customer->setGroupId(BusinessCodesManager::M_CUST_GROUP_RETAIL);
+                /* MOBI-427: change group ID for distrs & wholesalers */
+                if (in_array($custId, $this->GROUP_DISTR)) {
+                    $customer->setGroupId(BusinessCodesManager::M_CUST_GROUP_DISTRIBUTOR);
                 }
                 if (in_array($custId, $this->GROUP_WHOLESALE)) {
                     $customer->setGroupId(BusinessCodesManager::M_CUST_GROUP_WHOLESALE);
@@ -101,8 +97,6 @@ class Customers
                 $this->mapCustomerMageIdByIndex[$custId] = $saved->getId();
                 $this->mapCustomerIndexByMageId[$saved->getId()] = $custId;
             }
-            /* MOBI-426 : rename customer groups according to Generic App scheme and create new ones. */
-            $this->subCustomerGroups->updateGroups();
             $this->manTrans->commit($def);
         } finally {
             // transaction will be rolled back if commit is not done (otherwise - do nothing)
