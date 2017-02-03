@@ -207,6 +207,7 @@ casper.test.begin(desc, 38, function scene_020_020(test) {
 
     //  Gmail: get signup link
 
+    casper.wait(5000) // MOBI-595 TODO: remove delay and add Refresh for the page
 
     /** Gmail login form is loaded */
     casper.then(function () {

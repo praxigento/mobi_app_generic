@@ -210,6 +210,7 @@ casper.test.begin(desc, 38, function scene_020_030(test) {
 
     //  Gmail: get signup link
 
+    casper.wait(5000) // MOBI-595 TODO: remove delay and add Refresh for the page
 
     /** Gmail login form is loaded */
     casper.then(function () {
@@ -253,13 +254,17 @@ casper.test.begin(desc, 38, function scene_020_030(test) {
 
     /** Signup email is found */
     casper.then(function () {
-        var cssItem = "body > table:nth-child(16) > tbody > tr > td:nth-child(2) > table:nth-child(1) > tbody > tr > td:nth-child(2) > form > table.th > tbody > tr:nth-child(1) > td:nth-child(3) > a "
-        casper.waitForSelector(cssItem, function () {
-            var subject = casper.fetchText(cssItem)
+        var cssFirstSubj = "body > table:nth-child(16) > tbody > tr > td:nth-child(2) > table:nth-child(1) > tbody > tr > td:nth-child(2) > form > table.th > tbody > tr:nth-child(1) > td:nth-child(3) > a > span > b"
+        var cssRefresh = "body > table:nth-child(16) > tbody > tr > td:nth-child(2) > table:nth-child(1) > tbody > tr > td:nth-child(2) > form > table:nth-child(4) > tbody > tr > td:nth-child(1) > a"
+
+        casper.waitForSelector(cssFirstSubj, function () {
+            subTest.capture(optsCapture)
+            var subject = casper.fetchText(cssFirstSubj)
             var isSignupEmail = (subject.indexOf("Welcome to MOBI Test Store") !== -1)
-            casper.click(cssItem)
-            test.assert(true, "Signup email is found.")
+            casper.click(cssFirstSubj)
+            test.assert(isSignupEmail, "Signup email is found.")
         })
+
     })
 
     /** "Set password" link is extracted */
