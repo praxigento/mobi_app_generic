@@ -79,7 +79,10 @@ var result = function mageFrontSwitchCurrency(opts) {
             casper.then(function () {
                 casper.waitForSelector("div.page-wrapper", function () {
                     if (saveScreens) subTest.capture(optsCapture)
-                    casper.echo("Current currency is switched to given (" + currency + ").", "PARAMETER")
+                    var text = casper.fetchText(cssLabel)
+                    text = text.toLowerCase()
+                    text = text.trim()
+                    casper.echo("Current currency (" + text + ") is switched to given (" + currency + ").", "PARAMETER")
                 })
             })
 
