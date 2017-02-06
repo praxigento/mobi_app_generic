@@ -35,19 +35,19 @@ var result = function mageFrontSwitchCurrency(opts) {
     var cssLabel = "#switcher-currency-trigger > strong > span"
     var cssLabelOther = "#ui-id-1 > li > a"
 
-    // locl funcs
+    // local funcs
 
     var filterCurrency = function (value) {
         var result
         var text = value.toLowerCase()
         text = text.trim()
-        casper.echo("Current currency: " + text, "PARAMETER")
         switch (text) {
-            case 'eur - euro':
+            case "eur - euro":
+            case "eur - евро":
                 result = conf.app.currency.eur
                 break
-            case 'usd - us dollar':
-            case 'usd - доллар сша':
+            case "usd - us dollar":
+            case "usd - доллар сша":
                 result = conf.app.currency.usd
                 break
         }
@@ -95,7 +95,7 @@ var result = function mageFrontSwitchCurrency(opts) {
                     }
                     return result
                 }, null, function onTimeout() {
-                    casper.echo("Currency cannot be switched to given (" + currency + ").", "PARAMETER")
+                    casper.echo("Currency (" + text + ") cannot be switched to given (" + currency + ").", "PARAMETER")
                     if (saveScreens) subTest.capture(optsCapture)
                 })
             })
