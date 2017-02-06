@@ -35,6 +35,25 @@ var result = function mageFrontSwitchCurrency(opts) {
     var cssLabel = "#switcher-currency-trigger > strong > span"
     var cssLabelOther = "#ui-id-1 > li > a"
 
+    // locl funcs
+
+    var filterCurrency = function (value) {
+        var result
+        var text = value.toLowerCase()
+        text = text.trim()
+        casper.echo("Current currency: " + text, "PARAMETER")
+        switch (text) {
+            case 'eur - euro':
+                result = conf.app.currency.eur
+                break
+            case 'usd - us dollar':
+            case 'usd - доллар сша':
+                result = conf.app.currency.usd
+                break
+        }
+        return result
+    }
+
     // function itself
 
     /** extract currecny switcher value */
@@ -42,18 +61,7 @@ var result = function mageFrontSwitchCurrency(opts) {
         if (saveScreens) subTest.capture(optsCapture)
         casper.waitForSelector(cssTrigger, function () {
             var text = casper.fetchText(cssLabel)
-            text = text.toLowerCase()
-            text = text.trim()
-            casper.echo("Current currency: " + text, "PARAMETER")
-            switch (text) {
-                case 'eur - euro':
-                    currentCur = conf.app.currency.eur
-                    break
-                case 'usd - us dollar':
-                case 'usd - доллар сша':
-                    currentCur = conf.app.currency.usd
-                    break
-            }
+            currentCur = filterCurrency(text)
         })
     })
 
@@ -80,24 +88,14 @@ var result = function mageFrontSwitchCurrency(opts) {
                 casper.waitFor(function check() {
                     var result = false
                     var text = casper.fetchText(cssLabel)
-                    var testedCur
-                    text = text.toLowerCase()
-                    text = text.trim()
-                    switch (text) {
-                        case 'eur - euro':
-                            testedCur = conf.app.currency.eur
-                            break
-                        case 'usd - us dollar':
-                        case 'usd - доллар сша':
-                            testedCur = conf.app.currency.usd
-                            break
-                    }
+                    var testedCur = filterCurrency(text)
                     if (testedCur == currency) {
                         casper.echo("Current currency (" + text + ") is switched to given (" + currency + ").", "PARAMETER")
                         result = true
                     }
                     return result
                 }, null, function onTimeout() {
+                    casper.echo("Currency cannot be switched to given (" + currency + ").", "PARAMETER")
                     if (saveScreens) subTest.capture(optsCapture)
                 })
             })
