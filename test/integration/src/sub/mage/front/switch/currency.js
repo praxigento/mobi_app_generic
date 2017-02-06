@@ -77,12 +77,28 @@ var result = function mageFrontSwitchCurrency(opts) {
 
             /** ... and wait while loading */
             casper.then(function () {
-                casper.waitForSelector("div.page-wrapper", function () {
-                    if (saveScreens) subTest.capture(optsCapture)
+                casper.waitFor(function check() {
+                    var result = false
                     var text = casper.fetchText(cssLabel)
+                    var testedCur
                     text = text.toLowerCase()
                     text = text.trim()
-                    casper.echo("Current currency (" + text + ") is switched to given (" + currency + ").", "PARAMETER")
+                    switch (text) {
+                        case 'eur - euro':
+                            testedCur = conf.app.currency.eur
+                            break
+                        case 'usd - us dollar':
+                        case 'usd - доллар сша':
+                            testedCur = conf.app.currency.usd
+                            break
+                    }
+                    if (testedCur == currency) {
+                        casper.echo("Current currency (" + text + ") is switched to given (" + currency + ").", "PARAMETER")
+                        result = true
+                    }
+                    return result
+                }, null, function onTimeout() {
+                    if (saveScreens) subTest.capture(optsCapture)
                 })
             })
 
