@@ -2,7 +2,7 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\App\Generic2\Console\Command\Init;
+namespace Praxigento\App\Generic2\Cli\Cmd\Init;
 
 include_once(__DIR__ . '/../../../phpunit_bootstrap.php');
 
