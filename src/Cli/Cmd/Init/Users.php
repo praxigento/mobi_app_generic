@@ -10,12 +10,12 @@ namespace Praxigento\App\Generic2\Cli\Cmd\Init;
 class Users
     extends \Praxigento\Core\Cli\Cmd\Base
 {
-    /** @var Sub\AclUser */
-    protected $subAclUsers;
+    /** @var \Praxigento\App\Generic2\Cli\Cmd\Init\Users\Create */
+    protected $subCreate;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\App\Generic2\Cli\Cmd\Init\Sub\AclUser $subAclUsers
+        \Praxigento\App\Generic2\Cli\Cmd\Init\Users\Create $subCreate
 
     ) {
         parent::__construct(
@@ -23,14 +23,14 @@ class Users
             'prxgt:app:init-users',
             'Create admin and API users for tests (tester & odoo).'
         );
-        $this->subAclUsers = $subAclUsers;
+        $this->subCreate = $subCreate;
     }
 
     protected function execute(
         \Symfony\Component\Console\Input\InputInterface $input,
         \Symfony\Component\Console\Output\OutputInterface $output
     ) {
-        $this->subAclUsers->createAclUsers($output);
+        $this->subCreate->createAclUsers($output);
     }
 
 }
