@@ -9,7 +9,7 @@ use Magento\Tax\Model\Calculation\Rule as EntityTaxRule;
 use Praxigento\App\Generic2\Config as Cfg;
 
 class Stocks
-    extends \Praxigento\Core\Console\Command\Base
+    extends \Praxigento\Core\Cli\Cmd\Base
 {
     /**#@+
      * IDs for groups (stores in adminhtml terms).

@@ -13,7 +13,7 @@ use Praxigento\Core\Tool\IPeriod;
  * @deprecated Use classes in Praxigento\App\Generic2\Console\Command\Test\...
  */
 class Bonus
-    extends \Praxigento\Core\Console\Command\Base
+    extends \Praxigento\Core\Cli\Cmd\Base
 {
     /** @var  \Praxigento\Core\Transaction\Database\IManager */
     protected $_manTrans;

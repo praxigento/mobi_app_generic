@@ -7,7 +7,7 @@ namespace Praxigento\App\Generic2\Console\Command\Init;
 use Praxigento\App\Generic2\Tool\Odoo\Def\BusinessCodesManager;
 
 class Customers
-    extends \Praxigento\Core\Console\Command\Base
+    extends \Praxigento\Core\Cli\Cmd\Base
 {
     /** Default downline tree */
     protected $DEFAULT_DWNL_TREE = [

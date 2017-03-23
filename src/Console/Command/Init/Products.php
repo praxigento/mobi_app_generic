@@ -7,7 +7,7 @@ namespace Praxigento\App\Generic2\Console\Command\Init;
 use Praxigento\Odoo\Service\Replicate\Request\ProductSave as ProductSaveRequest;
 
 class Products
-    extends \Praxigento\Core\Console\Command\Base
+    extends \Praxigento\Core\Cli\Cmd\Base
 {
     /** @var \Praxigento\Odoo\Service\IReplicate */
     protected $_callReplicate;

@@ -10,7 +10,7 @@ use Praxigento\App\Generic2\Config as Cfg;
  * Initialize customer groups for Generic project.
  */
 class CustomerGroups
-    extends \Praxigento\Core\Console\Command\Base
+    extends \Praxigento\Core\Cli\Cmd\Base
 {
 
     /** @var \Praxigento\Odoo\Tool\IBusinessCodesManager */

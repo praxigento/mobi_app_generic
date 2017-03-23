@@ -8,7 +8,7 @@ namespace Praxigento\App\Generic2\Console\Command\Init;
  * Create sale orders to calculate bonus and collect internal money on customer accounts.
  */
 class SaleOrders
-    extends \Praxigento\Core\Console\Command\Base
+    extends \Praxigento\Core\Cli\Cmd\Base
 {
     /** @var  \Praxigento\Core\Transaction\Database\IManager */
     protected $_manTrans;
