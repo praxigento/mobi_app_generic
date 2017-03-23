@@ -15,7 +15,7 @@ class Users
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\App\Generic2\Console\Command\Init\Sub\AclUser $subAclUsers
+        \Praxigento\App\Generic2\Console\Command\Init\Sub\AclUser $subCreate
 
     ) {
         parent::__construct(
@@ -23,7 +23,7 @@ class Users
             'prxgt:app:init-users',
             'Create admin and API users for tests (tester & odoo).'
         );
-        $this->subAclUsers = $subAclUsers;
+        $this->subAclUsers = $subCreate;
     }
 
     protected function execute(
