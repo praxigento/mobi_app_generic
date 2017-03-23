@@ -5,7 +5,7 @@
 
 namespace Praxigento\App\Generic2\Tool\Warehouse\Def;
 
-use \Praxigento\App\Generic2\Console\Command\Init\Stocks as Init;
+use \Praxigento\App\Generic2\Cli\Cmd\Init\Stocks as Init;
 
 class StockManager implements \Praxigento\Warehouse\Tool\IStockManager
 {
