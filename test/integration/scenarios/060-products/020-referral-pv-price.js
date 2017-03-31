@@ -17,7 +17,7 @@ var desc = "scenario " + pack + "/" + scenario + ": Referral Price and PV checki
 // function itself
 casper.test.begin(desc, 6, function suite_060_010(test) {
 
-    // Start scenario and setup phantom/capser
+    // Start scenario and setup phantom/casper
     subTest.start()
 
     // clean up referral cookies

@@ -56,7 +56,7 @@ var result = function mageFrontSwitchCurrency(opts) {
 
     // function itself
 
-    /** extract currecny switcher value */
+    /** extract currency switcher value */
     casper.then(function () {
         if (saveScreens) subTest.capture(optsCapture)
         casper.waitForSelector(cssTrigger, function () {
