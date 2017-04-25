@@ -57,7 +57,7 @@ var result = {
     gmail: {
         customerAnon: {
             email: 'mobi.anon@gmail.com',
-            password: 'p11PGCLEVMjsRCVNemja'
+            password: 'F7HVVFxB4ZyhNDbt0yp6'
         },
         customerReferral: {
             email: 'mobi.referral@gmail.com',
