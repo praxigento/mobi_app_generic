@@ -10,7 +10,6 @@
                 <item name="prxgt_app_init_bonus" xsi:type="object">\Praxigento\App\Generic2\Cli\Cmd\Init\Bonus</item>
                 <item name="prxgt_app_init_groups" xsi:type="object">\Praxigento\App\Generic2\Cli\Cmd\Init\CustomerGroups</item>
                 <item name="prxgt_app_init_customers" xsi:type="object">\Praxigento\App\Generic2\Cli\Cmd\Init\Customers</item>
-                <item name="prxgt_app_init_products" xsi:type="object">\Praxigento\App\Generic2\Cli\Cmd\Init\Products</item>
                 <item name="prxgt_app_init_orders" xsi:type="object">\Praxigento\App\Generic2\Cli\Cmd\Init\SaleOrders</item>
                 <item name="prxgt_app_init_stocks" xsi:type="object">\Praxigento\App\Generic2\Cli\Cmd\Init\Stocks</item>
                 <item name="prxgt_app_init_users" xsi:type="object">\Praxigento\App\Generic2\Cli\Cmd\Init\Users</item>
