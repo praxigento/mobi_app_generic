@@ -37,7 +37,7 @@ class Bonus
         /** @var \Praxigento\BonusLoyalty\Service\Calc\Request\Bonus $req */
         $req = new \Praxigento\BonusLoyalty\Service\Calc\Request\Bonus();
         /** @var \Praxigento\BonusLoyalty\Service\ICalc $call */
-        $call = $this->_manObj->get(\Praxigento\BonusLoyalty\Service\ICalc::class);
+        $call = $this->manObj->get(\Praxigento\BonusLoyalty\Service\ICalc::class);
         $resp = $call->bonus($req);
         $calcId = $resp->getCalcId();
         return $calcId;
@@ -46,7 +46,7 @@ class Bonus
     protected function _calcPeriod()
     {
         /** @var \Praxigento\BonusBase\Service\IPeriod $call */
-        $call = $this->_manObj->get(\Praxigento\BonusBase\Service\IPeriod::class);
+        $call = $this->manObj->get(\Praxigento\BonusBase\Service\IPeriod::class);
         /** @var \Praxigento\BonusBase\Service\Period\Request\GetForPvBasedCalc $req */
         $req = new \Praxigento\BonusBase\Service\Period\Request\GetForPvBasedCalc();
         $req->setCalcTypeCode(Cfg::CODE_TYPE_CALC_BONUS);
@@ -60,7 +60,7 @@ class Bonus
     protected function _calcQualification()
     {
         /** @var \Praxigento\BonusLoyalty\Service\ICalc $call */
-        $call = $this->_manObj->get(\Praxigento\BonusLoyalty\Service\ICalc::class);
+        $call = $this->manObj->get(\Praxigento\BonusLoyalty\Service\ICalc::class);
         /** @var \Praxigento\BonusLoyalty\Service\Calc\Request\Qualification $req */
         $req = new \Praxigento\BonusLoyalty\Service\Calc\Request\Qualification();
         $req->setGvMaxLevels(Cfg::QUAL_LEVEL_GV);
@@ -73,7 +73,7 @@ class Bonus
     protected function _calcTreeCompression()
     {
         /** @var \Praxigento\BonusLoyalty\Service\ICalc $call */
-        $call = $this->_manObj->get(\Praxigento\BonusLoyalty\Service\ICalc::class);
+        $call = $this->manObj->get(\Praxigento\BonusLoyalty\Service\ICalc::class);
         $req = new \Praxigento\BonusLoyalty\Service\Calc\Request\Compress();
         $resp = $call->compress($req);
         $calcId = $resp->getCalcId();
@@ -83,7 +83,7 @@ class Bonus
     protected function _calcTreeSnapshots($periodTo)
     {
         /** @var \Praxigento\Downline\Service\ISnap $call */
-        $call = $this->_manObj->get(\Praxigento\Downline\Service\ISnap::class);
+        $call = $this->manObj->get(\Praxigento\Downline\Service\ISnap::class);
         /** @var \Praxigento\Downline\Service\Snap\Request\Calc $req */
         $req = new \Praxigento\Downline\Service\Snap\Request\Calc();
         $req->setDatestampTo($periodTo);
@@ -94,11 +94,11 @@ class Bonus
     {
         try {
             /** @var \Praxigento\BonusBase\Repo\Entity\Type\ICalc $repoCalc */
-            $repoCalc = $this->_manObj->get(\Praxigento\BonusBase\Repo\Entity\Type\ICalc::class);
+            $repoCalc = $this->manObj->get(\Praxigento\BonusBase\Repo\Entity\Type\ICalc::class);
             /** @var \Praxigento\BonusBase\Repo\Entity\IRank $repoRank */
-            $repoRank = $this->_manObj->get(\Praxigento\BonusBase\Repo\Entity\IRank::class);
+            $repoRank = $this->manObj->get(\Praxigento\BonusBase\Repo\Entity\IRank::class);
             /** @var \Praxigento\BonusBase\Repo\Entity\Cfg\IGeneration $repo */
-            $repo = $this->_manObj->get(\Praxigento\BonusBase\Repo\Entity\Cfg\IGeneration::class);
+            $repo = $this->manObj->get(\Praxigento\BonusBase\Repo\Entity\Cfg\IGeneration::class);
             /** @var \Praxigento\BonusBase\Data\Entity\Cfg\Generation $data */
             $data = new \Praxigento\BonusBase\Data\Entity\Cfg\Generation();
             // get calculation type ID
@@ -164,9 +164,9 @@ class Bonus
     {
         try {
             /** @var \Praxigento\BonusBase\Repo\Entity\IRank $repoRank */
-            $repoRank = $this->_manObj->get(\Praxigento\BonusBase\Repo\Entity\IRank::class);
+            $repoRank = $this->manObj->get(\Praxigento\BonusBase\Repo\Entity\IRank::class);
             /** @var \Praxigento\BonusLoyalty\Repo\Entity\Cfg\IParam $repo */
-            $repo = $this->_manObj->get(\Praxigento\BonusLoyalty\Repo\Entity\Cfg\IParam::class);
+            $repo = $this->manObj->get(\Praxigento\BonusLoyalty\Repo\Entity\Cfg\IParam::class);
             /** @var \Praxigento\BonusLoyalty\Data\Entity\Cfg\Param $data */
             $data = new \Praxigento\BonusLoyalty\Data\Entity\Cfg\Param();
             //
@@ -199,7 +199,7 @@ class Bonus
     {
         try {
             /** @var \Praxigento\BonusBase\Repo\Entity\IRank $repo */
-            $repo = $this->_manObj->get(\Praxigento\BonusBase\Repo\Entity\IRank::class);
+            $repo = $this->manObj->get(\Praxigento\BonusBase\Repo\Entity\IRank::class);
             /** @var \Praxigento\BonusBase\Data\Entity\Rank $data */
             $data = new \Praxigento\BonusBase\Data\Entity\Rank();
             // PV

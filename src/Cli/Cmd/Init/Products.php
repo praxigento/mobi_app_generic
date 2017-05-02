@@ -50,7 +50,7 @@ class Products
         try {
             /* create products using replication */
             /** @var ProductSaveRequest $req */
-            $req = $this->_manObj->create(ProductSaveRequest::class);
+            $req = $this->manObj->create(ProductSaveRequest::class);
             $req->setProductBundle($bundle);
             $this->_callReplicate->productSave($req);
             /* enable categories after replication */
