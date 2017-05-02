@@ -134,16 +134,6 @@ echo "Replace wrong Magento files by own versions:"
 cp -f ${DIR_DEPLOY}/mage/magento/module-catalog-search/etc/di.xml ${DIR_MAGE}/vendor/magento/module-catalog-search/etc/di.xml
 echo "    ${DIR_MAGE}/vendor/magento/module-catalog-search/etc/di.xml is replaced;"
 
-## MOBI-524
-echo ""
-echo "Link automated tests folder to the web root..."
-cd ${DIR_MAGE}
-ln -s ${DIR_ROOT}/test/integration theater
-echo ""
-echo "Install npm module for integration tests..."
-cd ${DIR_ROOT}/test/integration
-/usr/bin/npm install
-
 echo ""
 echo "Add file with timestamp mark into the web root..."
 CURRENT_TIMESTAMP=`date +%Y%m%d-%H%M%S`
