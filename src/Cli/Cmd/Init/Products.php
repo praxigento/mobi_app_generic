@@ -2,6 +2,7 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
+
 namespace Praxigento\App\Generic2\Cli\Cmd\Init;
 
 use Praxigento\Odoo\Service\Replicate\Request\ProductSave as ProductSaveRequest;
@@ -50,7 +51,7 @@ class Products
         try {
             /* create products using replication */
             /** @var ProductSaveRequest $req */
-            $req = $this->manObj->create(ProductSaveRequest::class);
+            $req = new \Praxigento\Odoo\Service\Replicate\Request\ProductSave();
             $req->setProductBundle($bundle);
             $this->_callReplicate->productSave($req);
             /* enable categories after replication */
