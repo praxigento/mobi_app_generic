@@ -71,6 +71,7 @@ class Create
             $ctx->set(ProcCreate::OPT_EMAIL, $user[self::A_EMAIL]);
             $ctx->set(ProcCreate::OPT_NAME_FIRST, $user[self::A_NAME_FIRST]);
             $ctx->set(ProcCreate::OPT_NAME_LAST, $user[self::A_NAME_LAST]);
+            $ctx->set(ProcCreate::OPT_ROLE_ID, self::ROLE_ADMIN_ID);
 
             /* perform action */
             $this->prcUserCreate->exec($ctx);
