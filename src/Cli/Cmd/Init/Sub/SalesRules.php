@@ -113,7 +113,7 @@ class SalesRules
         $rule->setCustomerGroupIds($this->_custGroups);
         $rule->setDiscountAmount($discountAmount);
         $rule->setStopRulesProcessing(false);
-        $rule->setApplyToShipping(true);
+        $rule->setApplyToShipping(false);
         $rule->setSimpleAction(\Magento\SalesRule\Model\Rule::CART_FIXED_ACTION);
         /* combined condition */
         /** @var \Magento\SalesRule\Model\Rule\Condition\Combine $combo */
