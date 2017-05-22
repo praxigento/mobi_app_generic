@@ -125,7 +125,7 @@ php ${DIR_MAGE}/bin/magento prxgt:app:init-customers
 echo "Init development data: STOCKS."
 php ${DIR_MAGE}/bin/magento prxgt:app:init-stocks
 echo "Init development data: replicate Odoo products."
-php ${DIR_MAGE}/bin/magento prxgt:odoo:replicate-products
+php ${DIR_MAGE}/bin/magento prxgt:odoo:replicate:products
 echo "Init development data: post-replication routines."
 php ${DIR_MAGE}/bin/magento prxgt:odoo:post-replicate
 echo "Init development data: calculate downline snapshots."
