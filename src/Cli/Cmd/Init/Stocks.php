@@ -72,7 +72,7 @@ class Stocks
     protected $manTrans;
     /** @var  \Praxigento\Core\Repo\IGeneric */
     protected $repoGeneric;
-    /** @var  \Praxigento\Odoo\Repo\Agg\IWarehouse */
+    /** @var  \Praxigento\Odoo\Repo\Agg\Store\IWarehouse */
     protected $repoWrhs;
     /** @var \Magento\Store\Model\Store */
     protected $storeBalticEn;
@@ -93,7 +93,7 @@ class Stocks
         \Magento\Store\Api\StoreRepositoryInterface $mageRepoStore,
         \Magento\CatalogInventory\Api\StockRepositoryInterface $mageRepoStock,
         \Praxigento\Core\Repo\IGeneric $repoGeneric,
-        \Praxigento\Odoo\Repo\Agg\IWarehouse $repoWrhs,
+        \Praxigento\Odoo\Repo\Agg\Store\IWarehouse $repoWrhs,
         Sub\SalesRules $subRules
     ) {
         parent::__construct(
