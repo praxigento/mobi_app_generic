@@ -1,10 +1,5 @@
 {
   "templates": {
-    "bin/post_install.sh": {
-      "src": "../deploy/tmpl/bin/post_install.work.sh",
-      "dst": "../bin/post_install.sh",
-      "rewrite": true
-    },
     "bin/setup.sql": {
       "src": "../deploy/tmpl/bin/setup.work.sql",
       "dst": "../bin/setup.sql",

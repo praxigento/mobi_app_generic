@@ -56,6 +56,11 @@ then
     --db-user="${DB_USER}" \
     ${MAGE_DBPASS} \
     # 'MAGE_DBPASS' should be placed on the last position to prevent failures if this var is empty.
+
+    echo ""
+    echo "Apply local configuration as SQL script."
+    mysql --database=${DB_NAME} --host=${DB_HOST} --user=${DB_USER} ${MYSQL_PASS} -e "source ${DIR_BIN}/setup.sql"
+
 else
     echo "Setup Magento to use existing DB (${DB_NAME}@${DB_HOST} as ${DB_USER})."
     php ${DIR_MAGE}/bin/magento setup:install  \
