@@ -4,11 +4,11 @@ formatters:
         class: Monolog\Formatter\LineFormatter
         format: "%datetime%-%channel%.%level_name% - %message%\n"
 handlers:
-    application_hndl:
+    app_hndl:
         class: Monolog\Handler\StreamHandler
         level: DEBUG
         formatter: dashed
-        stream: ${CFG_DIR_MAGE}/var/log/application.log
+        stream: ${CFG_DIR_MAGE}/var/log/app.log
     debug_hndl:
         class: Monolog\Handler\StreamHandler
         level: DEBUG
@@ -51,7 +51,7 @@ handlers:
         stream: ${CFG_DIR_MAGE}/var/log/webapi.log
 loggers:
     app:
-        handlers: [application_hndl]
+        handlers: [app_hndl]
     events:
         handlers: [events_hndl]
     main:

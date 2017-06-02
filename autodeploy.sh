@@ -1,29 +1,18 @@
 #!/usr/bin/env bash
 ## *************************************************************************
-#   Magento 2 auto deployment by cron.
+#   Version of the MOBI app to be deployed by cron for auto tests.
 ## *************************************************************************
-
 
 # pin current folder and deployment root folder
 CUR_DIR="$PWD"
 DIR_ROOT="$( cd "$( dirname "$0" )" && pwd )"
 
+echo "Start deployment of the MOBI app test version."
 echo ""
-echo "Update project sources from Github..."
 cd ${DIR_ROOT}
-/usr/bin/git pull
-
-echo ""
-echo "Start deployment..."
-cd ${DIR_ROOT}
-/bin/sh deploy.sh
-
-echo ""
-echo "Perform post-deployment routines..."
-cd ${DIR_ROOT}
-/bin/sh ./bin/post_install.sh
+/bin/sh deploy.sh -d work -r production -I -P
 
 # Finalize job
 echo ""
-echo "Auto deployment is done."
+echo "Deployment of the MOBI app test version is done."
 cd ${CUR_DIR}

@@ -1,40 +1,42 @@
 #!/bin/sh
 ##
-#   Setup Magento instance after install with Composer.
+#   Setup Magento instance for MOBI project after install with Composer.
 #   (all placeholders ${CFG_...} should be replaced by real values from "/templates.vars.work.json" file)
 ##
 
 # pin current folder and deployment root folder
 CUR_DIR="$PWD"
-DIR_ROOT="$( cd "$(dirname $( dirname "$0" ))" && pwd )"    # 2 levels up from scripts dir
+DIR_ROOT="$( cd "$( dirname "$0" )/../" && pwd )"    # 1 level up from current dir
 
-# current mode is 'work'
-MODE=work
+MODE_LIVE="live"
+MODE_PILOT="pilot"
+MODE_WORK="work"
 
-# check configuration file exists and load deployment config (db connection, Magento installation opts, etc.).
-FILE_CFG=${DIR_ROOT}/deploy.cfg.${MODE}.sh
-if [ -f "${FILE_CFG}" ]
-then
-    echo "There is deployment configuration in ${FILE_CFG}."
-    . ${FILE_CFG}
-else
-    echo "There is no expected configuration in ${FILE_CFG}. Aborting..."
-    cd ${DIR_CUR}
-    exit
-fi
+# parse runtime args and validate current deployment mode (work|test|pilot|live)
+MODE=$1
+case "${MODE}" in
+    ${MODE_WORK}|${MODE_PILOT}|${MODE_LIVE})
+        # this is expected deployment mode
+        ;;
+    *)
+        echo "Un-expected deployment mode for application: ${MODE}. Exiting."
+        exit 255
+        ;;
+esac
 echo "Post install routines are started in the '${MODE}' mode."
+
 
 # Folders shortcuts
 DIR_SRC=${DIR_ROOT}/src             # folder with sources
 DIR_DEPLOY=${DIR_ROOT}/deploy       # folder with deployment templates
 DIR_MAGE=${DIR_ROOT}/${MODE}        # root folder for Magento application
 DIR_BIN=${DIR_ROOT}/bin             # root folder for shell scripts
-
+FILE_CFG=${DIR_ROOT}/config.${MODE}.sh
 
 # DB connection params
-DB_HOST=${CFG_DB_HOST}
-DB_NAME=${CFG_DB_NAME}
-DB_USER=${CFG_DB_USER}
+DB_HOST="${CFG_DB_HOST}"
+DB_NAME="${CFG_DB_NAME}"
+DB_USER="${CFG_DB_USER}"
 # use 'skip_password' to connect to server w/o password.
 DB_PASS=${CFG_DB_PASSWORD}
 if [ "${DB_PASS}" = "skip_password" ]; then
@@ -109,48 +111,15 @@ mysql --database=${DB_NAME} --host=${DB_HOST} --user=${DB_USER} ${MYSQL_PASS} -e
 echo ""
 echo "Upgrade Magento DB structure and data..."
 php ${DIR_MAGE}/bin/magento setup:upgrade
-echo "Switch Magento 2 into 'production' mode..."
-php ${DIR_MAGE}/bin/magento deploy:mode:set production
-echo "Deploy static content for 'ru_RU'..."
-php ${DIR_MAGE}/bin/magento setup:static-content:deploy ru_RU
-
-
-echo ""
-echo "Initial data: USERS."
-php ${DIR_MAGE}/bin/magento prxgt:app:init-users
-echo "Init Generic customer groups."
-php ${DIR_MAGE}/bin/magento prxgt:app:init-groups
-echo "Init development data: CUSTOMERS."
-php ${DIR_MAGE}/bin/magento prxgt:app:init-customers
-echo "Init development data: STOCKS."
-php ${DIR_MAGE}/bin/magento prxgt:app:init-stocks
-echo "Init development data: replicate Odoo products."
-php ${DIR_MAGE}/bin/magento prxgt:odoo:replicate:products
-echo "Init development data: post-replication routines."
-php ${DIR_MAGE}/bin/magento prxgt:odoo:post-replicate
-echo "Init development data: calculate downline snapshots."
-php ${DIR_MAGE}/bin/magento prxgt:downline:snaps
-
-echo ""
+echo "Switch Magento 2 into 'developer' mode..."
+php ${DIR_MAGE}/bin/magento deploy:mode:set developer
+echo "Clean up and disable cache"
+php ${DIR_MAGE}/bin/magento cache:disable
+php ${DIR_MAGE}/bin/magento cache:clean
 echo "Run Magento 2 cron..."
 php ${DIR_MAGE}/bin/magento cron:run
 echo "Run Magento 2 re-index."
 php ${DIR_MAGE}/bin/magento indexer:reindex
-
-echo ""
-echo "Set file system ownership and permissions."
-mkdir -p ${DIR_MAGE}/var/cache
-mkdir -p ${DIR_MAGE}/var/generation
-chown -R ${LOCAL_OWNER}:${LOCAL_GROUP} ${DIR_MAGE}
-# find ${DIR_MAGE} -type d -exec chmod 770 {} \;
-# find ${DIR_MAGE} -type f -exec chmod 660 {} \;
-chmod -R g+w ${DIR_MAGE}/var
-chmod -R g+w ${DIR_MAGE}/pub
-chmod u+x ${DIR_MAGE}/bin/magento
-chmod -R go-w ${DIR_MAGE}/app/etc
-
-# TMP: add execute permission on local instance
-chmod ug+x ${DIR_MAGE}/vendor/phpmd/phpmd/src/bin/phpmd
 
 ##
 echo "Post installation setup is done."

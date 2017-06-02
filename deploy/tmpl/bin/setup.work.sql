@@ -6,8 +6,6 @@
 -- Store / Configuration defaults
 --
 
--- MGT-COMMERCE.COM / Developer Toolbar
-REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '0', path ='mgt_developer_toolbar/module/is_enabled';
 -- MOBI options
 --    Downline
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '2', path ='praxigento_downline/referrals/root_anonymous';
@@ -30,6 +28,7 @@ REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'LV', path ='general/s
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '362', path ='general/store_information/region_id';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'Riga', path ='general/store_information/city';
 -- General / Web
+-- REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '1', path ='web/url/use_store';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '1', path ='web/seo/use_rewrites';
 -- General / Currency Setup
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = 'EUR,RUB,USD', path ='currency/options/allow';

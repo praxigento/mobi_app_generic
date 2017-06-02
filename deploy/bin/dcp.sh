@@ -1,33 +1,13 @@
 #!/usr/bin/env bash
 ## *************************************************************************
-#   DCP component installation.
+#   Child script to install DCP sub-component.
+#       "MODE" and other env. vars should be set before.
 ## *************************************************************************
-
-## =========================================================================
-#   Working variables and hardcoded configuration.
-## =========================================================================
-
-# pin current folder and deployment root folder
-DIR_CUR="$PWD"
-DIR_ROOT="$( cd "$( dirname "$0" )/../../" && pwd )"    # 2 levels up from current dir
-
-MODE_LIVE="live"
-MODE_PILOT="pilot"
-MODE_TEST="test"
-MODE_WORK="work"
-
-# parse runtime args and validate current deployment mode (work|test|pilot|live)
-MODE=$1
-case "${MODE}" in
-    ${MODE_WORK}|${MODE_TEST}|${MODE_PILOT}|${MODE_LIVE})
-        # this is expected deployment mode
-        ;;
-    *)
-        echo "Un-expected deployment mode DCP installation: ${MODE}. Exiting."
-        exit 666
-        ;;
-esac
-
+if [ -z "${MODE}" ];
+then
+    echo "Variable MODE should be set in the parent script. Exit."
+    exit 255
+fi
 
 # Folders shortcuts
 DIR_MAGE=${DIR_ROOT}/${MODE}                # root folder for Magento application

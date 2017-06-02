@@ -1,0 +1,47 @@
+Index: vendor/magento/module-catalog-search/etc/di.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- vendor/magento/module-catalog-search/etc/di.xml	(revision )
++++ vendor/magento/module-catalog-search/etc/di.xml	(revision )
+@@ -131,14 +131,14 @@
+             </argument>
+         </arguments>
+     </virtualType>
+-    <virtualType name="Magento\CatalogSearch\Model\ResourceModel\Fulltext\CollectionFactory" type="Magento\Catalog\Model\ResourceModel\Product\CollectionFactory">
++    <virtualType name="fulltextCollectionFactoryVirtual" type="Magento\Catalog\Model\ResourceModel\Product\CollectionFactory">
+         <arguments>
+             <argument name="instanceName" xsi:type="string">Magento\CatalogSearch\Model\ResourceModel\Fulltext\Collection</argument>
+         </arguments>
+     </virtualType>
+     <type name="Magento\CatalogSearch\Model\Layer\Category\ItemCollectionProvider">
+         <arguments>
+-            <argument name="collectionFactory" xsi:type="object">Magento\CatalogSearch\Model\ResourceModel\Fulltext\CollectionFactory</argument>
++            <argument name="collectionFactory" xsi:type="object">fulltextCollectionFactoryVirtual</argument>
+         </arguments>
+     </type>
+ 
+@@ -148,7 +148,7 @@
+         </arguments>
+     </virtualType>
+ 
+-    <virtualType name="Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory" type="Magento\Catalog\Model\ResourceModel\Product\CollectionFactory">
++    <virtualType name="fulltextSearchCollectionFactoryVirtual" type="Magento\Catalog\Model\ResourceModel\Product\CollectionFactory">
+         <arguments>
+             <argument name="instanceName" xsi:type="string">Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollection</argument>
+         </arguments>
+@@ -156,11 +156,11 @@
+ 
+     <virtualType name="Magento\CatalogSearch\Model\Layer\Search\ItemCollectionProvider" type="Magento\Catalog\Model\Layer\Search\ItemCollectionProvider">
+         <arguments>
+-            <argument name="collectionFactory" xsi:type="object">Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory</argument>
++            <argument name="collectionFactory" xsi:type="object">fulltextSearchCollectionFactoryVirtual</argument>
+         </arguments>
+     </virtualType>
+     <virtualType name="Magento\CatalogSearch\Model\ResourceModel\Advanced\CollectionFactory"
+-                 type="Magento\Catalog\Model\ResourceModel\Product\CollectionFactory">
++            type="Magento\Catalog\Model\ResourceModel\Product\CollectionFactory">
+         <arguments>
+             <argument name="instanceName" xsi:type="string">Magento\CatalogSearch\Model\ResourceModel\Advanced\Collection</argument>
+         </arguments>

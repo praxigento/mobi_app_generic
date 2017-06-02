@@ -1,149 +1,210 @@
 #!/usr/bin/env bash
 ## *************************************************************************
-#   Magento 2 deployment script.
+#   MOBI application deploy script.
 ## *************************************************************************
 
-## =========================================================================
-#   Working variables and hardcoded configuration.
-## =========================================================================
 
+##
 # pin current folder and deployment root folder
-DIR_CUR="$PWD"
+##
+CUR_DIR="$PWD"
 DIR_ROOT="$( cd "$( dirname "$0" )" && pwd )"
+
+# available CLI options and defaults
+OPT_DEPLOY_APP="work"         # -d work|pilot|live (MOBI deployment mode)
+OPT_DEPLOY_MAGE="developer"   # -r developer|production (M2 runtime mode)
+OPT_CLONE_DB=""               # -D (clone database from 'live' instance)
+OPT_CLONE_MEDIA=""            # -M (clone media from 'live' instance)
+OPT_CLI_INIT=""               # -I (initialize project specific data)
+OPT_DCP_INIT=""               # -P (deploy Downline Control Panel)
+OPT_CLI_HELP=""               # -h print out help
 
 # Available deployment modes
 MODE_WORK=work
 MODE_PILOT=pilot
 MODE_LIVE=live
 
-# parse runtime args and validate current deployment mode (work|pilot|live)
+
+
+## *************************************************************************
+#   Parse input options
+## *************************************************************************
+echo ""
+echo "Deployment options:"
+while getopts "hd:r:DMIP" OPTNAME
+  do
+    case "${OPTNAME}" in
+      "h")
+        OPT_CLI_HELP="yes"
+        ;;
+      "d")
+        OPT_DEPLOY_APP=${OPTARG}
+        echo "\tMOBI application deployment mode:\t ${OPT_DEPLOY_APP}"
+        ;;
+      "r")
+        OPT_DEPLOY_MAGE=${OPTARG}
+        echo "\tMagento runtime mode:\t\t\t ${OPT_DEPLOY_MAGE}"
+        ;;
+      "D")
+        OPT_CLONE_DB="yes"
+        echo "\tDatabase cloning:\t\t\t requested"
+        ;;
+      "M")
+        OPT_CLONE_MEDIA="yes"
+        echo "\tMedia cloning:\t\t\t\t requested"
+        ;;
+      "I")
+        OPT_CLI_INIT="yes"
+        echo "\tCLI init scripts:\t\t\t requested"
+        ;;
+      "P")
+        OPT_DCP_INIT="yes"
+        echo "\tDCP deployment:\t\t\t\t requested"
+        ;;
+    esac
+  done
+echo ""
+
+
+
+## *************************************************************************
+#   Print out help
+## *************************************************************************
+if [ "${OPT_CLI_HELP}" = "yes" ]
+then
+    echo "MOBI application deployment script."
+    echo ""
+    echo "Usage: sh deploy.sh -d [work|pilot|live] -r [developer|production] -I -P -D -M"
+    echo ""
+    echo "Where:"
+    echo "  -d: MOBI application deployment mode ([work|pilot|live], if missed: work);"
+    echo "  -r: Magento 2 runtime mode ([developer|production], if missed: developer);"
+    echo "  -I: initialize MOBI app with test data;"
+    echo "  -P: Build Downline Control Panel sub-component;"
+    echo "  -D: Request database cloning from live version (RESERVED);"
+    echo "  -M: Request media files cloning from live version (RESERVED);"
+    echo "  -h: This output;"
+    exit
+fi
+
+
+
+## *****************************************************************************************
+# Validate configuration
+## *****************************************************************************************
+MODE_WORK="work"
+MODE_PILOT="pilot"
+MODE_LIVE="live"
+
+# validate application deployment mode (work|test|pilot|live)
 MODE=${MODE_WORK}
-case "$1" in
+case "${OPT_DEPLOY_APP}" in
     ${MODE_PILOT}|${MODE_LIVE})
         MODE=$1;;
 esac
 
-# Folders shortcuts
-DIR_SRC=${DIR_ROOT}/src             # folder with sources
-DIR_DEPLOY=${DIR_ROOT}/deploy       # folder with deployment templates
-DIR_MAGE=${DIR_ROOT}/${MODE}        # root folder for Magento application
-DIR_BIN=${DIR_ROOT}/bin             # root folder for shell scripts
-
 # check configuration file exists and load deployment config (db connection, Magento installation opts, etc.).
-FILE_CFG=${DIR_ROOT}/deploy.cfg.${MODE}.sh
+FILE_CFG=${DIR_ROOT}/cfg.${MODE}.sh
 if [ -f "${FILE_CFG}" ]
 then
-    echo "There is deployment configuration in ${FILE_CFG}."
+    echo "There is deployment configuration in '${FILE_CFG}'."
     . ${FILE_CFG}
+    echo "Deployment configuration is loaded from '${FILE_CFG}'."
 else
-    echo "There is no expected configuration in ${FILE_CFG}. Aborting..."
+    echo "There is no expected deployment configuration in '${FILE_CFG}'. Aborting..."
     cd ${DIR_CUR}
-    exit
+    exit 255
 fi
 echo "Deployment is started in the '${MODE}' mode."
 
+
+
+## *****************************************************************************************
+# Update sources
+## *****************************************************************************************
 echo ""
-echo "Generate JSON config for templates processing..."
-cat << EOF > ${DIR_ROOT}/templates.vars.${MODE}.json
-{
-  "vars": {
-    "SQL_ODOO_URI": "${SQL_ODOO_URI}",
-    "SQL_ODOO_DB": "${SQL_ODOO_DB}",
-    "SQL_ODOO_USER": "${SQL_ODOO_USER}",
-    "SQL_ODOO_PASSWORD": "${SQL_ODOO_PASSWORD}",
-    "CFG_DIR_MAGE": "${DIR_MAGE}",
-    "CFG_ADMIN_FIRSTNAME": "${ADMIN_FIRSTNAME}",
-    "CFG_ADMIN_LASTNAME": "${ADMIN_LASTNAME}",
-    "CFG_ADMIN_EMAIL": "${ADMIN_EMAIL}",
-    "CFG_ADMIN_USER": "${ADMIN_USER}",
-    "CFG_ADMIN_PASSWORD": "${ADMIN_PASSWORD}",
-    "CFG_BASE_URL": "${BASE_URL}",
-    "CFG_BACKEND_FRONTNAME": "${BACKEND_FRONTNAME}",
-    "CFG_SECURE_KEY": "${SECURE_KEY}",
-    "CFG_DB_HOST": "${DB_HOST}",
-    "CFG_DB_NAME": "${DB_NAME}",
-    "CFG_DB_USER": "${DB_USER}",
-    "CFG_DB_PASSWORD": "${DB_PASS}",
-    "CFG_DB_PREFIX": "${DB_PREFIX}",
-    "CFG_LANGUAGE": "${LANGUAGE}",
-    "CFG_CURRENCY": "${CURRENCY}",
-    "CFG_TIMEZONE": "${TIMEZONE}",
-    "CFG_USE_REWRITES": "${USE_REWRITES}",
-    "CFG_USE_SECURE": "${USE_SECURE}",
-    "CFG_USE_SECURE_ADMIN": "${USE_SECURE_ADMIN}",
-    "CFG_ADMIN_USE_SECURITY_KEY": "${ADMI_USE_SECURITY_KEY}",
-    "CFG_SESSION_SAVE": "${SESSION_SAVE}"
-  }
-}
-EOF
+echo "Update project sources from Github..."
+cd ${DIR_ROOT}
+/usr/bin/git pull
 
 
 
-## =========================================================================
-#   Magento application deployment.
-## =========================================================================
+## *****************************************************************************************
+# Deploy Magento 2 app and populate it with custom modules
+## *****************************************************************************************
+echo ""
+echo "Deploy Magento..."
+cd ${DIR_ROOT}
+. ${DIR_ROOT}/deploy/bin/app.sh
 
-# (re)create root folder for application deployment
-if [ -d "${DIR_MAGE}" ]
+
+
+## *****************************************************************************************
+# Deploy DCP if requested
+## *****************************************************************************************
+if [ "${OPT_DCP_INIT}" = "yes" ]
 then
-    if [ ${MODE} != ${MODE_LIVE} ]
-    then
-        echo "Re-create '${DIR_MAGE}' folder."
-        rm -fr ${DIR_MAGE}    # remove Magento root folder
-        mkdir -p ${DIR_MAGE}  # ... then create it
-    fi
-else
-    mkdir -p ${DIR_MAGE}      # just create folder if not exist (live mode)
+    echo ""
+    echo "Deploy Downline Control Panel..."
+    . ${DIR_ROOT}/deploy/bin/dcp.sh
 fi
-echo "Magento will be installed into the '${DIR_MAGE}' folder."
 
 
-#   Create shortcuts for deployment files.
-COMPOSER_MAIN=${DIR_MAGE}/composer.json                         # original Magento 2 descriptor
-COMPOSER_UNSET=${DIR_DEPLOY}/composer/unset.${MODE_WORK}.json   # options to unset from original descriptor
-COMPOSER_OPTS=${DIR_DEPLOY}/composer/opts.${MODE_WORK}.json     # options to set to original descriptor
-case "${MODE}" in
-    ${MODE_PILOT}|${MODE_LIVE})
-        COMPOSER_UNSET=${DIR_DEPLOY}/composer/unset.${MODE_LIVE}.json
-        COMPOSER_OPTS=${DIR_DEPLOY}/composer/opts.${MODE_LIVE}.json ;;
-esac
 
+## *****************************************************************************************
+# Initialize application data
+## *****************************************************************************************
+if [ "${OPT_CLI_INIT}" = "yes" ]
+then
+    echo ""
+    echo "Init application data..."
+    . ${DIR_ROOT}/deploy/bin/init.sh
+fi
+
+
+
+## *****************************************************************************************
+# Update Magento DB and perform service routines (mode, cache, indexer, cron)
+## *****************************************************************************************
 echo ""
-echo "Create M2 CE project in '${DIR_MAGE}' using composer..."
-composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=^2 ${DIR_MAGE}
+echo "Magento runtime mode: ${OPT_DEPLOY_MAGE}."
+/usr/bin/php ${DIR_ROOT}/${MODE}/bin/magento setup:upgrade
+/usr/bin/php ${DIR_ROOT}/${MODE}/bin/magento deploy:mode:set ${OPT_DEPLOY_MAGE}
+if [ "${OPT_DEPLOY_MAGE}" = "production" ] && [ ${MODE} = "live" ]
+then
+    echo ""
+    echo "Start JS/CSS minification..."
+#    /usr/bin/php ${DIR_ROOT}/${OPT_MODE}/bin/magento fl32:minify:make
+fi
+if [ "${OPT_DEPLOY_MAGE}" = "developer" ]
+then
+    echo ""
+    echo "Compile DI & deploy static content..."
+    /usr/bin/php ${DIR_ROOT}/${OPT_MODE}/bin/magento cache:disable
+    /usr/bin/php ${DIR_ROOT}/${OPT_MODE}/bin/magento setup:di:compile
+    /usr/bin/php ${DIR_ROOT}/${OPT_MODE}/bin/magento setup:static-content:deploy
+fi
 
+
+
+## *****************************************************************************************
+# Setup files permissions
+## *****************************************************************************************
 echo ""
-echo "Merge original"
-echo "    '${COMPOSER_MAIN}' with"
-echo "    '${COMPOSER_UNSET}' and"
-echo "    '${COMPOSER_OPTS}'..."
-php ${DIR_DEPLOY}/merge_json.php ${COMPOSER_MAIN} ${COMPOSER_UNSET} ${COMPOSER_OPTS}
+echo "Setup filesystem permission..."
+. ${DIR_ROOT}/deploy/bin/permissions.sh
 
-echo ""
-echo "Update M2 CE project with additional options..."
-cd ${DIR_MAGE}
-composer update
 
-echo ""
-echo "Create scripts from templates..."
-composer status
 
-## MOBI-522
-echo ""
-echo "Replace wrong Magento files by own versions:"
-cp -f ${DIR_DEPLOY}/mage/magento/module-catalog-search/etc/di.xml ${DIR_MAGE}/vendor/magento/module-catalog-search/etc/di.xml
-echo "    ${DIR_MAGE}/vendor/magento/module-catalog-search/etc/di.xml is replaced;"
-
+## *****************************************************************************************
+# Finalize job
+## *****************************************************************************************
 echo ""
 echo "Add file with timestamp mark into the web root..."
 CURRENT_TIMESTAMP=`date +%Y%m%d-%H%M%S`
-cat << EOF > ${DIR_MAGE}/date_deployed.txt
+cat << EOF > ${DIR_ROOT}/${MODE}/date_deployed.txt
 ${CURRENT_TIMESTAMP}
 EOF
 
-
-# Finalize job
-echo ""
-echo "Deployment is done. Launch post-installation script:"
-echo "    sh ./bin/post_install.sh"
-cd ${DIR_CUR}
+echo "Auto deployment is done."
+cd ${CUR_DIR}

@@ -1,6 +1,6 @@
 {
-  "name": "praxigento/mobi_app_generic_mage2_work",
-  "description": "Development/test environment for Magento v2 Generic MOBI application.",
+  "name": "praxigento/mobi_app_generic_mage2_launcher",
+  "description": "Launch environment for Magento Generic MOBI application.",
   "homepage": "https://github.com/praxigento/mobi_app_generic_mage2",
   "authors": [
     {
@@ -19,24 +19,20 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Praxigento\\Test\\": "../dev/fw/"
+      "Praxigento\\Core\\Test\\": "./vendor/praxigento/mobi_mod_mage2_core/test/fw"
     }
   },
   "repositories": {
     "praxigento/mobi_app_generic_mage2": {
       "type": "vcs",
       "url": "https://github.com/praxigento/mobi_app_generic_mage2"
-    },
-    "mgtcommerce/module-mgtdevelopertoolbar": {
-      "type": "vcs",
-      "url": "https://github.com/mgtcommerce/Mgt_Developertoolbar"
     }
   },
   "minimum-stability": "dev",
   "extra": {
     "praxigento_templates_config": [
-      "../deploy/composer/templates.cfg.work.json",
-      "../templates.vars.work.json"
+      "../deploy/tmpl/cfg.work.json",
+      "../cfg.tmpl.json"
     ]
   }
 }
