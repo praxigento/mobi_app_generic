@@ -5,7 +5,7 @@
       "dst": "../bin/setup.sql",
       "rewrite": true
     },
-    "var/log/logging.yaml": {
+    "bin/logging.yaml": {
       "comment": "intermediary script to be copied to ./var/log/ folder after magento will be installed",
       "src": "../deploy/tmpl/etc/logging.yaml",
       "dst": "../bin/logging.yaml",

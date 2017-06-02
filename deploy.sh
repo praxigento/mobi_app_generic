@@ -79,7 +79,7 @@ then
     echo "Where:"
     echo "  -d: MOBI application deployment mode ([work|pilot|live], if missed: work);"
     echo "  -r: Magento 2 runtime mode ([developer|production], if missed: developer);"
-    echo "  -I: initialize MOBI app with test data;"
+    echo "  -I: Initialize MOBI app with test data;"
     echo "  -P: Build Downline Control Panel sub-component;"
     echo "  -D: Request database cloning from live version (RESERVED);"
     echo "  -M: Request media files cloning from live version (RESERVED);"
