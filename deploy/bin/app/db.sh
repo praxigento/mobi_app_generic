@@ -14,13 +14,21 @@ fi
 #   Prepare working environment.
 ## =========================================================================
 
-# Prepare database password for using with Magento and MySQL utils
+# Prepare database password & prefix for using with Magento and MySQL utils
 if [ -z ${DB_PASS} ]; then
     MYSQL_PASS=""
     MAGE_DBPASS=""
 else
     MYSQL_PASS="--password=${DB_PASS}"
     MAGE_DBPASS="--db-password=""${DB_PASS}"""
+fi
+
+# DB prefix can be empty
+DB_PREFIX="${DB_PREFIX}"
+if [ "${DB_PREFIX}" = "" ]; then
+    MAGE_DBPREFIX=""
+else
+    MAGE_DBPREFIX="--db-prefix=${DB_PREFIX}"
 fi
 
 if [ ${MODE} != ${MODE_LIVE} ]
@@ -54,6 +62,7 @@ then
     --db-host="${DB_HOST}" \
     --db-name="${DB_NAME}" \
     --db-user="${DB_USER}" \
+    ${MAGE_DBPREFIX} \
     ${MAGE_DBPASS} \
     # 'MAGE_DBPASS' should be placed on the last position to prevent failures if this var is empty.
 
@@ -75,6 +84,7 @@ else
     --db-host="${DB_HOST}" \
     --db-name="${DB_NAME}" \
     --db-user="${DB_USER}" \
+    ${MAGE_DBPREFIX} \
     ${MAGE_DBPASS} \
     # 'MAGE_DBPASS' should be placed on the last position to prevent failures if this var is empty.
 fi

@@ -5,13 +5,12 @@
 ## Files
 
 * [./deploy](./deploy) - scripts that are used in the deployment process;
-* [./dev](./dev) - application level files for development (tests, coverage, etc.);
 * [./src](./src) - source files for the main module of the application;
 * [./test](./test) - test scripts for the own code of the application's main module;
 * [./.travis.yml](./.travis.yml) - descriptor for Travis CI; 
 * [./autodeploy.sh](./autodeploy.sh) - script to refresh deployment by cron; 
+* [./cfg.init.sh](./cfg.init.sh) - template for deployment configuration;
 * [./composer.json](./composer.json) - descriptor for the main module of the application (type: "magento2-module");
-* [./deploy.cfg.sh.init](./deploy.cfg.sh.init) - template for deployment configuration;
 * [./deploy.sh](./deploy.sh) - deployment script;
 
 
@@ -25,15 +24,15 @@
     
 Copy existing configuration from previous version:
     
-    $ cp ../mobi.test/deploy.cfg.work.sh .
+    $ cp ../mobi.test/cfg.work.sh .
     
 ... or new one from initial template:
  
-    $ cp ./deploy.cfg.sh.init deploy.cfg.work.sh
+    $ cp ./cfg.init.sh cfg.work.sh
 
 Then edit deployment configuration: 
 
-    $ nano deploy.cfg.work.sh
+    $ nano cfg.work.sh
 
 Change owners and Magento 2 deployment options:
 
@@ -46,13 +45,13 @@ Change owners and Magento 2 deployment options:
     #   * must be a member of the '${LOCAL_GROUP}' group.
     LOCAL_OWNER="owner"
     LOCAL_GROUP="www-data"
-            
+    
     # SQL update options
     SQL_ODOO_URI=
     SQL_ODOO_DB=
     SQL_ODOO_USER=
     SQL_ODOO_PASSWORD=
-
+    
     # Magento 2 installation configuration
     # see http://devdocs.magento.com/guides/v2.0/install-gde/install/cli/install-cli-install.html#instgde-install-cli-magento
     ADMIN_FIRSTNAME="Store"
@@ -67,6 +66,7 @@ Change owners and Magento 2 deployment options:
     DB_NAME="mage2"
     DB_USER="www"
     DB_PASS="..."
+    DB_PREFIX=""
     LANGUAGE="en_US"
     CURRENCY="USD"
     TIMEZONE="UTC"
@@ -78,18 +78,9 @@ Change owners and Magento 2 deployment options:
 
 Start deploy and post-installation routines:
 
-    $ sh ./deploy.sh
-    $ sh ./bin/post_install.sh
+    $ sh ./deploy.sh -d work -r production -I -P
 
 Re-link root folder to switch web server to the new instance:
 
     $ cd ../
     $ unlink mobi.test ; ln -s ./mobi.test_20160520 mobi.test ;
-
-
-
-## Code coverage
-
-    $ phpdbg -qrr ./work/vendor/bin/phpunit --configuration ./dev/coverage/phpunit.dist.xml
-
-Report is placed in `build/coverage/index.html`
