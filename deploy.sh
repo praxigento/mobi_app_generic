@@ -39,27 +39,27 @@ while getopts "hd:r:DMIP" OPTNAME
         ;;
       "d")
         OPT_DEPLOY_APP=${OPTARG}
-        echo "\tMOBI application deployment mode:\t ${OPT_DEPLOY_APP}"
+        echo "  MOBI application deployment mode:       ${OPT_DEPLOY_APP}"
         ;;
       "r")
         OPT_DEPLOY_MAGE=${OPTARG}
-        echo "\tMagento runtime mode:\t\t\t ${OPT_DEPLOY_MAGE}"
+        echo "  Magento runtime mode:                   ${OPT_DEPLOY_MAGE}"
         ;;
       "D")
         OPT_CLONE_DB="yes"
-        echo "\tDatabase cloning:\t\t\t requested"
+        echo "  Database cloning:                       requested"
         ;;
       "M")
         OPT_CLONE_MEDIA="yes"
-        echo "\tMedia cloning:\t\t\t\t requested"
+        echo "  Media cloning:                          requested"
         ;;
       "I")
         OPT_CLI_INIT="yes"
-        echo "\tCLI init scripts:\t\t\t requested"
+        echo "  CLI init scripts:                       requested"
         ;;
       "P")
         OPT_DCP_INIT="yes"
-        echo "\tDCP deployment:\t\t\t\t requested"
+        echo "  DCP deployment:                         requested"
         ;;
     esac
   done
