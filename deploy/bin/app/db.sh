@@ -57,7 +57,7 @@ then
     --use-rewrites="${USE_REWRITES}" \
     --use-secure="${USE_SECURE}" \
     --use-secure-admin="${USE_SECURE_ADMIN}" \
-    --admin-use-security-key="${ADMI_USE_SECURITY_KEY}" \
+    --admin-use-security-key="${ADMIN_USE_SECURITY_KEY}" \
     --session-save="${SESSION_SAVE}" \
     --db-host="${DB_HOST}" \
     --db-name="${DB_NAME}" \

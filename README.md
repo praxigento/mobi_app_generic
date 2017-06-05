@@ -73,7 +73,7 @@ Change owners and Magento 2 deployment options:
     USE_REWRITES="0"
     USE_SECURE="0"
     USE_SECURE_ADMIN="0"
-    ADMI_USE_SECURITY_KEY="0"
+    ADMIN_USE_SECURITY_KEY="0"
     SESSION_SAVE="db"
 
 Start deploy and post-installation routines:
