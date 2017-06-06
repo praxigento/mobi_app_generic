@@ -6,8 +6,8 @@
 -- Store / Configuration defaults
 --
 
--- MOBI options
--- DCP API
+-- MOBI options:
+--    DCP API
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '${SQL_DEV_MODE}', path ='praxigento_api/authentication/enabled_dev_mode';
 --    Downline
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '2', path ='praxigento_downline/referrals/root_anonymous';
