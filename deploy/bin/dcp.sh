@@ -24,7 +24,9 @@ cd ${DIR_DCP}
 git fetch
 git checkout new
 npm install
+# build production version
 #npm run build
+# build development version with "http://gen.mage.test.mobi.prxgt.com/rest/default/V1/" as API base
 npm run build-without-minification
 
 ##
