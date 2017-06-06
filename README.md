@@ -52,6 +52,9 @@ Change owners and Magento 2 deployment options:
     SQL_ODOO_USER=
     SQL_ODOO_PASSWORD=
     
+    # MOBI-761: enable/disable development mode for DCP API (1/0)
+    SQL_DEV_MODE=
+    
     # Magento 2 installation configuration
     # see http://devdocs.magento.com/guides/v2.0/install-gde/install/cli/install-cli-install.html#instgde-install-cli-magento
     ADMIN_FIRSTNAME="Store"
