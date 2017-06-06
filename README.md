@@ -93,7 +93,7 @@ Change owners and Magento 2 deployment options:
 
 Start deploy and post-installation routines:
 
-    $ sh ./deploy.sh -d work -r production -I -P
+    $ sh ./deploy.sh -d work -r production/developer -I -P
 
 Re-link root folder to switch web server to the new instance:
 
