@@ -34,6 +34,18 @@ Then edit deployment configuration:
 
     $ nano cfg.work.sh
 
+### Configuration
+<https://confluence.prxgt.com/display/MOBI/Instance%3A+Generic>
+
+SQL update options
+
+select instance
+
+SQL_ODOO_URI="http://mobi.odoo10.test-auto.prxgt.com" Odoo API Url without closing "/"
+SQL_ODOO_DB="mobi_test"
+SQL_ODOO_USER="magento"
+SQL_ODOO_PASSWORD=""
+
 Change owners and Magento 2 deployment options:
 
     #!/usr/bin/env bash
