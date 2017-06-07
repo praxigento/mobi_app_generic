@@ -13,7 +13,8 @@
 * [./composer.json](./composer.json) - descriptor for the main module of the application (type: "magento2-module");
 * [./deploy.sh](./deploy.sh) - deployment script;
 
-
+## Installation Requiriments
+npm
 
 ## Installation
 
