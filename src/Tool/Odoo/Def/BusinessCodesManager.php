@@ -12,14 +12,17 @@ class BusinessCodesManager
 {
     /**#@+
      * Business codes for Customer Groups.
+     *
+     * _CYR: https://jira.prxgt.com/browse/MOBI-762?focusedCommentId=95308&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-95308
      */
     const B_CUST_GROUP_ANONYMOUS = 'anon';
     const B_CUST_GROUP_DISTRIBUTOR = 'distributor';
+    const B_CUST_GROUP_DISTRIBUTOR_CYR = 'distributоr';
+    const B_CUST_GROUP_PRIVILEGED = 'privileged';
+    const B_CUST_GROUP_PRIVILEGED_CYR = 'privilegеd';
     const B_CUST_GROUP_REFERRAL = 'referral';
     const B_CUST_GROUP_RETAIL = 'retail';
-    const B_CUST_GROUP_WHOLESALE = 'wholesale';
     /**#@- */
-
     /**#@+
      * Business codes for Payment Methods.
      */
@@ -45,11 +48,10 @@ class BusinessCodesManager
      */
     const M_CUST_GROUP_ANONYMOUS = 0;
     const M_CUST_GROUP_DISTRIBUTOR = 1;
+    const M_CUST_GROUP_PRIVILEGED = 2;
     const M_CUST_GROUP_REFERRAL = 4;
     const M_CUST_GROUP_RETAIL = 3;
-    const M_CUST_GROUP_WHOLESALE = 2;
     /**#@- */
-
     /**#@+
      * Magento codes for Payment Methods.
      */
@@ -75,8 +77,8 @@ class BusinessCodesManager
         $result = self::B_CUST_GROUP_RETAIL;
         if ($groupId == self::M_CUST_GROUP_DISTRIBUTOR) {
             $result = self::B_CUST_GROUP_DISTRIBUTOR;
-        } elseif ($groupId == self::M_CUST_GROUP_WHOLESALE) {
-            $result = self::B_CUST_GROUP_WHOLESALE;
+        } elseif ($groupId == self::M_CUST_GROUP_PRIVILEGED) {
+            $result = self::B_CUST_GROUP_PRIVILEGED;
         } elseif ($groupId == self::M_CUST_GROUP_REFERRAL) {
             $result = self::B_CUST_GROUP_REFERRAL;
         } elseif ($groupId == self::M_CUST_GROUP_ANONYMOUS) {
@@ -121,10 +123,10 @@ class BusinessCodesManager
     public function getMageIdForCustomerGroupByCode($groupCode)
     {
         $result = null;
-        if ($groupCode == self::B_CUST_GROUP_DISTRIBUTOR) {
+        if ($groupCode == self::B_CUST_GROUP_DISTRIBUTOR || $groupCode == self::B_CUST_GROUP_DISTRIBUTOR_CYR) {
             $result = self::M_CUST_GROUP_DISTRIBUTOR;
-        } elseif ($groupCode == self::B_CUST_GROUP_WHOLESALE) {
-            $result = self::M_CUST_GROUP_WHOLESALE;
+        } elseif ($groupCode == self::B_CUST_GROUP_PRIVILEGED || $groupCode == self::B_CUST_GROUP_PRIVILEGED_CYR) {
+            $result = self::M_CUST_GROUP_PRIVILEGED;
         } elseif ($groupCode == self::B_CUST_GROUP_REFERRAL) {
             $result = self::M_CUST_GROUP_REFERRAL;
         } elseif ($groupCode == self::B_CUST_GROUP_ANONYMOUS) {

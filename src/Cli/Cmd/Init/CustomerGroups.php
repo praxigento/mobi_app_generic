@@ -12,6 +12,8 @@ use Praxigento\App\Generic2\Config as Cfg;
 class CustomerGroups
     extends \Praxigento\Core\Cli\Cmd\Base
 {
+    /** Total number jf the customer groups */
+    const TOTAL_GROUPS = 5;
 
     /** @var \Praxigento\Odoo\Tool\IBusinessCodesManager */
     protected $manBusCodes;
@@ -25,7 +27,7 @@ class CustomerGroups
     ) {
         parent::__construct(
             $manObj,
-            'prxgt:app:init-groups',
+            'prxgt:app:init:groups',
             'Initialize customer groups for Generic project.'
         );
         $this->manBusCodes = $manBusCodes;
@@ -55,13 +57,14 @@ class CustomerGroups
                 $this->repoGroup->save($item);
             }
         }
-        /* create additional groups (with id>=4: referrals & privileged customers) */
+        /* create additional groups (with id>=4, where '4'  - is count of the default groups in fresh M2 installation) */
         $total = $all->getTotalCount();
-        if ($total <= 4) {
+        $required = self::TOTAL_GROUPS - 1;
+        if ($total <= $required) {
             $taxId = $item->getTaxClassId(); // get data from last item
             $taxName = $item->getTaxClassName(); // get data from last item
             $groupId = $total;
-            while ($groupId <= 4) {
+            while ($groupId <= $required) {
                 /** @var \Magento\Customer\Model\Data\Group $group */
                 $group = $this->manObj->create(\Magento\Customer\Model\Data\Group::class);
                 $code = $this->manBusCodes->getBusCodeForCustomerGroupById($groupId);

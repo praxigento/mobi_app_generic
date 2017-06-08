@@ -27,7 +27,7 @@ echo ""
 echo "Init additional admin users."
 php ${DIR_MAGE}/bin/magento prxgt:app:init-users
 echo "Init customers groups."
-php ${DIR_MAGE}/bin/magento prxgt:app:init-groups
+php ${DIR_MAGE}/bin/magento prxgt:app:init:groups
 echo "Init downline tree."
 php ${DIR_MAGE}/bin/magento prxgt:app:init-customers
 echo "Init stores & stocks."
