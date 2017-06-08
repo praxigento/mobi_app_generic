@@ -28,8 +28,9 @@ class Customers
     /** @var string 'UserPassword12 */
     protected $DEFAULT_PASSWORD_HASH = '387cf1ea04874290e8e3c92836e1c4b630c5abea110d8766bddb4b3a6224ea04:QVIfkMF7kfwRkkC3HdqJ84K1XANG38LF:1';
     /** Distributors & Wholesale customers */
-    protected $GROUP_DISTR = [1, 2, 4, 5, 6, 7, 9, 10, 11, 12];
-    protected $GROUP_WHOLESALE = [3];
+    protected $GROUP_DISTR = [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12];
+    protected $GROUP_PRIVILEDED = [13];
+    protected $GROUP_RETAIL = [9];
     /** @var  \Praxigento\Core\Transaction\Database\IManager */
     protected $manTrans;
     /**
@@ -85,12 +86,15 @@ class Customers
                 $customer->setEmail($email);
                 $customer->setFirstname($first);
                 $customer->setLastname($last);
-                /* MOBI-427: change group ID for distrs & wholesalers */
+                /* MOBI-427: change group ID for customers */
                 if (in_array($custId, $this->GROUP_DISTR)) {
                     $customer->setGroupId(BusinessCodesManager::M_CUST_GROUP_DISTRIBUTOR);
                 }
-                if (in_array($custId, $this->GROUP_WHOLESALE)) {
-                    $customer->setGroupId(BusinessCodesManager::M_CUST_GROUP_WHOLESALE);
+                if (in_array($custId, $this->GROUP_PRIVILEDED)) {
+                    $customer->setGroupId(BusinessCodesManager::M_CUST_GROUP_PRIVILEGED);
+                }
+                if (in_array($custId, $this->GROUP_RETAIL)) {
+                    $customer->setGroupId(BusinessCodesManager::M_CUST_GROUP_RETAIL);
                 }
                 /** @var \Magento\Customer\Api\Data\CustomerInterface $saved */
                 $saved = $this->repoCustomer->save($customer, $this->DEFAULT_PASSWORD_HASH);
