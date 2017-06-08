@@ -28,7 +28,7 @@ class Customers
     /** @var string 'UserPassword12 */
     protected $DEFAULT_PASSWORD_HASH = '387cf1ea04874290e8e3c92836e1c4b630c5abea110d8766bddb4b3a6224ea04:QVIfkMF7kfwRkkC3HdqJ84K1XANG38LF:1';
     /** Distributors & Wholesale customers */
-    protected $GROUP_DISTR = [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12];
+    protected $GROUP_DISTR = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     protected $GROUP_PRIVILEDED = [13];
     protected $GROUP_RETAIL = [9];
     /** @var  \Praxigento\Core\Transaction\Database\IManager */
