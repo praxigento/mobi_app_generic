@@ -12,6 +12,7 @@ REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '${SQL_DEV_MODE}', pat
 --    Downline
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '2', path ='praxigento_downline/referrals/root_anonymous';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '4', path ='praxigento_downline/referrals/group_referrals';
+REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '2', path ='praxigento_downline/referrals/group_referrals_registered';
 --    Odoo
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '${SQL_ODOO_URI}', path ='praxigento_odoo/connect/uri';
 REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '${SQL_ODOO_DB}', path ='praxigento_odoo/connect/database';
