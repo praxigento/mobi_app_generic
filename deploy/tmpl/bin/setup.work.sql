@@ -95,16 +95,3 @@ REPLACE INTO ${CFG_DB_PREFIX}core_config_data SET value = '1', path ='dev/log/ac
 REPLACE INTO ${CFG_DB_PREFIX}tax_calculation_rate(tax_calculation_rate_id, tax_country_id, tax_region_id, tax_postcode, code, rate) VALUES (3, 'LV', 0, '*', 'LV Tax', 21.0000);
 REPLACE INTO ${CFG_DB_PREFIX}tax_calculation_rule(tax_calculation_rule_id, code, priority, `position`, calculate_subtotal) VALUES (1, 'LV Tax', 0, 0, 0);
 REPLACE INTO ${CFG_DB_PREFIX}tax_calculation(tax_calculation_id, tax_calculation_rate_id, tax_calculation_rule_id, customer_tax_class_id, product_tax_class_id) VALUES (1, 3, 1, 3, 2);
-
-
---
--- Change default database structure.
---
-
--- MOBI-254
-ALTER TABLE ${CFG_DB_PREFIX}cataloginventory_stock_item ADD UNIQUE INDEX ${CFG_DB_PREFIX}CATALOGINVENTORY_STOCK_ITEM_PRODUCT_ID_STOCK_ID (product_id, stock_id);
-ALTER TABLE ${CFG_DB_PREFIX}cataloginventory_stock_item DROP INDEX ${CFG_DB_PREFIX}CATALOGINVENTORY_STOCK_ITEM_PRODUCT_ID_WEBSITE_ID;
-
-ALTER TABLE ${CFG_DB_PREFIX}cataloginventory_stock
-  ADD CONSTRAINT FK_${CFG_DB_PREFIX}cataloginventory_stock_store_website_website_id FOREIGN KEY (website_id)
-  REFERENCES ${CFG_DB_PREFIX}store_website(website_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
