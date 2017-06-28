@@ -1,11 +1,11 @@
-Index: vendor/magento/module-catalog-search/etc/di.xml
+Index: app/code/Magento/CatalogSearch/etc/di.xml
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- vendor/magento/module-catalog-search/etc/di.xml	(revision )
-+++ vendor/magento/module-catalog-search/etc/di.xml	(revision )
-@@ -131,14 +131,14 @@
+--- app/code/Magento/CatalogSearch/etc/di.xml	(revision )
++++ app/code/Magento/CatalogSearch/etc/di.xml	(revision )
+@@ -148,14 +148,14 @@
              </argument>
          </arguments>
      </virtualType>
@@ -21,18 +21,18 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +            <argument name="collectionFactory" xsi:type="object">fulltextCollectionFactoryVirtual</argument>
          </arguments>
      </type>
- 
-@@ -148,7 +148,7 @@
+
+@@ -165,7 +165,7 @@
          </arguments>
      </virtualType>
- 
+
 -    <virtualType name="Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory" type="Magento\Catalog\Model\ResourceModel\Product\CollectionFactory">
 +    <virtualType name="fulltextSearchCollectionFactoryVirtual" type="Magento\Catalog\Model\ResourceModel\Product\CollectionFactory">
          <arguments>
              <argument name="instanceName" xsi:type="string">Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollection</argument>
          </arguments>
-@@ -156,11 +156,11 @@
- 
+@@ -173,7 +173,7 @@
+
      <virtualType name="Magento\CatalogSearch\Model\Layer\Search\ItemCollectionProvider" type="Magento\Catalog\Model\Layer\Search\ItemCollectionProvider">
          <arguments>
 -            <argument name="collectionFactory" xsi:type="object">Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory</argument>
@@ -40,8 +40,3 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
          </arguments>
      </virtualType>
      <virtualType name="Magento\CatalogSearch\Model\ResourceModel\Advanced\CollectionFactory"
--                 type="Magento\Catalog\Model\ResourceModel\Product\CollectionFactory">
-+            type="Magento\Catalog\Model\ResourceModel\Product\CollectionFactory">
-         <arguments>
-             <argument name="instanceName" xsi:type="string">Magento\CatalogSearch\Model\ResourceModel\Advanced\Collection</argument>
-         </arguments>
