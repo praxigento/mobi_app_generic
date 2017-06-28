@@ -21,7 +21,7 @@ class PostReplicate
     ) {
         parent::__construct(
             $manObj,
-            'prxgt:odoo:post-replicate',
+            'prxgt:odoo:replicate:post',
             'Enable data after replication from Odoo.'
         );
         $this->subCats = $subCats;

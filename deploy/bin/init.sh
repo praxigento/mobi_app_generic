@@ -25,17 +25,17 @@ DIR_MAGE=${DIR_ROOT}/${MODE}        # root folder for Magento application
 ## =========================================================================
 echo ""
 echo "Init additional admin users."
-php ${DIR_MAGE}/bin/magento prxgt:app:init-users
+php ${DIR_MAGE}/bin/magento prxgt:app:init:users
 echo "Init customers groups."
 php ${DIR_MAGE}/bin/magento prxgt:app:init:groups
 echo "Init downline tree."
-php ${DIR_MAGE}/bin/magento prxgt:app:init-customers
+php ${DIR_MAGE}/bin/magento prxgt:app:init:customers
 echo "Init stores & stocks."
-php ${DIR_MAGE}/bin/magento prxgt:app:init-stocks
+php ${DIR_MAGE}/bin/magento prxgt:app:init:stocks
 echo "Replicate Odoo products."
 php ${DIR_MAGE}/bin/magento prxgt:odoo:replicate:products
 echo "Post-replication routines."
-php ${DIR_MAGE}/bin/magento prxgt:odoo:post-replicate
+php ${DIR_MAGE}/bin/magento prxgt:odoo:replicate:post
 echo "Calculate downline snapshots."
 php ${DIR_MAGE}/bin/magento prxgt:downline:snaps
 

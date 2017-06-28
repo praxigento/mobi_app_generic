@@ -24,7 +24,7 @@ class SaleOrders
     ) {
         parent::__construct(
             $manObj,
-            'prxgt:app:init-orders',
+            'prxgt:app:init:orders',
             'Create orders to calculate bonus after that.'
         );
         $this->_manTrans = $manTrans;

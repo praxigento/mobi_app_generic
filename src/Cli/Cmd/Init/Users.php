@@ -20,7 +20,7 @@ class Users
     ) {
         parent::__construct(
             $manObj,
-            'prxgt:app:init-users',
+            'prxgt:app:init:users',
             'Create admin and API users for tests (tester & odoo).'
         );
         $this->subCreate = $subCreate;

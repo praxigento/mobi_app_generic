@@ -98,7 +98,7 @@ class Stocks
     ) {
         parent::__construct(
             $manObj,
-            'prxgt:app:init-stocks',
+            'prxgt:app:init:stocks',
             'Create sample stores in application and map warehouses/stocks to stores.'
         );
         $this->logger = $logger;

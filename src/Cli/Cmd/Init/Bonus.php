@@ -26,7 +26,7 @@ class Bonus
     ) {
         parent::__construct(
             $manObj,
-            'prxgt:app:init-bonus',
+            'prxgt:app:init:bonus',
             'Initialize bonus parameters for Generic Application.'
         );
         $this->_manTrans = $manTrans;

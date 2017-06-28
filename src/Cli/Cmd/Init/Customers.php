@@ -58,7 +58,7 @@ class Customers
     ) {
         parent::__construct(
             $manObj,
-            'prxgt:app:init-customers',
+            'prxgt:app:init:customers',
             'Create sample downline tree in application.'
         );
         $this->manTrans = $manTrans;
