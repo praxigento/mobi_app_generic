@@ -94,7 +94,7 @@ class Stocks
         \Magento\CatalogInventory\Api\StockRepositoryInterface $mageRepoStock,
         \Praxigento\Core\Repo\IGeneric $repoGeneric,
         \Praxigento\Odoo\Repo\Agg\Store\IWarehouse $repoWrhs,
-        Sub\SalesRules $subRules
+        Sub\SalesRules\Proxy $subRules
     ) {
         parent::__construct(
             $manObj,
