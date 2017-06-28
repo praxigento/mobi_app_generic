@@ -20,7 +20,7 @@ class SaleOrders
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\Transaction\Database\IManager $manTrans,
-        \Praxigento\App\Generic2\Cli\Cmd\Init\Sub\SaleOrder $subSaleOrder
+        \Praxigento\App\Generic2\Cli\Cmd\Init\Sub\SaleOrder\Proxy $subSaleOrder
     ) {
         parent::__construct(
             $manObj,
