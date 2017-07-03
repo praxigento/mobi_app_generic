@@ -13,7 +13,7 @@ class SaleOrders
     /** @var  \Praxigento\Core\Transaction\Database\IManager */
     protected $_manTrans;
     /** @var array SKU and count for order items (all orders have the same items). */
-    protected $DATA_ORDER_ITEMS = ['10674San' => 1, '215San' => 2];
+    protected $DATA_ORDER_ITEMS = ['10674' => 1, '215' => 2];
     /** @var  \Praxigento\App\Generic2\Cli\Cmd\Init\Sub\SaleOrder */
     protected $_subSaleOrder;
 

@@ -39,13 +39,6 @@ class Stocks
     /**#@-  */
 
     /**#@+
-     * IDs for websites.
-     */
-    const DEF_WEBSITE_ID_ADMIN = 0;
-    const DEF_WEBSITE_ID_MAIN = 1;
-    /**#@-  */
-
-    /**#@+
      * Odoo IDs for warehouses.
      */
     const DEF_WRHS_ODOO_ID_BALTIC = 2;
@@ -192,7 +185,7 @@ class Stocks
         $this->groupRussian = $this->manObj->create(\Magento\Store\Model\Group::class);
         $this->groupRussian->load(self::DEF_GROUP_ID_RUSSIAN);
         $this->groupRussian->setName('Russian');
-        $this->groupRussian->setWebsiteId(self::DEF_WEBSITE_ID_MAIN);
+        $this->groupRussian->setWebsiteId(Cfg::DEF_WEBSITE_ID_BASE);
         $this->groupRussian->setRootCategoryId($rootCatId);
         $this->groupRussian->save();
         $this->manEvent->dispatch('store_group_save', ['group' => $this->groupRussian]);
@@ -208,7 +201,7 @@ class Stocks
         /** @var \Magento\CatalogInventory\Model\Stock $stockBaltic */
         $stockBaltic = $this->mageRepoStock->get(self::DEF_STOCK_ID_DEFAULT);
         $stockBaltic->setStockName('Baltic');
-        $stockBaltic->setWebsiteId(self::DEF_WEBSITE_ID_ADMIN);
+        $stockBaltic->setWebsiteId(Cfg::DEF_WEBSITE_ID_ADMIN);
         $this->mageRepoStock->save($stockBaltic);
         /* create new stock as Russian */
         try {
@@ -218,7 +211,7 @@ class Stocks
             // $stockRussian->setStockId(self::DEF_STOCK_ID_RUSSIAN);
         } finally {
             $stockRussian->setStockName('Russian');
-            $stockRussian->setWebsiteId(self::DEF_WEBSITE_ID_ADMIN);
+            $stockRussian->setWebsiteId(Cfg::DEF_WEBSITE_ID_ADMIN);
             $this->mageRepoStock->save($stockRussian);
         }
         /* create new warehouses */
@@ -269,12 +262,12 @@ class Stocks
         /* create RU-store for Baltic group */
         $this->storeBalticRu = $this->saveStore(
             self::DEF_STORE_ID_BALTIC_RU, true, 'RU', 'baltic_ru',
-            self::DEF_WEBSITE_ID_MAIN, $this->groupBaltic->getId(), 10
+            Cfg::DEF_WEBSITE_ID_BASE, $this->groupBaltic->getId(), 10
         );
         /* create Ru-store for Russian group */
         $this->storeRussianRu = $this->saveStore(
             self::DEF_STORE_ID_RUSSIAN_RU, true, 'RU', 'russian_ru',
-            self::DEF_WEBSITE_ID_MAIN, $this->groupRussian->getId(), 10
+            Cfg::DEF_WEBSITE_ID_BASE, $this->groupRussian->getId(), 10
         );
     }
 
