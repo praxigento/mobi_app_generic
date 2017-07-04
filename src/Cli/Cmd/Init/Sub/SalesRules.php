@@ -6,7 +6,7 @@
 namespace Praxigento\App\Generic2\Cli\Cmd\Init\Sub;
 
 use Magento\Framework\App\ObjectManager;
-use Praxigento\App\Generic2\Cli\Cmd\Init\Stocks as InitStocks;
+use Praxigento\App\Generic2\Config as Cfg;
 
 class SalesRules
 {
@@ -59,7 +59,7 @@ class SalesRules
         $rule->setName($name);
         $rule->setDescription($description);
         $rule->setIsActive(true);
-        $rule->setWebsiteIds([InitStocks::DEF_WEBSITE_ID_MAIN]);
+        $rule->setWebsiteIds([Cfg::DEF_WEBSITE_ID_BASE]);
         $rule->setCustomerGroupIds($this->_custGroups);
         $rule->setDiscountAmount($discountPercent);
         $rule->setStopRulesProcessing(false);
@@ -109,7 +109,7 @@ class SalesRules
         $rule->setName($name);
         $rule->setDescription($description);
         $rule->setIsActive(true);
-        $rule->setWebsiteIds([InitStocks::DEF_WEBSITE_ID_MAIN]);
+        $rule->setWebsiteIds([Cfg::DEF_WEBSITE_ID_BASE]);
         $rule->setCustomerGroupIds($this->_custGroups);
         $rule->setDiscountAmount($discountAmount);
         $rule->setStopRulesProcessing(false);
