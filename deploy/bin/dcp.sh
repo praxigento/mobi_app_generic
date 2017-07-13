@@ -22,7 +22,7 @@ rm -fr ${DIR_DCP}
 git clone git@github.com:praxigento/mage_ext_dcp.git ${DIR_DCP}
 cd ${DIR_DCP}
 git fetch
-git checkout new
+# git checkout new - deprecated after MOBI-812
 npm install
 
 if [ "${SQL_DEV_MODE}" = "0" ]
