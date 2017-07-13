@@ -17,7 +17,6 @@ DIR_DCP=${DIR_ROOT}/dcp                     # root folder for DCP
 ##
 #   Clone DCP sources from github and build
 ##
-unlink ${DIR_MAGE}/dcp
 rm -fr ${DIR_DCP}
 git clone git@github.com:praxigento/mage_ext_dcp.git ${DIR_DCP}
 cd ${DIR_DCP}
@@ -27,6 +26,7 @@ npm install
 
 if [ "${SQL_DEV_MODE}" = "0" ]
 then
+    echo ""
     echo "Build DCP in production mode (minified)."
     npm run build
     ##
@@ -39,25 +39,12 @@ then
     cp styles.*.bundle.css styles.bundle.css
     cp vendor.*.bundle.js vendor.bundle.js
 else
+    echo ""
     echo "Build DCP in development mode (linked to Generic Dvlp)."
     # build development version with "http://gen.mage.dvlp.mobi.prxgt.com/rest/default/V1/" as API base
     npm run build-gen-dvlp
 fi
 
-# build production version
-#npm run build
-# build development version with "http://gen.mage.test.mobi.prxgt.com/rest/default/V1/" as API base
-npm run build-without-minification
-
-##
-#   Copy hashed versions of the built files to fixed-name versions.
-##
-cd ${DIR_DCP}/dist
-cp inline.*.bundle.js inline.bundle.js
-cp main.*.bundle.js main.bundle.js
-cp scripts.*.bundle.js scripts.bundle.js
-cp styles.*.bundle.css styles.bundle.css
-cp vendor.*.bundle.js vendor.bundle.js
 
 ##
 #   Link built DCP into Magento application.
