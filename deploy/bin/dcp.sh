@@ -24,6 +24,26 @@ cd ${DIR_DCP}
 git fetch
 git checkout new
 npm install
+
+if [ "${SQL_DEV_MODE}" = "0" ]
+then
+    echo "Build DCP in production mode (minified)."
+    npm run build
+    ##
+    #   Copy hashed versions of the built files to fixed-name versions.
+    ##
+    cd ${DIR_DCP}/dist
+    cp inline.*.bundle.js inline.bundle.js
+    cp main.*.bundle.js main.bundle.js
+    cp scripts.*.bundle.js scripts.bundle.js
+    cp styles.*.bundle.css styles.bundle.css
+    cp vendor.*.bundle.js vendor.bundle.js
+else
+    echo "Build DCP in development mode (linked to Generic Dvlp)."
+    # build development version with "http://gen.mage.dvlp.mobi.prxgt.com/rest/default/V1/" as API base
+    npm run build-gen-dvlp
+fi
+
 # build production version
 #npm run build
 # build development version with "http://gen.mage.test.mobi.prxgt.com/rest/default/V1/" as API base
