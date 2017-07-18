@@ -1,0 +1,16 @@
+Index: app/code/Magento/CatalogInventory/Model/ResourceModel/Indexer/Stock/DefaultStock.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/code/Magento/CatalogInventory/Model/ResourceModel/Indexer/Stock/DefaultStock.php	(revision )
++++ app/code/Magento/CatalogInventory/Model/ResourceModel/Indexer/Stock/DefaultStock.php	(revision )
+@@ -296,7 +296,7 @@
+             $data[] = [
+                 'product_id' => (int)$row['entity_id'],
+                 'website_id' => (int)$row['website_id'],
+-                'stock_id' => Stock::DEFAULT_STOCK_ID,
++                'stock_id' => (int)$row['stock_id'],
+                 'qty' => (double)$row['qty'],
+                 'stock_status' => (int)$row['status'],
+             ];
