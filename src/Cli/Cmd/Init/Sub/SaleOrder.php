@@ -7,12 +7,12 @@ namespace Praxigento\App\Generic2\Cli\Cmd\Init\Sub;
 
 class SaleOrder
 {
+    const DATE_PAID = '2016-06-21 16:32:21';
     const METHOD_PAYMENT = 'checkmo';
     const METHOD_SHIPPING = 'flatrate_flatrate';
     const SKU = '10674San';
     const STOCK_ID_RUS = 2;
     const STORE_ID_RUS = 3;
-    const DATE_PAID = '2016-06-21 16:32:21';
     /**
      * Cache for products data from DB.
      *
@@ -33,7 +33,7 @@ class SaleOrder
     protected $_repoCatProd;
     /** @var \Magento\Customer\Api\CustomerRepositoryInterface */
     protected $_repoCust;
-    /** @var \Praxigento\Pv\Repo\Entity\ISale */
+    /** @var \Praxigento\Pv\Repo\Entity\Sale */
     protected $_repoPvSale;
 
     public function __construct(
@@ -44,7 +44,7 @@ class SaleOrder
         \Magento\Sales\Api\InvoiceManagementInterface $manInvoice,
         \Magento\Catalog\Api\ProductRepositoryInterface $repoCatProd,
         \Magento\Customer\Api\CustomerRepositoryInterface $repoCust,
-        \Praxigento\Pv\Repo\Entity\ISale $repoPvSale
+        \Praxigento\Pv\Repo\Entity\Sale $repoPvSale
     ) {
         $this->_manObj = $manObj;
         $this->_manEvent = $manEvent;
