@@ -14,7 +14,7 @@ class Ranks
     protected $repoRank;
 
     public function __construct(
-        \Praxigento\BonusBase\Repo\Entity\Def\Rank $repoRank
+        \Praxigento\BonusBase\Repo\Entity\Rank $repoRank
     ) {
         $this->repoRank = $repoRank;
     }
