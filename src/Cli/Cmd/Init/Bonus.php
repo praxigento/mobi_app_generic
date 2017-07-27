@@ -165,8 +165,8 @@ class Bonus
         try {
             /** @var \Praxigento\BonusBase\Repo\Entity\Rank $repoRank */
             $repoRank = $this->manObj->get(\Praxigento\BonusBase\Repo\Entity\Rank::class);
-            /** @var \Praxigento\BonusLoyalty\Repo\Entity\Cfg\Def\Param $repo */
-            $repo = $this->manObj->get(\Praxigento\BonusLoyalty\Repo\Entity\Cfg\Def\Param::class);
+            /** @var \Praxigento\BonusLoyalty\Repo\Entity\Cfg\Param $repo */
+            $repo = $this->manObj->get(\Praxigento\BonusLoyalty\Repo\Entity\Cfg\Param::class);
             /** @var \Praxigento\BonusLoyalty\Data\Entity\Cfg\Param $data */
             $data = new \Praxigento\BonusLoyalty\Data\Entity\Cfg\Param();
             //
