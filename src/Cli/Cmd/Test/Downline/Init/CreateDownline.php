@@ -15,22 +15,23 @@ class CreateDownline
     const A_MAP_BY_MLM_ID = \Praxigento\App\Generic2\Cli\Cmd\Test\Downline\Init\CreateCustomers::A_MAP_BY_MLM_ID;
     /** @var \Praxigento\Downline\Service\ISnap */
     protected $callDwnlSnap;
+    /** @var  \Praxigento\Core\Tool\IFormat */
+    protected $hlpFormat;
     /** @var \Psr\Log\LoggerInterface */
     protected $logger;
-    /** @var \Praxigento\Downline\Repo\Entity\IChange */
+    /** @var \Praxigento\Downline\Repo\Entity\Def\Change */
     protected $repoDwnlChange;
-    /** @var \Praxigento\Downline\Repo\Entity\ICustomer */
+    /** @var \Praxigento\Downline\Repo\Entity\Def\Customer */
     protected $repoDwnlCust;
     /** @var \Magento\Framework\App\ResourceConnection */
     protected $resource;
-    /** @var  \Praxigento\Core\Tool\IFormat */
-    protected $hlpFormat;
+
     public function __construct(
         \Praxigento\Core\Fw\Logger\App $logger,
         \Magento\Framework\App\ResourceConnection $resource,
         \Praxigento\Core\Tool\IFormat $hlpFormat,
-        \Praxigento\Downline\Repo\Entity\IChange $repoDwnlChange,
-        \Praxigento\Downline\Repo\Entity\ICustomer $repoDwnlCust,
+        \Praxigento\Downline\Repo\Entity\Def\Change $repoDwnlChange,
+        \Praxigento\Downline\Repo\Entity\Def\Customer $repoDwnlCust,
         \Praxigento\Downline\Service\ISnap $callDwnlSnap
     ) {
         $this->logger = $logger;
