@@ -19,9 +19,9 @@ class CreateDownline
     protected $hlpFormat;
     /** @var \Psr\Log\LoggerInterface */
     protected $logger;
-    /** @var \Praxigento\Downline\Repo\Entity\Def\Change */
+    /** @var \Praxigento\Downline\Repo\Entity\Change */
     protected $repoDwnlChange;
-    /** @var \Praxigento\Downline\Repo\Entity\Def\Customer */
+    /** @var \Praxigento\Downline\Repo\Entity\Customer */
     protected $repoDwnlCust;
     /** @var \Magento\Framework\App\ResourceConnection */
     protected $resource;
@@ -30,8 +30,8 @@ class CreateDownline
         \Praxigento\Core\Fw\Logger\App $logger,
         \Magento\Framework\App\ResourceConnection $resource,
         \Praxigento\Core\Tool\IFormat $hlpFormat,
-        \Praxigento\Downline\Repo\Entity\Def\Change $repoDwnlChange,
-        \Praxigento\Downline\Repo\Entity\Def\Customer $repoDwnlCust,
+        \Praxigento\Downline\Repo\Entity\Change $repoDwnlChange,
+        \Praxigento\Downline\Repo\Entity\Customer $repoDwnlCust,
         \Praxigento\Downline\Service\ISnap $callDwnlSnap
     ) {
         $this->logger = $logger;
