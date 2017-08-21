@@ -32,6 +32,8 @@ echo "Init downline tree."
 php ${DIR_MAGE}/bin/magento prxgt:app:init:customers
 echo "Init stores & stocks."
 php ${DIR_MAGE}/bin/magento prxgt:app:init:stocks
+echo "Init sale taxes."
+php ${DIR_MAGE}/bin/magento prxgt:app:init:taxes
 echo "Replicate Odoo products."
 php ${DIR_MAGE}/bin/magento prxgt:odoo:replicate:products
 echo "Post-replication routines."
