@@ -22,9 +22,9 @@ class Taxes
     /**
      * Fixed IDs for own data.
      */
-    const DEF_TAX_RATE_ID_LV15 = 1;
-    const DEF_TAX_RATE_ID_LV6 = 2;
-    const DEF_TAX_RATE_ID_RU = 3;
+    const DEF_TAX_RATE_ID_LV = 1;
+    const DEF_TAX_RATE_ID_RU6 = 2;
+    const DEF_TAX_RATE_ID_RU12 = 3;
     const DEF_TAX_RULE_ID_LV = 1;
     const DEF_TAX_RULE_ID_RU = 2;
     /** @var  \Praxigento\Core\Transaction\Database\IManager */
@@ -53,21 +53,21 @@ class Taxes
     protected function addLinks()
     {
         $data = [
-            Cfg::E_TAX_CALC_A_RATE_ID => self::DEF_TAX_RATE_ID_LV15,
+            Cfg::E_TAX_CALC_A_RATE_ID => self::DEF_TAX_RATE_ID_LV,
             Cfg::E_TAX_CALC_A_RULE_ID => self::DEF_TAX_RULE_ID_LV,
             Cfg::E_TAX_CALC_A_CUST_TAX_CLASS_ID => self::DEF_CUST_TAX_CLASS_ID,
             Cfg::E_TAX_CALC_A_PROD_TAX_CLASS_ID => self::DEF_PROD_TAX_CLASS_ID,
         ];
         $this->repoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC, $data);
         $data = [
-            Cfg::E_TAX_CALC_A_RATE_ID => self::DEF_TAX_RATE_ID_LV6,
-            Cfg::E_TAX_CALC_A_RULE_ID => self::DEF_TAX_RULE_ID_LV,
+            Cfg::E_TAX_CALC_A_RATE_ID => self::DEF_TAX_RATE_ID_RU6,
+            Cfg::E_TAX_CALC_A_RULE_ID => self::DEF_TAX_RULE_ID_RU,
             Cfg::E_TAX_CALC_A_CUST_TAX_CLASS_ID => self::DEF_CUST_TAX_CLASS_ID,
             Cfg::E_TAX_CALC_A_PROD_TAX_CLASS_ID => self::DEF_PROD_TAX_CLASS_ID,
         ];
         $this->repoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC, $data);
         $data = [
-            Cfg::E_TAX_CALC_A_RATE_ID => self::DEF_TAX_RATE_ID_RU,
+            Cfg::E_TAX_CALC_A_RATE_ID => self::DEF_TAX_RATE_ID_RU12,
             Cfg::E_TAX_CALC_A_RULE_ID => self::DEF_TAX_RULE_ID_RU,
             Cfg::E_TAX_CALC_A_CUST_TAX_CLASS_ID => self::DEF_CUST_TAX_CLASS_ID,
             Cfg::E_TAX_CALC_A_PROD_TAX_CLASS_ID => self::DEF_PROD_TAX_CLASS_ID,
@@ -81,32 +81,32 @@ class Taxes
     protected function addRates()
     {
         $data = [
-            Cfg::E_TAX_CALC_RATE_A_ID => self::DEF_TAX_RATE_ID_LV15,
+            Cfg::E_TAX_CALC_RATE_A_ID => self::DEF_TAX_RATE_ID_LV,
             Cfg::E_TAX_CALC_RATE_A_COUNTRY_ID => 'LV',
             Cfg::E_TAX_CALC_RATE_A_REGION_ID => 0,
             Cfg::E_TAX_CALC_RATE_A_POSTCODE => '*',
-            Cfg::E_TAX_CALC_RATE_A_CODE => 'LV Tax 15%',
-            Cfg::E_TAX_CALC_RATE_A_RATE => 15
+            Cfg::E_TAX_CALC_RATE_A_CODE => 'LV Tax 21%',
+            Cfg::E_TAX_CALC_RATE_A_RATE => 21
         ];
         $this->repoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC_RATE, $data);
 
         $data = [
-            Cfg::E_TAX_CALC_RATE_A_ID => self::DEF_TAX_RATE_ID_LV6,
-            Cfg::E_TAX_CALC_RATE_A_COUNTRY_ID => 'LV',
+            Cfg::E_TAX_CALC_RATE_A_ID => self::DEF_TAX_RATE_ID_RU6,
+            Cfg::E_TAX_CALC_RATE_A_COUNTRY_ID => 'RU',
             Cfg::E_TAX_CALC_RATE_A_REGION_ID => 0,
             Cfg::E_TAX_CALC_RATE_A_POSTCODE => '*',
-            Cfg::E_TAX_CALC_RATE_A_CODE => 'LV Tax 6%',
+            Cfg::E_TAX_CALC_RATE_A_CODE => 'RU Tax 6%',
             Cfg::E_TAX_CALC_RATE_A_RATE => 6
         ];
         $this->repoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC_RATE, $data);
 
         $data = [
-            Cfg::E_TAX_CALC_RATE_A_ID => self::DEF_TAX_RATE_ID_RU,
+            Cfg::E_TAX_CALC_RATE_A_ID => self::DEF_TAX_RATE_ID_RU12,
             Cfg::E_TAX_CALC_RATE_A_COUNTRY_ID => 'RU',
             Cfg::E_TAX_CALC_RATE_A_REGION_ID => 0,
             Cfg::E_TAX_CALC_RATE_A_POSTCODE => '*',
-            Cfg::E_TAX_CALC_RATE_A_CODE => 'RU Tax 18%',
-            Cfg::E_TAX_CALC_RATE_A_RATE => 18
+            Cfg::E_TAX_CALC_RATE_A_CODE => 'RU Tax 12%',
+            Cfg::E_TAX_CALC_RATE_A_RATE => 12
         ];
         $this->repoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC_RATE, $data);
     }
