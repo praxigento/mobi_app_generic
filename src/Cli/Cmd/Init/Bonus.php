@@ -99,8 +99,8 @@ class Bonus
             $repoRank = $this->manObj->get(\Praxigento\BonusBase\Repo\Entity\Rank::class);
             /** @var \Praxigento\BonusBase\Repo\Entity\Cfg\Generation $repo */
             $repo = $this->manObj->get(\Praxigento\BonusBase\Repo\Entity\Cfg\Generation::class);
-            /** @var \Praxigento\BonusBase\Data\Entity\Cfg\Generation $data */
-            $data = new \Praxigento\BonusBase\Data\Entity\Cfg\Generation();
+            /** @var \Praxigento\BonusBase\Repo\Entity\Data\Cfg\Generation $data */
+            $data = new \Praxigento\BonusBase\Repo\Entity\Data\Cfg\Generation();
             // get calculation type ID
             $calcTypeId = $repoCalc->getIdByCode(Cfg::CODE_TYPE_CALC_BONUS);
             $data->setCalcTypeId($calcTypeId);
@@ -200,8 +200,8 @@ class Bonus
         try {
             /** @var \Praxigento\BonusBase\Repo\Entity\Rank $repo */
             $repo = $this->manObj->get(\Praxigento\BonusBase\Repo\Entity\Rank::class);
-            /** @var \Praxigento\BonusBase\Data\Entity\Rank $data */
-            $data = new \Praxigento\BonusBase\Data\Entity\Rank();
+            /** @var \Praxigento\BonusBase\Repo\Entity\Data\Rank $data */
+            $data = new \Praxigento\BonusBase\Repo\Entity\Data\Rank();
             // PV
             $data->setCode(Cfg::RANK_BY_PV);
             $data->setNote('Qualified by PV only.');
