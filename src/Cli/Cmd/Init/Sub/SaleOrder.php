@@ -186,7 +186,7 @@ class SaleOrder
         /* update date paid in PV register */
 //        $orderId = $order->getEntityId();
 //        $bind = [
-//            \Praxigento\Pv\Data\Entity\Sale::ATTR_DATE_PAID => self::DATE_PAID
+//            \Praxigento\Pv\Repo\Entity\Data\Sale::ATTR_DATE_PAID => self::DATE_PAID
 //        ];
 //        $this->_repoPvSale->updateById($orderId, $bind);
         /* transfer PV to customer account */
