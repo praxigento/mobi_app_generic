@@ -4,7 +4,7 @@
  */
 namespace Praxigento\App\Generic2\Cli\Cmd\Init\Users;
 
-use \Praxigento\Core\Service\Init\Admin\User\Create as ProcCreate;
+use Praxigento\Core\Service\Init\Admin\User\Create as ProcCreate;
 
 /**
  * Create Admin Users with predefined ACL role.
@@ -12,9 +12,9 @@ use \Praxigento\Core\Service\Init\Admin\User\Create as ProcCreate;
 class Create
 {
     const A_EMAIL = 'email';
-    const A_NAME_USER = 'name';
     const A_NAME_FIRST = 'first';
     const A_NAME_LAST = 'last';
+    const A_NAME_USER = 'name';
     const A_PASSWORD = 'password';
     const ROLE_ADMIN_ID = 1;
     const USER_ODOO_NAME = 'odoo';
@@ -65,7 +65,7 @@ class Create
             $username = $user[self::A_NAME_USER];
             $output->writeln("Create user '$username'...");
             /* create context for process */
-            $ctx = new \Flancer32\Lib\Data();
+            $ctx = new \Praxigento\Core\Data();
             $ctx->set(ProcCreate::OPT_USER_NAME, $username);
             $ctx->set(ProcCreate::OPT_PASSWORD, $user[self::A_PASSWORD]);
             $ctx->set(ProcCreate::OPT_EMAIL, $user[self::A_EMAIL]);
