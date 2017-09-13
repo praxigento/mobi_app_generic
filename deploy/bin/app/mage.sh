@@ -51,7 +51,7 @@ composer create-project -s dev --prefer-source --keep-vcs --no-install \
     --repository "{\"type\": \"vcs\",\"url\": \"https://github.com/magento/magento2\"}" \
     magento/magento2ce ${DIR_MAGE}
 cd ${DIR_MAGE}
-#git checkout 2.2.0-preview
+git checkout origin/2.2.0-preview
 composer install
 
 
