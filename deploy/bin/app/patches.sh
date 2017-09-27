@@ -15,9 +15,8 @@ fi
 ## =========================================================================
 echo ""
 echo "Patching Magento 2 files..."
-patch ${DIR_MAGE}/app/code/Magento/CatalogSearch/etc/di.xml ${DIR_DEPLOY}/patch/PR-7696.patch
-patch ${DIR_MAGE}/app/bootstrap.php ${DIR_DEPLOY}/patch/PR-10245.patch
-patch ${DIR_MAGE}/app/code/Magento/CatalogInventory/Model/ResourceModel/Indexer/Stock/DefaultStock.php ${DIR_DEPLOY}/patch/PR-10281.patch
+patch ${DIR_MAGE}/vendor/magento/module-catalog-search/etc/di.xml ${DIR_DEPLOY}/patch/PR-7696.patch
+patch ${DIR_MAGE}/vendor/magento/module-catalog-inventory/Model/ResourceModel/Indexer/Stock/DefaultStock.php ${DIR_DEPLOY}/patch/PR-10281.patch
 
 echo "All patches are applied."
 echo ""

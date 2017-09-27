@@ -1,11 +1,11 @@
-Index: app/code/Magento/CatalogSearch/etc/di.xml
+Index: vendor/magento/module-catalog-search/etc/di.xml
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/code/Magento/CatalogSearch/etc/di.xml	(revision )
-+++ app/code/Magento/CatalogSearch/etc/di.xml	(revision )
-@@ -148,14 +148,14 @@
+--- vendor/magento/module-catalog-search/etc/di.xml	(revision )
++++ vendor/magento/module-catalog-search/etc/di.xml	(revision )
+@@ -155,14 +155,14 @@
              </argument>
          </arguments>
      </virtualType>
@@ -22,7 +22,7 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
          </arguments>
      </type>
 
-@@ -165,7 +165,7 @@
+@@ -172,7 +172,7 @@
          </arguments>
      </virtualType>
 
@@ -31,7 +31,7 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
          <arguments>
              <argument name="instanceName" xsi:type="string">Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollection</argument>
          </arguments>
-@@ -173,7 +173,7 @@
+@@ -180,7 +180,7 @@
 
      <virtualType name="Magento\CatalogSearch\Model\Layer\Search\ItemCollectionProvider" type="Magento\Catalog\Model\Layer\Search\ItemCollectionProvider">
          <arguments>
