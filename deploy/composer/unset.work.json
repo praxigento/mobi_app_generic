@@ -2,12 +2,5 @@
   "name",
   "description",
   "version",
-  "minimum-stability",
-  {
-    "require-dev": [
-      "phpunit/phpunit",
-      "phpunit/php-code-coverage",
-      "mockery/mockery"
-    ]
-  }
+  "minimum-stability"
 ]
