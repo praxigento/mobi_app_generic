@@ -24,6 +24,7 @@
     }
   },
   "minimum-stability": "dev",
+  "prefer-stable": true,
   "extra": {
     "praxigento_templates_config": [
       "../deploy/tmpl/cfg.work.json",
