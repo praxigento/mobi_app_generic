@@ -10,6 +10,7 @@
   ],
   "require": {
     "praxigento/composer_plugin_templates": "^1",
+    "flancer32/php_data_object": "dev-master",
     "praxigento/mobi_app_generic_mage2": "dev-master"
   },
   "autoload-dev": {
