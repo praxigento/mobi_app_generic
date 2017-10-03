@@ -23,10 +23,11 @@ class Taxes
      * Fixed IDs for own data.
      */
     const DEF_TAX_RATE_ID_LV = 1;
-    const DEF_TAX_RATE_ID_RU6 = 2;
     const DEF_TAX_RATE_ID_RU12 = 3;
+    const DEF_TAX_RATE_ID_RU6 = 2;
     const DEF_TAX_RULE_ID_LV = 1;
-    const DEF_TAX_RULE_ID_RU = 2;
+    const DEF_TAX_RULE_ID_RU1 = 2;
+    const DEF_TAX_RULE_ID_RU2 = 3;
     /** @var  \Praxigento\Core\Transaction\Database\IManager */
     protected $manTrans;
     /** @var \Praxigento\Core\Repo\IGeneric */
@@ -52,6 +53,7 @@ class Taxes
      */
     protected function addLinks()
     {
+        /* link Rate LV with Rule LV */
         $data = [
             Cfg::E_TAX_CALC_A_RATE_ID => self::DEF_TAX_RATE_ID_LV,
             Cfg::E_TAX_CALC_A_RULE_ID => self::DEF_TAX_RULE_ID_LV,
@@ -59,16 +61,18 @@ class Taxes
             Cfg::E_TAX_CALC_A_PROD_TAX_CLASS_ID => self::DEF_PROD_TAX_CLASS_ID,
         ];
         $this->repoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC, $data);
+        /* link Rate RU6 with Rule #1 RU */
         $data = [
             Cfg::E_TAX_CALC_A_RATE_ID => self::DEF_TAX_RATE_ID_RU6,
-            Cfg::E_TAX_CALC_A_RULE_ID => self::DEF_TAX_RULE_ID_RU,
+            Cfg::E_TAX_CALC_A_RULE_ID => self::DEF_TAX_RULE_ID_RU1,
             Cfg::E_TAX_CALC_A_CUST_TAX_CLASS_ID => self::DEF_CUST_TAX_CLASS_ID,
             Cfg::E_TAX_CALC_A_PROD_TAX_CLASS_ID => self::DEF_PROD_TAX_CLASS_ID,
         ];
         $this->repoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC, $data);
+        /* link Rate RU12 with Rule #2 RU */
         $data = [
             Cfg::E_TAX_CALC_A_RATE_ID => self::DEF_TAX_RATE_ID_RU12,
-            Cfg::E_TAX_CALC_A_RULE_ID => self::DEF_TAX_RULE_ID_RU,
+            Cfg::E_TAX_CALC_A_RULE_ID => self::DEF_TAX_RULE_ID_RU2,
             Cfg::E_TAX_CALC_A_CUST_TAX_CLASS_ID => self::DEF_CUST_TAX_CLASS_ID,
             Cfg::E_TAX_CALC_A_PROD_TAX_CLASS_ID => self::DEF_PROD_TAX_CLASS_ID,
         ];
@@ -116,6 +120,7 @@ class Taxes
      */
     protected function addRules()
     {
+        /* add Rule for LV */
         $data = [
             Cfg::E_TAX_CALC_RULE_A_ID => self::DEF_TAX_RULE_ID_LV,
             Cfg::E_TAX_CALC_RULE_A_CODE => 'LV',
@@ -124,9 +129,19 @@ class Taxes
             Cfg::E_TAX_CALC_RULE_A_CALC_SUBTOTAL => 0,
         ];
         $this->repoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC_RULE, $data);
+        /* add Rule #1 for RU */
         $data = [
-            Cfg::E_TAX_CALC_RULE_A_ID => self::DEF_TAX_RULE_ID_RU,
-            Cfg::E_TAX_CALC_RULE_A_CODE => 'RU',
+            Cfg::E_TAX_CALC_RULE_A_ID => self::DEF_TAX_RULE_ID_RU1,
+            Cfg::E_TAX_CALC_RULE_A_CODE => 'RU #1',
+            Cfg::E_TAX_CALC_RULE_A_PRIORITY => 0,
+            Cfg::E_TAX_CALC_RULE_A_POSITION => 0,
+            Cfg::E_TAX_CALC_RULE_A_CALC_SUBTOTAL => 0,
+        ];
+        $this->repoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC_RULE, $data);
+        /* add Rule #2 for RU */
+        $data = [
+            Cfg::E_TAX_CALC_RULE_A_ID => self::DEF_TAX_RULE_ID_RU2,
+            Cfg::E_TAX_CALC_RULE_A_CODE => 'RU #2',
             Cfg::E_TAX_CALC_RULE_A_PRIORITY => 0,
             Cfg::E_TAX_CALC_RULE_A_POSITION => 0,
             Cfg::E_TAX_CALC_RULE_A_CALC_SUBTOTAL => 0,
