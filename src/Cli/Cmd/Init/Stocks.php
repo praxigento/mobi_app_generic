@@ -219,7 +219,7 @@ class Stocks
         $wrhsBaltic = $this->repoWrhs->getById(self::DEF_STOCK_ID_BALTIC);
         $shoudCreate = is_null($wrhsBaltic->getOdooId());
         $wrhsBaltic->setCode('Baltic');
-        $wrhsBaltic->setCurrency('USD');
+        $wrhsBaltic->setCurrency('EUR');
         $wrhsBaltic->setCountryCode('LV');
         $wrhsBaltic->setNote('Warehouse for Baltic states (LV, LT, EE)');
         $wrhsBaltic->setOdooId(self::DEF_WRHS_ODOO_ID_BALTIC);
