@@ -7,7 +7,7 @@ namespace Praxigento\App\Generic2\Cli\Cmd\Init;
 use Praxigento\App\Generic2\Tool\Odoo\Def\BusinessCodesManager;
 
 class Customers
-    extends \Praxigento\Core\Cli\Cmd\BaseWithArea
+    extends \Praxigento\Core\Cli\Cmd\Base
 {
     /** Default downline tree */
     protected $DEFAULT_DWNL_TREE = [
@@ -70,6 +70,7 @@ class Customers
         \Symfony\Component\Console\Input\InputInterface $input,
         \Symfony\Component\Console\Output\OutputInterface $output
     ) {
+        $this->checkAreaCode();
         $def = $this->manTrans->begin();
         try {
             foreach ($this->DEFAULT_DWNL_TREE as $custId => $parentId) {
