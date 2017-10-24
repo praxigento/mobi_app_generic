@@ -110,6 +110,7 @@ class Stocks
         \Symfony\Component\Console\Input\InputInterface $input,
         \Symfony\Component\Console\Output\OutputInterface $output
     ) {
+        $this->checkAreaCode();
         $this->processGroups();
         $this->processStores();
         $this->processStocks();
