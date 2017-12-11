@@ -9,7 +9,7 @@ namespace Praxigento\App\Generic2\Cli\Cmd\Test\Bonus;
  * Configure bonus calculations for integration testing.
  */
 class Config
-    extends \Praxigento\Core\Cli\Cmd\Base
+    extends \Praxigento\Core\App\Cli\Cmd\Base
 {
 
     const RANK_PV_QUAL = 'PV_QUALIFIED';

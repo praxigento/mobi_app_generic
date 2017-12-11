@@ -7,7 +7,7 @@ namespace Praxigento\App\Generic2\Cli\Cmd\Init;
 use Praxigento\App\Generic2\Tool\Odoo\Def\BusinessCodesManager;
 
 class Customers
-    extends \Praxigento\Core\Cli\Cmd\Base
+    extends \Praxigento\Core\App\Cli\Cmd\Base
 {
     /** Default downline tree */
     protected $DEFAULT_DWNL_TREE = [
@@ -31,7 +31,7 @@ class Customers
     protected $GROUP_DISTR = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     protected $GROUP_PRIVILEDED = [13];
     protected $GROUP_RETAIL = [9];
-    /** @var  \Praxigento\Core\Transaction\Database\IManager */
+    /** @var  \Praxigento\Core\App\Transaction\Database\IManager */
     protected $manTrans;
     /**
      * Map index by Magento ID (index started from 1).
@@ -52,7 +52,7 @@ class Customers
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\Core\Transaction\Database\IManager $manTrans,
+        \Praxigento\Core\App\Transaction\Database\IManager $manTrans,
         \Magento\Customer\Api\CustomerRepositoryInterface $repoCustomer,
         \Praxigento\Downline\Tool\IReferral $toolReferral
     ) {

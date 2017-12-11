@@ -32,7 +32,7 @@
             <argument name="loggerName" xsi:type="string">sql</argument>
         </arguments>
     </virtualType>
-    <virtualType name="loggerSql" type="\Praxigento\Core\Fw\Logger\App">
+    <virtualType name="loggerSql" type="\Praxigento\Core\App\Logger\App">
         <!-- Configure this application logger from Praxigneto_Core module -->
         <arguments>
             <argument name="logger" xsi:type="object">loggerSqlInternal</argument>
@@ -46,7 +46,7 @@
             <argument name="loggerName" xsi:type="string">setup</argument>
         </arguments>
     </virtualType>
-    <virtualType name="loggerSetup" type="\Praxigento\Core\Fw\Logger\App">
+    <virtualType name="loggerSetup" type="\Praxigento\Core\App\Logger\App">
         <!-- Configure this application logger from Praxigneto_Core module -->
         <arguments>
             <argument name="logger" xsi:type="object">loggerSetupInternal</argument>
@@ -61,7 +61,7 @@
     </type>
 
     <!-- Praxigento\Core -->
-    <type name="Praxigento\Core\Setup\Dem\Tool">
+    <type name="Praxigento\Core\App\Setup\Dem\Tool">
         <arguments>
             <argument name="logger" xsi:type="object">loggerSetup</argument>
         </arguments>

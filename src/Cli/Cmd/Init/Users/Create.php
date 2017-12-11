@@ -4,7 +4,7 @@
  */
 namespace Praxigento\App\Generic2\Cli\Cmd\Init\Users;
 
-use Praxigento\Core\Service\Init\Admin\User\Create as ProcCreate;
+use Praxigento\Core\App\Service\Init\Admin\User\Create as ProcCreate;
 
 /**
  * Create Admin Users with predefined ACL role.
@@ -22,7 +22,7 @@ class Create
     const USER_TESTER_NAME = 'tester';
     const USER_TESTER_PASSWORD = 'b4yHm6PNQ1PXeFsHzUDu';
 
-    /** @var \Praxigento\Core\Service\Init\Admin\User\Create */
+    /** @var \Praxigento\Core\App\Service\Init\Admin\User\Create */
     protected $prcUserCreate;
 
     /**
@@ -47,7 +47,7 @@ class Create
 
     public function __construct(
         \Magento\User\Model\UserFactory $factoryUser,
-        \Praxigento\Core\Service\Init\Admin\User\Create $prcUserCreate
+        \Praxigento\Core\App\Service\Init\Admin\User\Create $prcUserCreate
     ) {
         $this->prcUserCreate = $prcUserCreate;
     }

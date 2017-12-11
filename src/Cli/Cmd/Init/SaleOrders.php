@@ -8,9 +8,9 @@ namespace Praxigento\App\Generic2\Cli\Cmd\Init;
  * Create sale orders to calculate bonus and collect internal money on customer accounts.
  */
 class SaleOrders
-    extends \Praxigento\Core\Cli\Cmd\Base
+    extends \Praxigento\Core\App\Cli\Cmd\Base
 {
-    /** @var  \Praxigento\Core\Transaction\Database\IManager */
+    /** @var  \Praxigento\Core\App\Transaction\Database\IManager */
     protected $_manTrans;
     /** @var array SKU and count for order items (all orders have the same items). */
     protected $DATA_ORDER_ITEMS = ['10674' => 1, '215' => 2];
@@ -19,7 +19,7 @@ class SaleOrders
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\Core\Transaction\Database\IManager $manTrans,
+        \Praxigento\Core\App\Transaction\Database\IManager $manTrans,
         \Praxigento\App\Generic2\Cli\Cmd\Init\Sub\SaleOrder\Proxy $subSaleOrder
     ) {
         parent::__construct(

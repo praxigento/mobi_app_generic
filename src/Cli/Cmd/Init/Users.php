@@ -8,7 +8,7 @@ namespace Praxigento\App\Generic2\Cli\Cmd\Init;
  * Create admin and API users for tests (tester & odoo).
  */
 class Users
-    extends \Praxigento\Core\Cli\Cmd\Base
+    extends \Praxigento\Core\App\Cli\Cmd\Base
 {
     /** @var \Praxigento\App\Generic2\Cli\Cmd\Init\Users\Create */
     protected $subCreate;

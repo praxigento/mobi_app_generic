@@ -9,7 +9,7 @@ namespace Praxigento\App\Generic2\Cli\Cmd\Test\Downline;
  * Initialize customers downline for integration testing.
  */
 class Init
-    extends \Praxigento\Core\Cli\Cmd\Base
+    extends \Praxigento\Core\App\Cli\Cmd\Base
 {
     const A_CUST_MLM_ID = 'cust_mlm_id';
     const A_DATE_ENROLLED = 'date_enrolled';

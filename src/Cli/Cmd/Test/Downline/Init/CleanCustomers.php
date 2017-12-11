@@ -11,11 +11,11 @@ use Praxigento\App\Generic2\Config as Cfg;
  */
 class CleanCustomers
 {
-    /** @var \Praxigento\Core\Repo\IGeneric */
+    /** @var \Praxigento\Core\App\Repo\IGeneric */
     protected $repoGeneric;
 
     public function __construct(
-        \Praxigento\Core\Repo\IGeneric $repoGeneric
+        \Praxigento\Core\App\Repo\IGeneric $repoGeneric
     ) {
         $this->repoGeneric = $repoGeneric;
     }

@@ -9,7 +9,7 @@ use Magento\Tax\Model\Calculation\Rule as EntityTaxRule;
 use Praxigento\App\Generic2\Config as Cfg;
 
 class Stocks
-    extends \Praxigento\Core\Cli\Cmd\Base
+    extends \Praxigento\Core\App\Cli\Cmd\Base
 {
     /**#@+
      * IDs for groups (stores in adminhtml terms).
@@ -61,9 +61,9 @@ class Stocks
     protected $manEvent;
     /** @var  \Magento\Store\Model\StoreManager */
     protected $manStore;
-    /** @var  \Praxigento\Core\Transaction\Database\IManager */
+    /** @var  \Praxigento\Core\App\Transaction\Database\IManager */
     protected $manTrans;
-    /** @var  \Praxigento\Core\Repo\IGeneric */
+    /** @var  \Praxigento\Core\App\Repo\IGeneric */
     protected $repoGeneric;
     /** @var  \Praxigento\Odoo\Repo\Agg\Store\IWarehouse */
     protected $repoWrhs;
@@ -77,15 +77,15 @@ class Stocks
     protected $subRules;
 
     public function __construct(
-        \Praxigento\Core\Fw\Logger\App $logger,
+        \Praxigento\Core\App\Logger\App $logger,
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\Core\Transaction\Database\IManager $manTrans,
+        \Praxigento\Core\App\Transaction\Database\IManager $manTrans,
         \Magento\Store\Model\StoreManager $manStore,
         \Magento\Framework\Event\ManagerInterface $manEvent,
         \Magento\Store\Api\GroupRepositoryInterface $mageRepoGroup,
         \Magento\Store\Api\StoreRepositoryInterface $mageRepoStore,
         \Magento\CatalogInventory\Api\StockRepositoryInterface $mageRepoStock,
-        \Praxigento\Core\Repo\IGeneric $repoGeneric,
+        \Praxigento\Core\App\Repo\IGeneric $repoGeneric,
         \Praxigento\Odoo\Repo\Agg\Store\IWarehouse $repoWrhs,
         Sub\SalesRules\Proxy $subRules
     ) {

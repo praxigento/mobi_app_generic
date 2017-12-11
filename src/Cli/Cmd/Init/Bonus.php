@@ -13,14 +13,14 @@ use Praxigento\Core\Tool\IPeriod;
  * @deprecated Use classes in Praxigento\App\Generic2\Cli\Cmd\Test\...
  */
 class Bonus
-    extends \Praxigento\Core\Cli\Cmd\Base
+    extends \Praxigento\Core\App\Cli\Cmd\Base
 {
-    /** @var  \Praxigento\Core\Transaction\Database\IManager */
+    /** @var  \Praxigento\Core\App\Transaction\Database\IManager */
     protected $_manTrans;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\Core\Transaction\Database\IManager $manTrans,
+        \Praxigento\Core\App\Transaction\Database\IManager $manTrans,
         \Praxigento\BonusBase\Service\IPeriod $callBonusPeriod,
         \Praxigento\Pv\Service\ISale $callPvSale
     ) {

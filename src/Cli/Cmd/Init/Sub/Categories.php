@@ -16,12 +16,12 @@ class Categories
     const DEF_STORE_VIEW_ID_ADMIN = 0;
     /** @var   \Magento\Catalog\Api\CategoryRepositoryInterface */
     protected $repoCategory;
-    /** @var  \Praxigento\Core\Repo\IGeneric */
+    /** @var  \Praxigento\Core\App\Repo\IGeneric */
     protected $repoGeneric;
 
     public function __construct(
         \Magento\Catalog\Api\CategoryRepositoryInterface $repoCat,
-        \Praxigento\Core\Repo\IGeneric $repoGeneric
+        \Praxigento\Core\App\Repo\IGeneric $repoGeneric
 
     ) {
         $this->repoCategory = $repoCat;

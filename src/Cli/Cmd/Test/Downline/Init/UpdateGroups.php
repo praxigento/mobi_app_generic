@@ -11,7 +11,7 @@ class UpdateGroups
 {
     /** @var \Magento\Framework\ObjectManagerInterface */
     protected $manObj;
-    /** @var \Praxigento\Core\Repo\IGeneric */
+    /** @var \Praxigento\Core\App\Repo\IGeneric */
     protected $repoGeneric;
     /** @var \Magento\Customer\Api\GroupRepositoryInterface */
     protected $repoGroup;
@@ -24,7 +24,7 @@ class UpdateGroups
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Magento\Framework\App\ResourceConnection $resource,
         \Praxigento\App\Generic2\Tool\Odoo\Def\BusinessCodesManager $manBusCodes,
-        \Praxigento\Core\Repo\IGeneric $repoGeneric,
+        \Praxigento\Core\App\Repo\IGeneric $repoGeneric,
         \Magento\Customer\Api\GroupRepositoryInterface $repoGroup
 
     ) {

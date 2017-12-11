@@ -11,7 +11,7 @@ use Praxigento\App\Generic2\Config as Cfg;
  * Setup sale taxes for Generic project (prices excl. taxes).
  */
 class Taxes
-    extends \Praxigento\Core\Cli\Cmd\Base
+    extends \Praxigento\Core\App\Cli\Cmd\Base
 {
 
     /**
@@ -28,15 +28,15 @@ class Taxes
     const DEF_TAX_RULE_ID_LV = 1;
     const DEF_TAX_RULE_ID_RU1 = 2;
     const DEF_TAX_RULE_ID_RU2 = 3;
-    /** @var  \Praxigento\Core\Transaction\Database\IManager */
+    /** @var  \Praxigento\Core\App\Transaction\Database\IManager */
     protected $manTrans;
-    /** @var \Praxigento\Core\Repo\IGeneric */
+    /** @var \Praxigento\Core\App\Repo\IGeneric */
     protected $repoGeneric;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\Core\Transaction\Database\IManager $manTrans,
-        \Praxigento\Core\Repo\IGeneric $repoGeneric
+        \Praxigento\Core\App\Transaction\Database\IManager $manTrans,
+        \Praxigento\Core\App\Repo\IGeneric $repoGeneric
     )
     {
         parent::__construct(

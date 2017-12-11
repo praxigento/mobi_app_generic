@@ -27,7 +27,7 @@ class CreateDownline
     protected $resource;
 
     public function __construct(
-        \Praxigento\Core\Fw\Logger\App $logger,
+        \Praxigento\Core\App\Logger\App $logger,
         \Magento\Framework\App\ResourceConnection $resource,
         \Praxigento\Core\Tool\IFormat $hlpFormat,
         \Praxigento\Downline\Repo\Entity\Change $repoDwnlChange,

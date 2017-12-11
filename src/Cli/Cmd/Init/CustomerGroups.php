@@ -10,7 +10,7 @@ use Praxigento\App\Generic2\Config as Cfg;
  * Initialize customer groups for Generic project.
  */
 class CustomerGroups
-    extends \Praxigento\Core\Cli\Cmd\Base
+    extends \Praxigento\Core\App\Cli\Cmd\Base
 {
     /** Total number jf the customer groups */
     const TOTAL_GROUPS = 5;

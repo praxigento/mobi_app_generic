@@ -11,7 +11,7 @@ class CustomerGroups
     protected $manBusCodes;
     /** @var \Magento\Framework\ObjectManagerInterface */
     protected $manObj;
-    /** @var \Praxigento\Core\Repo\IGeneric */
+    /** @var \Praxigento\Core\App\Repo\IGeneric */
     protected $repoGeneric;
     /** @var \Magento\Customer\Api\GroupRepositoryInterface */
     protected $repoGroup;
@@ -19,7 +19,7 @@ class CustomerGroups
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\App\Generic2\Tool\Odoo\Def\BusinessCodesManager $manBusCodes,
-        \Praxigento\Core\Repo\IGeneric $repoGeneric,
+        \Praxigento\Core\App\Repo\IGeneric $repoGeneric,
         \Magento\Customer\Api\GroupRepositoryInterface $repoGroup
     ) {
         $this->manObj = $manObj;
