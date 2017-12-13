@@ -21,53 +21,6 @@
         </arguments>
     </type>
 
-    <!-- ************************* -->
-    <!-- PSR LOGGERS CONFIGURATION -->
-    <!-- ************************* -->
-    <virtualType name="loggerSqlInternal" type="Praxigento\Logging\Logger">
-        <arguments>
-            <!-- Config file path is related to Magento 2 base directory. Absolute path can be used too. -->
-            <argument name="configFile" xsi:type="string">var/log/logging.yaml</argument>
-            <!-- Name of the logger in configuration file. Default: "sql".  -->
-            <argument name="loggerName" xsi:type="string">sql</argument>
-        </arguments>
-    </virtualType>
-    <virtualType name="loggerSql" type="\Psr\Log\LoggerInterface">
-        <!-- Configure this application logger from Praxigneto_Core module -->
-        <arguments>
-            <argument name="logger" xsi:type="object">loggerSqlInternal</argument>
-        </arguments>
-    </virtualType>
-    <virtualType name="loggerSetupInternal" type="Praxigento\Logging\Logger">
-        <arguments>
-            <!-- Config file path is related to Magento 2 base directory. Absolute path can be used too. -->
-            <argument name="configFile" xsi:type="string">var/log/logging.yaml</argument>
-            <!-- Name of the logger in configuration file. Default: "setup".  -->
-            <argument name="loggerName" xsi:type="string">setup</argument>
-        </arguments>
-    </virtualType>
-    <virtualType name="loggerSetup" type="\Psr\Log\LoggerInterface">
-        <!-- Configure this application logger from Praxigneto_Core module -->
-        <arguments>
-            <argument name="logger" xsi:type="object">loggerSetupInternal</argument>
-        </arguments>
-    </virtualType>
-
-    <!-- Praxigento\AppGeneric2 -->
-    <type name="Praxigento\App\Generic2\Cli\Cmd\Init\Stocks">
-        <arguments>
-            <argument name="logger" xsi:type="object">loggerSetup</argument>
-        </arguments>
-    </type>
-
-    <!-- Praxigento\Core -->
-    <type name="Praxigento\Core\App\Setup\Dem\Tool">
-        <arguments>
-            <argument name="logger" xsi:type="object">loggerSetup</argument>
-        </arguments>
-    </type>
-
-
     <!-- ************************************** -->
     <!-- APP SPECIFIC INTERFACE IMPLEMENTATIONS -->
     <!-- ************************************** -->
