@@ -26,7 +26,7 @@ class CreateCustomers
     protected $subReadCsv;
 
     public function __construct(
-        \Praxigento\Core\App\Logger\App $logger,
+        \Psr\Log\LoggerInterface $logger,
         \Magento\Framework\App\ResourceConnection $resource,
         \Praxigento\App\Generic2\Cli\Cmd\Test\Downline\Init\ReadCsv\Downline $subReadCsv
     ) {
