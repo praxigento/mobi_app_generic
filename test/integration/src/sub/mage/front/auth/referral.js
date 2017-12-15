@@ -20,7 +20,7 @@ var result = function mageFrontAuthReferral(opts) {
     var domain = parts[2]
 
     phantom.addCookie({
-        name: "prxgtDwnlReferral",  // see \Praxigento\Downline\Tool\Def\Referral::COOKIE_REFERRAL_CODE
+        name: "prxgtDwnlReferral",  // see \Praxigento\Downline\Helper\Referral::COOKIE_REFERRAL_CODE
         value: code + "%3A20170101",     // "REF_CODE:DATE_SAVED_YYYYMMDD"
         domain: domain,
         path: "/",

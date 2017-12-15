@@ -42,7 +42,7 @@ class Customers_Test extends \Praxigento\Core\Test\BaseCase\Mockery
         $this->mManObj = $this->_mockObjectManager();
         $this->mManTrans = $this->_mockTransactionManager();
         $this->mRepoMageCustomer = $this->_mock(\Magento\Customer\Model\ResourceModel\CustomerRepository::class);
-        $this->mToolReferal = $this->_mock(\Praxigento\Downline\Tool\IReferral::class);
+        $this->mToolReferal = $this->_mock(\Praxigento\Downline\Api\Helper\Referral::class);
         /* parameters */
         $this->mInput = $this->_mock(\Symfony\Component\Console\Input\InputInterface::class);
         $this->mOutput = $this->_mock(\Symfony\Component\Console\Output\OutputInterface::class);

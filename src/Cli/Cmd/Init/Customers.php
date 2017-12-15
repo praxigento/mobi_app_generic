@@ -47,14 +47,14 @@ class Customers
     protected $mapCustomerMageIdByIndex = [];
     /** @var \Magento\Customer\Api\CustomerRepositoryInterface */
     protected $repoCustomer;
-    /** @var \Praxigento\Downline\Tool\IReferral */
+    /** @var \Praxigento\Downline\Api\Helper\Referral */
     protected $toolReferral;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\App\Transaction\Database\IManager $manTrans,
         \Magento\Customer\Api\CustomerRepositoryInterface $repoCustomer,
-        \Praxigento\Downline\Tool\IReferral $toolReferral
+        \Praxigento\Downline\Api\Helper\Referral $toolReferral
     ) {
         parent::__construct(
             $manObj,
