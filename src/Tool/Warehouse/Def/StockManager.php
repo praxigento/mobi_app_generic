@@ -7,7 +7,7 @@ namespace Praxigento\App\Generic2\Tool\Warehouse\Def;
 
 use \Praxigento\App\Generic2\Cli\Cmd\Init\Stocks as Init;
 
-class StockManager implements \Praxigento\Warehouse\Tool\IStockManager
+class StockManager implements \Praxigento\Warehouse\Api\Helper\Stock
 {
 
     /** @var  \Magento\Store\Model\StoreManagerInterface */
