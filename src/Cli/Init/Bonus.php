@@ -2,10 +2,10 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
+
 namespace Praxigento\App\Generic2\Cli\Init;
 
 use Praxigento\App\Generic2\Config as Cfg;
-use Praxigento\Core\Tool\IPeriod;
 
 /**
  * Initialize bonus parameters for Generic Application.
@@ -50,7 +50,7 @@ class Bonus
         /** @var \Praxigento\BonusBase\Service\Period\Request\GetForPvBasedCalc $req */
         $req = new \Praxigento\BonusBase\Service\Period\Request\GetForPvBasedCalc();
         $req->setCalcTypeCode(Cfg::CODE_TYPE_CALC_BONUS);
-        $req->setPeriodType(IPeriod::TYPE_DAY);
+        $req->setPeriodType(HPeriod::TYPE_DAY);
         $resp = $call->getForPvBasedCalc($req);
         $period = $resp->getPeriodData();
         $result = $period->getDstampEnd();

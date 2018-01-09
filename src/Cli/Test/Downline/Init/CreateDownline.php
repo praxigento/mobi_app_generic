@@ -15,7 +15,7 @@ class CreateDownline
     const A_MAP_BY_MLM_ID = \Praxigento\App\Generic2\Cli\Test\Downline\Init\CreateCustomers::A_MAP_BY_MLM_ID;
     /** @var \Praxigento\Downline\Service\ISnap */
     protected $callDwnlSnap;
-    /** @var  \Praxigento\Core\Tool\IFormat */
+    /** @var  \Praxigento\Core\Api\Helper\Format */
     protected $hlpFormat;
     /** @var \Psr\Log\LoggerInterface */
     protected $logger;
@@ -29,7 +29,7 @@ class CreateDownline
     public function __construct(
         \Psr\Log\LoggerInterface $logger,
         \Magento\Framework\App\ResourceConnection $resource,
-        \Praxigento\Core\Tool\IFormat $hlpFormat,
+        \Praxigento\Core\Api\Helper\Format $hlpFormat,
         \Praxigento\Downline\Repo\Entity\Change $repoDwnlChange,
         \Praxigento\Downline\Repo\Entity\Customer $repoDwnlCust,
         \Praxigento\Downline\Service\ISnap $callDwnlSnap
