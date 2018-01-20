@@ -5,7 +5,7 @@
 
 namespace Praxigento\App\Generic2\Tool\Warehouse\Def;
 
-use \Praxigento\App\Generic2\Cli\Init\Stocks as Init;
+use Praxigento\App\Generic2\Cli\Init\Stocks as Init;
 
 class StockManager implements \Praxigento\Warehouse\Api\Helper\Stock
 {
@@ -36,6 +36,11 @@ class StockManager implements \Praxigento\Warehouse\Api\Helper\Stock
             $this->_mapGroupToStock[$id] :
             \Magento\CatalogInventory\Model\Stock::DEFAULT_STOCK_ID;
         return $result;
+    }
+
+    public function getDefaultStockId()
+    {
+        return Init::DEF_STOCK_ID_BALTIC;
     }
 
     public function getStockIdByStoreId($storeId)
