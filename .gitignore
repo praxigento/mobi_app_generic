@@ -1,15 +1,3 @@
 /.idea/
-/bin/
-/dcp/
-/build/
-/live/
-/pilot/
-/tmp/
-/work/
 /atlassian-ide-plugin.xml
 /composer.lock
-/cfg.live.sh
-/cfg.pilot.sh
-/cfg.work.sh
-/cfg.tmpl.json
-/ttttest.*

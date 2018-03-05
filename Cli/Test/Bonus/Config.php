@@ -12,9 +12,9 @@ class Config
     extends \Praxigento\Core\App\Cli\Cmd\Base
 {
 
-    const RANK_PV_QUAL = 'PV_QUALIFIED';
     const RANK_GV_QUAL = 'GV_QUALIFIED';
     const RANK_PSAA_QUAL = 'PSAA_QUALIFIED';
+    const RANK_PV_QUAL = 'PV_QUALIFIED';
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj

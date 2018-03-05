@@ -17,10 +17,10 @@
   },
   "autoload": {
     "files": [
-      "src/registration.php"
+      "registration.php"
     ],
     "psr-4": {
-      "Praxigento\\App\\Generic2\\": "src/"
+      "Praxigento\\App\\Generic2\\": ""
     }
   }
 }

@@ -10,10 +10,10 @@ namespace Praxigento\App\Generic2\Cli\Init;
 class SaleOrders
     extends \Praxigento\Core\App\Cli\Cmd\Base
 {
-    /** @var  \Praxigento\Core\App\Transaction\Database\IManager */
-    protected $_manTrans;
     /** @var array SKU and count for order items (all orders have the same items). */
     protected $DATA_ORDER_ITEMS = ['10674' => 1, '215' => 2];
+    /** @var  \Praxigento\Core\App\Transaction\Database\IManager */
+    protected $_manTrans;
     /** @var  \Praxigento\App\Generic2\Cli\Init\Sub\SaleOrder */
     protected $_subSaleOrder;
 
