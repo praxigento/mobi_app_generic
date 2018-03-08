@@ -2,7 +2,11 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
+
 namespace Praxigento\App\Generic2\Tool\Odoo\Def;
+
+use Praxigento\Accounting\Repo\Entity\Data\Type\Operation as ETypeOper;
+use Praxigento\App\Generic2\Config as Cfg;
 
 /**
  * Implementation of the codes manager for Generic MOBI application.
@@ -13,7 +17,8 @@ class BusinessCodesManager
     /**#@+
      * Business codes for Customer Groups.
      *
-     * _CYR: https://jira.prxgt.com/browse/MOBI-762?focusedCommentId=95308&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-95308
+     * _CYR:
+     * https://jira.prxgt.com/browse/MOBI-762?focusedCommentId=95308&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-95308
      */
     const B_CUST_GROUP_ANONYMOUS = 'anon';
     const B_CUST_GROUP_DISTRIBUTOR = 'distributor';
@@ -23,14 +28,20 @@ class BusinessCodesManager
     const B_CUST_GROUP_REFERRAL = 'referral';
     const B_CUST_GROUP_RETAIL = 'retail';
     /**#@- */
+
+    /**#@+
+     * Business codes for Operations (transactions).
+     */
+    const B_OPER_MANUAL = 'MANUAL';
+    const B_OPER_SALE_PAYMENT = 'SALE_PAYMENT';
+    /**#@- */
+
     /**#@+
      * Business codes for Payment Methods.
      */
     const B_PAY_BRAINTREE = 'ccard_braintree';
     const B_PAY_CHECK_MONEY = 'check_money';
     const B_PAY_INTERNAL_MONEY = 'internal_money';
-    /**#@- */
-
     /**#@+
      * Business codes for Shipping Methods.
      */
@@ -52,6 +63,7 @@ class BusinessCodesManager
     const M_CUST_GROUP_REFERRAL = 4;
     const M_CUST_GROUP_RETAIL = 3;
     /**#@- */
+
     /**#@+
      * Magento codes for Payment Methods.
      */
@@ -72,6 +84,21 @@ class BusinessCodesManager
     const M_TRACK_TITLE__FLAT_RATE = 'Pseudo tracking code for tests.';
     /**#@- */
 
+    /**
+     * Map to convert operation type code into operation type id.
+     *
+     * @var string[]
+     */
+    private $cacheOperTypeCodesById;
+    /** @var \Praxigento\Accounting\Repo\Entity\Type\Operation */
+    private $repoTypeOper;
+
+    public function __construct(
+        \Praxigento\Accounting\Repo\Entity\Type\Operation $repoTypeOper
+    ) {
+        $this->repoTypeOper = $repoTypeOper;
+    }
+
     public function getBusCodeForCustomerGroupById($groupId)
     {
         $result = self::B_CUST_GROUP_RETAIL;
@@ -83,6 +110,21 @@ class BusinessCodesManager
             $result = self::B_CUST_GROUP_REFERRAL;
         } elseif ($groupId == self::M_CUST_GROUP_ANONYMOUS) {
             $result = self::B_CUST_GROUP_ANONYMOUS;
+        }
+        return $result;
+    }
+
+    public function getBusCodeForOperTypeId($typeId)
+    {
+        $result = null;
+        $typeCode = $this->mapOperTypeIdToCode($typeId);
+        if (
+            ($typeCode == Cfg::CODE_TYPE_OPER_CHANGE_BALANCE) ||
+            ($typeCode == Cfg::CODE_TYPE_OPER_WALLET_TRANSFER)
+        ) {
+            $result = self::B_OPER_MANUAL;
+        } elseif ($typeCode == Cfg::CODE_TYPE_OPER_WALLET_SALE) {
+            $result = self::B_OPER_SALE_PAYMENT;
         }
         return $result;
     }
@@ -141,6 +183,22 @@ class BusinessCodesManager
         if ($businessCode == self::B_SHIP_FLAT_RATE) {
             $result = self::M_TRACK_TITLE__FLAT_RATE;
         }
+        return $result;
+    }
+
+    private function mapOperTypeIdToCode($typeId)
+    {
+        if (is_null($this->cacheOperTypeCodesById)) {
+            $this->cacheOperTypeCodesById = [];
+            $rs = $this->repoTypeOper->get();
+            /** @var ETypeOper $one */
+            foreach ($rs as $one) {
+                $id = $one->getId();
+                $code = $one->getCode();
+                $this->cacheOperTypeCodesById[$id] = $code;
+            }
+        }
+        $result = $this->cacheOperTypeCodesById[$typeId];
         return $result;
     }
 }
