@@ -28,14 +28,14 @@ class Taxes
     const DEF_TAX_RULE_ID_LV = 1;
     const DEF_TAX_RULE_ID_RU1 = 2;
     const DEF_TAX_RULE_ID_RU2 = 3;
-    /** @var  \Praxigento\Core\App\Transaction\Database\IManager */
+    /** @var  \Praxigento\Core\App\Api\Repo\Transaction\Manager */
     protected $manTrans;
     /** @var \Praxigento\Core\App\Repo\IGeneric */
     protected $repoGeneric;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\Core\App\Transaction\Database\IManager $manTrans,
+        \Praxigento\Core\App\Api\Repo\Transaction\Manager $manTrans,
         \Praxigento\Core\App\Repo\IGeneric $repoGeneric
     )
     {
