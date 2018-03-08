@@ -61,7 +61,7 @@ class Stocks
     protected $manEvent;
     /** @var  \Magento\Store\Model\StoreManager */
     protected $manStore;
-    /** @var  \Praxigento\Core\App\Api\Repo\Transaction\Manager */
+    /** @var  \Praxigento\Core\Api\App\Repo\Transaction\Manager */
     protected $manTrans;
     /** @var  \Praxigento\Core\App\Repo\IGeneric */
     protected $repoGeneric;
@@ -77,9 +77,9 @@ class Stocks
     protected $subRules;
 
     public function __construct(
-        \Psr\Log\LoggerInterface $logger,
+        \Praxigento\Core\Api\App\Logger\Main $logger,
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\Core\App\Api\Repo\Transaction\Manager $manTrans,
+        \Praxigento\Core\Api\App\Repo\Transaction\Manager $manTrans,
         \Magento\Store\Model\StoreManager $manStore,
         \Magento\Framework\Event\ManagerInterface $manEvent,
         \Magento\Store\Api\GroupRepositoryInterface $mageRepoGroup,

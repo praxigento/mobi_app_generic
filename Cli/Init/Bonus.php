@@ -15,12 +15,12 @@ use Praxigento\App\Generic2\Config as Cfg;
 class Bonus
     extends \Praxigento\Core\App\Cli\Cmd\Base
 {
-    /** @var  \Praxigento\Core\App\Api\Repo\Transaction\Manager */
+    /** @var  \Praxigento\Core\Api\App\Repo\Transaction\Manager */
     protected $_manTrans;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\Core\App\Api\Repo\Transaction\Manager $manTrans,
+        \Praxigento\Core\Api\App\Repo\Transaction\Manager $manTrans,
         \Praxigento\BonusBase\Service\IPeriod $callBonusPeriod,
         \Praxigento\Pv\Service\ISale $callPvSale
     ) {
