@@ -35,6 +35,7 @@ class SaleOrders
         \Symfony\Component\Console\Input\InputInterface $input,
         \Symfony\Component\Console\Output\OutputInterface $output
     ) {
+        $this->checkAreaCode();
         $def = $this->_manTrans->begin();
         try {
             $customers = $this->_subSaleOrder->getAllCustomers();

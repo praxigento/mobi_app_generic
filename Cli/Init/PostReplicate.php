@@ -31,6 +31,7 @@ class PostReplicate
         \Symfony\Component\Console\Input\InputInterface $input,
         \Symfony\Component\Console\Output\OutputInterface $output
     ) {
+        $this->checkAreaCode();
         /* enable categories after replication */
         $this->subCats->enableForAllStoreViews();
     }

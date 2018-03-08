@@ -161,6 +161,7 @@ class Taxes
         \Symfony\Component\Console\Output\OutputInterface $output
     )
     {
+        $this->checkAreaCode();
         $def = $this->manTrans->begin();
         try {
             $this->clearDbData();

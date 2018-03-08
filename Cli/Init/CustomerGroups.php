@@ -38,6 +38,7 @@ class CustomerGroups
         \Symfony\Component\Console\Input\InputInterface $input,
         \Symfony\Component\Console\Output\OutputInterface $output
     ) {
+        $this->checkAreaCode();
         $this->processGroups();
         $output->writeln('<info>Command is completed.<info>');
     }
