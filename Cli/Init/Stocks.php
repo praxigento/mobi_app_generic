@@ -46,35 +46,37 @@ class Stocks
     /**#@-  */
 
     /** @var  \Magento\Store\Model\Group */
-    protected $groupBaltic;
+    private $groupBaltic;
     /** @var  \Magento\Store\Model\Group */
-    protected $groupRussian;
+    private $groupRussian;
     /** @var \Psr\Log\LoggerInterface */
-    protected $logger;
+    private $logger;
     /** @var  \Magento\Store\Api\GroupRepositoryInterface */
-    protected $mageRepoGroup;
+    private $mageRepoGroup;
     /** @var  \Magento\CatalogInventory\Api\StockRepositoryInterface */
-    protected $mageRepoStock;
+    private $mageRepoStock;
     /** @var  \Magento\Store\Api\StoreRepositoryInterface */
-    protected $mageRepoStore;
+    private $mageRepoStore;
     /** @var  \Magento\Framework\Event\ManagerInterface */
-    protected $manEvent;
+    private $manEvent;
     /** @var  \Magento\Store\Model\StoreManager */
-    protected $manStore;
+    private $manStore;
     /** @var  \Praxigento\Core\Api\App\Repo\Transaction\Manager */
-    protected $manTrans;
+    private $manTrans;
     /** @var  \Praxigento\Core\App\Repo\IGeneric */
-    protected $repoGeneric;
-    /** @var  \Praxigento\Odoo\Repo\Agg\Store\IWarehouse */
-    protected $repoWrhs;
+    private $repoGeneric;
+    /** @var  \Praxigento\Warehouse\Repo\Entity\Warehouse */
+    private $repoWrhs;
+    /** @var \Praxigento\Odoo\Repo\Entity\Warehouse */
+    private $repoWrhsOdoo;
     /** @var \Magento\Store\Model\Store */
-    protected $storeBalticEn;
+    private $storeBalticEn;
     /** @var \Magento\Store\Model\Store */
-    protected $storeBalticRu;
+    private $storeBalticRu;
     /** @var \Magento\Store\Model\Store */
-    protected $storeRussianRu;
+    private $storeRussianRu;
     /** @var Sub\SalesRules */
-    protected $subRules;
+    private $subRules;
 
     public function __construct(
         \Praxigento\Core\Api\App\Logger\Main $logger,
@@ -86,7 +88,8 @@ class Stocks
         \Magento\Store\Api\StoreRepositoryInterface $mageRepoStore,
         \Magento\CatalogInventory\Api\StockRepositoryInterface $mageRepoStock,
         \Praxigento\Core\App\Repo\IGeneric $repoGeneric,
-        \Praxigento\Odoo\Repo\Agg\Store\IWarehouse $repoWrhs,
+        \Praxigento\Warehouse\Repo\Entity\Warehouse $repoWrhs,
+        \Praxigento\Odoo\Repo\Entity\Warehouse $repoWrhsOdoo,
         Sub\SalesRules\Proxy $subRules
     ) {
         parent::__construct(
@@ -103,6 +106,7 @@ class Stocks
         $this->mageRepoStock = $mageRepoStock;
         $this->repoGeneric = $repoGeneric;
         $this->repoWrhs = $repoWrhs;
+        $this->repoWrhsOdoo = $repoWrhsOdoo;
         $this->subRules = $subRules;
     }
 
@@ -217,37 +221,39 @@ class Stocks
         }
         /* create new warehouses */
         /* Baltic */
-        $wrhsBaltic = $this->repoWrhs->getById(self::DEF_STOCK_ID_BALTIC);
-        $shoudCreate = is_null($wrhsBaltic->getOdooId());
-        $wrhsBaltic->setCode('Baltic');
-        $wrhsBaltic->setCurrency('EUR');
-        $wrhsBaltic->setCountryCode('LV');
-        $wrhsBaltic->setNote('Warehouse for Baltic states (LV, LT, EE)');
-        $wrhsBaltic->setOdooId(self::DEF_WRHS_ODOO_ID_BALTIC);
-        if ($shoudCreate) {
-            $this->repoWrhs->create($wrhsBaltic);
-        } else {
-            $this->repoWrhs->updateById($wrhsBaltic->getId(), $wrhsBaltic);
+        $wrhsBalt = $this->repoWrhs->getById(self::DEF_STOCK_ID_BALTIC);
+        if (!$wrhsBalt) {
+            /* create warehouse itself */
+            $wrhsBalt = new \Praxigento\Warehouse\Repo\Entity\Data\Warehouse();
+            $wrhsBalt->setCode('Baltic');
+            $wrhsBalt->setCurrency('EUR');
+            $wrhsBalt->setCountryCode('LV');
+            $wrhsBalt->setNote('Warehouse for Baltic states (LV, LT, EE)');
+            $wrhsBalt->setStockRef(self::DEF_STOCK_ID_BALTIC);
+            $this->repoWrhs->create($wrhsBalt);
+            /* create link to Odoo warehouse */
+            $wrhsBaltOdoo = new \Praxigento\Odoo\Repo\Entity\Data\Warehouse();
+            $wrhsBaltOdoo->setMageRef(self::DEF_STOCK_ID_BALTIC);
+            $wrhsBaltOdoo->setOdooRef(self::DEF_WRHS_ODOO_ID_BALTIC);
+            $this->repoWrhsOdoo->create($wrhsBaltOdoo);
         }
         /* Russian */
-        $wrhsRussian = $this->repoWrhs->getById(self::DEF_STOCK_ID_RUSSIAN);
-        if (!$wrhsRussian) {
-            $wrhsRussian = new \Praxigento\Odoo\Data\Agg\Warehouse();
+        $wrhsRus = $this->repoWrhs->getById(self::DEF_STOCK_ID_RUSSIAN);
+        if (!$wrhsRus) {
+            /* create warehouse itself */
+            $wrhsRus = new \Praxigento\Warehouse\Repo\Entity\Data\Warehouse();
+            $wrhsRus->setCode('Russian');
+            $wrhsRus->setCurrency('USD');
+            $wrhsRus->setCountryCode('RU');
+            $wrhsRus->setNote('Warehouse for Russian Federation');
+            $wrhsRus->setStockRef(self::DEF_STOCK_ID_RUSSIAN);
+            $this->repoWrhs->create($wrhsRus);
+            /* create link to Odoo warehouse */
+            $wrhsRusOdoo = new \Praxigento\Odoo\Repo\Entity\Data\Warehouse();
+            $wrhsRusOdoo->setMageRef(self::DEF_STOCK_ID_RUSSIAN);
+            $wrhsRusOdoo->setOdooRef(self::DEF_WRHS_ODOO_ID_RUSSIAN);
+            $this->repoWrhsOdoo->create($wrhsRusOdoo);
         }
-        $shoudCreate = is_null($wrhsRussian->getOdooId());
-        $wrhsRussian->setCode('Russian');
-        $wrhsRussian->setCurrency('USD');
-        $wrhsRussian->setCountryCode('RU');
-        $wrhsRussian->setNote('Warehouse for Russian Federation');
-        $wrhsRussian->setOdooId(self::DEF_WRHS_ODOO_ID_RUSSIAN);
-        if ($shoudCreate) {
-            $wrhsRussian->setId($stockRussian->getStockId());
-            $this->repoWrhs->create($wrhsRussian);
-        } else {
-            $this->repoWrhs->updateById($wrhsRussian->getId(), $wrhsRussian);
-        }
-        return;
-
     }
 
     /**
