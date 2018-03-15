@@ -21,8 +21,7 @@ class Bonus
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\Api\App\Repo\Transaction\Manager $manTrans,
-        \Praxigento\BonusBase\Service\IPeriod $callBonusPeriod,
-        \Praxigento\Pv\Service\ISale $callPvSale
+        \Praxigento\BonusBase\Service\IPeriod $callBonusPeriod
     ) {
         parent::__construct(
             $manObj,
