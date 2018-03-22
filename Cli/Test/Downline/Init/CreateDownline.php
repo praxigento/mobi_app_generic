@@ -85,7 +85,7 @@ class CreateDownline
             $eCust->setParentId($parentMageId);
             $eCust->setDepth($depth);
             $eCust->setPath($pathIds);
-            $eCust->setHumanRef($custMlmId);
+            $eCust->setMlmId($custMlmId);
             $eCust->setReferralCode($custMlmId);
             $eCust->setCountryCode($country);
             $this->repoDwnlCust->create($eCust);
