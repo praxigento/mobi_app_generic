@@ -5,7 +5,7 @@
 
 namespace Praxigento\App\Generic2\Tool\Odoo\Def;
 
-use Praxigento\Accounting\Repo\Entity\Data\Type\Operation as ETypeOper;
+use Praxigento\Accounting\Repo\Data\Type\Operation as ETypeOper;
 use Praxigento\App\Generic2\Config as Cfg;
 
 /**
@@ -90,11 +90,11 @@ class BusinessCodesManager
      * @var string[]
      */
     private $cacheOperTypeCodesById;
-    /** @var \Praxigento\Accounting\Repo\Entity\Type\Operation */
+    /** @var \Praxigento\Accounting\Repo\Dao\Type\Operation */
     private $repoTypeOper;
 
     public function __construct(
-        \Praxigento\Accounting\Repo\Entity\Type\Operation $repoTypeOper
+        \Praxigento\Accounting\Repo\Dao\Type\Operation $repoTypeOper
     ) {
         $this->repoTypeOper = $repoTypeOper;
     }
