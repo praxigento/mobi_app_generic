@@ -19,9 +19,9 @@ class CreateDownline
     protected $hlpFormat;
     /** @var \Psr\Log\LoggerInterface */
     protected $logger;
-    /** @var \Praxigento\Downline\Repo\Entity\Change */
+    /** @var \Praxigento\Downline\Repo\Dao\Change */
     protected $repoDwnlChange;
-    /** @var \Praxigento\Downline\Repo\Entity\Customer */
+    /** @var \Praxigento\Downline\Repo\Dao\Customer */
     protected $repoDwnlCust;
     /** @var \Magento\Framework\App\ResourceConnection */
     protected $resource;
@@ -30,8 +30,8 @@ class CreateDownline
         \Praxigento\Core\Api\App\Logger\Main $logger,
         \Magento\Framework\App\ResourceConnection $resource,
         \Praxigento\Core\Api\Helper\Format $hlpFormat,
-        \Praxigento\Downline\Repo\Entity\Change $repoDwnlChange,
-        \Praxigento\Downline\Repo\Entity\Customer $repoDwnlCust,
+        \Praxigento\Downline\Repo\Dao\Change $repoDwnlChange,
+        \Praxigento\Downline\Repo\Dao\Customer $repoDwnlCust,
         \Praxigento\Downline\Service\ISnap $callDwnlSnap
     ) {
         $this->logger = $logger;
@@ -55,17 +55,17 @@ class CreateDownline
         $expandedTree = $respExpand->getSnapData();
         /* order tree by depth */
         uasort($expandedTree, function ($a, $b) {
-            $result = $a[\Praxigento\Downline\Repo\Entity\Data\Snap::ATTR_DEPTH] - $b[\Praxigento\Downline\Repo\Entity\Data\Snap::ATTR_DEPTH];
+            $result = $a[\Praxigento\Downline\Repo\Data\Snap::ATTR_DEPTH] - $b[\Praxigento\Downline\Repo\Data\Snap::ATTR_DEPTH];
             return $result;
         });
         /* save customer data into repo */
         $dtChanged = \DateTime::createFromFormat('Ymd', '20170101');
         $timeStarted = $dtChanged->getTimestamp();
         foreach ($expandedTree as $item) {
-            $custMlmId = $item[\Praxigento\Downline\Repo\Entity\Data\Snap::ATTR_CUSTOMER_ID];
-            $parentMlmId = $item[\Praxigento\Downline\Repo\Entity\Data\Snap::ATTR_PARENT_ID];
-            $depth = $item[\Praxigento\Downline\Repo\Entity\Data\Snap::ATTR_DEPTH];
-            $path = $item[\Praxigento\Downline\Repo\Entity\Data\Snap::ATTR_PATH];
+            $custMlmId = $item[\Praxigento\Downline\Repo\Data\Snap::ATTR_CUSTOMER_ID];
+            $parentMlmId = $item[\Praxigento\Downline\Repo\Data\Snap::ATTR_PARENT_ID];
+            $depth = $item[\Praxigento\Downline\Repo\Data\Snap::ATTR_DEPTH];
+            $path = $item[\Praxigento\Downline\Repo\Data\Snap::ATTR_PATH];
             $country = 'ES';
             /* get Mage IDs for MLM IDs */
             $cusMageId = $mapByMlmId[$custMlmId];
@@ -80,7 +80,7 @@ class CreateDownline
             $dtChanged->setTimestamp($timeStarted);
             $dateChanged = $this->hlpFormat->dateTimeForDb($dtChanged);
             /* add record to downline tree */
-            $eCust = new \Praxigento\Downline\Repo\Entity\Data\Customer();
+            $eCust = new \Praxigento\Downline\Repo\Data\Customer();
             $eCust->setCustomerId($cusMageId);
             $eCust->setParentId($parentMageId);
             $eCust->setDepth($depth);
@@ -90,7 +90,7 @@ class CreateDownline
             $eCust->setCountryCode($country);
             $this->repoDwnlCust->create($eCust);
             /* add record to change log */
-            $eChange = new \Praxigento\Downline\Repo\Entity\Data\Change();
+            $eChange = new \Praxigento\Downline\Repo\Data\Change();
             $eChange->setCustomerId($cusMageId);
             $eChange->setParentId($parentMageId);
             $eChange->setDateChanged($dateChanged);

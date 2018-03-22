@@ -22,9 +22,9 @@ class CleanCustomers
 
     public function do()
     {
-        $this->repoGeneric->deleteEntity(\Praxigento\Downline\Repo\Entity\Data\Snap::ENTITY_NAME);
-        $this->repoGeneric->deleteEntity(\Praxigento\Downline\Repo\Entity\Data\Change::ENTITY_NAME);
-        $this->repoGeneric->deleteEntity(\Praxigento\Downline\Repo\Entity\Data\Customer::ENTITY_NAME);
+        $this->repoGeneric->deleteEntity(\Praxigento\Downline\Repo\Data\Snap::ENTITY_NAME);
+        $this->repoGeneric->deleteEntity(\Praxigento\Downline\Repo\Data\Change::ENTITY_NAME);
+        $this->repoGeneric->deleteEntity(\Praxigento\Downline\Repo\Data\Customer::ENTITY_NAME);
         $this->repoGeneric->deleteEntity(Cfg::ENTITY_MAGE_CUSTOMER);
 
     }
