@@ -33,7 +33,7 @@ class SaleOrder
     protected $_repoCatProd;
     /** @var \Magento\Customer\Api\CustomerRepositoryInterface */
     protected $_repoCust;
-    /** @var \Praxigento\Pv\Repo\Entity\Sale */
+    /** @var \Praxigento\Pv\Repo\Dao\Sale */
     protected $_repoPvSale;
 
     public function __construct(
@@ -44,7 +44,7 @@ class SaleOrder
         \Magento\Sales\Api\InvoiceManagementInterface $manInvoice,
         \Magento\Catalog\Api\ProductRepositoryInterface $repoCatProd,
         \Magento\Customer\Api\CustomerRepositoryInterface $repoCust,
-        \Praxigento\Pv\Repo\Entity\Sale $repoPvSale
+        \Praxigento\Pv\Repo\Dao\Sale $repoPvSale
     ) {
         $this->_manObj = $manObj;
         $this->_manEvent = $manEvent;
@@ -186,7 +186,7 @@ class SaleOrder
         /* update date paid in PV register */
 //        $orderId = $order->getEntityId();
 //        $bind = [
-//            \Praxigento\Pv\Repo\Entity\Data\Sale::ATTR_DATE_PAID => self::DATE_PAID
+//            \Praxigento\Pv\Repo\Data\Sale::ATTR_DATE_PAID => self::DATE_PAID
 //        ];
 //        $this->_repoPvSale->updateById($orderId, $bind);
         /* transfer PV to customer account */
