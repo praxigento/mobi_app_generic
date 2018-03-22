@@ -164,10 +164,10 @@ class Bonus
         try {
             /** @var \Praxigento\BonusBase\Repo\Dao\Rank $repoRank */
             $repoRank = $this->manObj->get(\Praxigento\BonusBase\Repo\Dao\Rank::class);
-            /** @var \Praxigento\BonusLoyalty\Repo\Entity\Cfg\Param $repo */
-            $repo = $this->manObj->get(\Praxigento\BonusLoyalty\Repo\Entity\Cfg\Param::class);
-            /** @var \Praxigento\BonusLoyalty\Repo\Entity\Data\Cfg\Param $data */
-            $data = new \Praxigento\BonusLoyalty\Repo\Entity\Data\Cfg\Param();
+            /** @var \Praxigento\BonusLoyalty\Repo\Dao\Cfg\Param $repo */
+            $repo = $this->manObj->get(\Praxigento\BonusLoyalty\Repo\Dao\Cfg\Param::class);
+            /** @var \Praxigento\BonusLoyalty\Repo\Data\Cfg\Param $data */
+            $data = new \Praxigento\BonusLoyalty\Repo\Data\Cfg\Param();
             //
             $id = $repoRank->getIdByCode(Cfg::RANK_BY_PV);
             $data->setRankId($id);
