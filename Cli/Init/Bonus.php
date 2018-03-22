@@ -92,14 +92,14 @@ class Bonus
     protected function _initGenerationPercents()
     {
         try {
-            /** @var \Praxigento\BonusBase\Repo\Entity\Type\Calc $repoCalc */
-            $repoCalc = $this->manObj->get(\Praxigento\BonusBase\Repo\Entity\Type\Calc::class);
-            /** @var \Praxigento\BonusBase\Repo\Entity\Rank $repoRank */
-            $repoRank = $this->manObj->get(\Praxigento\BonusBase\Repo\Entity\Rank::class);
-            /** @var \Praxigento\BonusBase\Repo\Entity\Cfg\Generation $repo */
-            $repo = $this->manObj->get(\Praxigento\BonusBase\Repo\Entity\Cfg\Generation::class);
-            /** @var \Praxigento\BonusBase\Repo\Entity\Data\Cfg\Generation $data */
-            $data = new \Praxigento\BonusBase\Repo\Entity\Data\Cfg\Generation();
+            /** @var \Praxigento\BonusBase\Repo\Dao\Type\Calc $repoCalc */
+            $repoCalc = $this->manObj->get(\Praxigento\BonusBase\Repo\Dao\Type\Calc::class);
+            /** @var \Praxigento\BonusBase\Repo\Dao\Rank $repoRank */
+            $repoRank = $this->manObj->get(\Praxigento\BonusBase\Repo\Dao\Rank::class);
+            /** @var \Praxigento\BonusBase\Repo\Dao\Cfg\Generation $repo */
+            $repo = $this->manObj->get(\Praxigento\BonusBase\Repo\Dao\Cfg\Generation::class);
+            /** @var \Praxigento\BonusBase\Repo\Data\Cfg\Generation $data */
+            $data = new \Praxigento\BonusBase\Repo\Data\Cfg\Generation();
             // get calculation type ID
             $calcTypeId = $repoCalc->getIdByCode(Cfg::CODE_TYPE_CALC_BONUS);
             $data->setCalcTypeId($calcTypeId);
@@ -162,8 +162,8 @@ class Bonus
     protected function _initLoyaltyCfg()
     {
         try {
-            /** @var \Praxigento\BonusBase\Repo\Entity\Rank $repoRank */
-            $repoRank = $this->manObj->get(\Praxigento\BonusBase\Repo\Entity\Rank::class);
+            /** @var \Praxigento\BonusBase\Repo\Dao\Rank $repoRank */
+            $repoRank = $this->manObj->get(\Praxigento\BonusBase\Repo\Dao\Rank::class);
             /** @var \Praxigento\BonusLoyalty\Repo\Entity\Cfg\Param $repo */
             $repo = $this->manObj->get(\Praxigento\BonusLoyalty\Repo\Entity\Cfg\Param::class);
             /** @var \Praxigento\BonusLoyalty\Repo\Entity\Data\Cfg\Param $data */
@@ -197,10 +197,10 @@ class Bonus
     protected function _initRanks()
     {
         try {
-            /** @var \Praxigento\BonusBase\Repo\Entity\Rank $repo */
-            $repo = $this->manObj->get(\Praxigento\BonusBase\Repo\Entity\Rank::class);
-            /** @var \Praxigento\BonusBase\Repo\Entity\Data\Rank $data */
-            $data = new \Praxigento\BonusBase\Repo\Entity\Data\Rank();
+            /** @var \Praxigento\BonusBase\Repo\Dao\Rank $repo */
+            $repo = $this->manObj->get(\Praxigento\BonusBase\Repo\Dao\Rank::class);
+            /** @var \Praxigento\BonusBase\Repo\Data\Rank $data */
+            $data = new \Praxigento\BonusBase\Repo\Data\Rank();
             // PV
             $data->setCode(Cfg::RANK_BY_PV);
             $data->setNote('Qualified by PV only.');
