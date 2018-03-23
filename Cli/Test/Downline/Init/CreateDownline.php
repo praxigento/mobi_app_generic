@@ -55,17 +55,17 @@ class CreateDownline
         $expandedTree = $respExpand->getSnapData();
         /* order tree by depth */
         uasort($expandedTree, function ($a, $b) {
-            $result = $a[\Praxigento\Downline\Repo\Data\Snap::ATTR_DEPTH] - $b[\Praxigento\Downline\Repo\Data\Snap::ATTR_DEPTH];
+            $result = $a[\Praxigento\Downline\Repo\Data\Snap::A_DEPTH] - $b[\Praxigento\Downline\Repo\Data\Snap::A_DEPTH];
             return $result;
         });
         /* save customer data into repo */
         $dtChanged = \DateTime::createFromFormat('Ymd', '20170101');
         $timeStarted = $dtChanged->getTimestamp();
         foreach ($expandedTree as $item) {
-            $custMlmId = $item[\Praxigento\Downline\Repo\Data\Snap::ATTR_CUSTOMER_ID];
-            $parentMlmId = $item[\Praxigento\Downline\Repo\Data\Snap::ATTR_PARENT_ID];
-            $depth = $item[\Praxigento\Downline\Repo\Data\Snap::ATTR_DEPTH];
-            $path = $item[\Praxigento\Downline\Repo\Data\Snap::ATTR_PATH];
+            $custMlmId = $item[\Praxigento\Downline\Repo\Data\Snap::A_CUSTOMER_ID];
+            $parentMlmId = $item[\Praxigento\Downline\Repo\Data\Snap::A_PARENT_ID];
+            $depth = $item[\Praxigento\Downline\Repo\Data\Snap::A_DEPTH];
+            $path = $item[\Praxigento\Downline\Repo\Data\Snap::A_PATH];
             $country = 'ES';
             /* get Mage IDs for MLM IDs */
             $cusMageId = $mapByMlmId[$custMlmId];

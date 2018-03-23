@@ -36,7 +36,7 @@ class Categories
         $this->repoGeneric->deleteEntity($entity, $where);
         /* enable all categories */
         $bind = [Cfg::E_CATCAT_EAV_INT_VALUE => 1];
-        $where = Cfg::E_CATCAT_EAV_INT_ATTR_ID . '=' . self::DEF_CATEGORY_EAV_ID_IS_ACTIVE;
+        $where = Cfg::E_CATCAT_EAV_INT_A_ID . '=' . self::DEF_CATEGORY_EAV_ID_IS_ACTIVE;
         $this->repoGeneric->updateEntity($entity, $bind, $where);
     }
 
