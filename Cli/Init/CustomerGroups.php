@@ -18,12 +18,12 @@ class CustomerGroups
     /** @var \Praxigento\Odoo\Tool\IBusinessCodesManager */
     protected $manBusCodes;
     /** @var \Magento\Customer\Api\GroupRepositoryInterface */
-    protected $repoGroup;
+    protected $daoGroup;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Odoo\Tool\IBusinessCodesManager $manBusCodes,
-        \Magento\Customer\Api\GroupRepositoryInterface $repoGroup
+        \Magento\Customer\Api\GroupRepositoryInterface $daoGroup
     ) {
         parent::__construct(
             $manObj,
@@ -31,7 +31,7 @@ class CustomerGroups
             'Initialize customer groups for Generic project.'
         );
         $this->manBusCodes = $manBusCodes;
-        $this->repoGroup = $repoGroup;
+        $this->daoGroup = $daoGroup;
     }
 
     protected function execute(
@@ -46,7 +46,7 @@ class CustomerGroups
     protected function processGroups()
     {
         $crit = $this->manObj->create(\Magento\Framework\Api\SearchCriteriaInterface::class);
-        $all = $this->repoGroup->getList($crit);
+        $all = $this->daoGroup->getList($crit);
         /** @var \Magento\Customer\Model\Data\Group $item */
         foreach ($all->getItems() as $item) {
             $groupId = $item->getId();
@@ -55,7 +55,7 @@ class CustomerGroups
             $codeExpected = $this->manBusCodes->getBusCodeForCustomerGroupById($groupId);
             if ($codeExpected != $codeSaved) {
                 $item->setCode($codeExpected);
-                $this->repoGroup->save($item);
+                $this->daoGroup->save($item);
             }
         }
         /* create additional groups (with id>=4, where '4'  - is count of the default groups in fresh M2 installation) */
@@ -73,7 +73,7 @@ class CustomerGroups
                 $group->setCode($code);
                 $group->setTaxClassId($taxId);
                 $group->setTaxClassName($taxName);
-                $this->repoGroup->save($group);
+                $this->daoGroup->save($group);
             }
         }
     }

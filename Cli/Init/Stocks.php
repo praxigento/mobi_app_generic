@@ -64,11 +64,11 @@ class Stocks
     /** @var  \Praxigento\Core\Api\App\Repo\Transaction\Manager */
     private $manTrans;
     /** @var  \Praxigento\Core\App\Repo\IGeneric */
-    private $repoGeneric;
+    private $daoGeneric;
     /** @var  \Praxigento\Warehouse\Repo\Dao\Warehouse */
-    private $repoWrhs;
+    private $daoWrhs;
     /** @var \Praxigento\Odoo\Repo\Dao\Warehouse */
-    private $repoWrhsOdoo;
+    private $daoWrhsOdoo;
     /** @var \Magento\Store\Model\Store */
     private $storeBalticEn;
     /** @var \Magento\Store\Model\Store */
@@ -87,9 +87,9 @@ class Stocks
         \Magento\Store\Api\GroupRepositoryInterface $mageRepoGroup,
         \Magento\Store\Api\StoreRepositoryInterface $mageRepoStore,
         \Magento\CatalogInventory\Api\StockRepositoryInterface $mageRepoStock,
-        \Praxigento\Core\App\Repo\IGeneric $repoGeneric,
-        \Praxigento\Warehouse\Repo\Dao\Warehouse $repoWrhs,
-        \Praxigento\Odoo\Repo\Dao\Warehouse $repoWrhsOdoo,
+        \Praxigento\Core\App\Repo\IGeneric $daoGeneric,
+        \Praxigento\Warehouse\Repo\Dao\Warehouse $daoWrhs,
+        \Praxigento\Odoo\Repo\Dao\Warehouse $daoWrhsOdoo,
         Sub\SalesRules\Proxy $subRules
     ) {
         parent::__construct(
@@ -104,9 +104,9 @@ class Stocks
         $this->mageRepoGroup = $mageRepoGroup;
         $this->mageRepoStore = $mageRepoStore;
         $this->mageRepoStock = $mageRepoStock;
-        $this->repoGeneric = $repoGeneric;
-        $this->repoWrhs = $repoWrhs;
-        $this->repoWrhsOdoo = $repoWrhsOdoo;
+        $this->daoGeneric = $daoGeneric;
+        $this->daoWrhs = $daoWrhs;
+        $this->daoWrhsOdoo = $daoWrhsOdoo;
         $this->subRules = $subRules;
     }
 
@@ -129,7 +129,7 @@ class Stocks
         $entity = Cfg::ENTITY_MAGE_TAX_CALC;
         $where = Cfg::E_TAX_CALC_A_RATE_ID . '=' . (int)$rateId;
         $where .= ' AND ' . Cfg::E_TAX_CALC_A_RULE_ID . '=' . (int)$ruleId;
-        $rows = $this->repoGeneric->getEntities($entity, null, $where);
+        $rows = $this->daoGeneric->getEntities($entity, null, $where);
         $result = is_array($rows) && count($rows);
         return $result;
     }
@@ -139,8 +139,8 @@ class Stocks
         $result = null;
         $entity = Cfg::ENTITY_MAGE_TAX_CALC_RATE;
         $cols = [Cfg::E_TAX_CALC_RATE_A_ID];
-        $where = EntityTaxRate::KEY_CODE . '=' . $this->repoGeneric->getConnection()->quote($code);
-        $rows = $this->repoGeneric->getEntities($entity, $cols, $where);
+        $where = EntityTaxRate::KEY_CODE . '=' . $this->daoGeneric->getConnection()->quote($code);
+        $rows = $this->daoGeneric->getEntities($entity, $cols, $where);
         if (is_array($rows)) {
             $one = reset($rows);
             $result = $one[Cfg::E_TAX_CALC_RATE_A_ID];
@@ -153,8 +153,8 @@ class Stocks
         $result = null;
         $entity = Cfg::ENTITY_MAGE_TAX_CALC_RULE;
         $cols = [Cfg::E_TAX_CALC_RULE_A_ID];
-        $where = EntityTaxRule::KEY_CODE . '=' . $this->repoGeneric->getConnection()->quote($code);
-        $rows = $this->repoGeneric->getEntities($entity, $cols, $where);
+        $where = EntityTaxRule::KEY_CODE . '=' . $this->daoGeneric->getConnection()->quote($code);
+        $rows = $this->daoGeneric->getEntities($entity, $cols, $where);
         if (is_array($rows)) {
             $one = reset($rows);
             $result = $one[Cfg::E_TAX_CALC_RULE_A_ID];
@@ -221,7 +221,7 @@ class Stocks
         }
         /* create new warehouses */
         /* Baltic */
-        $wrhsBalt = $this->repoWrhs->getById(self::DEF_STOCK_ID_BALTIC);
+        $wrhsBalt = $this->daoWrhs->getById(self::DEF_STOCK_ID_BALTIC);
         if (!$wrhsBalt) {
             /* create warehouse itself */
             $wrhsBalt = new \Praxigento\Warehouse\Repo\Data\Warehouse();
@@ -230,15 +230,15 @@ class Stocks
             $wrhsBalt->setCountryCode('LV');
             $wrhsBalt->setNote('Warehouse for Baltic states (LV, LT, EE)');
             $wrhsBalt->setStockRef(self::DEF_STOCK_ID_BALTIC);
-            $this->repoWrhs->create($wrhsBalt);
+            $this->daoWrhs->create($wrhsBalt);
             /* create link to Odoo warehouse */
             $wrhsBaltOdoo = new \Praxigento\Odoo\Repo\Data\Warehouse();
             $wrhsBaltOdoo->setMageRef(self::DEF_STOCK_ID_BALTIC);
             $wrhsBaltOdoo->setOdooRef(self::DEF_WRHS_ODOO_ID_BALTIC);
-            $this->repoWrhsOdoo->create($wrhsBaltOdoo);
+            $this->daoWrhsOdoo->create($wrhsBaltOdoo);
         }
         /* Russian */
-        $wrhsRus = $this->repoWrhs->getById(self::DEF_STOCK_ID_RUSSIAN);
+        $wrhsRus = $this->daoWrhs->getById(self::DEF_STOCK_ID_RUSSIAN);
         if (!$wrhsRus) {
             /* create warehouse itself */
             $wrhsRus = new \Praxigento\Warehouse\Repo\Data\Warehouse();
@@ -247,12 +247,12 @@ class Stocks
             $wrhsRus->setCountryCode('RU');
             $wrhsRus->setNote('Warehouse for Russian Federation');
             $wrhsRus->setStockRef(self::DEF_STOCK_ID_RUSSIAN);
-            $this->repoWrhs->create($wrhsRus);
+            $this->daoWrhs->create($wrhsRus);
             /* create link to Odoo warehouse */
             $wrhsRusOdoo = new \Praxigento\Odoo\Repo\Data\Warehouse();
             $wrhsRusOdoo->setMageRef(self::DEF_STOCK_ID_RUSSIAN);
             $wrhsRusOdoo->setOdooRef(self::DEF_WRHS_ODOO_ID_RUSSIAN);
-            $this->repoWrhsOdoo->create($wrhsRusOdoo);
+            $this->daoWrhsOdoo->create($wrhsRusOdoo);
         }
     }
 
@@ -309,7 +309,7 @@ class Stocks
             Cfg::E_CONFIG_A_PATH => $path,
             Cfg::E_CONFIG_A_VALUE => $value
         ];
-        $this->repoGeneric->replaceEntity($entity, $bind);
+        $this->daoGeneric->replaceEntity($entity, $bind);
     }
 
     /**
@@ -364,7 +364,7 @@ class Stocks
                 Cfg::E_TAX_CALC_A_CUST_TAX_CLASS_ID => 3,
                 Cfg::E_TAX_CALC_A_PROD_TAX_CLASS_ID => 2
             ];
-            $this->repoGeneric->replaceEntity($entity, $bind);
+            $this->daoGeneric->replaceEntity($entity, $bind);
         }
     }
 
@@ -379,7 +379,7 @@ class Stocks
                 EntityTaxRate::KEY_PERCENTAGE_RATE => $rate,
                 EntityTaxRate::KEY_POSTCODE => '*'
             ];
-            $result = $this->repoGeneric->addEntity($entity, $bind);
+            $result = $this->daoGeneric->addEntity($entity, $bind);
         }
         return $result;
     }
@@ -392,7 +392,7 @@ class Stocks
             $bind = [
                 EntityTaxRate::KEY_CODE => $code
             ];
-            $result = $this->repoGeneric->addEntity($entity, $bind);
+            $result = $this->daoGeneric->addEntity($entity, $bind);
         }
         return $result;
     }

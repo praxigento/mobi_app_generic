@@ -91,12 +91,12 @@ class BusinessCodesManager
      */
     private $cacheOperTypeCodesById;
     /** @var \Praxigento\Accounting\Repo\Dao\Type\Operation */
-    private $repoTypeOper;
+    private $daoTypeOper;
 
     public function __construct(
-        \Praxigento\Accounting\Repo\Dao\Type\Operation $repoTypeOper
+        \Praxigento\Accounting\Repo\Dao\Type\Operation $daoTypeOper
     ) {
-        $this->repoTypeOper = $repoTypeOper;
+        $this->daoTypeOper = $daoTypeOper;
     }
 
     public function getBusCodeForCustomerGroupById($groupId)
@@ -190,7 +190,7 @@ class BusinessCodesManager
     {
         if (is_null($this->cacheOperTypeCodesById)) {
             $this->cacheOperTypeCodesById = [];
-            $rs = $this->repoTypeOper->get();
+            $rs = $this->daoTypeOper->get();
             /** @var ETypeOper $one */
             foreach ($rs as $one) {
                 $id = $one->getId();

@@ -46,14 +46,14 @@ class Customers
      */
     protected $mapCustomerMageIdByIndex = [];
     /** @var \Magento\Customer\Api\CustomerRepositoryInterface */
-    protected $repoCustomer;
+    protected $daoCustomer;
     /** @var \Praxigento\Downline\Api\Helper\Referral */
     protected $toolReferral;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\Api\App\Repo\Transaction\Manager $manTrans,
-        \Magento\Customer\Api\CustomerRepositoryInterface $repoCustomer,
+        \Magento\Customer\Api\CustomerRepositoryInterface $daoCustomer,
         \Praxigento\Downline\Api\Helper\Referral $toolReferral
     ) {
         parent::__construct(
@@ -62,7 +62,7 @@ class Customers
             'Create sample downline tree in application.'
         );
         $this->manTrans = $manTrans;
-        $this->repoCustomer = $repoCustomer;
+        $this->daoCustomer = $daoCustomer;
         $this->toolReferral = $toolReferral;
     }
 
@@ -98,7 +98,7 @@ class Customers
                     $customer->setGroupId(BusinessCodesManager::M_CUST_GROUP_RETAIL);
                 }
                 /** @var \Magento\Customer\Api\Data\CustomerInterface $saved */
-                $saved = $this->repoCustomer->save($customer, $this->DEFAULT_PASSWORD_HASH);
+                $saved = $this->daoCustomer->save($customer, $this->DEFAULT_PASSWORD_HASH);
                 $this->mapCustomerMageIdByIndex[$custId] = $saved->getId();
                 $this->mapCustomerIndexByMageId[$saved->getId()] = $custId;
             }

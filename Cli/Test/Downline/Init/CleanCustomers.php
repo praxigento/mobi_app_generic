@@ -12,20 +12,20 @@ use Praxigento\App\Generic2\Config as Cfg;
 class CleanCustomers
 {
     /** @var \Praxigento\Core\App\Repo\IGeneric */
-    protected $repoGeneric;
+    protected $daoGeneric;
 
     public function __construct(
-        \Praxigento\Core\App\Repo\IGeneric $repoGeneric
+        \Praxigento\Core\App\Repo\IGeneric $daoGeneric
     ) {
-        $this->repoGeneric = $repoGeneric;
+        $this->daoGeneric = $daoGeneric;
     }
 
     public function do()
     {
-        $this->repoGeneric->deleteEntity(\Praxigento\Downline\Repo\Data\Snap::ENTITY_NAME);
-        $this->repoGeneric->deleteEntity(\Praxigento\Downline\Repo\Data\Change::ENTITY_NAME);
-        $this->repoGeneric->deleteEntity(\Praxigento\Downline\Repo\Data\Customer::ENTITY_NAME);
-        $this->repoGeneric->deleteEntity(Cfg::ENTITY_MAGE_CUSTOMER);
+        $this->daoGeneric->deleteEntity(\Praxigento\Downline\Repo\Data\Snap::ENTITY_NAME);
+        $this->daoGeneric->deleteEntity(\Praxigento\Downline\Repo\Data\Change::ENTITY_NAME);
+        $this->daoGeneric->deleteEntity(\Praxigento\Downline\Repo\Data\Customer::ENTITY_NAME);
+        $this->daoGeneric->deleteEntity(Cfg::ENTITY_MAGE_CUSTOMER);
 
     }
 }

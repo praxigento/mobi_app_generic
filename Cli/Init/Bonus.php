@@ -92,68 +92,68 @@ class Bonus
     protected function _initGenerationPercents()
     {
         try {
-            /** @var \Praxigento\BonusBase\Repo\Dao\Type\Calc $repoCalc */
-            $repoCalc = $this->manObj->get(\Praxigento\BonusBase\Repo\Dao\Type\Calc::class);
-            /** @var \Praxigento\BonusBase\Repo\Dao\Rank $repoRank */
-            $repoRank = $this->manObj->get(\Praxigento\BonusBase\Repo\Dao\Rank::class);
-            /** @var \Praxigento\BonusBase\Repo\Dao\Cfg\Generation $repo */
-            $repo = $this->manObj->get(\Praxigento\BonusBase\Repo\Dao\Cfg\Generation::class);
+            /** @var \Praxigento\BonusBase\Repo\Dao\Type\Calc $daoCalc */
+            $daoCalc = $this->manObj->get(\Praxigento\BonusBase\Repo\Dao\Type\Calc::class);
+            /** @var \Praxigento\BonusBase\Repo\Dao\Rank $daoRank */
+            $daoRank = $this->manObj->get(\Praxigento\BonusBase\Repo\Dao\Rank::class);
+            /** @var \Praxigento\BonusBase\Repo\Dao\Cfg\Generation $dao */
+            $dao = $this->manObj->get(\Praxigento\BonusBase\Repo\Dao\Cfg\Generation::class);
             /** @var \Praxigento\BonusBase\Repo\Data\Cfg\Generation $data */
             $data = new \Praxigento\BonusBase\Repo\Data\Cfg\Generation();
             // get calculation type ID
-            $calcTypeId = $repoCalc->getIdByCode(Cfg::CODE_TYPE_CALC_BONUS);
+            $calcTypeId = $daoCalc->getIdByCode(Cfg::CODE_TYPE_CALC_BONUS);
             $data->setCalcTypeId($calcTypeId);
             //
             // PV rank
             //
-            $id = $repoRank->getIdByCode(Cfg::RANK_BY_PV);
+            $id = $daoRank->getIdByCode(Cfg::RANK_BY_PV);
             $data->setRankId($id);
             //
             $data->setGeneration(1);
             $data->setPercent(0.2);
-            $repo->create($data);
+            $dao->create($data);
             //
             $data->setGeneration(2);
             $data->setPercent(0.15);
-            $repo->create($data);
+            $dao->create($data);
             //
             // GV rank
             //
-            $id = $repoRank->getIdByCode(Cfg::RANK_BY_GV);
+            $id = $daoRank->getIdByCode(Cfg::RANK_BY_GV);
             $data->setRankId($id);
             //
             $data->setGeneration(1);
             $data->setPercent(0.2);
-            $repo->create($data);
+            $dao->create($data);
             //
             $data->setGeneration(2);
             $data->setPercent(0.15);
-            $repo->create($data);
+            $dao->create($data);
             //
             $data->setGeneration(3);
             $data->setPercent(0.1);
-            $repo->create($data);
+            $dao->create($data);
             //
             // PSAA rank
             //
-            $id = $repoRank->getIdByCode(Cfg::RANK_BY_PSAA);
+            $id = $daoRank->getIdByCode(Cfg::RANK_BY_PSAA);
             $data->setRankId($id);
             //
             $data->setGeneration(1);
             $data->setPercent(0.2);
-            $repo->create($data);
+            $dao->create($data);
             //
             $data->setGeneration(2);
             $data->setPercent(0.15);
-            $repo->create($data);
+            $dao->create($data);
             //
             $data->setGeneration(3);
             $data->setPercent(0.1);
-            $repo->create($data);
+            $dao->create($data);
             //
             $data->setGeneration(4);
             $data->setPercent(0.05);
-            $repo->create($data);
+            $dao->create($data);
         } catch (\Exception $e) {
             // do nothing if data is already created
         }
@@ -162,30 +162,30 @@ class Bonus
     protected function _initLoyaltyCfg()
     {
         try {
-            /** @var \Praxigento\BonusBase\Repo\Dao\Rank $repoRank */
-            $repoRank = $this->manObj->get(\Praxigento\BonusBase\Repo\Dao\Rank::class);
-            /** @var \Praxigento\BonusLoyalty\Repo\Dao\Cfg\Param $repo */
-            $repo = $this->manObj->get(\Praxigento\BonusLoyalty\Repo\Dao\Cfg\Param::class);
+            /** @var \Praxigento\BonusBase\Repo\Dao\Rank $daoRank */
+            $daoRank = $this->manObj->get(\Praxigento\BonusBase\Repo\Dao\Rank::class);
+            /** @var \Praxigento\BonusLoyalty\Repo\Dao\Cfg\Param $dao */
+            $dao = $this->manObj->get(\Praxigento\BonusLoyalty\Repo\Dao\Cfg\Param::class);
             /** @var \Praxigento\BonusLoyalty\Repo\Data\Cfg\Param $data */
             $data = new \Praxigento\BonusLoyalty\Repo\Data\Cfg\Param();
             //
-            $id = $repoRank->getIdByCode(Cfg::RANK_BY_PV);
+            $id = $daoRank->getIdByCode(Cfg::RANK_BY_PV);
             $data->setRankId($id);
             $data->setPv(5);
-            $repo->create($data);
+            $dao->create($data);
             //
-            $id = $repoRank->getIdByCode(Cfg::RANK_BY_GV);
+            $id = $daoRank->getIdByCode(Cfg::RANK_BY_GV);
             $data->setRankId($id);
             $data->setPv(5);
             $data->setGv(10);
-            $repo->create($data);
+            $dao->create($data);
             //
-            $id = $repoRank->getIdByCode(Cfg::RANK_BY_PSAA);
+            $id = $daoRank->getIdByCode(Cfg::RANK_BY_PSAA);
             $data->setRankId($id);
             $data->setPv(5);
             $data->setGv(10);
             $data->setPsaa(2);
-            $repo->create($data);
+            $dao->create($data);
         } catch (\Exception $e) {
             // do nothing if data is already created
         }
@@ -197,22 +197,22 @@ class Bonus
     protected function _initRanks()
     {
         try {
-            /** @var \Praxigento\BonusBase\Repo\Dao\Rank $repo */
-            $repo = $this->manObj->get(\Praxigento\BonusBase\Repo\Dao\Rank::class);
+            /** @var \Praxigento\BonusBase\Repo\Dao\Rank $dao */
+            $dao = $this->manObj->get(\Praxigento\BonusBase\Repo\Dao\Rank::class);
             /** @var \Praxigento\BonusBase\Repo\Data\Rank $data */
             $data = new \Praxigento\BonusBase\Repo\Data\Rank();
             // PV
             $data->setCode(Cfg::RANK_BY_PV);
             $data->setNote('Qualified by PV only.');
-            $repo->create($data);
+            $dao->create($data);
             // PV & GV
             $data->setCode(Cfg::RANK_BY_GV);
             $data->setNote('Qualified by PV & GV.');
-            $repo->create($data);
+            $dao->create($data);
             // PV, GV & PSAA
             $data->setCode(Cfg::RANK_BY_PSAA);
             $data->setNote('Qualified by PV, GV & PSAA.');
-            $repo->create($data);
+            $dao->create($data);
         } catch (\Exception $e) {
             // do nothing if data is already created
         }

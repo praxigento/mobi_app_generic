@@ -31,12 +31,12 @@ class Taxes
     /** @var  \Praxigento\Core\Api\App\Repo\Transaction\Manager */
     protected $manTrans;
     /** @var \Praxigento\Core\App\Repo\IGeneric */
-    protected $repoGeneric;
+    protected $daoGeneric;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\Api\App\Repo\Transaction\Manager $manTrans,
-        \Praxigento\Core\App\Repo\IGeneric $repoGeneric
+        \Praxigento\Core\App\Repo\IGeneric $daoGeneric
     )
     {
         parent::__construct(
@@ -45,7 +45,7 @@ class Taxes
             'Setup sale taxes for Generic project (prices excl. taxes).'
         );
         $this->manTrans = $manTrans;
-        $this->repoGeneric = $repoGeneric;
+        $this->daoGeneric = $daoGeneric;
     }
 
     /**
@@ -60,7 +60,7 @@ class Taxes
             Cfg::E_TAX_CALC_A_CUST_TAX_CLASS_ID => self::DEF_CUST_TAX_CLASS_ID,
             Cfg::E_TAX_CALC_A_PROD_TAX_CLASS_ID => self::DEF_PROD_TAX_CLASS_ID,
         ];
-        $this->repoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC, $data);
+        $this->daoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC, $data);
         /* link Rate RU6 with Rule #1 RU */
         $data = [
             Cfg::E_TAX_CALC_A_RATE_ID => self::DEF_TAX_RATE_ID_RU6,
@@ -68,7 +68,7 @@ class Taxes
             Cfg::E_TAX_CALC_A_CUST_TAX_CLASS_ID => self::DEF_CUST_TAX_CLASS_ID,
             Cfg::E_TAX_CALC_A_PROD_TAX_CLASS_ID => self::DEF_PROD_TAX_CLASS_ID,
         ];
-        $this->repoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC, $data);
+        $this->daoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC, $data);
         /* link Rate RU12 with Rule #2 RU */
         $data = [
             Cfg::E_TAX_CALC_A_RATE_ID => self::DEF_TAX_RATE_ID_RU12,
@@ -76,7 +76,7 @@ class Taxes
             Cfg::E_TAX_CALC_A_CUST_TAX_CLASS_ID => self::DEF_CUST_TAX_CLASS_ID,
             Cfg::E_TAX_CALC_A_PROD_TAX_CLASS_ID => self::DEF_PROD_TAX_CLASS_ID,
         ];
-        $this->repoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC, $data);
+        $this->daoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC, $data);
     }
 
     /**
@@ -92,7 +92,7 @@ class Taxes
             Cfg::E_TAX_CALC_RATE_A_CODE => 'LV Tax 21%',
             Cfg::E_TAX_CALC_RATE_A_RATE => 21
         ];
-        $this->repoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC_RATE, $data);
+        $this->daoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC_RATE, $data);
 
         $data = [
             Cfg::E_TAX_CALC_RATE_A_ID => self::DEF_TAX_RATE_ID_RU6,
@@ -102,7 +102,7 @@ class Taxes
             Cfg::E_TAX_CALC_RATE_A_CODE => 'RU Tax 6%',
             Cfg::E_TAX_CALC_RATE_A_RATE => 6
         ];
-        $this->repoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC_RATE, $data);
+        $this->daoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC_RATE, $data);
 
         $data = [
             Cfg::E_TAX_CALC_RATE_A_ID => self::DEF_TAX_RATE_ID_RU12,
@@ -112,7 +112,7 @@ class Taxes
             Cfg::E_TAX_CALC_RATE_A_CODE => 'RU Tax 12%',
             Cfg::E_TAX_CALC_RATE_A_RATE => 12
         ];
-        $this->repoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC_RATE, $data);
+        $this->daoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC_RATE, $data);
     }
 
     /**
@@ -128,7 +128,7 @@ class Taxes
             Cfg::E_TAX_CALC_RULE_A_POSITION => 0,
             Cfg::E_TAX_CALC_RULE_A_CALC_SUBTOTAL => 0,
         ];
-        $this->repoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC_RULE, $data);
+        $this->daoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC_RULE, $data);
         /* add Rule #1 for RU */
         $data = [
             Cfg::E_TAX_CALC_RULE_A_ID => self::DEF_TAX_RULE_ID_RU1,
@@ -137,7 +137,7 @@ class Taxes
             Cfg::E_TAX_CALC_RULE_A_POSITION => 0,
             Cfg::E_TAX_CALC_RULE_A_CALC_SUBTOTAL => 0,
         ];
-        $this->repoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC_RULE, $data);
+        $this->daoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC_RULE, $data);
         /* add Rule #2 for RU */
         $data = [
             Cfg::E_TAX_CALC_RULE_A_ID => self::DEF_TAX_RULE_ID_RU2,
@@ -146,14 +146,14 @@ class Taxes
             Cfg::E_TAX_CALC_RULE_A_POSITION => 0,
             Cfg::E_TAX_CALC_RULE_A_CALC_SUBTOTAL => 0,
         ];
-        $this->repoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC_RULE, $data);
+        $this->daoGeneric->addEntity(Cfg::ENTITY_MAGE_TAX_CALC_RULE, $data);
 
     }
 
     protected function clearDbData()
     {
-        $this->repoGeneric->deleteEntity(Cfg::ENTITY_MAGE_TAX_CALC_RATE);
-        $this->repoGeneric->deleteEntity(Cfg::ENTITY_MAGE_TAX_CALC_RULE);
+        $this->daoGeneric->deleteEntity(Cfg::ENTITY_MAGE_TAX_CALC_RATE);
+        $this->daoGeneric->deleteEntity(Cfg::ENTITY_MAGE_TAX_CALC_RULE);
     }
 
     protected function execute(

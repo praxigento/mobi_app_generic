@@ -14,9 +14,9 @@ class UpdateGroups
     /** @var \Magento\Framework\ObjectManagerInterface */
     protected $manObj;
     /** @var \Praxigento\Core\App\Repo\IGeneric */
-    protected $repoGeneric;
+    protected $daoGeneric;
     /** @var \Magento\Customer\Api\GroupRepositoryInterface */
-    protected $repoGroup;
+    protected $daoGroup;
     /** @var \Magento\Framework\App\ResourceConnection */
     protected $resource;
 
@@ -24,21 +24,21 @@ class UpdateGroups
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Magento\Framework\App\ResourceConnection $resource,
         \Praxigento\App\Generic2\Tool\Odoo\Def\BusinessCodesManager $manBusCodes,
-        \Praxigento\Core\App\Repo\IGeneric $repoGeneric,
-        \Magento\Customer\Api\GroupRepositoryInterface $repoGroup
+        \Praxigento\Core\App\Repo\IGeneric $daoGeneric,
+        \Magento\Customer\Api\GroupRepositoryInterface $daoGroup
 
     ) {
         $this->manObj = $manObj;
         $this->resource = $resource;
         $this->manBusCodes = $manBusCodes;
-        $this->repoGeneric = $repoGeneric;
-        $this->repoGroup = $repoGroup;
+        $this->daoGeneric = $daoGeneric;
+        $this->daoGroup = $daoGroup;
     }
 
     public function do()
     {
         $crit = $this->manObj->create(\Magento\Framework\Api\SearchCriteriaInterface::class);
-        $all = $this->repoGroup->getList($crit);
+        $all = $this->daoGroup->getList($crit);
         /** @var \Magento\Customer\Model\Data\Group $item */
         foreach ($all->getItems() as $item) {
             $groupId = $item->getId();
@@ -47,7 +47,7 @@ class UpdateGroups
             $codeExpected = $this->manBusCodes->getBusCodeForCustomerGroupById($groupId);
             if ($codeExpected != $codeSaved) {
                 $item->setCode($codeExpected);
-                $this->repoGroup->save($item);
+                $this->daoGroup->save($item);
             }
         }
         /* create additional groups (id>=4) */
@@ -63,7 +63,7 @@ class UpdateGroups
             $group->setCode($code);
             $group->setTaxClassId($taxId);
             $group->setTaxClassName($taxName);
-            $this->repoGroup->save($group);
+            $this->daoGroup->save($group);
         }
 
     }

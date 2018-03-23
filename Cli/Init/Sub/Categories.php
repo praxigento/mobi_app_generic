@@ -15,17 +15,17 @@ class Categories
     /* EAV attr ID for catalog_category.is_active (see 'eav_attribute' table) */
     const DEF_STORE_VIEW_ID_ADMIN = 0;
     /** @var   \Magento\Catalog\Api\CategoryRepositoryInterface */
-    protected $repoCategory;
+    protected $daoCategory;
     /** @var  \Praxigento\Core\App\Repo\IGeneric */
-    protected $repoGeneric;
+    protected $daoGeneric;
 
     public function __construct(
-        \Magento\Catalog\Api\CategoryRepositoryInterface $repoCat,
-        \Praxigento\Core\App\Repo\IGeneric $repoGeneric
+        \Magento\Catalog\Api\CategoryRepositoryInterface $daoCat,
+        \Praxigento\Core\App\Repo\IGeneric $daoGeneric
 
     ) {
-        $this->repoCategory = $repoCat;
-        $this->repoGeneric = $repoGeneric;
+        $this->daoCategory = $daoCat;
+        $this->daoGeneric = $daoGeneric;
     }
 
     public function enableForAllStoreViews()
@@ -33,11 +33,11 @@ class Categories
         /* delete all store views data except admin */
         $entity = Cfg::ENTITY_MAGE_CATALOG_CATEGORY_EAV_INT;
         $where = Cfg::E_CATCAT_EAV_INT_STORE_ID . '>' . self::DEF_STORE_VIEW_ID_ADMIN;
-        $this->repoGeneric->deleteEntity($entity, $where);
+        $this->daoGeneric->deleteEntity($entity, $where);
         /* enable all categories */
         $bind = [Cfg::E_CATCAT_EAV_INT_VALUE => 1];
         $where = Cfg::E_CATCAT_EAV_INT_A_ID . '=' . self::DEF_CATEGORY_EAV_ID_IS_ACTIVE;
-        $this->repoGeneric->updateEntity($entity, $bind, $where);
+        $this->daoGeneric->updateEntity($entity, $bind, $where);
     }
 
 }

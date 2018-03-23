@@ -20,9 +20,9 @@ class CreateDownline
     /** @var \Psr\Log\LoggerInterface */
     protected $logger;
     /** @var \Praxigento\Downline\Repo\Dao\Change */
-    protected $repoDwnlChange;
+    protected $daoDwnlChange;
     /** @var \Praxigento\Downline\Repo\Dao\Customer */
-    protected $repoDwnlCust;
+    protected $daoDwnlCust;
     /** @var \Magento\Framework\App\ResourceConnection */
     protected $resource;
 
@@ -30,15 +30,15 @@ class CreateDownline
         \Praxigento\Core\Api\App\Logger\Main $logger,
         \Magento\Framework\App\ResourceConnection $resource,
         \Praxigento\Core\Api\Helper\Format $hlpFormat,
-        \Praxigento\Downline\Repo\Dao\Change $repoDwnlChange,
-        \Praxigento\Downline\Repo\Dao\Customer $repoDwnlCust,
+        \Praxigento\Downline\Repo\Dao\Change $daoDwnlChange,
+        \Praxigento\Downline\Repo\Dao\Customer $daoDwnlCust,
         \Praxigento\Downline\Service\ISnap $callDwnlSnap
     ) {
         $this->logger = $logger;
         $this->resource = $resource;
         $this->hlpFormat = $hlpFormat;
-        $this->repoDwnlChange = $repoDwnlChange;
-        $this->repoDwnlCust = $repoDwnlCust;
+        $this->daoDwnlChange = $daoDwnlChange;
+        $this->daoDwnlCust = $daoDwnlCust;
         $this->callDwnlSnap = $callDwnlSnap;
     }
 
@@ -88,13 +88,13 @@ class CreateDownline
             $eCust->setMlmId($custMlmId);
             $eCust->setReferralCode($custMlmId);
             $eCust->setCountryCode($country);
-            $this->repoDwnlCust->create($eCust);
+            $this->daoDwnlCust->create($eCust);
             /* add record to change log */
             $eChange = new \Praxigento\Downline\Repo\Data\Change();
             $eChange->setCustomerId($cusMageId);
             $eChange->setParentId($parentMageId);
             $eChange->setDateChanged($dateChanged);
-            $this->repoDwnlChange->create($eChange);
+            $this->daoDwnlChange->create($eChange);
         }
     }
 }

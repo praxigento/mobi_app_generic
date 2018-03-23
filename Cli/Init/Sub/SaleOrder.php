@@ -42,18 +42,18 @@ class SaleOrder
         \Magento\Store\Model\StoreManagerInterface $manStore,
         \Magento\Quote\Model\QuoteManagement\Proxy $manQuote,
         \Magento\Sales\Api\InvoiceManagementInterface $manInvoice,
-        \Magento\Catalog\Api\ProductRepositoryInterface $repoCatProd,
-        \Magento\Customer\Api\CustomerRepositoryInterface $repoCust,
-        \Praxigento\Pv\Repo\Dao\Sale $repoPvSale
+        \Magento\Catalog\Api\ProductRepositoryInterface $daoCatProd,
+        \Magento\Customer\Api\CustomerRepositoryInterface $daoCust,
+        \Praxigento\Pv\Repo\Dao\Sale $daoPvSale
     ) {
         $this->_manObj = $manObj;
         $this->_manEvent = $manEvent;
         $this->_manStore = $manStore;
         $this->_manQuote = $manQuote;
         $this->_manInvoice = $manInvoice;
-        $this->_repoCatProd = $repoCatProd;
-        $this->_repoCust = $repoCust;
-        $this->_repoPvSale = $repoPvSale;
+        $this->_repoCatProd = $daoCatProd;
+        $this->_repoCust = $daoCust;
+        $this->_repoPvSale = $daoPvSale;
     }
 
     /**

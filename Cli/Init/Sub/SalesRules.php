@@ -31,8 +31,8 @@ class SalesRules
         \Magento\SalesRule\Model\Converter\ToDataModel $convertRule,
         \Magento\SalesRule\Api\Data\ConditionInterfaceFactory $factoryCondition,
         \Magento\SalesRule\Model\Rule\Condition\CombineFactory $factoryCondCombain,
-        \Magento\Customer\Api\GroupRepositoryInterface $repoCustomerGroup,
-        \Magento\SalesRule\Api\RuleRepositoryInterface $repoRule,
+        \Magento\Customer\Api\GroupRepositoryInterface $daoCustomerGroup,
+        \Magento\SalesRule\Api\RuleRepositoryInterface $daoRule,
         \Magento\Rule\Model\Condition\Context $contextCondition
 
     ) {
@@ -40,8 +40,8 @@ class SalesRules
         $this->_convertRule = $convertRule;
         $this->_factoryCondition = $factoryCondition;
         $this->_factoryCondCombain = $factoryCondCombain;
-        $this->_repoCustomerGroup = $repoCustomerGroup;
-        $this->_repoRule = $repoRule;
+        $this->_repoCustomerGroup = $daoCustomerGroup;
+        $this->_repoRule = $daoRule;
         $this->_contextCondition = $contextCondition;
     }
 
