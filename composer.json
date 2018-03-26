@@ -1,8 +1,8 @@
 {
-  "name": "praxigento/mobi_app_generic_mage2",
-  "description": "Generic MOBI application for Magento v2.",
+  "name": "praxigento/mobi_app_generic",
+  "description": "Generic MOBI application",
   "type": "magento2-module",
-  "homepage": "https://github.com/praxigento/mobi_app_generic_mage2",
+  "homepage": "https://github.com/praxigento/mobi_app_generic",
   "license": "MIT",
   "authors": [
     {
@@ -12,8 +12,8 @@
     }
   ],
   "require": {
-    "praxigento/mobi_mod_mage2_bonus_global_sales": "dev-master",
-    "praxigento/mobi_mod_mage2_odoo": "dev-master"
+    "praxigento/mobi_mod_bonus_global_sales": "dev-master",
+    "praxigento/mobi_mod_odoo": "dev-master"
   },
   "autoload": {
     "files": [
