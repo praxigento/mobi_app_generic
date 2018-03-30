@@ -13,7 +13,14 @@
   ],
   "require": {
     "praxigento/mobi_mod_bonus_global_sales": "dev-master",
-    "praxigento/mobi_mod_odoo": "dev-master"
+    "praxigento/mobi_mod_odoo": "dev-master",
+    "praxigento/mobi_theme_base": "dev-master"
+  },
+  "repositories": {
+    "praxigento/mobi_theme_base": {
+      "type": "vcs",
+      "url": "https://github.com/praxigento/mobi_theme_base"
+    }
   },
   "autoload": {
     "files": [
