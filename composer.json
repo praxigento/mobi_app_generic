@@ -12,6 +12,7 @@
     }
   ],
   "require": {
+    "praxigento/mobi_mod_bonus_base": "dev-master",
     "praxigento/mobi_mod_odoo": "dev-master",
     "praxigento/mobi_theme_base": "dev-master"
   },
