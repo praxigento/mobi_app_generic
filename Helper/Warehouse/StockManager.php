@@ -3,11 +3,12 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\App\Generic2\Tool\Warehouse\Def;
+namespace Praxigento\App\Generic2\Helper\Warehouse;
 
 use Praxigento\App\Generic2\Cli\Init\Stocks as Init;
 
-class StockManager implements \Praxigento\Warehouse\Api\Helper\Stock
+class StockManager
+    implements \Praxigento\Warehouse\Api\Helper\Stock
 {
     /** @var \Praxigento\Warehouse\Repo\Dao\Warehouse */
     private $daoWrhs;
@@ -60,5 +61,10 @@ class StockManager implements \Praxigento\Warehouse\Api\Helper\Stock
             $this->mapStoreToStock[$storeId] :
             \Magento\CatalogInventory\Model\Stock::DEFAULT_STOCK_ID;
         return $result;
+    }
+
+    public function convertPaymentAmount($payment, $amount)
+    {
+        return $amount;
     }
 }

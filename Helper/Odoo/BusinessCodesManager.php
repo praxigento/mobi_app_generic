@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\App\Generic2\Tool\Odoo\Def;
+namespace Praxigento\App\Generic2\Helper\Odoo;
 
 use Praxigento\Accounting\Repo\Data\Type\Operation as ETypeOper;
 use Praxigento\App\Generic2\Config as Cfg;

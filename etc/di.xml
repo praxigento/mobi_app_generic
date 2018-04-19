@@ -24,7 +24,9 @@
     <!-- ************************************** -->
     <!-- APP SPECIFIC INTERFACE IMPLEMENTATIONS -->
     <!-- ************************************** -->
-    <preference for="Praxigento\Odoo\Tool\IBusinessCodesManager" type="Praxigento\App\Generic2\Tool\Odoo\Def\BusinessCodesManager"/>
-    <preference for="Praxigento\Warehouse\Api\Helper\Stock" type="Praxigento\App\Generic2\Tool\Warehouse\Def\StockManager"/>
+    <preference for="Praxigento\Odoo\Tool\IBusinessCodesManager"
+                type="Praxigento\App\Generic2\Helper\Odoo\BusinessCodesManager"/>
+    <preference for="Praxigento\Warehouse\Api\Helper\Stock"
+                type="Praxigento\App\Generic2\Helper\Warehouse\StockManager"/>
 
 </config>
