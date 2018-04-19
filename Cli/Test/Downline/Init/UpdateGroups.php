@@ -9,7 +9,7 @@ namespace Praxigento\App\Generic2\Cli\Test\Downline\Init;
  */
 class UpdateGroups
 {
-    /** @var \Praxigento\App\Generic2\Tool\Odoo\Def\BusinessCodesManager */
+    /** @var \Praxigento\App\Generic2\Helper\Odoo\BusinessCodesManager */
     protected $manBusCodes;
     /** @var \Magento\Framework\ObjectManagerInterface */
     protected $manObj;
@@ -23,7 +23,7 @@ class UpdateGroups
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Magento\Framework\App\ResourceConnection $resource,
-        \Praxigento\App\Generic2\Tool\Odoo\Def\BusinessCodesManager $manBusCodes,
+        \Praxigento\App\Generic2\Helper\Odoo\BusinessCodesManager $manBusCodes,
         \Praxigento\Core\App\Repo\IGeneric $daoGeneric,
         \Magento\Customer\Api\GroupRepositoryInterface $daoGroup
 

@@ -4,7 +4,7 @@
  */
 namespace Praxigento\App\Generic2\Cli\Init;
 
-use Praxigento\App\Generic2\Tool\Odoo\Def\BusinessCodesManager;
+use Praxigento\App\Generic2\Helper\Odoo\BusinessCodesManager;
 
 class Customers
     extends \Praxigento\Core\App\Cli\Cmd\Base
