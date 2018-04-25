@@ -16,12 +16,12 @@ class Categories
     const DEF_STORE_VIEW_ID_ADMIN = 0;
     /** @var   \Magento\Catalog\Api\CategoryRepositoryInterface */
     protected $daoCategory;
-    /** @var  \Praxigento\Core\App\Repo\IGeneric */
+    /** @var  \Praxigento\Core\Api\App\Repo\Generic */
     protected $daoGeneric;
 
     public function __construct(
         \Magento\Catalog\Api\CategoryRepositoryInterface $daoCat,
-        \Praxigento\Core\App\Repo\IGeneric $daoGeneric
+        \Praxigento\Core\Api\App\Repo\Generic $daoGeneric
 
     ) {
         $this->daoCategory = $daoCat;

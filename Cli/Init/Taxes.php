@@ -30,13 +30,13 @@ class Taxes
     const DEF_TAX_RULE_ID_RU2 = 3;
     /** @var  \Praxigento\Core\Api\App\Repo\Transaction\Manager */
     protected $manTrans;
-    /** @var \Praxigento\Core\App\Repo\IGeneric */
+    /** @var \Praxigento\Core\Api\App\Repo\Generic */
     protected $daoGeneric;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\Api\App\Repo\Transaction\Manager $manTrans,
-        \Praxigento\Core\App\Repo\IGeneric $daoGeneric
+        \Praxigento\Core\Api\App\Repo\Generic $daoGeneric
     )
     {
         parent::__construct(

@@ -63,7 +63,7 @@ class Stocks
     private $manStore;
     /** @var  \Praxigento\Core\Api\App\Repo\Transaction\Manager */
     private $manTrans;
-    /** @var  \Praxigento\Core\App\Repo\IGeneric */
+    /** @var  \Praxigento\Core\Api\App\Repo\Generic */
     private $daoGeneric;
     /** @var  \Praxigento\Warehouse\Repo\Dao\Warehouse */
     private $daoWrhs;
@@ -87,7 +87,7 @@ class Stocks
         \Magento\Store\Api\GroupRepositoryInterface $mageRepoGroup,
         \Magento\Store\Api\StoreRepositoryInterface $mageRepoStore,
         \Magento\CatalogInventory\Api\StockRepositoryInterface $mageRepoStock,
-        \Praxigento\Core\App\Repo\IGeneric $daoGeneric,
+        \Praxigento\Core\Api\App\Repo\Generic $daoGeneric,
         \Praxigento\Warehouse\Repo\Dao\Warehouse $daoWrhs,
         \Praxigento\Odoo\Repo\Dao\Warehouse $daoWrhsOdoo,
         Sub\SalesRules\Proxy $subRules
