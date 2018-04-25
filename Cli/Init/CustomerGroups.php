@@ -15,14 +15,14 @@ class CustomerGroups
     /** Total number jf the customer groups */
     const TOTAL_GROUPS = 5;
 
-    /** @var \Praxigento\Odoo\Tool\IBusinessCodesManager */
+    /** @var \Praxigento\Odoo\Api\Helper\BusinessCodes */
     protected $manBusCodes;
     /** @var \Magento\Customer\Api\GroupRepositoryInterface */
     protected $daoGroup;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\Odoo\Tool\IBusinessCodesManager $manBusCodes,
+        \Praxigento\Odoo\Api\Helper\BusinessCodes $manBusCodes,
         \Magento\Customer\Api\GroupRepositoryInterface $daoGroup
     ) {
         parent::__construct(

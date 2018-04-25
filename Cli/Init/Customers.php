@@ -4,7 +4,7 @@
  */
 namespace Praxigento\App\Generic2\Cli\Init;
 
-use Praxigento\App\Generic2\Helper\Odoo\BusinessCodesManager;
+use Praxigento\App\Generic2\Helper\Odoo\BusinessCodes;
 
 class Customers
     extends \Praxigento\Core\App\Cli\Cmd\Base
@@ -89,13 +89,13 @@ class Customers
                 $customer->setLastname($last);
                 /* MOBI-427: change group ID for customers */
                 if (in_array($custId, $this->GROUP_DISTR)) {
-                    $customer->setGroupId(BusinessCodesManager::M_CUST_GROUP_DISTRIBUTOR);
+                    $customer->setGroupId(BusinessCodes::M_CUST_GROUP_DISTRIBUTOR);
                 }
                 if (in_array($custId, $this->GROUP_PRIVILEDED)) {
-                    $customer->setGroupId(BusinessCodesManager::M_CUST_GROUP_PRIVILEGED);
+                    $customer->setGroupId(BusinessCodes::M_CUST_GROUP_PRIVILEGED);
                 }
                 if (in_array($custId, $this->GROUP_RETAIL)) {
-                    $customer->setGroupId(BusinessCodesManager::M_CUST_GROUP_RETAIL);
+                    $customer->setGroupId(BusinessCodes::M_CUST_GROUP_RETAIL);
                 }
                 /** @var \Magento\Customer\Api\Data\CustomerInterface $saved */
                 $saved = $this->daoCustomer->save($customer, $this->DEFAULT_PASSWORD_HASH);

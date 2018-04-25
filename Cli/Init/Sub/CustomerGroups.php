@@ -7,7 +7,7 @@ namespace Praxigento\App\Generic2\Cli\Init\Sub;
 
 class CustomerGroups
 {
-    /** @var \Praxigento\App\Generic2\Helper\Odoo\BusinessCodesManager */
+    /** @var \Praxigento\App\Generic2\Helper\Odoo\BusinessCodes */
     protected $manBusCodes;
     /** @var \Magento\Framework\ObjectManagerInterface */
     protected $manObj;
@@ -18,7 +18,7 @@ class CustomerGroups
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\App\Generic2\Helper\Odoo\BusinessCodesManager $manBusCodes,
+        \Praxigento\App\Generic2\Helper\Odoo\BusinessCodes $manBusCodes,
         \Praxigento\Core\App\Repo\IGeneric $daoGeneric,
         \Magento\Customer\Api\GroupRepositoryInterface $daoGroup
     ) {

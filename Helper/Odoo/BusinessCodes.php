@@ -11,8 +11,8 @@ use Praxigento\App\Generic2\Config as Cfg;
 /**
  * Implementation of the codes manager for Generic MOBI application.
  */
-class BusinessCodesManager
-    implements \Praxigento\Odoo\Tool\IBusinessCodesManager
+class BusinessCodes
+    implements \Praxigento\Odoo\Api\Helper\BusinessCodes
 {
     /**#@+
      * Business codes for Customer Groups.
