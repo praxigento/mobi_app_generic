@@ -7,16 +7,16 @@
     <type name="Magento\Framework\Console\CommandList">
         <arguments>
             <argument name="commands" xsi:type="array">
-                <item name="prxgt_app_init_bonus" xsi:type="object">\Praxigento\App\Generic2\Cli\Init\Bonus</item>
-                <item name="prxgt_app_init_groups" xsi:type="object">\Praxigento\App\Generic2\Cli\Init\CustomerGroups</item>
-                <item name="prxgt_app_init_customers" xsi:type="object">\Praxigento\App\Generic2\Cli\Init\Customers</item>
-                <item name="prxgt_app_init_orders" xsi:type="object">\Praxigento\App\Generic2\Cli\Init\SaleOrders</item>
-                <item name="prxgt_app_init_stocks" xsi:type="object">\Praxigento\App\Generic2\Cli\Init\Stocks</item>
-                <item name="prxgt_app_init_taxes" xsi:type="object">\Praxigento\App\Generic2\Cli\Init\Taxes</item>
-                <item name="prxgt_app_init_users" xsi:type="object">\Praxigento\App\Generic2\Cli\Init\Users</item>
-                <item name="prxgt_app_init_post_replicate" xsi:type="object">\Praxigento\App\Generic2\Cli\Init\PostReplicate</item>
-                <item name="prxgt_app_test_bonus_config" xsi:type="object">\Praxigento\App\Generic2\Cli\Test\Bonus\Config</item>
-                <item name="prxgt_app_test_downline_init" xsi:type="object">\Praxigento\App\Generic2\Cli\Test\Downline\Init</item>
+                <item name="prxgt_app_init_bonus" xsi:type="object">Praxigento\App\Generic2\Cli\Init\Bonus</item>
+                <item name="prxgt_app_init_groups" xsi:type="object">Praxigento\App\Generic2\Cli\Init\CustomerGroups</item>
+                <item name="prxgt_app_init_customers" xsi:type="object">Praxigento\App\Generic2\Cli\Init\Customers</item>
+                <item name="prxgt_app_init_orders" xsi:type="object">Praxigento\App\Generic2\Cli\Init\SaleOrders</item>
+                <item name="prxgt_app_init_stocks" xsi:type="object">Praxigento\App\Generic2\Cli\Init\Stocks</item>
+                <item name="prxgt_app_init_taxes" xsi:type="object">Praxigento\App\Generic2\Cli\Init\Taxes</item>
+                <item name="prxgt_app_init_users" xsi:type="object">Praxigento\App\Generic2\Cli\Init\Users</item>
+                <item name="prxgt_app_init_post_replicate" xsi:type="object">Praxigento\App\Generic2\Cli\Init\PostReplicate</item>
+                <item name="prxgt_app_test_bonus_config" xsi:type="object">Praxigento\App\Generic2\Cli\Test\Bonus\Config</item>
+                <item name="prxgt_app_test_downline_init" xsi:type="object">Praxigento\App\Generic2\Cli\Test\Downline\Init</item>
             </argument>
         </arguments>
     </type>
